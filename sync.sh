@@ -48,7 +48,6 @@ if [[ ! -d ~/.nvm ]]; then
 fi
 
 # ~ Setup
-mkdir -p ~/.cache
 mkdir -p ~/.cache/zsh
 
 echo Synced mxfng.dotfiles
