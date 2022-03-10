@@ -5,6 +5,7 @@ tap "homebrew/core"
 tap "homebrew/services"
 
 # Core Dependencies
+brew "zsh"
 brew "git"
 
 # Python Dependencies
@@ -19,15 +20,15 @@ brew "ruby-build"
 brew "nvm"
 
 # Auxiliary Tools
-brew "libtool"
-brew "wget"
-brew "shellcheck"
+brew "lf"
+brew "zsh-syntax-highlighting"
 brew "spaceship"
 
 # Casks
 cask "alfred"
 cask "firefox"
 cask "font-mononoki"
-cask "hyper"
+cask "iterm2"
+cask "keepassxc"
 cask "spotify"
 cask "visual-studio-code"
