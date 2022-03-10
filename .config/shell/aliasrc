@@ -20,4 +20,5 @@ alias \
 	ls="ls --color=auto" \
 
 alias \
-    e="$EDITOR"
+    e="$EDITOR"\
+	cdev="cd ~/Developer"
