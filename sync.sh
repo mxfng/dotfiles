@@ -1,12 +1,14 @@
 # mxfng.sync | Run to sync dotfiles to $HOME and brew bundle.
 
-BASEDIR="$(dirname "$(realpath -s "$0")")"
-
-git -C $BASEDIR pull
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Syncing mxfng.dotfiles.macOS
+fi
 
+BASEDIR="$(dirname "$(realpath -s "$0")")"
+#git -C $BASEDIR pull    # Update Repository
+echo $BASEDIR
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
     which -s brew
     if [[ $? != 0 ]] ; then
         # Install Homebrew
@@ -38,16 +40,16 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 # Rm sourced .config files to swap in $HOME
-if [ -e ~/.zprofile ]; then
-    rm ~/.zprofile  # Remove .zprofile in $HOME
-fi
-if [ -e ~/.zshrc ]; then
-    rm ~/.zshrc     # Remove .zshrc in $HOME
-fi
+for DOTFILE in ~/.zprofile ~/.zshrc ~/.gitconfig;
+    do if [ -e $DOTFILE ]; then
+        rm $DOTFILE
+    fi
+done
 
 # Sourced .config files in $HOME
 echo "source ${BASEDIR}/.config/shell/profile" >> ~/.zprofile
 echo "source ${BASEDIR}/.config/zsh/.zshrc" >> ~/.zshrc
+ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
 
 # Symlinks in $HOME
 #ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
