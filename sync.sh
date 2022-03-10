@@ -1,23 +1,28 @@
 # mxfng.sync | Run to sync dotfiles to $HOME and brew bundle.
 
+BASEDIR="$(dirname "$(realpath -s "$0")")"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Syncing mxfng.dotfiles.macOS
 fi
 
-BASEDIR="$(dirname "$(realpath -s "$0")")"
-#git -C $BASEDIR pull    # Update Repository
 echo $BASEDIR
+
+cd $BASEDIR; if [ -d .git ]; then
+    git -C $BASEDIR pull   # Update Repository
+    echo Update Repository
+else
+    echo Clone Repository
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     which -s brew
     if [[ $? != 0 ]] ; then
         # Install Homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    else
-        brew update
     fi
-
-    brew bundle --file=$BASEDIR/Brewfile    # Run Brewfile
+    
+    brew update; brew bundle --file=$BASEDIR/Brewfile    # Run Brewfile
     
     if [ $(which zsh) != "$(brew --prefix)/bin/zsh"]; then
         echo Current active Zsh will swap to $(which zsh)
@@ -34,25 +39,20 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo Cleaning up M1 dependencies
     fi
 
-    if [ -e $BASEDIR/Brewfile.lock.json ]; then
-        rm $BASEDIR/Brewfile.lock.json   # Wipe Brewfile debugging output
-    fi
+    rm -f $BASEDIR/Brewfile.lock.json   # Wipe Brewfile debugging output
 fi
 
-# Rm sourced .config files to swap in $HOME
-for DOTFILE in ~/.zprofile ~/.zshrc ~/.gitconfig;
-    do if [ -e $DOTFILE ]; then
-        rm $DOTFILE
-    fi
+# Rm .config files to swap in $HOME
+for DOTFILE in ~/.zprofile ~/.zshrc ~/.gitconfig; do
+    rm -f $DOTFILE
 done
 
-# Sourced .config files in $HOME
+# Source .config files in $HOME
 echo "source ${BASEDIR}/.config/shell/profile" >> ~/.zprofile
 echo "source ${BASEDIR}/.config/zsh/.zshrc" >> ~/.zshrc
-ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
 
-# Symlinks in $HOME
-#ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
+# Symlink .config files in $HOME
+ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
 
 # ~/ Setup
 mkdir -p ~/.cache/zsh ~/.nvm ~/Developer 
