@@ -1,9 +1,17 @@
 # mxfng.sync | Run to sync dotfiles to $HOME and brew bundle.
 
-BASEDIR=$( dirname $(realpath "$0") )
+BASEDIR="$(dirname "$(realpath -s "$0")")"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Syncing mxfng.dotfiles.macOS
+
+    which -s brew
+    if [[ $? != 0 ]] ; then
+        # Install Homebrew
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        brew update
+    fi
 
     brew bundle --file=$BASEDIR/Brewfile    # Run Brewfile
     
@@ -43,7 +51,8 @@ echo "source ${BASEDIR}/.config/zsh/.zshrc" >> ~/.zshrc
 #ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
 
 # ~/ Setup
-mkdir -p ~/.cache/zsh
-mkdir -p ~/.nvm
+mkdir -p ~/.cache/zsh ~/.nvm ~/Developer 
+
+echo 'Refresh your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
 
 echo Synced mxfng.dotfiles
