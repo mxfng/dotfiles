@@ -5,6 +5,9 @@
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Python
+export PIP_REQUIRE_VIRTUALENV=false
+
 # Locates dotfiles folder via the symlink path
 export BASEDIR=$(echo "$(dirname "$(realpath -s "$0")")" | rev | cut -d '/' -f3- | rev)
 
