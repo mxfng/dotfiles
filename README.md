@@ -2,7 +2,7 @@
 
 A dotfile repo that exists to make it easier for me to bootstrap onto new systems. Nothing special, really.
 
-## Contained Configurations
+## Configurations
 
 * zsh shell
 * git
@@ -11,7 +11,15 @@ A dotfile repo that exists to make it easier for me to bootstrap onto new system
 
 ## Scripts
 
-Coming soon.
+### `sync`
+
+Run to synchronize dotfiles from the repo to `$HOME` and refresh the Brewfile. Can install dotfiles as well as maintain any updates.
+
+#### Dependencies
+* Homebrew
+* coreutils
+
+Execute `sync` from your local instance of the repository using `sh sync.sh` or using curl with `curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync.sh | sh`
 
 ## Installation
 
