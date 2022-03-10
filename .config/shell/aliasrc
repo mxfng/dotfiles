@@ -21,4 +21,6 @@ alias \
 
 alias \
     e="$EDITOR"\
-	cdev="cd ~/Developer"
+	cdev="cd ~/Developer"\
+	cdot="cd ${BASEDIR}"
+	
