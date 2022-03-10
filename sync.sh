@@ -15,7 +15,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     # iTerm2 Shell Integration for Zsh
     curl -L https://iterm2.com/shell_integration/zsh \
     -o $BASEDIR/.config/iTerm2/.iterm2_shell_integration.zsh
-    touch ~/.hushlogin
+    touch ~/.hushlogin      # Silence prompt at login
 
     if [[ $(uname -m) == 'arm64' ]]; then
         # M1-Specific Installs
