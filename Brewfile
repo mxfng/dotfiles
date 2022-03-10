@@ -14,7 +14,6 @@ brew "virtualenv"
 # Ruby Dependencies
 brew "rbenv"
 brew "ruby-build"
-brew "shellcheck"
 
 # JavaScript Dependencies
 brew "nvm"
