@@ -2,6 +2,8 @@
 
 BASEDIR="$(dirname "$(realpath -s "$0")")"
 
+git -C $BASEDIR pull
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Syncing mxfng.dotfiles.macOS
 
