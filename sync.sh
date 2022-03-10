@@ -42,12 +42,8 @@ echo "source ${BASEDIR}/.config/zsh/.zshrc" >> ~/.zshrc
 # Symlinks in $HOME
 #ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
 
-# Node Version Manager
-if [[ ! -d ~/.nvm ]]; then
-    mkdir ~/.nvm
-fi
-
-# ~ Setup
+# ~/ Setup
 mkdir -p ~/.cache/zsh
+mkdir -p ~/.nvm
 
 echo Synced mxfng.dotfiles
