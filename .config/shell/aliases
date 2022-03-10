@@ -9,10 +9,11 @@ done; unset command
 
 # Core Verbosity + Settings
 alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	bc="bc -ql" \
-	mkd="mkdir -pv" \
+	rm='rm -iv'
+	cp='cp -iv' \
+	mv='mv -iv' \
+	bc='bc -ql' \
+	mkd='mkdir -pv' \
 	sync="sh ${BASEDIR}/sync.sh"
 
 # Colorize Commands
