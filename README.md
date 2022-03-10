@@ -2,6 +2,8 @@
 
 A dotfile repo that exists to make it easier for me to bootstrap onto new systems. Nothing special, really.
 
+![mxfng.dotfiles](/img/cap.png)
+
 ## Configurations
 
 * zsh shell
