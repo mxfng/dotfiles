@@ -22,7 +22,9 @@ autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit -d $CACHE_HOME/zsh/.zcompdump      # Outputs to $HOME
-_comp_options+=(globdots)		        # Include hidden files 
+_comp_options+=(globdots)		        # Include hidden files
+zstyle ':completion:*' menu select 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 
 # Use lf to switch directories + Bind to Ctrl+G
@@ -45,6 +47,7 @@ source $CONFIG_HOME/iTerm2/.iterm2_shell_integration.zsh
 
 # Auto-Suggestions
 source $HOMEBREW_PREFIX/Cellar/zsh-autosuggestions/0.7.0/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey "^ " autosuggest-accept
 
 # Syntax Highlighting (Should Be Last)
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
