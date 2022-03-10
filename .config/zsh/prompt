@@ -1,3 +1,5 @@
+#!/opt/homebrew/bin/zsh
+
 # mxfng.prompt | Prompt configuration for Zsh
 
 fpath=( "$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath )
