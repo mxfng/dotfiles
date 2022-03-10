@@ -15,7 +15,7 @@ setopt appendhistory
 
 # Load Aliases/Shortcuts
 [ -f "${CONFIG_HOME}/shell/shortcutrc" ] && source "${CONFIG_HOME}/shell/shortcutrc"
-[ -f "${CONFIG_HOME}/shell/aliasrc" ] && source "${CONFIG_HOME}/shell/aliasrc"
+[ -f "${CONFIG_HOME}/shell/aliases" ] && source "${CONFIG_HOME}/shell/aliases"
 
 # Simple Auto/Tab Complete
 autoload -U compinit
