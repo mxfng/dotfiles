@@ -7,6 +7,7 @@ tap "homebrew/services"
 # Core Dependencies
 brew "zsh"
 brew "git"
+brew "coreutils"
 
 # Python Dependencies
 brew "python@3.9"
@@ -20,9 +21,10 @@ brew "ruby-build"
 brew "nvm"
 
 # Auxiliary Tools
+brew "spaceship"
 brew "lf"
 brew "zsh-syntax-highlighting"
-brew "spaceship"
+brew "zsh-autosuggestions"
 
 # Casks
 cask "alfred"
