@@ -1,0 +1,23 @@
+#!/opt/homebrew/bin/zsh
+
+# mxfng.aliasrc | Separate file for alias commands.
+
+# Sudo not required for some system commands
+for command in shutdown poweroff reboot ; do
+	alias $command="sudo $command"
+done; unset command
+
+# Core Verbosity + Settings
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	bc="bc -ql" \
+	mkd="mkdir -pv" \
+	sync="sh ${BASEDIR}/sync.sh"
+
+# Colorize Commands
+alias \
+	ls="ls --color=auto" \
+
+alias \
+    e="$EDITOR"
