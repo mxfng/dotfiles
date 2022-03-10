@@ -27,8 +27,7 @@ Execute `sync` from your local instance of the repository using `sh sync.sh` or 
 
 ### Prerequisites
 
-* Git
-* Homebrew [macOS]
+* Homebrew [macOS] 
 
 ### Instructions
 
