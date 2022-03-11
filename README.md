@@ -19,20 +19,11 @@ Run to synchronize dotfiles from the repo to `$HOME` and refresh the Brewfile. C
 * Homebrew
 * coreutils
 
-Execute `sync` from your local instance of the repository using `sh sync.sh` or using curl with `curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync.sh | sh`
+Execute `sync` for the first time with `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync.sh | sh` to install dotfiles. Afterward just run the command `sync` to keep dotfiles updated.
 
 ## Installation
-
-### Prerequisites
-
-* Homebrew [macOS] 
-
 ### Instructions
 
-1. Clone repo.
-2. In the newly cloned **dotfiles** folder, run `sh sync.sh`
-3. Configure iTerm2.
+1. Run `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync.sh | sh` in your Terminal.
+2. To sync iTerm2 preferences with this repo, open the app.
    1. Go to Preferences > General > Preferences and check **load preferences from a custom folder or URL**, then set the directory to `.../dotfiles/.config/iTerm2` (make sure to include the entire path up to your cloned dotfiles repo)
-4. Configure Alfred.
-   1. In Alfred Preferences, on the General tab, change the **Alfred Hotkey** to **Command + Space**.
-5. More coming soon...
