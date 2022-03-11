@@ -17,6 +17,7 @@ if [ -d .git ]; then
     git pull   # Update Repository
 else
     echo Cloning remote
+    mkdir -p $LOCAL_REPO
     git clone $URL $LOCAL_REPO
     cd $LOCAL_REPO
 fi
