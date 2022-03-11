@@ -17,7 +17,7 @@ setopt appendhistory
 [ -f "${CONFIG_HOME}/shell/aliases" ] && source "${CONFIG_HOME}/shell/aliases"
 [ -f $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh    # NVM
 
-# Load local shell config files from .local/bin/$USER
+# User defined shell config files from .local/bin/$USER
  for f in ~/.local/bin/${USER}; do source $f; done
 
 # Simple Auto/Tab Complete
