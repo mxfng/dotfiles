@@ -21,12 +21,12 @@ Run to synchronize dotfiles from the repo to `$HOME` and refresh the Brewfile. C
 * macOS
 * git
 
-Execute `sync` for the first time with `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync.sh | sh` to install dotfiles. Afterward just run the command `sync` to keep dotfiles updated.
+Execute `sync` for the first time with `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync | zsh` to install dotfiles. Afterward just run the command `sync` to keep dotfiles updated.
 
 ## Installation
 
 1. Open up Terminal and close all other applications (if they will be upgraded by the Brewfile).
-2. Run `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync.sh | sh` in your Terminal.
+2. Run `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync | zsh` in your Terminal.
 3. Close Terminal and open up iTerm2.
 4. To sync iTerm2 preferences with this repo, do the following:
    1. Go to Preferences > General > Preferences and check **load preferences from a custom folder or URL**, then click cancel on the popup to type the URL in manually. Set the directory to `~/Developer/dotfiles/.config/iTerm2`

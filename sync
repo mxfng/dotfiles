@@ -88,8 +88,8 @@ ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 # ~/ Setup
 mkdir -p ~/.cache/zsh ~/.nvm ~/Developer  ~/.local/bin/$USER
 
-echo Your local source scripts will be read from ~/.local/bin/$USER
+echo "User-defined shell config files go in \`~/.local/bin/${USER}\`"
 
-echo 'Refresh your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
+echo 'Restart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
 
 echo Synced mxfng.dotfiles

@@ -15,7 +15,7 @@ alias \
 	bc='bc -ql' \
 	mkd="mkdir -pv" \
 	rmd="rm -rf" \
-	sync="sh ${BASEDIR}/sync.sh"
+	sync="zsh ${BASEDIR}/sync"
 
 # Colorize Commands
 alias \
