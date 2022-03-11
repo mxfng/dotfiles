@@ -19,7 +19,6 @@ Run to synchronize dotfiles from the repo to `$HOME` and refresh the Brewfile. C
 
 #### Dependencies
 * macOS
-* git
 
 Execute `sync` for the first time with `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync.sh | sh` to install dotfiles. Afterward just run the command `sync` to keep dotfiles updated.
 
