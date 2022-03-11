@@ -1,9 +1,63 @@
 #!/opt/homebrew/bin/zsh
 
-# mxfng.prompt | Prompt configuration for Zsh
+# mxfng.prompt | Prompt configuration for Zsh. Reference: https://github.com/spaceship-prompt/spaceship-prompt/blob/master/docs/options.md
 
 fpath=( "$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath )
 autoload -U promptinit; promptinit
 prompt spaceship
 
-# Spaceship Configuration
+# Order
+SPACESHIP_PROMPT_ORDER=(
+    dir           # Current directory section
+    git           # Git section (git_branch + git_status)
+    package       # Package version
+    gradle        # Gradle section
+    maven         # Maven section
+    node          # Node.js section
+    ruby          # Ruby section
+    pyenv         # Pyenv section
+    venv          # virtualenv section
+    conda         # conda virtualenv section
+    elixir        # Elixir section
+    xcode         # Xcode section
+    swift         # Swift section
+    golang        # Go section
+    docker        # Docker section
+    aws           # Amazon Web Services section
+    gcloud        # Google Cloud Platform section
+    dotnet        # .NET section
+    ember         # Ember.js section
+    kubectl       # Kubectl context section
+    terraform     # Terraform workspace section
+    exec_time     # Execution time
+    line_sep      # Line break
+    battery       # Battery level and status
+    vi_mode       # Vi-mode indicator
+    jobs          # Background jobs indicator
+    exit_code     # Exit code section
+    char          # Prompt character
+)
+
+# Configuration
+SPACESHIP_USER_SHOW=false
+SPACESHIP_TIME_SHOW=false
+
+# Symbols
+SPACESHIP_CHAR_SYMBOL=" ー "  # Prompt
+SPACESHIP_RUBY_SYMBOL=""
+SPACESHIP_DOCKER_SYMBOL=""
+SPACESHIP_PYENV_SYMBOL=""
+
+# Prefixes/Suffixes
+SPACESHIP_CHAR_PREFIX=$CUSTOM_USER
+SPACESHIP_DIR_PREFIX="・"
+SPACESHIP_GIT_PREFIX=""
+SPACESHIP_EXEC_TIME_PREFIX="took "
+
+# Colours
+# Chart: https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+SPACESHIP_CHAR_COLOR_SUCCESS=238
+SPACESHIP_DIR_COLOR=051
+SPACESHIP_GIT_BRANCH_COLOR=240
+SPACESHIP_GIT_STATUS_COLOR=242
+SPACESHIP_EXEC_TIME_COLOR=117
