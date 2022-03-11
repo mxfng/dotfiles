@@ -23,10 +23,11 @@ fi
 if [[ "$OSTYPE" == "darwin"* ]]; then
     which -s brew
     if [[ $? != 0 ]] ; then
-        # Install Homebrew
+        echo Installing Homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
     
+    echo Running Brewfile
     brew update; brew bundle --file=$BASEDIR/Brewfile    # Run Brewfile
     
     if [ $(which zsh) != "$(brew --prefix)/bin/zsh"]; then
