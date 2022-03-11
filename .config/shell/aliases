@@ -9,16 +9,16 @@ done; unset command
 
 # Core Verbosity + Settings
 alias \
-	rm='rm -iv'
+	rm='rm -iv' \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	bc='bc -ql' \
-	mkd='mkdir -pv' \
+	mkd="mkdir -pv" \
 	sync="sh ${BASEDIR}/sync.sh"
 
 # Colorize Commands
 alias \
-	ls="ls --color=auto" \
+	ls="ls --color=auto"
 
 alias \
     e="$EDITOR"\
