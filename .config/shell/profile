@@ -2,6 +2,9 @@
 
 # mxfng.profile | Runs on login. Environmental variables are set here.
 
+# Username
+export CUSTOM_USER=mx   # For prompt only
+
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
