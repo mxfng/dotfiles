@@ -5,6 +5,9 @@
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+# Ruby in PATH
+eval "$(rbenv init -)"
+
 # Python
 export PIP_REQUIRE_VIRTUALENV=false
 
