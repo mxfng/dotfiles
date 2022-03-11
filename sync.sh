@@ -86,7 +86,9 @@ echo "source ${PWD}/.config/zsh/.zshrc" >> ~/.zshrc
 ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 
 # ~/ Setup
-mkdir -p ~/.cache/zsh ~/.nvm ~/Developer 
+mkdir -p ~/.cache/zsh ~/.nvm ~/Developer  ~/.local/bin/$USER
+
+echo Your local source scripts will be read from ~/.local/bin/$USER
 
 echo 'Refresh your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
 

@@ -14,8 +14,11 @@ HISTFILE=$CACHE_HOME/zsh/history
 setopt appendhistory
 
 # Load Aliases/Shortcuts
-[ -f "${CONFIG_HOME}/shell/shortcutrc" ] && source "${CONFIG_HOME}/shell/shortcutrc"
 [ -f "${CONFIG_HOME}/shell/aliases" ] && source "${CONFIG_HOME}/shell/aliases"
+[ -f $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh    # NVM
+
+# Load local shell config files from .local/bin/$USER
+ for f in ~/.local/bin/${USER}; do source $f; done
 
 # Simple Auto/Tab Complete
 autoload -U compinit
@@ -38,9 +41,6 @@ lfcd () {
     fi
 }
 bindkey -s '^g' 'lfcd\n'
-
-# NVM
-source $(brew --prefix nvm)/nvm.sh
 
 # iTerm2 Shell Integration
 source $CONFIG_HOME/iTerm2/.iterm2_shell_integration.zsh
