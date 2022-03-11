@@ -2,54 +2,76 @@
 
 BASEDIR="$(dirname "$(realpath -s "$0")")"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo Syncing mxfng.dotfiles.macOS
-fi
-
-cd $BASEDIR; LOCAL_REPO=~/Developer/dotfiles
-
-if [ -d $LOCAL_REPO ] && [ ! -d .git ]; then
-    cd $LOCAL_REPO
-fi
-
-if [ -d .git ]; then
-    echo Pulling remote
-    git pull   # Update Repository
-else
-    echo Cloning remote
-    mkdir -p $LOCAL_REPO
-    git clone https://github.com/mxfng/dotfiles $LOCAL_REPO
-    cd $LOCAL_REPO
-fi
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
+brewsync()  # Installs dependencies Homebrew and Git
+{
     which -s brew
     if [[ $? != 0 ]] ; then
         echo Installing Homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
+        brew install git
     fi
-    
-    echo Running Brewfile
-    brew update; brew bundle    # Run Brewfile
-    
+}
+
+gitsync()   # Remote pull or remote clone
+{
+    if [ -d $LOCAL_REPO ] && [ ! -d .git ]; then
+        cd $LOCAL_REPO
+    fi
+
+    if [ -d .git ]; then
+        echo Pulling remote
+        git pull   # Update Repository
+    else
+        echo Cloning remote
+        mkdir -p $LOCAL_REPO
+        git clone https://github.com/mxfng/dotfiles $LOCAL_REPO
+        cd $LOCAL_REPO
+    fi
+}
+
+zshsync()   # Swaps to brew zsh and adds iTerm2 Shell Integration
+{
     if [ $(which zsh) != "$(brew --prefix)/bin/zsh"]; then
         echo Current active Zsh will swap to $(which zsh)
         chsh -s $(which zsh)    # Set Default Shell to Homebrew Zsh
     fi
-    
-    # iTerm2 Shell Integration for Zsh
-    curl -L https://iterm2.com/shell_integration/zsh \
-    -o $PWD/.config/iTerm2/.iterm2_shell_integration.zsh
-    touch ~/.hushlogin          # Silence prompt at login
 
-    if [[ $(uname -m) == 'arm64' ]]; then
-        # M1-Specific Installs
-        echo Cleaning up M1 dependencies
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        # iTerm2 Shell Integration for Zsh
+        curl -L https://iterm2.com/shell_integration/zsh \
+        -o $PWD/.config/iTerm2/.iterm2_shell_integration.zsh
+        touch ~/.hushlogin          # Silence prompt at login
     fi
+}
 
-    rm -f $PWD/Brewfile.lock.json   # Wipe Brewfile debugging output
+arm64cleanup()  # Addresses any M1-specific issues
+{
+    if [[ $(uname -m) == 'arm64' ]]; then
+        echo Cleaning up M1 dependencies
+        # Unused
+    fi
+}
+
+# ----------------------------------------------------------------
+
+echo Syncing mxfng.dotfiles.$OSTYPE
+
+cd $BASEDIR; LOCAL_REPO=~/Developer/dotfiles
+
+if [[ "$OSTYPE" == "darwin"* ]]; then brewsync; fi
+gitsync     # Git remote pull or clone
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo Running Brewfile
+    brew update; brew bundle    # Run Brewfile
 fi
+
+zshsync         # Swap to Homebrew zsh; add iTerm 2
+
+arm64cleanup    # Address any M1-specific issues
+
+rm -f $PWD/Brewfile.lock.json   # Wipe Brewfile debugging output
 
 # Rm .config files to swap in $HOME
 for DOTFILE in ~/.zprofile ~/.zshrc ~/.gitconfig; do
