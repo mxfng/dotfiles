@@ -38,15 +38,15 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     
     # iTerm2 Shell Integration for Zsh
     curl -L https://iterm2.com/shell_integration/zsh \
-    -o $BASEDIR/.config/iTerm2/.iterm2_shell_integration.zsh
-    touch ~/.hushlogin      # Silence prompt at login
+    -o $PWD/.config/iTerm2/.iterm2_shell_integration.zsh
+    touch ~/.hushlogin          # Silence prompt at login
 
     if [[ $(uname -m) == 'arm64' ]]; then
         # M1-Specific Installs
         echo Cleaning up M1 dependencies
     fi
 
-    rm -f $BASEDIR/Brewfile.lock.json   # Wipe Brewfile debugging output
+    rm -f $PWD/Brewfile.lock.json   # Wipe Brewfile debugging output
 fi
 
 # Rm .config files to swap in $HOME
@@ -55,11 +55,11 @@ for DOTFILE in ~/.zprofile ~/.zshrc ~/.gitconfig; do
 done
 
 # Source .config files in $HOME
-echo "source ${BASEDIR}/.config/shell/profile" >> ~/.zprofile
-echo "source ${BASEDIR}/.config/zsh/.zshrc" >> ~/.zshrc
+echo "source ${PWD}/.config/shell/profile" >> ~/.zprofile
+echo "source ${PWD}/.config/zsh/.zshrc" >> ~/.zshrc
 
 # Symlink .config files in $HOME
-ln -s $BASEDIR/.config/git/.gitconfig ~/.gitconfig
+ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 
 # ~/ Setup
 mkdir -p ~/.cache/zsh ~/.nvm ~/Developer 
