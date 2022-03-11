@@ -6,13 +6,18 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Syncing mxfng.dotfiles.macOS
 fi
 
-echo $BASEDIR
+cd $BASEDIR; LOCAL_REPO=~/Developer/dotfiles
 
-cd $BASEDIR; if [ -d .git ]; then
-    git -C $BASEDIR pull   # Update Repository
-    echo Update Repository
+if [ -d $LOCAL_REPO ] && [ ! -d .git ]; then
+    cd $LOCAL_REPO
+fi
+
+if [ -d .git ]; then
+    echo Pulling remote
+    git pull   # Update Repository
 else
-    echo Clone Repository
+    echo Cloning remote
+    git clone $URL $LOCAL_REPO
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
