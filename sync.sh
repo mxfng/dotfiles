@@ -18,6 +18,7 @@ if [ -d .git ]; then
 else
     echo Cloning remote
     git clone $URL $LOCAL_REPO
+    cd $LOCAL_REPO
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -28,11 +29,11 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
     
     echo Running Brewfile
-    brew update; brew bundle --file=$BASEDIR/Brewfile    # Run Brewfile
+    brew update; brew bundle    # Run Brewfile
     
     if [ $(which zsh) != "$(brew --prefix)/bin/zsh"]; then
         echo Current active Zsh will swap to $(which zsh)
-        chsh -s $(which zsh)   # Set Default Shell to Homebrew Zsh
+        chsh -s $(which zsh)    # Set Default Shell to Homebrew Zsh
     fi
     
     # iTerm2 Shell Integration for Zsh
