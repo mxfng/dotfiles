@@ -1,9 +1,9 @@
 [alias]
+	a = add
 	co = checkout
 	sco = restore --staged
 	br = branch
-	cm = commit
-	cmm = commit -m
+	cm = commit -m
 	st = status
 	rb = rebase
 	pfwl = push --force-with-lease
@@ -17,7 +17,7 @@
 	fixup = commit --fixup
 	squash = commit --squash
 	unstage = reset HEAD
-	rum = rebase master@{u}
+	rum = rebase main@{u}
 	puff = pull --ff-only
 	merff = merge --ff-only
 	fa = fetch --all
