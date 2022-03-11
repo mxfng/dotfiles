@@ -18,7 +18,7 @@ if [ -d .git ]; then
 else
     echo Cloning remote
     mkdir -p $LOCAL_REPO
-    git clone $URL $LOCAL_REPO
+    git clone https://github.com/mxfng/dotfiles $LOCAL_REPO
     cd $LOCAL_REPO
 fi
 
