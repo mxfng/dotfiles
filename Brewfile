@@ -12,6 +12,7 @@ brew "coreutils"
 # Python Dependencies
 brew "python@3.9"
 brew "virtualenv"
+brew "pyenv"
 
 # Ruby Dependencies
 brew "rbenv"
@@ -29,7 +30,7 @@ brew "zsh-autosuggestions"
 # Casks
 cask "alfred"
 cask "firefox"
-cask "font-mononoki"
+cask "font-mononoki-nerd-font"
 cask "iterm2"
 cask "keepassxc"
 cask "spotify"
