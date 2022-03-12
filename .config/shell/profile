@@ -22,3 +22,4 @@ export NVM_DIR=~/.nvm
 export CONFIG_HOME=$BASEDIR/.config
 export CACHE_HOME=$HOME/.cache
 export ZDOTDIR=$CONFIG_HOME/zsh
+export DEV=$BASEDIR/..

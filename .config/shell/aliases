@@ -23,7 +23,7 @@ alias \
 
 alias \
     e="$EDITOR"\
-	cdev="cd ~/Developer"\
+	cdev="$DEV"\
 	cdot="cd ${BASEDIR}"
 
 # Python Specific
