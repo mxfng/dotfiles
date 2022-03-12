@@ -1,6 +1,6 @@
 # max's dotfiles
 
-A dotfile repo that exists to make it easier for me to bootstrap onto new systems. Nothing special, really.
+A dotfile repo that exists to make it easier for me to bootstrap onto new systems. Nothing special, really. It is notably free of Oh-My-Zsh, which is not typical of most zsh configurations, and has a variety of aesthetic and quality of life tweaks and improvements that I very much enjoy daily. Please feel free to use any of these files or take some inspiration from them for your own dotfiles.
 
 ![mxfng.dotfiles](img/capture.png)
 
