@@ -52,3 +52,6 @@ bindkey "^ " autosuggest-accept
 
 # Syntax Highlighting (Should Be Last)
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=117,underline
+ZSH_HIGHLIGHT_STYLES[precommand]=fg=117,underline
+ZSH_HIGHLIGHT_STYLES[arg0]=fg=117
