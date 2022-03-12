@@ -97,6 +97,6 @@ ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 # ~/ Setup
 mkdir -p ~/.cache/zsh ~/.nvm ~/Developer  ~/.local/bin/$USER
 
-echo -e "\e[1;32mUser-defined shell config files go in \`~/.local/bin/${USER}\`\e[0m"
-echo -e '\e[1;31mRestart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`\e[0m'
-echo "Synced mxfng.dotfiles"
+echo -e "User-defined shell config files go in \`~/.local/bin/${USER}\`m"
+echo -e 'Restart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
+echo -e '\e[1;32mSynced mxfng.dotfiles\e[0m'
