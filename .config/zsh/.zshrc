@@ -18,7 +18,8 @@ setopt appendhistory
 [ -f $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh    # NVM
 
 # User defined shell config files from .local/bin/$USER
- for f in ~/.local/bin/${USER}; do source $f; done
+ for f (~/.local/bin/$USER/**/*(N.))  . $f
+
 
 # Simple Auto/Tab Complete
 autoload -U compinit
