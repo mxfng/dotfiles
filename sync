@@ -34,7 +34,7 @@ gitsync()   # Remote pull or remote clone
 
 zshsync()   # Swaps to brew zsh and adds iTerm2 Shell Integration
 {
-    if [ $(which zsh) != "$(brew --prefix)/bin/zsh"]; then
+    if [[ $(which zsh) != "$(brew --prefix)/bin/zsh" ]]; then
         echo Current active Zsh will swap to $(which zsh)
         chsh -s $(which zsh)    # Set Default Shell to Homebrew Zsh
     fi
