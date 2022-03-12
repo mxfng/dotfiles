@@ -21,11 +21,14 @@ gitsync()   # Remote pull or remote clone
 
     if [ -d .git ]; then
         echo Pulling remote
-        git pull   # Update Repository
+        git pull || exit 1  # Update Repository
     else
         echo Cloning remote
         mkdir -p $LOCAL_REPO
-        git clone https://github.com/mxfng/dotfiles $LOCAL_REPO
+        git clone https://github.com/mxfng/dotfiles $LOCAL_REPO ||\
+        echo "There were 1 or more errors during sync."\
+        echo "Please reference the output above for more information on the error(s)."\
+        echo Syncing mxfng.dotfiles failed
         cd $LOCAL_REPO
     fi
 }
@@ -52,6 +55,12 @@ arm64cleanup()  # Addresses any M1-specific issues
         # Unused
     fi
 }
+
+# Simple error handling
+set -e
+trap "echo -e '\e[1;31mThere were 1 or more errors during sync.\e[0m';
+echo -e '\e[1;31mPlease reference the output above for more information on the error(s).\e[0m'
+echo 'Syncing mxfng.dotfiles failed'" EXIT
 
 # ----------------------------------------------------------------
 
@@ -88,8 +97,6 @@ ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 # ~/ Setup
 mkdir -p ~/.cache/zsh ~/.nvm ~/Developer  ~/.local/bin/$USER
 
-echo "User-defined shell config files go in \`~/.local/bin/${USER}\`"
-
-echo 'Restart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
-
-echo Synced mxfng.dotfiles
+echo -e "\e[1;32mUser-defined shell config files go in \`~/.local/bin/${USER}\`\e[0m"
+echo -e '\e[1;31mRestart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`\e[0m'
+echo "Synced mxfng.dotfiles"
