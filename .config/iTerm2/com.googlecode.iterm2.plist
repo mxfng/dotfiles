@@ -977,8 +977,10 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>QuitWhenAllWindowsClosed</key>
+	<key>PromptOnQuitEvenIfThereAreNoWindows</key>
 	<true/>
+	<key>QuitWhenAllWindowsClosed</key>
+	<false/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>StatusBarPosition</key>
