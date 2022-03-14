@@ -19,8 +19,11 @@ export DEV=$BASEDIR/..
 
 # Default Programs:
 export EDITOR="code"
-export NVM_DIR=~/.nvm
 
 # Python
 export PYTHONSTARTUP=$CONFIG_HOME/python/.pythonrc
 export PIP_REQUIRE_VIRTUALENV=false
+
+# Node
+export NVM_DIR=~/.nvm
+export NODE_REPL_HISTORY=~/.cache/node/history

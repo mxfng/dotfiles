@@ -92,7 +92,7 @@ echo "source ${PWD}/.config/zsh/.zshrc" >> ~/.zshrc
 ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
 
 # ~/ Setup
-mkdir -p ~/.cache/zsh ~/.nvm ~/Developer  ~/.local/bin/$USER
+mkdir -p ~/.cache/zsh ~/.cache/node ~/.nvm ~/Developer  ~/.local/bin/$USER
 
 if $ERROUT; then
     echo -e "\e[1;31mThere were $ERRC or more errors during sync.\e[0m"
