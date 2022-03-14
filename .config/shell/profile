@@ -2,14 +2,17 @@
 
 # mxfng.profile | Runs on login. Environmental variables are set here.
 
+# ~/ Minimalism
+export CONFIG_HOME=$BASEDIR/.config
+export CACHE_HOME=$HOME/.cache
+export ZDOTDIR=$CONFIG_HOME/zsh
+export DEV=$BASEDIR/..
+
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Ruby in PATH
 eval "$(rbenv init -)"
-
-# Python
-export PIP_REQUIRE_VIRTUALENV=false
 
 # Locates dotfiles folder via the symlink path
 export BASEDIR=$(echo "$(dirname "$(realpath -s "$0")")" | rev | cut -d '/' -f3- | rev)
@@ -18,8 +21,6 @@ export BASEDIR=$(echo "$(dirname "$(realpath -s "$0")")" | rev | cut -d '/' -f3-
 export EDITOR="code"
 export NVM_DIR=~/.nvm
 
-# ~/ Minimalism
-export CONFIG_HOME=$BASEDIR/.config
-export CACHE_HOME=$HOME/.cache
-export ZDOTDIR=$CONFIG_HOME/zsh
-export DEV=$BASEDIR/..
+# Python
+export PYTHONSTARTUP=$CONFIG_HOME/python/pythonrc
+export PIP_REQUIRE_VIRTUALENV=false
