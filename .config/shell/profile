@@ -21,7 +21,7 @@ export DEV=$BASEDIR/..
 export EDITOR="code"
 
 # Python
-export PYTHONSTARTUP=$CONFIG_HOME/python/.pythonrc
+export PYTHONSTARTUP=$CONFIG_HOME/python/.pythonrc.py
 export PIP_REQUIRE_VIRTUALENV=false
 
 # Node
