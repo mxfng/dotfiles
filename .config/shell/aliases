@@ -9,6 +9,7 @@ done; unset command
 
 # Core Verbosity + Settings
 alias \
+	home='cd ~' \
 	rm='rm -iv' \
 	cp='cp -iv' \
 	mv='mv -iv' \
