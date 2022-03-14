@@ -27,4 +27,6 @@ alias \
 	cdot="cd ${BASEDIR}"
 
 # Python Specific
-alias pip-user='PIP_REQUIRE_VIRTUALENV=false python3 -m pip'
+alias \
+	python='python3' \
+	pip-user='PIP_REQUIRE_VIRTUALENV=false python3 -m pip'

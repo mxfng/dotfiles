@@ -2,12 +2,6 @@
 
 # mxfng.profile | Runs on login. Environmental variables are set here.
 
-# ~/ Minimalism
-export CONFIG_HOME=$BASEDIR/.config
-export CACHE_HOME=$HOME/.cache
-export ZDOTDIR=$CONFIG_HOME/zsh
-export DEV=$BASEDIR/..
-
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -16,6 +10,12 @@ eval "$(rbenv init -)"
 
 # Locates dotfiles folder via the symlink path
 export BASEDIR=$(echo "$(dirname "$(realpath -s "$0")")" | rev | cut -d '/' -f3- | rev)
+
+# ~/ Minimalism
+export CONFIG_HOME=$BASEDIR/.config
+export CACHE_HOME=$HOME/.cache
+export ZDOTDIR=$CONFIG_HOME/zsh
+export DEV=$BASEDIR/..
 
 # Default Programs:
 export EDITOR="code"
