@@ -20,7 +20,6 @@ setopt appendhistory
 # User defined shell config files from .local/bin/$USER
  for f (~/.local/bin/$USER/**/*(N.))  . $f
 
-
 # Simple Auto/Tab Complete
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -29,7 +28,6 @@ compinit -d $CACHE_HOME/zsh/.zcompdump      # Outputs to $HOME
 _comp_options+=(globdots)		        # Include hidden files
 zstyle ':completion:*' menu select 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
 
 # Use lf to switch directories + Bind to Ctrl+G
 lfcd () {
