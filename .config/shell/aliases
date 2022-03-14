@@ -9,18 +9,19 @@ done; unset command
 
 # Core Verbosity + Settings
 alias \
-	home='cd ~' \
+	h='cd ~' \
+	sync="zsh ${BASEDIR}/sync" \
+	ls='gls -a' \
 	rm='rm -iv' \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	bc='bc -ql' \
 	mkd="mkdir -pv" \
-	rmd="rm -rf" \
-	sync="zsh ${BASEDIR}/sync"
+	rmd="rm -rf"
 
 # Colorize Commands
 alias \
-	ls="gls --color=auto"
+	ls='ls --color=auto'
 
 alias \
     e="$EDITOR"\
