@@ -101,6 +101,6 @@ if $ERROUT; then
 else
     source ~/.zprofile; source ~/.zshrc
     echo "User-defined shell config files go in \`~/.local/bin/${USER}\`"
-    echo 'Restart your shell to reflect sync or run `source ~/.zprofile ~/.zshrc`'
+    echo 'Restart your iTerm2 shell to reflect preferences sync'
     echo -e '\e[1;32mSynced mxfng.dotfiles\e[0m'
 fi
