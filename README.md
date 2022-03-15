@@ -6,9 +6,11 @@ A dotfile repo that exists to make it easier for me to bootstrap onto new system
 
 ## Configurations
 
-* zsh shell
+* zsh
 * git
 * iTerm2 Terminal
+* python
+* vim
 * keepassxc
 
 ## Scripts
