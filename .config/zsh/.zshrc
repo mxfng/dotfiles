@@ -43,6 +43,7 @@ bindkey -s '^g' 'lfcd\n'
 
 # iTerm2 Shell Integration
 source $CONFIG_HOME/iTerm2/.iterm2_shell_integration.zsh
+source $CONFIG_HOME/iTerm2/scripts
 
 # Auto-Suggestions
 source $HOMEBREW_PREFIX/Cellar/zsh-autosuggestions/0.7.0/share/zsh-autosuggestions/zsh-autosuggestions.zsh
