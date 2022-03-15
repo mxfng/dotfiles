@@ -30,4 +30,4 @@ set wildmode=list:longest
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 " Change default location of viminfo
-set viminfofile = ~/.vim/viminfo
+set viminfofile=~/.vim/viminfo
