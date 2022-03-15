@@ -1,3 +1,5 @@
+#!/opt/homebrew/bin/zsh
+
 # mxfng.sync | Run to sync dotfiles to $HOME and brew bundle.
 
 BASEDIR="$(dirname "$(realpath -s "$0")")"
