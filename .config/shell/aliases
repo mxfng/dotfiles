@@ -36,3 +36,7 @@ alias \
 # Vim
 alias \
 	vim="vim -u ${CONFIG_HOME}/vim/.vimrc"
+
+# For Fun
+alias \
+	poop="echo 💩"
