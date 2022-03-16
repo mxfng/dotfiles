@@ -13,6 +13,7 @@ brew "coreutils"
 brew "python@3.9"
 brew "virtualenv"
 brew "pyenv"
+brew "ipython"
 
 # Ruby Dependencies
 brew "rbenv"
