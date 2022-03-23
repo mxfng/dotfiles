@@ -9,7 +9,7 @@ done; unset command
 
 # Core Verbosity + Settings
 alias \
-	h='cd ~' \
+	h='cd ~; clear' \
 	sync="zsh ${BASEDIR}/sync" \
 	rm='rm -iv' \
 	cp='cp -iv' \
