@@ -72,7 +72,7 @@ gitsync     # Git remote pull or clone
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Running Brewfile
-    brew update; brew bundle    # Run Brewfile
+    brew update; brew upgrade; brew bundle    # Run Brewfile
 fi
 
 zshsync         # Swap to Homebrew zsh; add iTerm 2
