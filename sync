@@ -16,7 +16,6 @@ brewsync()  # Installs dependencies Homebrew and Git
         brew doctor
         brew install git
     fi
-    xcode-select --install &>/dev/null  # Install XCode Command Line Tools if macOS updated
 }
 
 gitsync()   # Remote pull or remote clone
