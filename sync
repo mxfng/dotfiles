@@ -13,8 +13,10 @@ brewsync()  # Installs dependencies Homebrew and Git
         echo Installing Homebrew
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         eval "$(/opt/homebrew/bin/brew shellenv)"
+        brew doctor
         brew install git
     fi
+    xcode-select --install &>/dev/null  # Install XCode Command Line Tools if macOS updated
 }
 
 gitsync()   # Remote pull or remote clone
@@ -68,7 +70,8 @@ echo Syncing mxfng.dotfiles.$OSTYPE
 cd $BASEDIR; LOCAL_REPO=~/Developer/dotfiles
 
 if [[ "$OSTYPE" == "darwin"* ]]; then brewsync; fi
-gitsync     # Git remote pull or clone
+
+gitsync         # Git remote pull or clone
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     echo Running Brewfile
