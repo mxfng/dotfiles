@@ -79,7 +79,7 @@ fi
 
 zshsync         # Swap to Homebrew zsh; add iTerm 2
 
-arm64cleanup    # Address any M1-specific issues
+#arm64cleanup    # Address any M1-specific issues
 
 rm -f $PWD/Brewfile.lock.json   # Wipe Brewfile debugging output
 
