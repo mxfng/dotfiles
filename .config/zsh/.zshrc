@@ -24,7 +24,7 @@ setopt appendhistory
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -d $CACHE_HOME/zsh/.zcompdump      # Outputs to $HOME
+compinit -d $CACHE_HOME/zsh/.zcompdump  # Outputs to $HOME
 _comp_options+=(globdots)		        # Include hidden files
 zstyle ':completion:*' menu select 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
