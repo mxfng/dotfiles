@@ -28,7 +28,7 @@
   },
   "HotKey Window Floats" : true,
   "Right Option Key Sends" : 0,
-  "Show Status Bar" : false,
+  "Show Status Bar" : true,
   "Character Encoding" : 4,
   "Selection Color" : {
     "Red Component" : 0.70196080207824707,
@@ -85,10 +85,12 @@
         }
       },
       {
-        "class" : "iTermStatusBarMemoryUtilizationComponent",
+        "class" : "iTermStatusBarSpringComponent",
         "configuration" : {
           "knobs" : {
+            "iTermStatusBarSpringComponentSizeMultipleKey" : 1,
             "base: priority" : 5,
+            "iTermStatusBarSpringComponentSpringConstantKey" : 0.01,
             "shared text color" : {
               "Red Component" : 0.63,
               "Color Space" : "sRGB",
@@ -99,26 +101,25 @@
             "base: compression resistance" : 1
           },
           "layout advanced configuration dictionary value" : {
-            "remove empty components" : false,
-            "auto-rainbow style" : 1,
-            "font" : ".AppleSystemUIFont 12",
-            "algorithm" : 0
+            "auto-rainbow style" : 0,
+            "algorithm" : 0,
+            "remove empty components" : false
           }
         }
       },
       {
-        "class" : "iTermStatusBarSearchFieldComponent",
+        "class" : "iTermStatusBarMemoryUtilizationComponent",
         "configuration" : {
           "knobs" : {
             "base: priority" : 5,
+            "base: compression resistance" : 1,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
               "Blue Component" : 0.77580000000000005,
               "Alpha Component" : 1,
               "Green Component" : 0.63
-            },
-            "base: compression resistance" : 1
+            }
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
@@ -131,9 +132,9 @@
     ],
     "advanced configuration" : {
       "remove empty components" : false,
-      "auto-rainbow style" : 1,
       "font" : ".AppleSystemUIFont 12",
-      "algorithm" : 0
+      "algorithm" : 0,
+      "auto-rainbow style" : 1
     }
   },
   "Flashing Bell" : false,
@@ -351,7 +352,7 @@
     "Green Component" : 0.7607843279838562
   },
   "Send Code When Idle" : false,
-  "ASCII Anti Aliased" : true,
+  "ASCII Anti Aliased" : false,
   "Tags" : [
     "developer"
   ],
@@ -426,7 +427,7 @@
   "Smart Cursor Color" : false,
   "Ambiguous Double Width" : false,
   "Blur Radius" : 7.8914893617021278,
-  "Cursor Type" : 2,
+  "Cursor Type" : 0,
   "Ansi 0 Color" : {
     "Red Component" : 0.078431375324726105,
     "Color Space" : "sRGB",
@@ -435,7 +436,7 @@
     "Green Component" : 0.098039217293262482
   },
   "Blur" : true,
-  "Normal Font" : "mononokiNerdFontCompleteM-Regular 18",
+  "Normal Font" : "MononokiNerdFontComplete-Regular 20",
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.7810397744178772,
@@ -478,7 +479,7 @@
   },
   "Screen" : -1,
   "HotKey Characters Ignoring Modifiers" : " ",
-  "Non Ascii Font" : "mononokiNerdFontCompleteM-Regular 20",
+  "Non Ascii Font" : "Menlo-Regular 11",
   "Ansi 13 Color" : {
     "Red Component" : 0.8821563720703125,
     "Color Space" : "sRGB",
