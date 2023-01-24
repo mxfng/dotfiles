@@ -57,7 +57,7 @@
     "slogin",
     "telnet"
   ],
-  "Scrollback Lines" : 1000,
+  "Scrollback Lines" : 0,
   "HotKey Window Reopens On Activation" : true,
   "Draw Powerline Glyphs" : true,
   "Status Bar Layout" : {
@@ -88,9 +88,8 @@
         "class" : "iTermStatusBarSpringComponent",
         "configuration" : {
           "knobs" : {
-            "iTermStatusBarSpringComponentSizeMultipleKey" : 1,
-            "base: priority" : 5,
             "iTermStatusBarSpringComponentSpringConstantKey" : 0.01,
+            "base: priority" : 5,
             "shared text color" : {
               "Red Component" : 0.63,
               "Color Space" : "sRGB",
@@ -98,11 +97,12 @@
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
             },
-            "base: compression resistance" : 1
+            "base: compression resistance" : 1,
+            "iTermStatusBarSpringComponentSizeMultipleKey" : 1
           },
           "layout advanced configuration dictionary value" : {
-            "auto-rainbow style" : 0,
             "algorithm" : 0,
+            "auto-rainbow style" : 0,
             "remove empty components" : false
           }
         }
@@ -112,14 +112,14 @@
         "configuration" : {
           "knobs" : {
             "base: priority" : 5,
-            "base: compression resistance" : 1,
             "shared text color" : {
               "Red Component" : 0.90000000000000002,
               "Color Space" : "sRGB",
               "Blue Component" : 0.77580000000000005,
               "Alpha Component" : 1,
               "Green Component" : 0.63
-            }
+            },
+            "base: compression resistance" : 1
           },
           "layout advanced configuration dictionary value" : {
             "remove empty components" : false,
@@ -132,9 +132,9 @@
     ],
     "advanced configuration" : {
       "remove empty components" : false,
+      "auto-rainbow style" : 1,
       "font" : ".AppleSystemUIFont 12",
-      "algorithm" : 0,
-      "auto-rainbow style" : 1
+      "algorithm" : 0
     }
   },
   "Flashing Bell" : false,
@@ -352,7 +352,7 @@
     "Green Component" : 0.7607843279838562
   },
   "Send Code When Idle" : false,
-  "ASCII Anti Aliased" : false,
+  "ASCII Anti Aliased" : true,
   "Tags" : [
     "developer"
   ],
@@ -436,7 +436,7 @@
     "Green Component" : 0.098039217293262482
   },
   "Blur" : true,
-  "Normal Font" : "MononokiNerdFontComplete-Regular 20",
+  "Normal Font" : "agaveNerdFontCompleteM-r 20",
   "Vertical Spacing" : 1,
   "Ansi 7 Color" : {
     "Red Component" : 0.7810397744178772,
