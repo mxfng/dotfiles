@@ -30,7 +30,9 @@ brew "zsh-autosuggestions"
 
 # Casks
 cask "alfred"
+cask "arc"
 cask "firefox"
+cask "google-chrome"
 cask "font-mononoki-nerd-font"
 cask "iterm2"
 cask "keepassxc"
