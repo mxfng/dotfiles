@@ -54,14 +54,6 @@ zshsync()   # Swaps to brew zsh and adds iTerm2 Shell Integration
     fi
 }
 
-arm64cleanup()  # Addresses any M1-specific issues
-{
-    if [[ $(uname -m) == 'arm64' ]]; then
-        echo Cleaning up M1 dependencies
-        # Unused
-    fi
-}
-
 # ----------------------------------------------------------------
 
 echo Syncing mxfng.dotfiles.$OSTYPE
@@ -78,8 +70,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 fi
 
 zshsync         # Swap to Homebrew zsh; add iTerm 2
-
-#arm64cleanup    # Address any M1-specific issues
 
 rm -f $PWD/Brewfile.lock.json   # Wipe Brewfile debugging output
 

@@ -20,6 +20,7 @@ brew "rbenv"
 brew "ruby-build"
 
 # JavaScript Dependencies
+brew "node"
 brew "nvm"
 
 # Auxiliary Tools
