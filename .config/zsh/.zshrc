@@ -57,3 +57,6 @@ ZSH_HIGHLIGHT_STYLES[arg0]=fg=117
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Created by `pipx` on 2023-12-19 20:36:52
+export PATH="$PATH:/Users/mxfng/.local/bin"
