@@ -25,6 +25,7 @@
 
 [core]
 	editor = code
+	sshCommand = ssh -i ~/.ssh/id_rsa -F /dev/null
 
 [color]
 	ui = auto
