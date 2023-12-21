@@ -16,10 +16,6 @@ brew "pyenv"
 brew "ipython"
 brew "pipx"
 
-# Ruby Dependencies
-brew "rbenv"
-brew "ruby-build"
-
 # JavaScript Dependencies
 brew "node"
 brew "nvm"

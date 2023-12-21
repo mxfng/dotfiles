@@ -27,10 +27,12 @@ Execute `sync` for the first time with `curl https://raw.githubusercontent.com/m
 
 ## Installation
 
-1. Open up Terminal and close all other applications (if they will be upgraded by the Brewfile).
-2. Run `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync | zsh` in your Terminal.
-3. Close Terminal and open up iTerm2.
-4. To sync iTerm2 preferences with this repo, do the following:
+1. Install Homebrew using `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+2. Install Apple Developer tools
+3. Open up Terminal and close all other applications (if they will be upgraded by the Brewfile).
+4. Run `curl https://raw.githubusercontent.com/mxfng/dotfiles/main/sync | zsh` in your Terminal.
+5. Close Terminal and open up iTerm2.
+6. To sync iTerm2 preferences with this repo, do the following:
    1. Go to Preferences > General > Preferences and check **load preferences from a custom folder or URL**, then click cancel on the popup to type the URL in manually. Set the directory to `~/Developer/dotfiles/.config/iTerm2`
-5. Open **System Preferences** > Users & Groups > Login Items and make sure that **iTerm** is added and **Hide** is selected.
-6. Fully quit iTerm2 by pressing `cmd + Q`, wait a moment, then reopen it for the repo preferences to load properly.
+7. Open **System Preferences** > Users & Groups > Login Items and make sure that **iTerm** is added and **Hide** is selected.
+8. Fully quit iTerm2 by pressing `cmd + Q`, wait a moment, then reopen it for the repo preferences to load properly.
