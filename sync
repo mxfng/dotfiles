@@ -33,9 +33,9 @@ gitsync()   # Remote pull or remote clone
         mkdir -p $LOCAL_REPO
         git clone https://github.com/mxfng/dotfiles $LOCAL_REPO
         cd $LOCAL_REPO
-        if ! git remote -v | grep -q 'origin	git@github.com:mxfng/dotfiles (fetch)'$'\n''origin	git@github.com:mxfng/dotfiles (push)'; then
-            echo "Setting remote git URL to git@github.com:mxfng/dotfiles"
-            git remote set-url origin git@github.com:mxfng/dotfiles
+        if ! git remote -v | grep -q 'origin	https://github.com/mxfng/dotfiles (fetch)'$'\n''origin	https://github.com/mxfng/dotfiles (push)'; then
+            echo "Setting remote git URL to https://github.com/mxfng/dotfiles"
+            git remote set-url origin https://github.com/mxfng/dotfiles
         fi
     fi
 }
