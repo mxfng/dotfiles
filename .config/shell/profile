@@ -9,7 +9,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(rbenv init -)"
 
 # Locates dotfiles folder via the symlink path
-export BASEDIR=$(echo "$(dirname "$(realpath -s "$0")")" | rev | cut -d '/' -f3- | rev)
+export BASEDIR=$(echo "$(dirname "$(readlink "$0" || echo "$0")")" | rev | cut -d '/' -f3- | rev)
 
 # ~/ Minimalism
 export CONFIG_HOME=$BASEDIR/.config
