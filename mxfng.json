@@ -88,8 +88,9 @@
         "class" : "iTermStatusBarSpringComponent",
         "configuration" : {
           "knobs" : {
-            "iTermStatusBarSpringComponentSpringConstantKey" : 0.01,
+            "base: compression resistance" : 1,
             "base: priority" : 5,
+            "iTermStatusBarSpringComponentSpringConstantKey" : 0.01,
             "shared text color" : {
               "Red Component" : 0.63,
               "Color Space" : "sRGB",
@@ -97,13 +98,12 @@
               "Alpha Component" : 1,
               "Green Component" : 0.90000000000000002
             },
-            "base: compression resistance" : 1,
             "iTermStatusBarSpringComponentSizeMultipleKey" : 1
           },
           "layout advanced configuration dictionary value" : {
+            "remove empty components" : false,
             "algorithm" : 0,
-            "auto-rainbow style" : 0,
-            "remove empty components" : false
+            "auto-rainbow style" : 0
           }
         }
       },
@@ -154,7 +154,6 @@
     "Green Component" : 0.76959484815597534
   },
   "Icon" : 0,
-  "Use Non-ASCII Font" : false,
   "Link Color" : {
     "Red Component" : 0.19802422821521759,
     "Color Space" : "sRGB",
@@ -162,6 +161,7 @@
     "Alpha Component" : 1,
     "Green Component" : 0.55789834260940552
   },
+  "Use Non-ASCII Font" : false,
   "Shortcut" : "",
   "Background Image Location" : "",
   "Bold Color" : {
@@ -401,15 +401,7 @@
   },
   "Name" : "mxfng",
   "Blinking Cursor" : true,
-  "Guid" : "E9463117-B29D-4BD1-8592-E988C6B0C6C2",
-  "Idle Code" : 0,
-  "Ansi 10 Color" : {
-    "Red Component" : 0.3450070321559906,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.56541937589645386,
-    "Alpha Component" : 1,
-    "Green Component" : 0.9042816162109375
-  },
+  "Guid" : "1DBD61B8-DF5C-4069-8892-CE8059C030D1",
   "Ansi 8 Color" : {
     "Red Component" : 0.40781760215759277,
     "Color Space" : "sRGB",
@@ -417,6 +409,14 @@
     "Alpha Component" : 1,
     "Green Component" : 0.40782788395881653
   },
+  "Ansi 10 Color" : {
+    "Red Component" : 0.3450070321559906,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.56541937589645386,
+    "Alpha Component" : 1,
+    "Green Component" : 0.9042816162109375
+  },
+  "Idle Code" : 0,
   "Badge Color" : {
     "Red Component" : 1,
     "Color Space" : "sRGB",
@@ -479,7 +479,7 @@
   },
   "Screen" : -1,
   "HotKey Characters Ignoring Modifiers" : " ",
-  "Non Ascii Font" : "Menlo-Regular 11",
+  "Non Ascii Font" : "MononokiNF-Regular 18",
   "Ansi 13 Color" : {
     "Red Component" : 0.8821563720703125,
     "Color Space" : "sRGB",
@@ -492,8 +492,8 @@
 
   ],
   "Visual Bell" : true,
-  "ASCII Ligatures" : false,
   "Custom Directory" : "No",
+  "ASCII Ligatures" : false,
   "Ansi 5 Color" : {
     "Red Component" : 0.752197265625,
     "Color Space" : "sRGB",
