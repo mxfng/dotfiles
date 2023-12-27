@@ -120,7 +120,20 @@ sync_dotfiles() {
     mkdir -p ~/.cache/zsh ~/.cache/node ~/.nvm ~/Developer  ~/.local/bin/$USER
 }
 
-sync_dotfiles
+# Main
+case "$1" in
+-h|--help)
+    echo "Usage: $0 [OPTION]"
+    echo "Sync dotfiles, update brew and zsh"
+    echo ""
+    echo "Options:"
+    echo "-h, --help    display this help and exit"
+    exit 0
+    ;;
+*)
+    sync_dotfiles
+    ;;
+esac
 
 if $ERROUT; then
     echo -e "\e[1;31mThere were $ERRC error(s) during sync.\e[0m"
