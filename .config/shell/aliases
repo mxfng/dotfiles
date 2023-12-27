@@ -33,10 +33,6 @@ alias \
 	python='python3' \
 	pip-user='PIP_REQUIRE_VIRTUALENV=false python3 -m pip'
 
-# Vim
-alias \
-	vim="vim -u ${CONFIG_HOME}/vim/.vimrc"
-
 # For Fun
 alias \
 	poop="echo 💩"

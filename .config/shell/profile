@@ -5,9 +5,6 @@
 # Homebrew in PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Ruby in PATH
-eval "$(rbenv init -)"
-
 # Locates dotfiles folder via the symlink path
 export BASEDIR=$(echo "$(dirname "$(readlink "$0" || echo "$0")")" | rev | cut -d '/' -f3- | rev)
 

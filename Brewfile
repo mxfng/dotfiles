@@ -9,9 +9,6 @@ brew "coreutils"
 
 # Python Dependencies
 brew "python@3.9"
-brew "virtualenv"
-brew "pyenv"
-brew "ipython"
 brew "pipx"
 
 # JavaScript Dependencies
