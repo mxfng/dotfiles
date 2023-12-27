@@ -1,6 +1,7 @@
 tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "homebrew/services"
+tap "buo/cask-upgrade"
 
 # Core Dependencies
 brew "zsh"
