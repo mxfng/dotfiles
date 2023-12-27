@@ -36,7 +36,7 @@ sync_brew()  # Installs dependencies Homebrew and Git
     fi
 }
 
-gitsync()   # Remote pull or remote clone
+sync_git()   # Remote pull or remote clone
 {
     if [ -d $LOCAL_REPO ] && [ ! -d .git ]; then
         cd $LOCAL_REPO
