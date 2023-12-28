@@ -21,6 +21,8 @@ brew "spaceship"
 brew "lf"
 brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
+brew "git-delta"
+brew "fzf"
 
 # Casks
 cask "alfred"
@@ -38,3 +40,4 @@ cask "inkscape"
 cask "slack"
 cask "discord"
 cask "postman"
+cask "httpie"

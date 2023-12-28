@@ -25,6 +25,7 @@
 
 [core]
 	editor = code
+	pager = delta
 	sshCommand = ssh -i ~/.ssh/id_rsa -F /dev/null
 
 [color]
@@ -39,6 +40,12 @@
 [pull]
 	rebase = true
 
+[merge]
+	conflictStyle = diff3
+
+[diff]
+	colorMoved = default
+
 [init]
 	defaultBranch = main
 
@@ -46,12 +53,14 @@
 	diffFilter = delta --color-only
 
 [delta]
+		navigate = true
   	features = side-by-side line-numbers decorations
   	whitespace-error-style = 22 reverse
 
 [delta "decorations"]
-  	commit-decoration-style = bold yellow box ul
-  	file-style = bold yellow ul
+  	commit-decoration-style = bold blue box ul
+  	file-style = bold blue ul
   	file-decoration-style = none
+
 [user]
 	email = maxhfung@gmail.com
