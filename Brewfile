@@ -16,6 +16,10 @@ brew "pipx"
 brew "node"
 brew "nvm"
 
+# Ruby Dependencies
+brew "rbenv"
+brew "ruby-build"
+
 # Auxiliary Tools
 brew "spaceship"
 brew "lf"
