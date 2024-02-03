@@ -35,6 +35,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # Add pipx completions
 eval "$(register-python-argcomplete pipx)"
 
+# Add rbenv
+eval "$(rbenv init - zsh)"
+
 # Use lf to switch directories + Bind to Ctrl+G
 lfcd () {
     tmp="$(mktemp)"
