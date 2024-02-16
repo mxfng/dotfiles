@@ -17,6 +17,12 @@ setopt appendhistory
 [ -f "${CONFIG_HOME}/shell/aliases" ] && source "${CONFIG_HOME}/shell/aliases"
 [ -f $(brew --prefix nvm)/nvm.sh ] && source $(brew --prefix nvm)/nvm.sh    # NVM
 
+# ASDF Config
+source $(brew --prefix asdf)/libexec/asdf.sh
+
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+
 # User defined shell config files from .local/bin/$USER
  for f (~/.local/bin/$USER/**/*(N.))  . $f
 
@@ -24,7 +30,7 @@ setopt appendhistory
 export PATH="$PATH:/Users/$USER/.local/bin"
 
 # Simple Auto/Tab Complete
-autoload -U compinit
+autoload -U compinit && compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit -d $CACHE_HOME/zsh/.zcompdump  # Outputs to $HOME
@@ -34,9 +40,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # Add pipx completions
 eval "$(register-python-argcomplete pipx)"
-
-# Add rbenv
-eval "$(rbenv init - zsh)"
 
 # Use lf to switch directories + Bind to Ctrl+G
 lfcd () {

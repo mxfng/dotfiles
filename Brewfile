@@ -17,8 +17,7 @@ brew "node"
 brew "nvm"
 
 # Ruby Dependencies
-brew "rbenv"
-brew "ruby-build"
+brew "asdf"
 
 # Auxiliary Tools
 brew "spaceship"
