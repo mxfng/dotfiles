@@ -82,8 +82,6 @@ sync_zsh() {
 
 sync_asdf() {
     if command_exists asdf; then
-        echo "Ensuring ASDF is synchronized with Ruby, NodeJS, and Yarn"
-
         # Add plugins if they don't exist
         asdf plugin list | grep -q ruby || asdf plugin add ruby
         asdf plugin list | grep -q nodejs || asdf plugin add nodejs
@@ -92,8 +90,8 @@ sync_asdf() {
         asdf list ruby | grep -q 3.3.0 || asdf install ruby 3.3.0
         asdf global ruby 3.3.0
 
+        echo "Updating RubyGems"
         gem update --system
-        echo "Warning: gem update --system may require sudo access"
 
         # Install nodejs version if it's not already installed
         asdf list nodejs | grep -q 20.11.0 || asdf install nodejs 20.11.0
@@ -102,9 +100,10 @@ sync_asdf() {
         # Check if yarn is installed, if not install it
         npm list -g --depth=0 | grep -q yarn || npm install -g yarn
 
-        # Check if Rails is installed, if not install it
-        if ! command_exists rails; then
-            sudo asdf exec gem install rails -v 7.1.3
+        # Check if Rails is installed
+        if ! which rails >/dev/null 2>&1; then
+            echo "Installing rails 7.1.3"
+            asdf exec gem install rails -v 7.1.3
         fi
         
     fi
