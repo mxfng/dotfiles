@@ -7,17 +7,15 @@ tap "buo/cask-upgrade"
 brew "zsh"
 brew "git"
 brew "coreutils"
+brew "asdf"
 
 # Python Dependencies
 brew "python@3.9"
 brew "pipx"
 
-# JavaScript Dependencies
-brew "node"
-brew "nvm"
-
-# Ruby Dependencies
-brew "asdf"
+# Database Dependencies
+brew "sqlite3"
+brew "postgresql"
 
 # Auxiliary Tools
 brew "spaceship"
