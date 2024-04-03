@@ -26,7 +26,6 @@
 [core]
 	editor = code
 	pager = delta
-	sshCommand = ssh -i ~/.ssh/id_rsa -F /dev/null
 
 [color]
 	ui = auto
