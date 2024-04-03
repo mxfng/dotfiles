@@ -120,10 +120,10 @@ sync_directories() {
     # Source .config files in $HOME
     echo "source ${PWD}/.config/shell/profile" >> ~/.zprofile
     echo "source ${PWD}/.config/zsh/.zshrc" >> ~/.zshrc
-    echo "source ${PWD}/.config/ssh/config" >> ~/.ssh/config
 
     # Symlink .config files in $HOME
     ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
+    ln -s $PWD/.config/ssh/config ~/.ssh/config
 
     # ~/ Setup
     mkdir -p ~/.cache/zsh ~/.cache/node ~/.nvm ~/Developer  ~/.local/bin/$USER
