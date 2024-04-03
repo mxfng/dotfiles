@@ -10,4 +10,4 @@ Host github-personal
   UseKeychain yes
   Hostname github.com
   User git
-  IdentityFile ~/.ssh/id_personal
+  IdentityFile ~/.ssh/id_ed25519_personal
