@@ -1,6 +1,4 @@
-#!/opt/homebrew/bin/zsh
-
-# mxfng.aliasrc | Separate file for alias commands.
+# mxfng.aliases | Separate file for alias commands.
 
 # Sudo not required for some system commands
 for command in shutdown poweroff reboot ; do
@@ -16,7 +14,8 @@ alias \
 	mv='mv -iv' \
 	bc='bc -ql' \
 	mkd="mkdir -pv" \
-	rmd="rm -rf"
+	rmd="rm -rf" \
+	x86='arch -x86_64'
 
 # Colorize Commands
 alias \

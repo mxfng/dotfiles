@@ -1,9 +1,4 @@
-#!/opt/homebrew/bin/zsh
-
 # mxfng.profile | Runs on login. Environmental variables are set here.
-
-# Homebrew in PATH
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Locates dotfiles folder via the symlink path
 export BASEDIR=$(echo "$(dirname "$(readlink "$0" || echo "$0")")" | rev | cut -d '/' -f3- | rev)

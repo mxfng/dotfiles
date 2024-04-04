@@ -1,0 +1,11 @@
+# mxfng.scripts
+
+# Sets the title of the Terminal tab to the text passed to it.
+
+function title {
+    echo -ne "\033]0;"$*"\007"
+}
+
+function gpt {
+    open "https://chat.openai.com"
+}

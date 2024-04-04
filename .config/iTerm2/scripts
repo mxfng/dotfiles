@@ -1,7 +1,0 @@
-#!/opt/homebrew/bin/zsh
-
-# mfng.iTerm2.scripts | iTerm2 / Terminal commands
-
-function title {
-    echo -ne "\033]0;"$*"\007"
-}

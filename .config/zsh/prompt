@@ -1,5 +1,3 @@
-#!/opt/homebrew/bin/zsh
-
 # mxfng.prompt | Prompt configuration for Zsh. Reference: https://github.com/spaceship-prompt/spaceship-prompt/blob/master/docs/options.md
 
 # Order
@@ -82,8 +80,5 @@ SPACESHIP_TIME_COLOR=117
 SPACESHIP_GIT_BRANCH_COLOR=244
 SPACESHIP_GIT_STATUS_COLOR=244
 SPACESHIP_EXEC_TIME_COLOR=117
-
-# Add margin to all stdout
-#exec 1> >(sed -r 's/^(.*)/      \1/g')
 
 source $(brew --prefix)/opt/spaceship/spaceship.zsh
