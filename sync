@@ -167,7 +167,7 @@ if $ERROUT; then
     echo -e '\e[1;31mSyncing mxfng.dotfiles failed\e[0m'
 else
     source ~/.zprofile; source ~/.zshrc
-    echo "User-defined shell config files go in \`~/.local/bin/${USER}\`"
+    echo "Device specific shell config files go in \`~/.local/bin/${USER}\`"
     echo 'Restart your iTerm2 shell to reflect preferences sync'
     echo -e '\e[1;32mSynced mxfng.dotfiles\e[0m'
 fi
