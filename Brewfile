@@ -24,6 +24,7 @@ brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 brew "git-delta"
 brew "fzf"
+brew "multipass"
 
 # Casks
 cask "alfred"
