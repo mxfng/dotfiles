@@ -123,6 +123,9 @@ sync_directories() {
 
     # Symlink .config files in $HOME
     ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
+    if [ -e ~/.ssh/config ]; then
+        rm ~/.ssh/config
+    fi
     ln -s $PWD/.config/ssh/config ~/.ssh/config
 
     # ~/ Setup
