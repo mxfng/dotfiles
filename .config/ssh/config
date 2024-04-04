@@ -6,4 +6,4 @@ Host github-work
 Host github-personal
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_personalz
+    IdentityFile ~/.ssh/id_personal
