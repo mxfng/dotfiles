@@ -34,6 +34,17 @@ Execute `sync` for the first time with `curl https://raw.githubusercontent.com/m
 
 Run to configure SSH authorization. Paired with the included SSH `config` file, `sshx` manages four different accounts: GitHub for personal and work, and GitLab for personal and work. The script will prompt the user to enter account information and instruct them on how to add SSH keys to the supported services, GitHub and GitLab.
 
+- github-personal
+- github-work
+- gitlab-personal
+- gitlab-work
+
+#### Setting Remote on Repo
+```
+git radd github-personal:username/repo.git
+git rurl github-personal:username/repo.git
+```
+
 ### `title`
 
 Easily rename tabs in your terminal by typing `title <your-title>`.
