@@ -47,8 +47,8 @@ function setup-ssh-key {
   if [[ $answer == "y" ]]; then
     create-ssh-key "${service}-${type}" $url
     echo "You can set this key to a git repository with: "
-    echo "git remote add origin ${service}-${type}:username/repository.git"
-    echo "git remote set-url origin ${service}-${type}:username/repository.git"
+    echo "git radd ${service}-${type}:username/repository.git"
+    echo "git rurl ${service}-${type}:username/repository.git"
   else
     # This is not working at the moment
     manage-ssh-key $service $type
