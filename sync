@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/zsh
+#!/usr/bin/env zsh
 
 # mxfng.sync | Run to sync dotfiles to $HOME and brew bundle.
 
