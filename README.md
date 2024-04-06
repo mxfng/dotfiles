@@ -103,3 +103,16 @@ The `.zshrc` in this dotfiles repo creates a directory structure `~/.local/bin/$
 - `pip-user` - Triggers global pip with `PIP_REQUIRE_VIRTUALENV=false python3 -m pip`
 - `poop` - just for fun
 - Reference `.gitconfig` for git command aliases
+
+## Additional Bootstrapping
+
+For future reference, I've saved some additional steps I like to take when bootstrapping onto a new system.
+
+1. Open **Finder** and go to Settings > General
+2. For **New Finder windows show:** select the home folder
+3. Navigate to **Sidebar** and select the **Home** folder, and include any additions as necessary
+4. Open **Visual Studio Code** and log in to synchronize settings
+5. Open **System Preferences** > Users & Groups > Login Items and make sure that **Alfred** is added
+6. Open Spotlight's System Settings and disable the menu keyboard shortcut under Keyboard > Keyboard Shortcuts > Spotlight
+7. Open **Alfred** and navigate to Preferences and set the **Alfred Hotkey** to `Command + Space`
+8. Install **Horo** from the App Store for time tracking
