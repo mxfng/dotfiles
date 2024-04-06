@@ -76,7 +76,7 @@ The `.zshrc` in this dotfiles repo creates a directory structure `~/.local/bin/$
 - `h` - Returns the user to the home directory and clears the console
 - `rm` - Performs a removal operation with the `-iv` flag
 - `cp` - Performs a copy operation with the `-iv` flag
-- `mv` - Performs a rename operation with the `-iv` flag
+- `mv` - Performs a move/rename operation with the `-iv` flag
 - `bc` - Opens the precision calculator with the `-ql` flag
 - `mkd` - Creates a directory with the `-pv` flag
 - `rmd` - Removes a directory recursively using the `-rf` flag
