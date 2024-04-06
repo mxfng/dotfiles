@@ -50,6 +50,7 @@ function setup-ssh-key {
     echo "git remote add origin ${service}-${type}:username/repository.git"
     echo "git remote set-url origin ${service}-${type}:username/repository.git"
   else
+    # This is not working at the moment
     manage-ssh-key $service $type
   fi
 }
@@ -60,6 +61,7 @@ function manage-ssh-key {
 
   read title url <<<$(set_service_details $service)
 
+  # There is an issue with this logic, it is not working as expected
   if [ -f "~/.ssh/sshx/${service}-${type}" ]; then
     echo "\n\e[1mA $title $type SSH key exists. Do you want to remove the $title $type SSH key? (y/n)\e[0m"
     echo -n "→ "
@@ -106,5 +108,5 @@ setup-ssh-key github work
 setup-ssh-key gitlab personal
 setup-ssh-key gitlab work
 
-echo "SSH Key setup complete"
+echo "\nSSH Key setup complete"
 echo "sshx exiting..."
