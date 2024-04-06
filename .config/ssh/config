@@ -1,11 +1,11 @@
 Host github-work
-    HostName github.com
+    Hostname github.com
     User git
     AddKeysToAgent yes
     IdentityFile ~/.ssh/sshx/github-work
 
 Host github-personal
-    HostName github.com
+    Hostname github.com
     User git
     AddKeysToAgent yes
     IdentityFile ~/.ssh/sshx/github-personal
