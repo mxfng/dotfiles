@@ -5,8 +5,9 @@
 BASEDIR="$(dirname "$(readlink -f "$0")")"
 ITERM2_ZSH_PATH="$PWD/.config/iTerm2/.iterm2_shell_integration.zsh"
 DOTFILES=(~/.zprofile ~/.zshrc ~/.gitconfig)
-ERROUT=false; ERRC=0    # ERROR flag and counter
-trap "ERROUT=true; ERRC=$((ERRC+1))" ERR
+ERROUT=false
+ERRC=0 # ERROR flag and counter
+trap "ERROUT=true; ERRC=$((ERRC + 1))" ERR
 
 # Check if a command exists
 command_exists() {
@@ -17,7 +18,7 @@ command_exists() {
 sync_iterm2() {
     if [[ "$OSTYPE" == "darwin"* ]]; then
         if curl -L https://iterm2.com/shell_integration/zsh -o $ITERM2_ZSH_PATH; then
-            touch ~/.hushlogin          # Silence prompt at login
+            touch ~/.hushlogin # Silence prompt at login
         else
             echo "Failed to download iTerm2 Shell Integration for Zsh"
             exit 1
@@ -60,7 +61,8 @@ sync_git() {
 sync_brew() {
     if command_exists brew; then
         echo Running Brewfile
-        brew update; brew upgrade
+        brew update
+        brew upgrade
 
         brew bundle --force cleanup
 
@@ -76,7 +78,7 @@ sync_brew() {
 sync_zsh() {
     if [[ $(which zsh) != "$(brew --prefix)/bin/zsh" ]]; then
         echo Current active Zsh will swap to $(which zsh)
-        chsh -s $(which zsh)    # Set Default Shell to Homebrew Zsh
+        chsh -s $(which zsh) # Set Default Shell to Homebrew Zsh
     fi
 }
 
@@ -105,7 +107,7 @@ sync_asdf() {
             echo "Installing rails 7.1.3"
             asdf exec gem install rails -v 7.1.3
         fi
-        
+
     fi
 }
 
@@ -118,37 +120,38 @@ sync_directories() {
     done
 
     # Source .config files in $HOME
-    echo "source ${PWD}/.config/shell/profile" >> ~/.zprofile
-    echo "source ${PWD}/.config/zsh/.zshrc" >> ~/.zshrc
+    echo "source ${PWD}/.config/shell/profile" >>~/.zprofile
+    echo "source ${PWD}/.config/zsh/.zshrc" >>~/.zshrc
 
     # Symlink .config files in $HOME
     ln -s $PWD/.config/git/.gitconfig ~/.gitconfig
     if [ -e ~/.ssh/config ]; then
-        rm ~/.ssh/config
+        sudo rm ~/.ssh/config
     fi
     ln -s $PWD/.config/ssh/config ~/.ssh/config
 
     # ~/ Setup
-    mkdir -p ~/.cache/zsh ~/.cache/node ~/.nvm ~/Developer  ~/.local/bin/$USER
+    mkdir -p ~/.cache/zsh ~/.cache/node ~/.nvm ~/Developer ~/.local/bin/$USER
 }
 
 # Sync dotfiles
 main() {
     echo Syncing mxfng.dotfiles.$OSTYPE
 
-    cd $BASEDIR; LOCAL_REPO=~/Developer/dotfiles
+    cd $BASEDIR
+    LOCAL_REPO=~/Developer/dotfiles
 
     ensure_brew_and_git
     sync_git
     sync_brew
     sync_zsh
     sync_asdf
-    sync_directories  
+    sync_directories
 }
 
 # Main
 case "$1" in
--h|--help)
+-h | --help)
     echo "Usage: $0 [OPTION]"
     echo "Sync dotfiles, update brew and zsh"
     echo ""
@@ -166,7 +169,8 @@ if $ERROUT; then
     echo -e '\e[1;31mPlease reference the output above for more information on the error(s).\e[0m'
     echo -e '\e[1;31mSyncing mxfng.dotfiles failed\e[0m'
 else
-    source ~/.zprofile; source ~/.zshrc
+    source ~/.zprofile
+    source ~/.zshrc
     echo "Device specific shell config files go in \`~/.local/bin/${USER}\`"
     echo 'Restart your iTerm2 shell to reflect preferences sync'
     echo -e '\e[1;32mSynced mxfng.dotfiles\e[0m'
