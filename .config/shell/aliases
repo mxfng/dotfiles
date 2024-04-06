@@ -3,9 +3,10 @@
 # mxfng.aliases | Separate file for alias commands.
 
 # Sudo not required for some system commands
-for command in shutdown poweroff reboot ; do
+for command in shutdown poweroff reboot; do
 	alias $command="sudo $command"
-done; unset command
+done
+unset command
 
 # Core Verbosity + Settings
 alias \
@@ -26,8 +27,8 @@ alias \
 	la='ls -a'
 
 alias \
-    e="$EDITOR"\
-	cdev="$DEV"\
+	e="$EDITOR" \
+	cdev="$DEV" \
 	cdot="cd ${BASEDIR}"
 
 # Python Specific

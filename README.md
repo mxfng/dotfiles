@@ -32,7 +32,7 @@ Execute `sync` for the first time with `curl https://raw.githubusercontent.com/m
 
 ### `sshx`
 
-Run to configure SSH authorization. 
+Run to configure SSH authorization. Paired with the included SSH `config` file, `sshx` manages four different accounts: GitHub for personal and work, and GitLab for personal and work. The script will prompt the user to enter account information and instruct them on how to add SSH keys to the supported services, GitHub and GitLab.
 
 ### `title`
 
@@ -56,15 +56,12 @@ Quickly triggers ChatGPT in the default web browser when `gpt` is executed.
 
 ### Included Packages
 
-- Core: zsh, git, coreutils, asdf
-- Python: python, pipx
-- Database: sqlite3, postgresql
-- Tools: spaceship, lf, zsh-syntax-highlighting, zsh-autosuggestions, git-delta, fzf
-- Casks: Alfred, Arc, Firefox, Google Chrome, Mononoki Nerd Font, iTerm2, Spotify, VSCode, Dropbox, Gimp, Inkscape, Slack, Discord, Postman, HTTPie
-
-## Setting Up SSH
-
-Saving this here as a personal note, as I often fumble with configuring SSH while bootstrapping a brand new machine.
+- Core: `zsh`, `git`, `coreutils`, `asdf`
+- Python: `python`, `pipx`
+- Database: `sqlite3`, `postgresql`
+- Tools: `spaceship`, `lf`, `zsh-syntax-highlighting`, `zsh-autosuggestions`, `git-delta`, `fzf`
+- Languages: Python, Ruby, Kotlin, JavaScript/TypeScript
+- Software: Alfred, Arc, Firefox, Google Chrome, Mononoki Nerd Font, iTerm2, Spotify, VSCode, Dropbox, Gimp, Inkscape, Slack, Discord, Postman, HTTPie
 
 ## Local Scripts
 
@@ -92,3 +89,4 @@ The `.zshrc` in this dotfiles repo creates a directory structure `~/.local/bin/$
 - `python` - Defaults to `python3`
 - `pip-user` - Triggers global pip with `PIP_REQUIRE_VIRTUALENV=false python3 -m pip`
 - `poop` - just for fun
+- Reference `.gitconfig` for git command aliases
