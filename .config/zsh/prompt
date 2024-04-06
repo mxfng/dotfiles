@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # mxfng.prompt | Prompt configuration for Zsh. Reference: https://github.com/spaceship-prompt/spaceship-prompt/blob/master/docs/options.md
 
 # Order

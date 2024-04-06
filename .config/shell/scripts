@@ -1,4 +1,6 @@
-# mxfng.scripts
+#!/usr/bin/env zsh
+
+# mxfng.scripts | Separate file for shell scripts encapsulated in functions. This is mostly experimental.
 
 # Sets the title of the Terminal tab to the text passed to it.
 

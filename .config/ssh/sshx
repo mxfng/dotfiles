@@ -1,0 +1,115 @@
+#!/usr/bin/env zsh
+
+# mxfng.sshx | SSH Key Management
+
+function start-ssh-agent {
+  echo "Starting ssh-agent"
+  eval "$(ssh-agent -s)"
+}
+
+function create-ssh-key {
+  filename=$1
+  url=$2
+
+  echo "Enter your account email for this key:"
+  echo -n "→ "
+  read email
+
+  ssh-keygen -t ed25519 -C "$email" -f ~/.ssh/sshx/$filename
+
+  if [ $? -ne 0 ]; then
+    return
+  fi
+
+  ssh-add --apple-use-keychain ~/.ssh/sshx/$filename
+
+  pbcopy <~/.ssh/sshx/$filename.pub
+
+  echo "\nYour public key is:"
+  echo -n "→ "
+  cat ~/.ssh/sshx/$filename.pub
+  echo ""
+  echo "Public key copied to clipboard"
+  echo "\e[1mAdd the public key to your account at $url\e[0m"
+  echo "Press ENTER when ready to continue..."
+  read pause
+}
+
+function setup-ssh-key {
+  service=$1
+  type=$2
+
+  read title url <<<$(set_service_details $service)
+
+  echo "\n\e[1mDo you want to setup a $title $type SSH key? (y/n)\e[0m"
+  echo -n "→ "
+  read answer
+  if [[ $answer == "y" ]]; then
+    create-ssh-key "${service}-${type}" $url
+    echo "You can set this key to a git repository with: "
+    echo "git remote add origin ${service}-${type}:username/repository.git"
+    echo "git remote set-url origin ${service}-${type}:username/repository.git"
+  else
+    echo "should manage here"
+
+    manage-ssh-key $service $type
+  fi
+}
+
+function manage-ssh-key {
+  service=$1
+  type=$2
+
+  read title url <<<$(set_service_details $service)
+
+  echo "managing"
+  echo "~/.ssh/sshx/${service}-${type}"
+
+  if [ -f "~/.ssh/sshx/${service}-${type}" ]; then
+    echo "\n\e[1mA $title $type SSH key exists. Do you want to remove the $title $type SSH key? (y/n)\e[0m"
+    echo -n "→ "
+    read answer
+    if [[ $answer == "y" ]]; then
+      rm ~/.ssh/sshx/${service}-${type}*
+      echo "Deleted $title $type SSH key"
+    else
+      sleep 0.5
+    fi
+  fi
+}
+
+function sshx-directory {
+  if [ ! -d ~/.ssh/sshx ]; then
+    mkdir -p ~/.ssh/sshx
+  fi
+}
+
+function header {
+  echo █▀ █▀ █░█ ▀▄▀
+  echo ▄█ ▄█ █▀█ █░█
+  echo "© Max Fung"
+}
+
+function set_service_details {
+  service=$1
+
+  if [[ $service == "github" ]]; then
+    title="GitHub"
+    url=https://github.com/settings/keys
+  elif [[ $service == "gitlab" ]]; then
+    title="GitLab"
+    url=https://gitlab.com/-/profile/keys
+  fi
+
+  echo $title $url
+}
+
+header
+sshx-directory
+setup-ssh-key github personal
+setup-ssh-key github work
+setup-ssh-key gitlab personal
+setup-ssh-key gitlab work
+
+echo "SSH Key setup complete"
+echo "sshx exiting..."

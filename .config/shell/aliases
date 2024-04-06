@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # mxfng.aliases | Separate file for alias commands.
 
 # Sudo not required for some system commands
@@ -9,6 +11,7 @@ done; unset command
 alias \
 	h='cd ~; clear' \
 	sync="zsh ${BASEDIR}/sync" \
+	sshx="zsh ${BASEDIR}/.config/ssh/sshx" \
 	rm='rm -iv' \
 	cp='cp -iv' \
 	mv='mv -iv' \

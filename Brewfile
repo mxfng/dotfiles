@@ -10,7 +10,7 @@ brew "coreutils"
 brew "asdf"
 
 # Python Dependencies
-brew "python@3.9"
+brew "python"
 brew "pipx"
 
 # Database Dependencies
@@ -24,7 +24,6 @@ brew "zsh-syntax-highlighting"
 brew "zsh-autosuggestions"
 brew "git-delta"
 brew "fzf"
-brew "multipass"
 
 # Casks
 cask "alfred"

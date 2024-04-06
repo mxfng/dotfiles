@@ -1,9 +1,23 @@
 Host github-work
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_work
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/sshx/github-work
 
 Host github-personal
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_personal
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/sshx/github-personal
+
+Host gitlab-work
+    HostName gitlab.com
+    User git
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/sshx/gitlab-work
+
+Host gitlab-personal
+    HostName gitlab.com
+    User git
+    AddKeysToAgent yes
+    IdentityFile ~/.ssh/sshx/gitlab-personal

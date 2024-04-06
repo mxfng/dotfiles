@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # mxfng.profile | Runs on login. Environmental variables are set here.
 
 # Locates dotfiles folder via the symlink path

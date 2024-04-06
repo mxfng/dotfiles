@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # mxfng.zshrc | Zsh-Specific Configuration File.
 
 # Hush login message
