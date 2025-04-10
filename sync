@@ -1,0 +1,135 @@
+#!/usr/bin/env fish
+
+set general_help '
+Syncs dotfiles between machines
+
+Options:
+    -d, --desktop   Sync desktop environment configurations
+    -g, --git       Sync git configuration
+    -i, --install   Install dependencies
+
+Usage:
+    sync <function> [arg [arg [...]]]     Run a function directly
+    source ./sync                         Source the file to use functions as commands
+'
+
+function main
+    argparse d/desktop g/git i/install -- $argv
+    set -l start_dir (pwd)
+    and set -l tmp_dir (mktemp --directory 2>/dev/null; or mktemp -d -t 'dotfiles')
+    and set -l cwd (string match -r '\w+$' $start_dir)
+    and set -l uname (uname)
+    or return $status
+
+    log 'syncing shell environment configurations'
+    set_color grey
+
+    setup_tmp_space $cwd $tmp_dir
+
+    and sync_terminal_env
+
+    and set_fish_universal_vars
+
+    and if test -n "$_flag_i"
+        set_color normal
+        log 'Installing Neovim plugins'
+        set_color grey
+
+        install_nvim_plugins
+    end
+
+    and if test -n "$_flag_d"
+        set_color normal
+        log 'Syncing desktop environment configurations'
+        set_color grey
+
+        sync_desktop_env $uname
+    end
+
+    and if test -n "$_flag_g"
+        set_color normal
+        log 'Sync git config'
+        sync_git_config
+        set_color grey
+    end
+
+    clean_up_tmp_space $cwd $start_dir $tmp_dir
+    or return $status
+
+    set_color normal
+    echo -s 'done syncing.'
+end
+
+function setup_tmp_space -a cwd tmp_dir
+    if test ! "$cwd" = dotfiles
+        git clone --recurse-submodules https://github.com/mxfng/dotfiles.git $tmp_dir
+        and cd $tmp_dir
+    end
+end
+
+function sync_terminal_env
+    if ! test -e ~/.config
+        mkdir ~/.config
+    end
+
+    if ! test -e ~/Developer/scripts
+        mkdir -p ~/Developer/scripts
+    end
+
+    rsync -aP ./.config/fish ~/.config/
+    and rsync -aP ./scripts/ ~/Developer/scripts/
+end
+
+function sync_desktop_env -a uname
+    rsync -aP ./.wezterm.lua ~/
+    or return 1
+
+    switch $uname
+        case Darwin
+            log 'syncing macOS desktop environment configurations'
+            rsync -aP ./.yabairc ~/
+            and rsync -aP --force --delete ./.skhdrc ~/
+            or return $status
+
+        case Linux
+            echo 'linux not supported yet'
+        case '*'
+            echo 'unsupported operating system'
+            return 1
+    end
+end
+
+function sync_git_config
+    rsync -aP ./.gitconfig ~/
+
+    echo 'Please set your git user:'
+    read -P 'name: ' name
+    read -P 'email: ' email
+
+    git config --global user.name $name
+    git config --global user.email $email
+end
+
+function set_fish_universal_vars
+    source ./fish_universal_vars.fish
+end
+
+function clean_up_tmp_space -a cwd start_dir tmp_dir
+    if test ! "$cwd" = dotfiles
+        cd $start_dir
+        and rm -r $tmp_dir
+    end
+end
+
+function log -a message
+    set_color blue
+    echo -n "==> "
+    set_color normal
+    echo "$message"
+end
+
+if test -n "$argv[1]"
+    main $argv[1]
+else
+    echo $general_help
+end

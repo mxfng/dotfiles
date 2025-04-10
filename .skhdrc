@@ -1,0 +1,37 @@
+# app shortcuts
+cmd - space: osascript -e 'tell application "Raycast" to activate' -e 'tell application "System Events" to tell process "Raycast" to if it is visible then set visible to false else set visible to true end if'
+alt - space: open -a WezTerm # Open terminal (⌥ + Space)
+shift + cmd - return: open -a Arc # Open browser (⇧ + ⌘ + Return)
+
+# window management
+# half screen
+ctrl + cmd - left: yabai -m window --grid 1:2:0:0:1:1 # Left half
+ctrl + cmd - right: yabai -m window --grid 1:2:1:0:1:1 # Right half
+ctrl + cmd - up: yabai -m window --grid 1:1:0:0:1:1 # Full screen
+ctrl + cmd - down: yabai -m window --grid 2:2:0:0:2:2 # Center
+
+# quarter screen
+ctrl + cmd + shift - left: yabai -m window --grid 2:2:0:0:1:1 # Top left
+ctrl + cmd + shift - right: yabai -m window --grid 2:2:1:0:1:1 # Top right
+ctrl + cmd + shift - up: yabai -m window --grid 2:2:0:1:1:1 # Bottom left
+ctrl + cmd + shift - down: yabai -m window --grid 2:2:1:1:1:1 # Bottom right
+
+# navigation
+alt - left: yabai -m window --focus west # Focus left window
+alt - right: yabai -m window --focus east # Focus right window
+alt - up: yabai -m window --focus north # Focus up window
+alt - down: yabai -m window --focus south # Focus down window
+
+# space control
+cmd - 1: yabai -m space --focus 1 # Focus Desktop 1
+cmd - 2: yabai -m space --focus 2 # Focus Desktop 2
+cmd - 3: yabai -m space --focus 3 # Focus Desktop 3
+
+# move window to space
+shift + cmd - 1: yabai -m window --space 1; yabai -m space --focus 1 # Move to Desktop 1
+shift + cmd - 2: yabai -m window --space 2; yabai -m space --focus 2 # Move to Desktop 2
+shift + cmd - 3: yabai -m window --space 3; yabai -m space --focus 3 # Move to Desktop 3
+
+# window toggles
+alt - f: yabai -m window --toggle zoom-fullscreen # Toggle fullscreen
+alt - t: yabai -m window --toggle float # Toggle float/tiling

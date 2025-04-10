@@ -1,0 +1,112 @@
+#!/usr/bin/env fish
+#
+set general_help '
+A collection of useful functions for provisioning macos
+
+Usage:
+    provision <function> [arg [arg [...]]]     Run a function directly
+    source ./provision                         Source the file to use functions as commands
+'
+
+function install_brew
+    log "installing brew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+end
+
+function install_brew_packages -a desktop
+    if not command -q brew
+        install_brew
+    end
+
+    log "installing packages"
+    if test -n "$desktop"
+        env HOMEBREW_DESKTOP=1 brew bundle
+    else
+        brew bundle
+    end
+    or return $status
+end
+
+function terminal -d 'Provision terminal environment'
+    log "provisioning terminal utilities for $USER"
+
+    install_brew_packages
+    or return $status
+
+    log 'adding brew path to fish'
+    fish_add_path /opt/homebrew/bin
+
+    log 'setting m\'s default shell to fish'
+    sudo chsh -s /opt/homebrew/bin/fish $USER
+
+    log 'running sync script'
+    ./sync --desktop
+end
+
+function desktop -d 'Provision a macOS desktop environment'
+    log "provisioning desktop environment for $USER"
+
+    install_brew_packages --desktop
+    or return $status
+
+    test (uname) != Darwin
+    and return 1
+
+    read -P "Would you like to delete old login items? [y/N] " confirm
+    switch $confirm
+        case y Y
+            log "deleting old login items"
+            osascript -e 'tell application "System Events" to delete every login item'
+    end
+
+    log 'adding wezterm to login items'
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
+
+    log 'adding raycast to login items'
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+
+    setup_raycast
+    or return $status
+
+    log 'installing yabai service'
+    yabai --install-service
+    yabai --start-service
+
+    log 'installing skhd service'
+    skhd --install-service
+    skhd --start-service
+
+    echo "done provisioning. "
+end
+
+function setup_raycast -d "Configure Raycast hotkey"
+    log "configuring raycast hotkey"
+
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "
+        <dict>
+            <key>enabled</key><false/>
+            <key>value</key><dict>
+                <key>parameters</key>
+                <array><integer>65535</integer><integer>49</integer><integer>1048576</integer></array>
+                <key>type</key><string>standard</string>
+            </dict>
+        </dict>"
+
+    killall Spotlight
+
+    log "spotlight hotkey disabled, skhd will handle Command + Space for Raycast"
+end
+
+function log -a message
+    set_color blue
+    echo -n "==> "
+    set_color normal
+    echo "$message"
+end
+
+if test -n "$argv[1]"
+    $argv[1]
+else
+    echo $general_help
+end

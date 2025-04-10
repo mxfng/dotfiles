@@ -1,0 +1,51 @@
+[alias]
+co = checkout
+sco = restore --staged
+br = branch
+cm = commit
+st = status
+rb = rebase
+pfwl = push --force-with-lease
+llog = log --date=local
+flog = log --pretty=fuller --decorate
+lol = log --graph --decorate --oneline
+lola = log --graph --decorate --oneline --all
+blog = log origin/master... --left-right
+ds = diff --staged
+amend = commit --amend -C HEAD
+fixup = commit --fixup
+squash = commit --squash
+unstage = reset HEAD
+rum = rebase master@{u}
+puff = pull --ff-only
+merff = merge --ff-only
+fa = fetch --all
+pa = push --all
+
+[core]
+editor = nvim
+pager = delta
+
+[color]
+ui = auto
+branch = auto
+interactive = auto
+status = auto
+
+[push]
+default = simple
+
+[pull]
+rebase = true
+
+[interactive]
+diffFilter = delta --color-only
+
+[delta]
+features = side-by-side line-numbers decorations
+whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+commit-decoration-style = bold yellow box ul
+file-style = bold yellow ul
+file-decoration-style = none
