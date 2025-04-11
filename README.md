@@ -2,14 +2,18 @@
 
 My preferred configurations and software for macOS systems.
 
-Includes:
+**Included:**
+
 - fish shell
-- tmux
 - git
 - Wez's terminal
 - yabaiwm (macOS)
 - skhd (macOS)
 
+**todo:**
+- cursor
+- tmux
+- neovim (someday)
 
 ## Scripts
 
@@ -22,6 +26,7 @@ Includes:
 - brew ([install guide](https://docs.brew.sh/Installation))
 - fish
 
+
 #### Usage
 
 For new configurations:
@@ -31,11 +36,13 @@ For new configurations:
 ```
 
 To run sync script using curl:
+
 ```bash
 curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
 ```
 
-## `provision`
+
+### `provision`
 
 
 #### Dependencies
@@ -52,7 +59,7 @@ Clone this repo and run the following for a fresh environment:
 ./provision terminal | fish
 ```
 
-To install desktop configs only:
+To install desktop software only:
 
 ```bash
 ./provision desktop | fish
