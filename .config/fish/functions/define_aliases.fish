@@ -12,5 +12,5 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
     alias age-k 'age --decrypt --identity ~/.secrets/id_ed25519 ~/.secrets/age_keys.age'
     alias c cursor
     alias skhdrc 'bat ~/.skhdrc | sed "s/^#.*\$/\x1b[90m&\x1b[0m/" | sed "s/^[^#].*\$/\x1b[32m&\x1b[0m/"'
-    alias keybindings 'skhdrc | less -R'
+    alias keys 'curl -sL https://raw.githubusercontent.com/mxfng/dotfiles/main/docs/shortcuts.md | glow -'
 end
