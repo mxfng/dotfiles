@@ -24,7 +24,7 @@ fa = fetch --all
 pa = push --all
 
 [core]
-editor = nvim
+editor = cursor
 pager = delta
 
 [color]
