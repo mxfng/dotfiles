@@ -78,69 +78,75 @@ To install desktop software:
 ./provision desktop | fish
 ```
 
-## Usage
+## Tips
 
-### Terminal
+1. #### Need a terminal?
 
-- Open terminal: `⌥+space`
-- Open web browser: `shift+⌥+space` 
+   Type `⌥+space`
 
-### File Management
+2. #### Need a web browser?
 
-- File navigation: `nnn` for interactive file browser
-- Fuzzy finding:
-  ```bash
-  fzf                  # Find files
-  git log | fzf        # Search git history  
-  history | fzf        # Search command history
-  ```
-- Smart directory jumping: Use `z` instead of `cd`
-- File searching with Silver Searcher:
-  ```bash
-  ag "pattern"         # Search file contents
-  ag -l "pattern"     # List matching files
-  ag -g "pattern"     # Search filenames
-  ```
-- File viewing: Use `bat` instead of `cat` for syntax highlighting
+   Type `shift+⌥+space`
 
-### Remote Access
+3. #### Looking for files?
 
-Use `mosh` for resilient SSH connections:
-- Maintains connection through network changes
-- Automatically reconnects
-- Provides instant feedback
+   Try running `nnn`
 
-### Desktop Apps
+4. #### Need something more specific?
 
-- Install desktop apps: `./provisions -d`
-- Configure Raycast (Spotlight replacement): Set hotkey to `cmd+space`
+   Try `fzf` - quickly find:
+   - Files with `fzf`
+   - Git commits with `git log | fzf` 
+   - Past commands with `history | fzf`
 
-### Window Management
+5. #### Smart directory navigation?
 
-Window control with keyboard shortcuts:
+   Use `z` instead of `cd` to jump to frequent directories
 
-Navigation:
-- Focus windows: `⌥ + h/j/k/l` (vim-style)
-- Swap windows: `shift + ⌥ + h/j/k/l`
-- Move windows: `shift + ⌘ + h/j/k/l`
+6. #### Better file searching?
 
-Spaces:
-- Focus space: `⌘ + ⌥ + [1-9]`
-- Move to space: `shift + ⌘ + [1-9]`
+   Try `ag` (The Silver Searcher) instead of `grep`:
+   - `ag "pattern"` to search files
+   - `ag -l "pattern"` to list matching files
+   - `ag -g "pattern"` to search filenames
 
-Window modes:
-- Float: `⌥ + t`
-- Picture-in-picture: `⌥ + p`
-- Fullscreen: `⌥ + f`
-- Parent zoom: `⌥ + d`
+7. #### Need to read or display files?
 
-Layout:
-- Toggle split: `⌥ + e`
-- Rotate tree: `⌥ + r`
+   Use `bat` instead of `cat` for syntax highlighting and git integration
 
-View all shortcuts: Type `keys` or see [keyboard shortcuts](./docs/shortcuts.md)
+8. #### Remote connections?
 
-### Documentation
+   Try `mosh` for reliable SSH:
+   - Survives bad connections
+   - Auto-reconnects
+   - Instant feedback
 
-- View markdown: Use `glow`
-- Get inspired: Type `quote`
+9. #### Want a better Spotlight app?
+
+    Download and use Raycast and other apps by calling `./provisions -d`; re-configure Raycast's hotkey with `cmd+space`
+
+10. #### Notice something funny about the windows?
+
+    Use these keyboard shortcuts for window management:
+    - Focus: `⌥ + h/j/k/l` (vim keys)
+    - Swap: `shift + ⌥ + h/j/k/l`
+    - Move: `shift + ⌘ + h/j/k/l`
+    - Spaces: `⌘ + ⌥ + 1-9` to focus, `shift + ⌘ + 1-9` to move window
+    - Float: `⌥ + t` to toggle float, `⌥ + p` for picture-in-picture
+    - Zoom: `⌥ + f` for fullscreen, `⌥ + d` for parent zoom
+    - Layout: `⌥ + e` to toggle split, `⌥ + r` to rotate tree
+
+11. #### Want to see all the keyboard shortcuts?
+
+    Type `keys` in the terminal to view docs or [read them here](./docs/shortcuts.md)
+
+12. #### Reading documentation?
+
+    Use `glow`
+
+12. #### Need inspiration?
+
+    Type `quote` in the terminal
+
+
+
