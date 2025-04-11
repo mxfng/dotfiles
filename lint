@@ -1,0 +1,119 @@
+#!/usr/bin/env fish
+
+set -l fix_mode 0
+set -l only_mode 0
+set -l targets
+
+for arg in $argv
+    if test $arg = --fix
+        set fix_mode 1
+    else if test $arg = --only
+        set only_mode 1
+    else if test $only_mode -eq 1
+        set -a targets $arg
+    end
+end
+
+function get_extensions_for -a key
+    switch $key
+        case lua
+            echo "*.lua"
+        case fish
+            echo "*.fish"
+        case json
+            echo "*.json"
+        case toml
+            echo "*.toml"
+        case '*'
+            return
+    end
+end
+
+function main --description 'Lint dotfiles using language-specific linters'
+    if not test (uname) = Darwin
+        echo "incompatible os ➜ darwin only"
+        return 1
+    end
+
+    set -l unmet_pkgs
+    for pkg in luacheck jq taplo stylua
+        if not command -sq $pkg
+            set -a unmet_pkgs $pkg
+        end
+    end
+
+    if test (count $unmet_pkgs) -gt 0
+        echo "missing dependencies. try:"
+        echo "brew install" (string join ' ' $unmet_pkgs)
+        return 1
+    end
+
+    # Determine extensions to check
+    set -l extensions
+    if test (count $targets) -gt 0
+        for ext in $targets
+            set -a extensions (get_extensions_for $ext)
+        end
+    else
+        set extensions "*.fish" "*.lua" "*.json" "*.toml"
+    end
+
+    for ext in $extensions
+        set -l files (git ls-files -- "$ext")
+        if test (count $files) -eq 0
+            log "no $ext files found"
+            continue
+        end
+
+        log "$ext..."
+        for file in $files
+            lint_file $file
+        end
+    end
+
+    echo done
+end
+
+function log -a message
+    set_color blue
+    echo -n "==> "
+    set_color normal
+    echo "$message"
+end
+
+function lint_file -a file
+    switch $file
+        case '*.fish'
+            if test "$fix_mode" = 1
+                fish_indent --write $file
+            else
+                fish -n $file
+            end
+        case '*.lua'
+            if test "$fix_mode" = 1
+                stylua $file
+            else
+                luacheck $file
+            end
+        case '*.json'
+            if test "$fix_mode" = 1
+                jq . $file >"$file.tmp"; and mv "$file.tmp" $file
+            else
+                jq empty $file
+            end
+        case '*.toml'
+            if test "$fix_mode" = 1
+                taplo format $file
+            else
+                taplo lint $file
+            end
+        case '*'
+            if test "$fix_mode" = 1
+                echo "no fixer configured for $file"
+            else
+                echo "no linter configured for $file"
+            end
+    end
+end
+
+main $argv
