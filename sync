@@ -56,7 +56,10 @@ function sync_terminal_env
     end
 
     rsync -aP ./.config/fish ~/.config/
+    and rsync -aP ./.tmux-line.conf ~/
+    and rsync -aP ./.tmux.conf ~/
     and rsync -aP ./scripts/ ~/Developer/scripts/
+    and rsync -aP ./.config/starship.toml ~/.config/
 end
 
 function sync_desktop_env -a uname
