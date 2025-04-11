@@ -81,17 +81,14 @@ To install desktop software only:
 
 4. #### Need something more specific?
 
-   Try `fzf` - a fuzzy finder for:
-   - Files: `fzf`
-   - Git history: `git log | fzf`
-   - Command history: `history | fzf`
+   Try `fzf` - quickly find:
+   - Files with `fzf`
+   - Git commits with `git log | fzf` 
+   - Past commands with `history | fzf`
 
 5. #### Smart directory navigation?
 
-   Use `zoxide` - it learns your habits:
-   - `z <partial-name>` to jump to a directory
-   - `zi` for interactive mode
-   - `zq` to query without jumping
+   Use `z` instead of `cd` to jump to frequent directories
 
 6. #### Better file searching?
 
@@ -102,26 +99,41 @@ To install desktop software only:
 
 7. #### Need to read or display files?
 
-   Use `bat` - a better `cat`:
-   - Syntax highlighting
-   - Git integration
-   - Line numbers
-   - Pager support
+   Use `bat` instead of `cat` for syntax highlighting and git integration
 
-8. #### Working with YAML?
+8. #### Remote connections?
 
-   Use `yq` for YAML processing:
-   - `yq e '.key' file.yml` to extract values
-   - `yq e -i '.key = "value"' file.yml` to edit
-   - `yq e -P file.yml` to pretty print
+   Try `mosh` for reliable SSH:
+   - Survives bad connections
+   - Auto-reconnects
+   - Instant feedback
 
-9. #### Remote connections?
+9. #### Want a better Spotlight app?
 
-   Try `mosh` for better SSH:
-   - Works on unreliable connections
-   - Reconnects automatically
-   - Local echo for better responsiveness
+    Download and use Raycast and other apps by calling `./provisions -d`; re-configure Raycast's hotkey with `cmd+space`
 
-10. #### Want a better Spotlight app?
+10. #### Moving windows around?
 
-    Download and use Raycast with `./provisions -d` and re-configure the hotkey with `cmd+space`
+    Use these keyboard shortcuts for window management:
+    - Focus: `⌥ + h/j/k/l` (vim keys)
+    - Swap: `shift + ⌥ + h/j/k/l`
+    - Move: `shift + ⌘ + h/j/k/l`
+    - Spaces: `⌘ + ⌥ + 1-9` to focus, `shift + ⌘ + 1-9` to move window
+    - Float: `⌥ + t` to toggle float, `⌥ + p` for picture-in-picture
+    - Zoom: `⌥ + f` for fullscreen, `⌥ + d` for parent zoom
+    - Layout: `⌥ + e` to toggle split, `⌥ + r` to rotate tree
+
+11. #### Want to see all the keyboard shortcuts?
+
+    Type `keybindings` in the terminal to view all configured shortcuts for `skhd`
+
+12. #### Need a dose of inspiration?
+
+    Type `quote` in the terminal to see one from my collection
+
+
+<small><i>a gift to my future self.</i></small>
+<small><i>made with ❤️ by max fung</i></small>
+
+
+
