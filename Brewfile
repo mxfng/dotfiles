@@ -21,6 +21,7 @@ if ENV["HOMEBREW_DESKTOP"]
   brew "koekeishiya/formulae/yabai"   # tiling window manager
   brew "koekeishiya/formulae/skhd"    # hotkey daemon for yabai
   cask "wezterm"
+  cask "docker"
   cask "raycast"
   cask "arc"
   cask "cursor"
