@@ -66,8 +66,8 @@
 ## Panes (Splits)
 | Shortcut | Action |
 |----------|--------|
-| prefix + \| | Split vertically |
-| prefix + - | Split horizontally |
+| prefix + % | Split vertically |
+| prefix + " | Split horizontally |
 | prefix + x | Kill pane |
 | prefix + arrows | Navigate between panes |
 | prefix + z | Toggle pane zoom |
@@ -76,3 +76,4 @@
 | Shortcut | Action |
 |----------|--------|
 | prefix + t | Show the time |
+
