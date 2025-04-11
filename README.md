@@ -66,7 +66,7 @@ Clone this repo and run the following for a fresh environment:
 ./provision terminal | fish
 ```
 
-To install desktop software only:
+To install desktop software:
 
 ```bash
 ./provision desktop | fish
@@ -138,9 +138,7 @@ To install desktop software only:
 
     Type `quote` in the terminal to see one from my collection
 
-
-<small><i>a gift to my future self.</i></small>
-<small><i>made with ❤️ by max fung</i></small>
+<p style="color: #666666; font-size: 0.8em; text-align: center; margin-top: 2em;">a gift to my future self. made with ❤️ by max fung</p>
 
 
 
