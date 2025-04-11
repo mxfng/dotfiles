@@ -10,6 +10,7 @@ function configure_fish
     starship init fish | source
     zoxide init fish | source
     fzf --fish | source
+    auto_attach_tmux
 end
 
 configure_fish
