@@ -11,6 +11,13 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
     alias age-e 'age --armor --recipient (cat ~/.secrets/id_ed25519.pub)'
     alias age-k 'age --decrypt --identity ~/.secrets/id_ed25519 ~/.secrets/age_keys.age'
     alias c cursor
+    alias skhdrc 'cat ~/.skhdrc | sed "s/^#.*\$/\x1b[90m&\x1b[0m/" | sed "s/^[^#].*\$/\x1b[32m&\x1b[0m/"'
+
+    # while learning, temporary - aliases for better command replacements
+    alias cd z
+    alias find fd
+    alias cat bat
+    alias grep ag
 
     switch "$uname"
         case Linux
@@ -22,6 +29,5 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
             alias pkmr 'brew uninstall'
             alias skhconf 'cursor ~/.skhdrc'
             alias yabconf 'cursor ~/.yabairc'
-            alias skhdrc 'cat ~/.skhdrc | sed "s/^#.*\$/\x1b[90m&\x1b[0m/" | sed "s/^[^#].*\$/\x1b[32m&\x1b[0m/"'
     end
 end
