@@ -99,7 +99,7 @@ To install desktop software:
 
 6. #### Better file searching?
 
-   Try `ag` (The Silver Searcher):
+   Try `ag` (The Silver Searcher) instead of `grep`:
    - `ag "pattern"` to search files
    - `ag -l "pattern"` to list matching files
    - `ag -g "pattern"` to search filenames
@@ -119,7 +119,7 @@ To install desktop software:
 
     Download and use Raycast and other apps by calling `./provisions -d`; re-configure Raycast's hotkey with `cmd+space`
 
-10. #### Moving windows around?
+10. #### Notice something funny about the windows?
 
     Use these keyboard shortcuts for window management:
     - Focus: `⌥ + h/j/k/l` (vim keys)
@@ -132,13 +132,11 @@ To install desktop software:
 
 11. #### Want to see all the keyboard shortcuts?
 
-    Type `keybindings` in the terminal to view all configured shortcuts for `skhd`
+    Type `keybindings` in the terminal to view all configured shortcuts
 
-12. #### Need a dose of inspiration?
+12. #### Need inspiration?
 
-    Type `quote` in the terminal to see one from my collection
-
-<small>a gift to my future self. made with ❤️ by max fung</small>
+    Type `quote` in the terminal
 
 
 
