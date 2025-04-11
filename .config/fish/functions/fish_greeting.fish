@@ -1,6 +1,8 @@
 function fish_greeting -d "What's up, fish?"
     set_color $fish_color_autosuggestion
 
+    quote
+
     set uname (uname -nor)
 
     command -s uptime >/dev/null
@@ -13,4 +15,5 @@ function fish_greeting -d "What's up, fish?"
     echo -s $uname $uptime
 
     set_color normal
+
 end

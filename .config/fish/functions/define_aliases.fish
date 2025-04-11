@@ -11,7 +11,6 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
     alias age-e 'age --armor --recipient (cat ~/.secrets/id_ed25519.pub)'
     alias age-k 'age --decrypt --identity ~/.secrets/id_ed25519 ~/.secrets/age_keys.age'
     alias c cursor
-    alias fishconf 'cursor ~/.config/fish/config.fish'
 
     switch "$uname"
         case Linux
