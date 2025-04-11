@@ -29,7 +29,7 @@ My preferred configurations and software for macOS systems.
 
 #### Usage
 
-For new configurations:
+To get new configurations:
 
 ```bash
 ./sync -d
@@ -41,6 +41,12 @@ To set up git:
 ```bash
 ./sync -g
 ./sync --git
+```
+
+To get new configurations for terminal only:
+
+```bash
+./sync
 ```
 
 To run sync script using curl:
