@@ -1,0 +1,4 @@
+- Add Cursor configurations
+- Add linting and other niceties for repo, maybe some scripts for fish
+- Add other configurations as needed
+- Test on another new system

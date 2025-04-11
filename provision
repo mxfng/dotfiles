@@ -57,6 +57,8 @@ function terminal -d 'Provision terminal environment'
             log 'running sync script for git'
             ./sync --git
     end
+
+    echo 'done provisioning.'
 end
 
 function desktop -d 'Provision a macOS desktop environment'

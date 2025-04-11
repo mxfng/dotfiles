@@ -2,6 +2,7 @@ function fish_greeting -d "What's up, fish?"
     set_color $fish_color_autosuggestion
 
     quote
+    echo
 
     set uname (uname -nor)
 

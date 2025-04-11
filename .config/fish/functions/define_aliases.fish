@@ -22,5 +22,6 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
             alias pkmr 'brew uninstall'
             alias skhconf 'cursor ~/.skhdrc'
             alias yabconf 'cursor ~/.yabairc'
+            alias skhdrc 'cat ~/.skhdrc | sed "s/^#.*\$/\x1b[90m&\x1b[0m/" | sed "s/^[^#].*\$/\x1b[32m&\x1b[0m/"'
     end
 end

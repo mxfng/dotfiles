@@ -10,9 +10,6 @@ It has my preferred configurations for:
 - skhd (macOS)
 - wezterm
 
-### TODO
-- add cursor configs
-
 # Quick Start
 
 To get the configurations quickly, you can run the sync script:
