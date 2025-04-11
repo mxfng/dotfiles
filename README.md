@@ -122,3 +122,6 @@ To install desktop software only:
    - Reconnects automatically
    - Local echo for better responsiveness
 
+10. #### Want a better Spotlight app?
+
+   Download and use Raycast with `./provisions -d` and re-configure the hotkey with `cmd+space`
