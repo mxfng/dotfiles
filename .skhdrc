@@ -1,7 +1,6 @@
 # app shortcuts
-cmd - space: osascript -e 'tell application "Raycast" to activate' -e 'tell application "System Events" to tell process "Raycast" to if it is visible then set visible to false else set visible to true end if'
-alt - space: open -a WezTerm # Open terminal (⌥ + Space)
-shift + cmd - return: open -a Arc # Open browser (⇧ + ⌘ + Return)
+alt - space: open -a WezTerm
+shift + cmd - return: open -a Arc
 
 # window management
 # half screen

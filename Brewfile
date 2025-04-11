@@ -6,6 +6,7 @@ brew "fd"                           # modern alternative to find, used by fzf
 brew "tmux"                         # terminal multiplexer for splits and sessions
 brew "bat"
 brew "git"                          # distributed version control system
+brew "delta"                        # syntax-highlighting pager for git
 brew "asdf"
 brew "ag"                           # code-searching tool, faster than grep
 brew "nnn"                          # terminal file manager and browser

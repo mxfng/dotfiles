@@ -40,8 +40,23 @@ function terminal -d 'Provision terminal environment'
     log 'setting m\'s default shell to fish'
     sudo chsh -s /opt/homebrew/bin/fish $USER
 
-    log 'running sync script'
-    ./sync --desktop
+    read -P "Would you like to sync desktop configurations? [Y/n] " confirm
+    switch $confirm
+        case n N
+            echo 'skipping desktop sync'
+        case '*'
+            log 'running sync script for desktop'
+            ./sync --desktop
+    end
+
+    read -P "Would you like to sync git configurations? [Y/n] " confirm
+    switch $confirm
+        case n N
+            echo 'skipping git sync'
+        case '*'
+            log 'running sync script for git'
+            ./sync --git
+    end
 end
 
 function desktop -d 'Provision a macOS desktop environment'
@@ -66,9 +81,6 @@ function desktop -d 'Provision a macOS desktop environment'
     log 'adding raycast to login items'
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
 
-    setup_raycast
-    or return $status
-
     log 'installing yabai service'
     yabai --install-service
     yabai --start-service
@@ -78,24 +90,6 @@ function desktop -d 'Provision a macOS desktop environment'
     skhd --start-service
 
     echo "done provisioning. "
-end
-
-function setup_raycast -d "Configure Raycast hotkey"
-    log "configuring raycast hotkey"
-
-    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 "
-        <dict>
-            <key>enabled</key><false/>
-            <key>value</key><dict>
-                <key>parameters</key>
-                <array><integer>65535</integer><integer>49</integer><integer>1048576</integer></array>
-                <key>type</key><string>standard</string>
-            </dict>
-        </dict>"
-
-    killall Spotlight
-
-    log "spotlight hotkey disabled, skhd will handle Command + Space for Raycast"
 end
 
 function log -a message
