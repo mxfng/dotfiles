@@ -1,12 +1,4 @@
 #!/usr/bin/env fish
-#
-set general_help '
-A collection of useful functions for provisioning macos
-
-Usage:
-    provision <function> [arg [arg [...]]]     Run a function directly
-    source ./provision                         Source the file to use functions as commands
-'
 
 function install_brew
     log "installing brew"
@@ -91,7 +83,7 @@ function desktop -d 'Provision a macOS desktop environment'
     skhd --install-service
     skhd --start-service
 
-    echo "done provisioning. "
+    echo "done provisioning."
 end
 
 function log -a message
@@ -101,8 +93,4 @@ function log -a message
     echo "$message"
 end
 
-if test -n "$argv[1]"
-    $argv[1]
-else
-    echo $general_help
-end
+$argv[1]

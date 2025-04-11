@@ -32,7 +32,15 @@ My preferred configurations and software for macOS systems.
 For new configurations:
 
 ```bash
-./sync -d # --desktop
+./sync -d
+./sync --desktop
+```
+
+To set up git:
+
+```bash
+./sync -g
+./sync --git
 ```
 
 To run sync script using curl:
@@ -40,7 +48,6 @@ To run sync script using curl:
 ```bash
 curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
 ```
-
 
 ### `provision`
 

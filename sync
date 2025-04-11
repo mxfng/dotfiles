@@ -1,35 +1,12 @@
 #!/usr/bin/env fish
 
-set general_help '
-Syncs dotfiles across machines. Copies files locally if run from dotfiles directory, otherwise clones and copies from remote.
-
-Options:
-    -i, --install   Install dependencies
-    -g, --git       Sync git configuration
-    -d, --desktop   Sync desktop environment configurations
-    -h, --help      Show this help message
-
-Usage:
-    sync <function> [arg [arg [...]]]     Run a function directly
-    source ./sync                         Source the file to use functions as commands
-'
-
 function main
-    argparse d/desktop g/git i/install h/help -- $argv
+    argparse d/desktop g/git -- $argv
     set -l start_dir (pwd)
     and set -l tmp_dir (mktemp --directory 2>/dev/null; or mktemp -d -t 'dotfiles')
     and set -l cwd (string match -r '\w+$' $start_dir)
     and set -l uname (uname)
     or return $status
-
-    if test -n "$_flag_i"
-        log 'installing dependencies'
-    end
-
-    if test -n "$_flag_h"
-        echo $general_help
-        return 0
-    end
 
     log 'syncing shell environment configurations'
     set_color grey
