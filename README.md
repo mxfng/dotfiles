@@ -1,80 +1,59 @@
-# dotfiles
+# max's dotfiles
 
-A collection of software and configurations for bootstrapping new macOS systems.
+My preferred configurations and software for macOS systems.
 
-It has my preferred configurations for:
-
+Includes:
 - fish shell
+- tmux
 - git
+- Wez's terminal
 - yabaiwm (macOS)
 - skhd (macOS)
-- wezterm
 
-# Quick Start
 
-To get the configurations quickly, you can run the sync script:
+## Scripts
+
+
+### `sync`
+
+
+#### Dependencies
+
+- brew ([install guide](https://docs.brew.sh/Installation))
+- fish
+
+#### Usage
+
+For new configurations:
+
+```bash
+./sync -d # --desktop
+```
+
+To run sync script using curl:
 ```bash
 curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
 ```
 
-## Fresh macOS Installation
+## `provision`
 
-[Install brew](https://docs.brew.sh/Installation)
 
-Install fish
-```bash
-brew install fish
-```
+#### Dependencies
 
-Run terminal provisioning and follow prompts
+- brew
+- fish
+
+
+#### Usage
+
+Clone this repo and run the following for a fresh environment:
+
 ```bash
 ./provision terminal | fish
 ```
 
-The provision script will ask if you want to optionally run the sync scripts for desktop and git configs.
+To install desktop configs only:
 
-You can clone the repository for local development like so:
 ```bash
-git clone https://github.com/mxfng/dotfiles.git ~/Developer/dotfiles
+./provision desktop | fish
 ```
-
-To update configs, you can run the sync script.
-
-I also like to set my hotkey to cmd + space for Raycast (Spotlight replacement)
-
-# Scripts
-
-## `provision`
-
-A collection of functions for provisioning macOS environments.
-
-### Dependencies
-
-- fish
-
-## `sync`
-
-Syncs all configuration files found in this repository to your home folder.
-
-### Dependencies
-
-- fish
-- git
-- rsync
-- curl
-
-To run this script with curl:
-```bash
-# Basic install
-curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
-
-# Desktop config
-curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish -s -- --desktop
-
-# Git config
-curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish -s -- --git
-```
-
-# Keyboard Shortcuts
-
-A list of keyboard shortcuts is defined in `.skhdrc`
