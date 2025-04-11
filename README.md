@@ -138,7 +138,7 @@ To install desktop software:
 
     Type `quote` in the terminal to see one from my collection
 
-<p style="color: #666666; font-size: 0.8em; text-align: center; margin-top: 2em;">a gift to my future self. made with ❤️ by max fung</p>
+<small>a gift to my future self. made with ❤️ by max fung</small>
 
 
 
