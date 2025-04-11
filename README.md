@@ -138,7 +138,11 @@ To install desktop software:
 
 11. #### Want to see all the keyboard shortcuts?
 
-    Type `keybindings` in the terminal to view all configured shortcuts
+    Type `keys` in the terminal to view all configured shortcuts or [read the doc here](./doc/shortcuts.md)
+
+12. #### Reading documentation?
+
+    Use `glow`
 
 12. #### Need inspiration?
 

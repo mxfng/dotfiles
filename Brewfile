@@ -14,6 +14,7 @@ brew "rsync"                        # fast, versatile file copying tool
 brew "curl"                         # transfer data with URLs
 brew "mosh"                         # mobile shell for unreliable connections (ssh alternative)
 brew "yq"                           # yaml processor
+brew "glow"                         # markdown renderer
 
 if ENV["HOMEBREW_DESKTOP"]
   tap "koekeishiya/formulae"
