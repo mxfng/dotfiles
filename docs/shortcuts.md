@@ -77,3 +77,72 @@
 |----------|--------|
 | prefix + t | Show the time |
 
+# NNN File Manager Shortcuts
+
+## Navigation
+| Shortcut | Action |
+|----------|--------|
+| ^E | End |
+| ^J | Toggle auto-advance on open |
+| B | Bookmark |
+| , | Mark location in-memory |
+| 1-4 | Switch context |
+| (Sh)Tab | Cycle/new context |
+| ^Q | Quit |
+| ^y | Next young |
+| ^G | Quit and cd to directory |
+| Q | Pick selection and quit |
+| q | Quit context |
+
+## Filter & Prompt
+| Shortcut | Action |
+|----------|--------|
+| / | Filter |
+| ^N | Toggle type-to-nav |
+| Esc | Exit prompt |
+| ^L | Toggle last filter |
+| . | Toggle hidden files |
+| Alt+Esc | Unfilter, quit context |
+
+## Files
+| Shortcut | Action |
+|----------|--------|
+| o/^O | Open with... |
+| n | Create new/link |
+| f/^F | File details |
+| d | Detail mode toggle |
+| ^R | Rename/duplicate |
+| r | Batch rename |
+| z | Archive |
+| e | Edit file |
+| * | Toggle executable |
+| > | Export list |
+| Space/+ | (Un)select |
+| m-m | Select range/clear |
+| a | Select all |
+| A | Invert selection |
+| p/^P | Copy here |
+| w/^W | Copy/move selection as |
+| v/^V | Move here |
+| E | Edit selection list |
+| x/^X | Delete or trash |
+| S | Listed selection size |
+| X | Delete (rm -rf) |
+| Esc | Send to FIFO |
+
+## Misc
+| Shortcut | Action |
+|----------|--------|
+| Alt+; | Select plugin |
+| = | Launch app |
+| !/^] | Shell |
+| ] | Command prompt |
+| c | Connect remote |
+| u | Unmount remote/archive |
+| t/^T | Sort toggles |
+| s | Manage session |
+| T | Set time type |
+| 0 | Lock |
+| ^L | Redraw |
+| ? | Help, configuration |
+
