@@ -10,6 +10,7 @@ brew "git"                          # distributed version control system
 brew "delta"                        # syntax-highlighting pager for git
 brew "asdf"
 brew "ag"                           # code-searching tool, faster than grep
+brew "ripgrep"                      # code searching tool, dep for fzf-lua (nvim)
 brew "nnn"                          # terminal file manager and browser
 brew "rsync"                        # fast, versatile file copying tool
 brew "curl"                         # transfer data with URLs
