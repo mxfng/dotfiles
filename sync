@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 function main
-    argparse d/desktop g/git -- $argv
+    argparse d/desktop g/git i/install -- $argv
     set -l start_dir (pwd)
     and set -l tmp_dir (mktemp --directory 2>/dev/null; or mktemp -d -t 'dotfiles')
     and set -l cwd (string match -r '\w+$' $start_dir)
@@ -16,6 +16,14 @@ function main
     and sync_terminal_env
 
     and set_fish_universal_vars
+
+    and if test -n "$_flag_i"
+        set_color_normal
+        log 'Installing neovim plugins'
+        set_color grey
+
+        install_nvim_plugins
+    end
 
     and if test -n "$_flag_d"
         set_color normal
@@ -76,6 +84,12 @@ function sync_desktop_env -a uname
             echo 'unsupported operating system'
             return 1
     end
+end
+
+function install_nvim_plugins
+    command -q nvim
+    and nvim +PlugUpgrade +PlugUpdate +UpdateRemotePlugins +qa
+    and nvim +COQdeps +bnext +bdelete
 end
 
 function sync_git_config

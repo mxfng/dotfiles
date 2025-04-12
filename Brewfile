@@ -1,5 +1,6 @@
 brew "fish"
 brew "starship"
+brew "neovim"
 brew "zoxide"                       # smarter cd command that learns your habits
 brew "fzf"                          # fuzzy finder for files, history, and more
 brew "fd"                           # modern alternative to find, used by fzf
