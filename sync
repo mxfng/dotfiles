@@ -18,8 +18,8 @@ function main
     and set_fish_universal_vars
 
     and if test -n "$_flag_i"
-        set_color_normal
-        log 'Installing neovim plugins'
+        set_color normal
+        log 'installing neovim plugins'
         set_color grey
 
         install_nvim_plugins
@@ -27,7 +27,7 @@ function main
 
     and if test -n "$_flag_d"
         set_color normal
-        log 'Syncing desktop environment configurations'
+        log 'syncing desktop environment configurations'
         set_color grey
 
         sync_desktop_env $uname
@@ -35,7 +35,7 @@ function main
 
     and if test -n "$_flag_g"
         set_color normal
-        log 'Sync git config'
+        log 'sync git config'
         sync_git_config
         set_color grey
     end

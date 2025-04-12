@@ -1,2 +1,1 @@
-require("max")
-print("hello")
+require("config.lazy")
