@@ -90,7 +90,8 @@ end
 function install_nvim_plugins
     command -q nvim
     and nvim +PlugUpgrade +PlugUpdate +UpdateRemotePlugins +qa
-    and nvim +COQdeps +bnext +bdelete
+    # and nvim +COQdeps +bnext +bdelete +qa # TODO: add this back
+    and nvim +bnext +bdelete +qa
 end
 
 function sync_git_config
