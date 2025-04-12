@@ -7,13 +7,13 @@ My preferred configurations and software for macOS systems.
 - fish shell
 - git
 - Wez's terminal
+- neovim
+- tmux
 - yabaiwm (macOS)
 - skhd (macOS)
 
-**todo:**
+**todo**
 - cursor
-- tmux
-- neovim (someday)
 
 ## Scripts
 
