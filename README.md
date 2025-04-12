@@ -49,6 +49,12 @@ To get new configurations for terminal only:
 ./sync
 ```
 
+To install nvim plugins:
+```bash
+./sync -i
+./sync --install
+```
+
 To run sync script using curl:
 
 ```bash

@@ -64,6 +64,7 @@ function sync_terminal_env
     end
 
     rsync -aP ./.config/fish ~/.config/
+    and rsync -aP ./.config/nvim ~/.config/
     and rsync -aP ./.tmux-line.conf ~/
     and rsync -aP ./.tmux.conf ~/
     and rsync -aP ./scripts/ ~/Developer/scripts/
