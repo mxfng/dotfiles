@@ -203,6 +203,10 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
 
+-- Keep cursor centered after <C-d> and <C-u>
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down and center' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Half page up and center' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
