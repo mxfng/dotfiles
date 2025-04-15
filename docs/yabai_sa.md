@@ -18,6 +18,6 @@ sudo yabai --load-sa
 
 # test if scripting addons working
 # create a second desktop on macOS if needed
-yabai -m window --focus recent
+yabai -m space --focus next
 ```
 
