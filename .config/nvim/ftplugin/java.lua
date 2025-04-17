@@ -51,6 +51,7 @@ local config = {
     'java.base/java.util=ALL-UNNAMED',
     '--add-opens',
     'java.base/java.lang=ALL-UNNAMED',
+    '-javaagent:' .. jdtls_path .. '/lombok.jar',
     '-jar',
     launcher_jar,
     '-configuration',
@@ -157,10 +158,7 @@ local config = {
     -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr })
 
     -- Enable Lombok support
-    jdtls.setup_dap { hotcodereplace = 'auto' }
-
-    -- Setup additional commands
-    jdtls.setup.add_commands()
+    jdtls.setup_dap { hotcodereplace = 'auto', config_overrides = {} }
 
     -- Show project information
     print('JDTLS: Connected to project: ' .. project_name)
