@@ -52,7 +52,7 @@ return {
       }
 
       -- Add keybindings
-      vim.keymap.set('n', '<leader>rn', '<cmd>TSToolsRename<VR>', { desc = 'Rename symbol' })
+      vim.keymap.set('n', '<leader>rn', '<cmd>TSToolsRename<CR>', { desc = 'Rename symbol' })
       vim.keymap.set('n', '<leader>ca', '<cmd>TSToolsFixAll<CR>', { desc = 'Fix all' })
       vim.keymap.set('n', '<leader>co', '<cmd>TSToolsOrganizeImports<CR>', { desc = 'Organize imports' })
       vim.keymap.set('n', '<leader>ci', '<cmd>TSToolsAddMissingImports<CR>', { desc = 'Add missing imports' })
