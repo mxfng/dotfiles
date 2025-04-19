@@ -15,11 +15,5 @@ return {
   },
   config = function(_, opts)
     require('treesitter-context').setup(opts)
-    
-    -- Set transparent background for context window
-    vim.api.nvim_set_hl(0, 'TreesitterContext', { bg = 'NONE' })
-    
-    local separator_color = require('tokyonight.colors').setup().comment
-    vim.api.nvim_set_hl(0, 'TreesitterContextSeparator', { bg = 'NONE', fg = separator_color })
   end
 }
