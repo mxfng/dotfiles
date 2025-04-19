@@ -13,19 +13,17 @@ My preferred configurations and software for macOS systems.
 - skhd (macOS)
 
 **todo**
+
 - cursor
 
 ## Scripts
 
-
 ### `sync`
-
 
 #### Dependencies
 
 - brew ([install guide](https://docs.brew.sh/Installation))
 - fish
-
 
 #### Usage
 
@@ -50,6 +48,7 @@ To get new configurations for terminal only:
 ```
 
 To install nvim plugins:
+
 ```bash
 ./sync -i
 ./sync --install
@@ -63,12 +62,10 @@ curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
 
 ### `provision`
 
-
 #### Dependencies
 
 - brew
 - fish
-
 
 #### Usage
 
@@ -102,7 +99,7 @@ To install desktop software:
 
    Try `fzf` - quickly find:
    - Files with `fzf`
-   - Git commits with `git log | fzf` 
+   - Git commits with `git log | fzf`
    - Past commands with `history | fzf`
 
 5. #### Smart directory navigation?
@@ -153,6 +150,3 @@ To install desktop software:
 12. #### Need inspiration?
 
     Type `quote` in the terminal
-
-
-

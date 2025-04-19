@@ -622,6 +622,7 @@ require('lazy').setup({
         go = { 'gofumpt', 'goimports', 'golines' },
         ruby = { 'rubocop' },
         sh = { 'shfmt' },
+        markdown = { 'markdownlint' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -811,9 +812,9 @@ require('lazy').setup({
       indent = { enable = true, disable = { 'ruby' } },
     },
   },
-  
+
   -- Import all plugins from the plugins directory
-  require('plugins'),
+  require 'plugins',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
