@@ -1,4 +1,6 @@
-return { -- Shows indent guides with a vertical lin:w
+-- Shows indent guides with a vertical line
+
+return {
   'lukas-reineke/indent-blankline.nvim',
   main = 'ibl',
   event = 'BufReadPre',

@@ -1,5 +1,6 @@
-return { -- Enhances text object selection using treesitter
-  -- Provides more precise text object selection based on the language's syntax
+-- Enhances text object selection using treesitter
+
+return {
   'nvim-treesitter/nvim-treesitter-textobjects',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = function()
