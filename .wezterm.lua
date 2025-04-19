@@ -28,6 +28,7 @@ config.colors = {
 
 config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"
+config.macos_window_background_blur = 98
 
 config.font_size = is_darwin() and 13 or 11
 
@@ -51,3 +52,4 @@ config.keys = {
 }
 
 return config
+
