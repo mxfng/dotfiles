@@ -1,4 +1,4 @@
-return {
+return { -- Highlights the current line number and cursor line
   'mawkler/modicator.nvim',
   dependencies = 'mawkler/onedark.nvim', -- Add your colorscheme plugin here
   init = function()
