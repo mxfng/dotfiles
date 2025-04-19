@@ -1,16 +1,16 @@
 -- TypeScript Tools configuration
 
 return {
-  "pmizio/typescript-tools.nvim",
-  dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  'pmizio/typescript-tools.nvim',
+  dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
   opts = {
     settings = {
       -- TypeScript settings
       tsserver_plugins = {
-        -- Add TypeScript plugins here
+        '@styled/typescript-styled-plugin',
       },
       tsserver_file_preferences = {
-        includeInlayParameterHints = "all",
+        includeInlayParameterHints = 'all',
         includeInlayParameterHintsWhenArgumentMatchesName = false,
         includeInlayFunctionParameterTypeHints = true,
         includeInlayVariableTypeHints = true,
@@ -29,7 +29,10 @@ return {
         insertSpaceBeforeFunctionParenthesis = false,
         placeOpenBraceOnNewLineForFunctions = false,
         placeOpenBraceOnNewLineForControlBlocks = false,
-        semicolons = "insert",
+        semicolons = 'insert',
+      },
+      tsserver_format_options = {
+        allowRenameOfImportPath = true,
       },
     },
     -- LSP settings
@@ -41,6 +44,6 @@ return {
     },
   },
   config = function(_, opts)
-    require("typescript-tools").setup(opts)
+    require('typescript-tools').setup(opts)
   end,
 }
