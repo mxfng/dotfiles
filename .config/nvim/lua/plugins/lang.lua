@@ -1,5 +1,3 @@
--- TypeScript Tools configuration
-
 return {
   { -- TypeScript Tools
     'pmizio/typescript-tools.nvim',
