@@ -83,6 +83,9 @@ function desktop -d 'Provision a macOS desktop environment'
     skhd --install-service
     skhd --start-service
 
+    log 'installing tmux package manager'
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
     echo "done provisioning."
 end
 
