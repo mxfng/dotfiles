@@ -5,7 +5,15 @@ return {
   },
   {
     "nvim-lualine/lualine.nvim",
-    enabled = false,
+    enabled = true,
+    event = "ColorScheme",
+    config = function()
+      require("lualine").setup({
+        options = {
+          theme = "tokyonight",
+        },
+      })
+    end,
   },
   -- messages, cmdline and the popupmenu
   {
@@ -64,7 +72,7 @@ return {
   -- buffer line
   {
     "akinsho/bufferline.nvim",
-    event = "VeryLazy",
+    event = "ColorScheme",
     keys = {
       { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
       { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
@@ -76,6 +84,10 @@ return {
         show_close_icon = false,
       },
     },
+    config = function()
+      local highlights = require("rose-pine.plugins.bufferline")
+      require("bufferline").setup({ highlights = highlights })
+    end,
   },
 
   -- filename

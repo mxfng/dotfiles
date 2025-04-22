@@ -13,7 +13,6 @@ vim.opt.hlsearch = true
 vim.opt.backup = false
 vim.opt.showcmd = true
 vim.opt.cmdheight = 0
-vim.opt.laststatus = 0
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.inccommand = "split"
@@ -32,3 +31,9 @@ vim.opt.splitkeep = "cursor"
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append({ "r" })
+
+-- vim.opt.termguicolors = true
+
+-- Lovely statusline
+vim.opt.laststatus = 2 -- Or 3 for global statusline
+vim.opt.statusline = " %f %m %= %l:%c ♥ "
