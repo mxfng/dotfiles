@@ -7,7 +7,7 @@ local is_darwin = function()
 	return wezterm.target_triple:find("darwin") ~= nil
 end
 
-config.term = "wezterm"
+config.term = "xterm-256color"
 
 config.force_reverse_video_cursor = true
 config.colors = theme.colors()

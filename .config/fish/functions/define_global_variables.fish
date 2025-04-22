@@ -1,4 +1,5 @@
 function define_global_variables -d 'Defines all and exclusively globally exported variables'
+    set -gx TERM xterm-256color
     set -gx EDITOR nvim
     set -gx BROWSER arc
     set -gx DIFFPROG nvim -d
