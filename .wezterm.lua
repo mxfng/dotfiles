@@ -12,9 +12,9 @@ config.term = "xterm-256color"
 config.force_reverse_video_cursor = true
 config.colors = theme.colors()
 
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"
-config.macos_window_background_blur = 98
+config.macos_window_background_blur = 70
 
 config.font_size = is_darwin() and 13 or 11
 
