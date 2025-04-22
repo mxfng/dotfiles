@@ -9,9 +9,9 @@ end
 config.force_reverse_video_cursor = true
 config.colors = {
 	foreground = "#dcd7ba",
-	background = "#1f1f28",
+	background = "#05081c",
 
-	cursor_bg = "#c8c093",
+	cursor_bg = "#000000",
 	cursor_fg = "#c8c093",
 	cursor_border = "#c8c093",
 
@@ -52,4 +52,3 @@ config.keys = {
 }
 
 return config
-
