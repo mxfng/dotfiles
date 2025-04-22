@@ -1,10 +1,11 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+command_timeout = 1000
 
-palette = 'kanagawa'
+palette = 'rose-pine'
 
-[palettes.kanagawa]
+[palettes.rose-pine ]
 bg = '#393552'
 fg = '#3e8fb0'
 black = '#393552'
