@@ -13,4 +13,5 @@ function define_aliases -a uname -d 'Defines aliases for commonly used commands'
     alias c cursor
     alias skhdrc 'bat ~/.skhdrc | sed "s/^#.*\$/\x1b[90m&\x1b[0m/" | sed "s/^[^#].*\$/\x1b[32m&\x1b[0m/"'
     alias keys 'curl -sL https://raw.githubusercontent.com/mxfng/dotfiles/main/docs/shortcuts.md | glow -'
+    alias arc 'open -a Arc'
 end
