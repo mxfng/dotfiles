@@ -72,6 +72,7 @@ end
 
 function sync_desktop_env -a uname
     rsync -aP ./.wezterm.lua ~/
+    rsync -aP ./.ideavimrc ~/
     or return 1
 
     switch $uname
