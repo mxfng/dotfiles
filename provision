@@ -121,6 +121,7 @@ function desktop -d 'Provision a macOS desktop environment'
 
     log 'installing yabai service'
     yabai --install-service
+    defaults write com.apple.dock mru-spaces -bool false
     yabai --start-service
 
     log 'installing skhd service'
