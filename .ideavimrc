@@ -37,6 +37,8 @@ Plug 'tpope/vim-commentary'
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 let mapleader=" "
 
+set relativenumber
+
 "" -- Basic Editing --
 " Delete without yanking
 map x "_x
