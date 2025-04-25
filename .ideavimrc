@@ -72,13 +72,13 @@ map <leader>t <Action>(ProjectView)
 map ss <Action>(SplitHorizontally)
 map sv <Action>(SplitVertically)
 
-" Move between windows
+" Move window
 map sh <C-w>h
 map sk <C-w>k
 map sj <C-w>j
 map sl <C-w>l
 
-" Resize windows
+" Resize window
 map <C-S-h> <C-w><
 map <C-S-l> <C-w>>
 map <C-S-k> <C-w>+
@@ -154,8 +154,8 @@ map K <Action>(QuickJavaDoc)
 " Find usages
 map <leader>fu <Action>(FindUsages)
 
-" Show type info
-map <leader>t <Action>(ShowTypeInfo)
+" Show type info (conflict resolved: using different prefix)
+map <leader>ti <Action>(ShowTypeInfo)
 
 " Code completion
 map <C-Space> <Action>(CodeCompletion)
