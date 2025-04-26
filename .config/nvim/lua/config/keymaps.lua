@@ -1,8 +1,5 @@
 local keymap = vim.keymap
 
--- Default options for all mappings
-local default_opts = { noremap = true, silent = true }
-
 -- Helper function to create keymap with description
 local function map(mode, lhs, rhs, desc)
   keymap.set(mode, lhs, rhs, { noremap = true, silent = true, desc = desc })
