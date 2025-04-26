@@ -14,7 +14,7 @@ map("n", "-", "<C-x>", "Decrement number")
 
 -- Select all
 map("n", "gA", "ggVG", "Select all text")
-map("n", "yA", "ggVGy", "Select all text and yank")
+map("n", "yA", "ggVGy", "Yank all text")
 
 -- Save file and quit
 map("n", "<Leader>w", ":update<Return>", "Save file")
