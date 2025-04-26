@@ -8,7 +8,7 @@ keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<S-C-a>", "gg<S-v>G")
 
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
