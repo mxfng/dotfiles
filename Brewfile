@@ -32,5 +32,4 @@ if ENV["HOMEBREW_DESKTOP"]
   cask "spotify"
   cask "font-ibm-plex"
   cask "font-jetbrains-mono"
-  cask "whichspace"
 end
