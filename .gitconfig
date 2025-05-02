@@ -11,13 +11,13 @@ llog = log --date=local
 flog = log --pretty=fuller --decorate
 lol = log --graph --decorate --oneline
 lola = log --graph --decorate --oneline --all
-blog = log origin/master... --left-right
+blog = log origin/main... --left-right
 ds = diff --staged
 amend = commit --amend -C HEAD
 fixup = commit --fixup
 squash = commit --squash
 unstage = reset HEAD
-rum = rebase master@{u}
+rum = rebase main@{u}
 puff = pull --ff-only
 merff = merge --ff-only
 fa = fetch --all
@@ -38,6 +38,9 @@ default = simple
 
 [pull]
 rebase = true
+
+[init]
+  defaultBranch = main
 
 [interactive]
 diffFilter = delta --color-only
