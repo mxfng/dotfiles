@@ -11,6 +11,7 @@ function configure_fish
     zoxide init fish | source
     fzf --fish | source
     auto_attach_tmux
+    configure_nnn
 end
 
 configure_fish

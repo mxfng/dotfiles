@@ -63,9 +63,6 @@ function install_nnn_plugins
     echo "Installing nnn plugins to: $plugin_dir"
     curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
 
-    echo "Setting NNN_PLUG in universal fish config..."
-    set -U NNN_PLUG 'f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
-
     echo "nnn plugin setup complete."
 end
 
