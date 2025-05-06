@@ -54,18 +54,6 @@ function configure_skhd_for_performance
     echo "Added SHELL=/bin/bash to $plist_path"
 end
 
-function install_nnn_plugins
-    set -l plugin_dir $XDG_CONFIG_HOME/nnn/plugins
-    if test -z $XDG_CONFIG_HOME
-        set plugin_dir $HOME/.config/nnn/plugins
-    end
-
-    echo "Installing nnn plugins to: $plugin_dir"
-    curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
-
-    echo "nnn plugin setup complete."
-end
-
 function terminal -d 'Provision terminal environment'
     log "provisioning terminal utilities for $USER"
 
@@ -77,10 +65,6 @@ function terminal -d 'Provision terminal environment'
 
     log 'setting m\'s default shell to fish'
     sudo chsh -s /opt/homebrew/bin/fish $USER
-
-    log 'installing nnn plugins'
-    install_nnn_plugins
-    or return $status
 
     read -P "Would you like to sync desktop configurations? [Y/n] " confirm
     switch $confirm
