@@ -1,9 +1,9 @@
 #!/usr/bin/env fish
 
-function install_brew_packages -a desktop
+function install_brew_packages -a terminal
     log "installing packages"
-    if test -n "$desktop"
-        env HOMEBREW_DESKTOP=1 brew bundle
+    if test -n "$terminal"
+        env HOMEBREW_TERMINAL=1 brew bundle
     else
         brew bundle
     end
@@ -54,10 +54,25 @@ function configure_skhd_for_performance
     echo "Added SHELL=/bin/bash to $plist_path"
 end
 
+function install_nnn_plugins
+    set -l plugin_dir $XDG_CONFIG_HOME/nnn/plugins
+    if test -z $XDG_CONFIG_HOME
+        set plugin_dir $HOME/.config/nnn/plugins
+    end
+
+    echo "Installing nnn plugins to: $plugin_dir"
+    curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugins/getplugs | sh
+
+    echo "Setting NNN_PLUG in universal fish config..."
+    set -U NNN_PLUG 'f:finder;o:fzopen;p:mocq;d:diffs;t:nmount;v:imgview'
+
+    echo "nnn plugin setup complete."
+end
+
 function terminal -d 'Provision terminal environment'
     log "provisioning terminal utilities for $USER"
 
-    install_brew_packages
+    install_brew_packages --terminal
     or return $status
 
     log 'adding brew path to fish'
@@ -65,6 +80,10 @@ function terminal -d 'Provision terminal environment'
 
     log 'setting m\'s default shell to fish'
     sudo chsh -s /opt/homebrew/bin/fish $USER
+
+    log 'installing nnn plugins'
+    install_nnn_plugins
+    or return $status
 
     read -P "Would you like to sync desktop configurations? [Y/n] " confirm
     switch $confirm
@@ -90,7 +109,7 @@ end
 function desktop -d 'Provision a macOS desktop environment'
     log "provisioning desktop environment for $USER"
 
-    install_brew_packages --desktop
+    install_brew_packages
     or return $status
 
     test (uname) != Darwin

@@ -19,7 +19,7 @@ brew "yq"                           # yaml processor
 brew "glow"                         # markdown renderer
 brew "go"
 
-if ENV["HOMEBREW_DESKTOP"]
+unless ENV["HOMEBREW_TERMINAL"]
   tap "koekeishiya/formulae"
 
   brew "koekeishiya/formulae/yabai"   # tiling window manager
