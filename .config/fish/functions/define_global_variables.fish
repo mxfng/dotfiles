@@ -12,8 +12,6 @@ function define_global_variables -d 'Defines all and exclusively globally export
     set -gx GOPATH $HOME/Developer/go
     set -gx GOBIN $GOPATH/bin
 
-    set -gx NNN_TMPFILE $HOME/.config/nnn/.lastd
-
     fish_add_path \
         $HOME/.local/bin \
         $HOME/Developer/scripts
