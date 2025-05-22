@@ -27,7 +27,7 @@ unless ENV["HOMEBREW_TERMINAL"]
   cask "wezterm"
   cask "docker"
   cask "raycast"
-  cask "arc"
+  cask "zen"
   cask "cursor"
   cask "spotify"
   cask "font-ibm-plex"
