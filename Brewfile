@@ -25,7 +25,6 @@ unless ENV["HOMEBREW_TERMINAL"]
 
   brew "koekeishiya/formulae/yabai"
   brew "koekeishiya/formulae/skhd"
-  brew "lighthouse"
   cask "wezterm"
   cask "docker"
   cask "raycast"
