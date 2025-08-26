@@ -25,6 +25,7 @@ unless ENV["HOMEBREW_TERMINAL"]
 
   brew "koekeishiya/formulae/yabai"
   brew "koekeishiya/formulae/skhd"
+  brew "lighthouse"
   cask "wezterm"
   cask "docker"
   cask "raycast"
@@ -33,4 +34,5 @@ unless ENV["HOMEBREW_TERMINAL"]
   cask "spotify"
   cask "font-ibm-plex"
   cask "font-jetbrains-mono"
+  cask "google-chrome"
 end
