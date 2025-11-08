@@ -1,37 +1,41 @@
-brew "fish"
-brew "starship"
-brew "git"
-brew "delta"
+brew "ag"
 brew "asdf"
-brew "neovim"
-brew "tmux"
-brew "zoxide"                       # smarter cd command that learns your habits
-brew "bat"                          # better than cat
-brew "fzf"                          # fuzzy finder for files, history, and more
-brew "fd"                           # modern alternative to find, used by fzf
-brew "ag"                           # code-searching tool, faster than grep
-brew "ripgrep"                      # for kickstarter neovim
-brew "nnn"                          # terminal file manager and browser
-brew "rsync"                        # fast, versatile file copying tool
-brew "curl"                         # transfer data with URLs
-brew "yq"                           # yaml processor
-brew "glow"                         # markdown renderer
-brew "go"
+brew "bat"
+brew "curl"
+brew "delta"
+brew "fd"
 brew "ffmpeg"
+brew "fish"
+brew "fzf"
+brew "git"
+brew "glow"
+brew "go"
+brew "k3d"
+brew "k9s"
+brew "kubectl"
+brew "neovim"
+brew "nnn"
+brew "ripgrep"
+brew "rsync"
+brew "starship"
+brew "tmux"
+brew "yq"
 brew "yt-dlp"
+brew "zoxide"
 
 unless ENV["HOMEBREW_TERMINAL"]
   tap "koekeishiya/formulae"
 
-  brew "koekeishiya/formulae/yabai"
   brew "koekeishiya/formulae/skhd"
-  cask "wezterm"
-  cask "docker"
-  cask "raycast"
-  cask "zen"
+  brew "koekeishiya/formulae/yabai"
+
   cask "cursor"
-  cask "spotify"
+  cask "docker"
   cask "font-ibm-plex"
   cask "font-jetbrains-mono"
   cask "google-chrome"
+  cask "raycast"
+  cask "spotify"
+  cask "wezterm"
+  cask "zen"
 end
