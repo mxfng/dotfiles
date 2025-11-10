@@ -1,27 +1,28 @@
 [alias]
 a = add
-co = checkout
-sco = restore --staged
+aa = add --all
+amend = commit --amend -C HEAD
+blog = log origin/main... --left-right
 br = branch
 cm = commit -m
-st = status
-rb = rebase
-pfwl = push --force-with-lease
-llog = log --date=local
+co = checkout
+ds = diff --staged
+fa = fetch --all
+fixup = commit --fixup
 flog = log --pretty=fuller --decorate
+llog = log --date=local
 lol = log --graph --decorate --oneline
 lola = log --graph --decorate --oneline --all
-blog = log origin/main... --left-right
-ds = diff --staged
-amend = commit --amend -C HEAD
-fixup = commit --fixup
-squash = commit --squash
-unstage = reset HEAD
-rum = rebase main@{u}
-puff = pull --ff-only
 merff = merge --ff-only
-fa = fetch --all
 pa = push --all
+pfwl = push --force-with-lease
+puff = pull --ff-only
+rb = rebase
+rum = rebase main@{u}
+sco = restore --staged
+squash = commit --squash
+st = status
+unstage = reset HEAD
 
 [core]
 editor = nvim
