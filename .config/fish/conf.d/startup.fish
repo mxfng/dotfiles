@@ -8,6 +8,9 @@ end
 and mkdir -p ~/.config/fish/completions
 and ln -sf "(brew --prefix asdf)"/completions/asdf.fish ~/.config/fish/completions
 
+# Start window management services
+restart_wm
+
 # Auto-attach to tmux session
 if status is-interactive
     and not set -q TMUX
