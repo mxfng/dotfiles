@@ -77,8 +77,7 @@ function sync_desktop_env -a uname
     switch $uname
         case Darwin
             log 'syncing macOS desktop environment configurations'
-            rsync -aP ./.yabairc ~/
-            and rsync -aP --force --delete ./.skhdrc ~/
+            rsync -aP --force --delete ./.skhdrc ~/
             or return $status
         case '*'
             echo 'unsupported operating system'
