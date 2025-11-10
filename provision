@@ -43,7 +43,7 @@ function terminal -d 'Provision terminal environment'
     echo 'done provisioning.'
 end
 
-function desktop -d 'Provision a macOS desktop environment'
+function desktop -d 'Provision macOS desktop environment'
     log "provisioning desktop environment for $USER"
 
     install_brew_packages
@@ -70,10 +70,19 @@ function desktop -d 'Provision a macOS desktop environment'
     defaults write com.apple.dock mru-spaces -bool false
     yabai --start-service
 
+    read -P "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N] " confirm
+    switch $confirm
+        case y Y
+            log 'setting up yabai scripting addition'
+            ./scripts/yabai_sa_setup.fish
+            or echo 'warning: yabai scripting addition setup failed'
+    end
+
     log 'installing skhd service'
     skhd --install-service
     log 'configuring skhd to use bash shell for better performance'
-    ./scripts/configure_skhd_for_performance.fish
+    ./scripts/skhd_performance_config.fish
+    or echo 'warning: skhd performance configuration failed'
     skhd --stop-service
     skhd --start-service
 
