@@ -1,4 +1,4 @@
-function git_bulk_delete_branches
+function git_branch_cleanup
     # Get all branches except the current one
     set branches (git branch | string replace -r '^\*?\s*' '')
 

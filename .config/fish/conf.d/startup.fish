@@ -1,5 +1,3 @@
-# Startup tasks
-
 # Start SSH agent if not already running
 if test -z "$SSH_AUTH_SOCK"; and test -z "$SSH_AGENT_PID"; and test -z "$SSH_CLIENT"
     eval (ssh-agent -c) >/dev/null 2>&1

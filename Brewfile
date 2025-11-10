@@ -37,7 +37,7 @@ unless ENV["HOMEBREW_TERMINAL"]
   brew "koekeishiya/formulae/yabai"
 
   cask "cursor"
-  cask "docker"
+  cask "docker-desktop"
   cask "font-ibm-plex"
   cask "font-jetbrains-mono"
   cask "google-chrome"
