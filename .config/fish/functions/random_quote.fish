@@ -1,4 +1,4 @@
-function quote -d "Display a random quote from quotes.yml"
+function random_quote -d "Display a random quote from quotes.yml"
     set -l quotes_file "$HOME/.config/fish/data/quotes.yml"
 
     set -l categories (yq '.categories | keys | .[]' $quotes_file)
