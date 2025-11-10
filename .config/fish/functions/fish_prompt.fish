@@ -1,4 +1,4 @@
-function fish_prompt --description 'Write out the prompt'
+function fish_prompt
     set -l last_status $status
     set -l color_cwd
     set -l suffix
