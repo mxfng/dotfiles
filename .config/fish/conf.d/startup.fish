@@ -17,7 +17,7 @@ if command -v docker >/dev/null 2>&1
 end
 
 # Start window management services
-# Passwordless sudo is configured via ./scripts/yabai_sa_setup.fish or running ./provision desktop
+# Passwordless sudo is configured via ./scripts/yabai_setup_sa.fish or running ./provision desktop
 restart_wm --sudo
 
 # Auto-attach to tmux session

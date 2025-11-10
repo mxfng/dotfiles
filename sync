@@ -15,7 +15,7 @@ function main
 
     and sync_terminal_env
 
-    and set_fish_universal_vars
+    and fish_set_universal_vars
 
     and if test -n "$_flag_i"
         set_color normal
@@ -103,8 +103,9 @@ function sync_git_config
     git config --global user.email $email
 end
 
-function set_fish_universal_vars
-    source ./fish_universal_vars.fish
+function fish_set_universal_vars
+    source ./scripts/fish_set_universal_vars.fish
+    or return $status
 end
 
 function clean_up_tmp_space -a cwd start_dir tmp_dir

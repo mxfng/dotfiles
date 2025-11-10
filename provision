@@ -74,14 +74,14 @@ function desktop -d 'Provision macOS desktop environment'
     switch $confirm
         case y Y
             log 'setting up yabai scripting addition'
-            ./scripts/yabai_sa_setup.fish
+            ./scripts/yabai_setup_sa.fish
             or echo 'warning: yabai scripting addition setup failed'
     end
 
     log 'installing skhd service'
     skhd --install-service
     log 'configuring skhd to use bash shell for better performance'
-    ./scripts/skhd_performance_config.fish
+    ./scripts/skhd_fix_performance.fish
     or echo 'warning: skhd performance configuration failed'
     skhd --stop-service
     skhd --start-service
