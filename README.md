@@ -66,3 +66,7 @@ To install desktop software:
 ```bash
 ./provision desktop | fish
 ```
+
+## Thanks
+
+I forked [Mitchell Simon's](https://github.com/mitchell/dotfiles) excellent dotfiles for some time and eventually used them as a guiding inspiration for my own. A decent amount of the code here stems from or was inspired by Mitchell's original project. Thanks Mitchell!
