@@ -26,7 +26,7 @@ brew "ripgrep"
 brew "rsync"
 brew "starship"
 brew "tmux"
-brew "yq"
+brew "yq" # used by random_quote.fish
 brew "yt-dlp"
 brew "zoxide"
 
