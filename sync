@@ -37,7 +37,6 @@ or exit 1
 
 # Sync root dotfiles
 rsync -a \
-    ./.tool-versions \
     ./.hushlogin \
     ~/
 or exit 1
