@@ -2,69 +2,45 @@
 
 My preferred configurations and software for macOS systems.
 
+## Quickstart
+
+```bash
+# Install Homebrew + fish first
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install fish
+
+# Clone this repo
+git clone https://github.com/mxfng/dotfiles.git ~/Developer/dotfiles
+cd ~/Developer/dotfiles
+
+# Provision terminal (installs packages, sets up shell)
+./provision terminal | fish
+
+# Optionally, provision desktop (window management, GUI apps)
+./provision desktop
+```
+
 ## Scripts
-
-### `sync`
-
-#### Dependencies
-
-- brew ([install guide](https://docs.brew.sh/Installation))
-- fish
-
-#### Usage
-
-To get new configurations:
-
-```bash
-./sync -d
-./sync --desktop
-```
-
-To set up git:
-
-```bash
-./sync -g
-./sync --git
-```
-
-To get new configurations for terminal only:
-
-```bash
-./sync
-```
-
-To install nvim plugins:
-
-```bash
-./sync -i
-./sync --install
-```
-
-To run sync script using curl:
-
-```bash
-curl https://raw.githubusercontent.com/mxfng/dotfiles/master/sync | fish
-```
 
 ### `provision`
 
-#### Dependencies
+Sets up a fresh macOS environment.
 
-- brew
-- fish
+**Commands:**
 
-#### Usage
+- `./provision terminal` - Install CLI tools (fish, nvim, tmux) and sync configs
+- `./provision desktop` - Install GUI apps (yabai, skhd, WezTerm) and sync configs
 
-Clone this repo and run the following for a fresh environment:
+### `sync`
 
-```bash
-./provision terminal | fish
-```
+Syncs dotfiles from repo to home directory. Run after pulling updates.
 
-To install desktop software:
+**Usage:**
 
 ```bash
-./provision desktop | fish
+./sync              # Sync terminal configs (fish, nvim, tmux, etc.)
+./sync --desktop    # Sync desktop configs (wezterm, skhd)
+./sync --git        # Sync git config and set user
 ```
 
 ## Thanks
