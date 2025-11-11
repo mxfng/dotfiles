@@ -23,3 +23,39 @@ if command -v docker >/dev/null 2>&1
 else
     echo 'warning: docker not found'
 end
+
+# kubectl
+if command -v kubectl >/dev/null 2>&1
+    kubectl completion fish >$completions_dir/kubectl.fish 2>/dev/null
+else
+    echo 'warning: kubectl not found'
+end
+
+# k9s
+if command -v k9s >/dev/null 2>&1
+    k9s completion fish >$completions_dir/k9s.fish 2>/dev/null
+else
+    echo 'warning: k9s not found'
+end
+
+# k3d
+if command -v k3d >/dev/null 2>&1
+    k3d completion fish >$completions_dir/k3d.fish 2>/dev/null
+else
+    echo 'warning: k3d not found'
+end
+
+# yq
+if command -v yq >/dev/null 2>&1
+    yq shell-completion fish >$completions_dir/yq.fish 2>/dev/null
+else
+    echo 'warning: yq not found'
+end
+
+# git-lfs
+if command -v git >/dev/null 2>&1
+    and git lfs version >/dev/null 2>&1
+    git lfs completion fish >$completions_dir/git-lfs.fish 2>/dev/null
+else
+    echo 'warning: git-lfs not found'
+end
