@@ -1,0 +1,23 @@
+#!/usr/bin/env fish
+
+# Install Cursor extensions from extensions.txt
+
+set -l extensions_file (dirname (status -f))/../.config/cursor/extensions.txt
+
+if not test -f $extensions_file
+    echo "No extensions file found at $extensions_file"
+    exit 1
+end
+
+if not command -q cursor
+    echo "Cursor CLI not found. Install Cursor first."
+    exit 1
+end
+
+echo "Installing Cursor extensions..."
+
+while read extension
+    cursor --install-extension $extension >/dev/null 2>&1
+end <$extensions_file
+
+echo "Done installing extensions."

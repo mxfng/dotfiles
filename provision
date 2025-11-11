@@ -99,4 +99,8 @@ skhd --start-service
 ./sync
 or echo 'warning: sync failed'
 
-echo "done provisioning."
+# Install Cursor extensions
+./scripts/cursor_install_extensions.fish
+or echo 'warning: failed to install cursor extensions'
+
+echo "done provisioning macOS!"
