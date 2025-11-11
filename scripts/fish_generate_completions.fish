@@ -3,7 +3,7 @@
 # Generate fish shell completions for installed tools
 # This script should be run during provisioning or when tools are updated
 
-echo 'Generating fish completions...'
+echo 'generating fish completions'
 
 set -l completions_dir ~/.config/fish/completions
 

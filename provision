@@ -105,4 +105,4 @@ or echo 'warning: failed to install cursor extensions'
 # TODO: this does not work
 defaults write com.cursor.helper ApplePressAndHoldEnabled -bool false 2>/dev/null
 
-echo "done provisioning macOS!"
+echo "done provisioning."

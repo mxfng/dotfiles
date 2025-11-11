@@ -5,16 +5,16 @@
 set -l extensions_file (dirname (status -f))/../.config/cursor/extensions.txt
 
 if not test -f $extensions_file
-    echo "No extensions file found at $extensions_file"
+    echo "Error: No extensions file found at $extensions_file"
     exit 1
 end
 
 if not command -q cursor
-    echo "Cursor CLI not found. Install Cursor first."
+    echo "Error: Cursor CLI not found."
     exit 1
 end
 
-echo "Installing Cursor extensions..."
+echo "installing cursor extensions"
 
 while read extension
     cursor --install-extension $extension >/dev/null 2>&1
