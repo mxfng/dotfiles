@@ -25,5 +25,3 @@ chmod +x ./install.sh
     echo "Install failed."
     exit 1
 end
-
-echo "Successfully installed macos_show_active_workspace"

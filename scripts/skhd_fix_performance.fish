@@ -38,4 +38,4 @@ end
     fi
 "
 
-echo "Added SHELL=/bin/bash to $plist_path"
+echo "added SHELL=/bin/bash to $plist_path"

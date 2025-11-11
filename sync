@@ -39,6 +39,16 @@ or exit 1
 rsync -aP ./.config/skhd ~/.config/
 or exit 1
 
+# Sync Cursor configs
+log 'syncing cursor configs'
+if test -d ./.config/cursor
+    rsync -a ./.config/cursor/settings.json "/Users/$USER/Library/Application Support/Cursor/User/"
+    or echo 'warning: failed to sync cursor settings'
+
+    rsync -a ./.config/cursor/keybindings.json "/Users/$USER/Library/Application Support/Cursor/User/"
+    or echo 'warning: failed to sync cursor keybindings'
+end
+
 # Sync git config (preserve user info)
 log 'syncing git config'
 set -l current_name (git config --global user.name 2>/dev/null)

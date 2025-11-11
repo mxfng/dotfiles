@@ -19,5 +19,3 @@ echo "Installing Cursor extensions..."
 while read extension
     cursor --install-extension $extension >/dev/null 2>&1
 end <$extensions_file
-
-echo "Done installing extensions."

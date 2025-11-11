@@ -1,0 +1,83 @@
+{
+  "editor.acceptSuggestionOnEnter": "off",
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.fontFamily": "JetBrains Mono, monospace",
+  "editor.fontSize": 13,
+  "settingsSync.ignoredExtensions": ["adelphes.android-dev-ext"],
+  "files.associations": {
+    "*.html": "jinja-html",
+    "*.j2": "jinja-html"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.includeLanguages": {
+    "jinja-html": "html"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "python.defaultInterpreterPath": "/Users/max/Developer/goon/env",
+  "workbench.colorTheme": "Rosé Pine Moon",
+  "workbench.iconTheme": "catppuccin-latte",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.tabSize": 2,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.openRepositoryInParentFolders": "always",
+  "editor.stickyScroll.enabled": true,
+  "window.zoomLevel": 1,
+  "workbench.startupEditor": "none",
+  "python.analysis.autoFormatStrings": true,
+  "editor.formatOnSave": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "editor.rulers": [120],
+    "editor.semanticHighlighting.enabled": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.run": "onSave",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontWeight": "normal",
+  "editor.letterSpacing": 1.03,
+  "explorer.confirmDragAndDrop": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "extensions.ignoreRecommendations": true,
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  }
+}

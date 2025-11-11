@@ -103,4 +103,4 @@ or echo 'warning: sync failed'
 ./scripts/cursor_install_extensions.fish
 or echo 'warning: failed to install cursor extensions'
 
-echo "done provisioning macOS!"
+echo "done provisioning."

@@ -29,4 +29,4 @@ end
 sudo yabai --uninstall-sa 2>/dev/null; or true
 sudo yabai --load-sa
 
-echo "Done! Test with: yabai -m space --focus next"
+echo "scripting addition setup complete. test with: yabai -m space --focus next"

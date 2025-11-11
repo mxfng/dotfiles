@@ -23,5 +23,3 @@ if command -v docker >/dev/null 2>&1
 else
     echo 'warning: docker not found'
 end
-
-echo 'Done!'
