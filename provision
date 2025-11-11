@@ -48,10 +48,6 @@ end
 ./scripts/fish_generate_completions.fish
 or echo 'warning: failed to generate fish completions'
 
-# Set fish universal variables (after fish config is synced)
-source ./scripts/fish_set_universal_vars.fish
-or exit 1
-
 # Set up terminal tools
 log "setting up terminal tools"
 if not test -d ~/.config/tmux/plugins/tpm
