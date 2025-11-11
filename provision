@@ -1,5 +1,18 @@
 #!/usr/bin/env fish
 
+function confirm -a prompt default
+    # Helper function for yes/no prompts
+    # Usage: confirm "message" "Y" (default yes) or confirm "message" "N" (default no)
+    read -P "$prompt " answer
+    set -l answer (string lower $answer)
+
+    if test -z "$answer"
+        test "$default" = Y
+    else
+        string match -q -r '^y' $answer
+    end
+end
+
 function install_brew_packages -a terminal
     log "installing packages"
     if test -n "$terminal"
@@ -19,28 +32,30 @@ function terminal -d 'Provision terminal environment'
     log 'adding brew path to fish'
     fish_add_path /opt/homebrew/bin
 
-    log 'setting m\'s default shell to fish'
-    sudo chsh -s /opt/homebrew/bin/fish $USER
+    log "setting $USER's default shell to fish"
+    if test $SHELL = /opt/homebrew/bin/fish
+        echo 'fish is already the default shell'
+    else
+        sudo chsh -s /opt/homebrew/bin/fish $USER
+    end
 
     log 'generating fish completions'
     ./scripts/fish_generate_completions.fish
 
-    read -P "Would you like to sync desktop configurations? [Y/n] " confirm
-    switch $confirm
-        case n N
-            echo 'skipping desktop sync'
-        case '*'
-            log 'running sync script for desktop'
-            ./sync --desktop
+    log 'installing tmux plugin manager'
+    if test -d ~/.config/tmux/plugins/tpm
+        echo 'tmux plugin manager already installed'
+    else
+        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+        or echo 'warning: failed to install tmux plugin manager'
     end
 
-    read -P "Would you like to sync git configurations? [Y/n] " confirm
-    switch $confirm
-        case n N
-            echo 'skipping git sync'
-        case '*'
-            log 'running sync script for git'
-            ./sync --git
+    log 'syncing terminal configurations'
+    ./sync
+    or echo 'warning: sync failed'
+
+    if confirm "Would you like to set up git user config? [Y/n]" Y
+        ./sync --git
     end
 
     echo 'done provisioning.'
@@ -55,30 +70,34 @@ function desktop -d 'Provision macOS desktop environment'
     test (uname) != Darwin
     and return 1
 
-    read -P "Would you like to delete old login items? [y/N] " confirm
-    switch $confirm
-        case y Y
-            log "deleting old login items"
-            osascript -e 'tell application "System Events" to delete every login item'
+    if confirm "Would you like to delete old login items? [y/N]" N
+        log "deleting old login items"
+        osascript -e 'tell application "System Events" to delete every login item'
     end
 
     log 'adding wezterm to login items'
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
+    if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q WezTerm
+        osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
+    else
+        echo 'wezterm already in login items'
+    end
 
     log 'adding raycast to login items'
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+    if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Raycast
+        osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+    else
+        echo 'raycast already in login items'
+    end
 
     log 'installing yabai service'
     yabai --install-service
     defaults write com.apple.dock mru-spaces -bool false
     yabai --start-service
 
-    read -P "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N] " confirm
-    switch $confirm
-        case y Y
-            log 'setting up yabai scripting addition'
-            ./scripts/yabai_setup_sa.fish
-            or echo 'warning: yabai scripting addition setup failed'
+    if confirm "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N]" N
+        log 'setting up yabai scripting addition'
+        ./scripts/yabai_setup_sa.fish
+        or echo 'warning: yabai scripting addition setup failed'
     end
 
     log 'installing skhd service'
@@ -89,8 +108,9 @@ function desktop -d 'Provision macOS desktop environment'
     skhd --stop-service
     skhd --start-service
 
-    log 'installing tmux package manager'
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    log 'syncing desktop configurations'
+    ./sync --desktop
+    or echo 'warning: desktop sync failed'
 
     echo "done provisioning."
 end
@@ -102,4 +122,21 @@ function log -a message
     echo "$message"
 end
 
-$argv[1]
+function usage
+    echo "Usage: ./provision [command]"
+    echo ""
+    echo "Commands:"
+    echo "  terminal  - Provision terminal environment (brew packages, shell, completions)"
+    echo "  desktop   - Provision macOS desktop environment (yabai, skhd, login items)"
+    echo ""
+    echo "Example:"
+    echo "  ./provision terminal"
+end
+
+# If no arguments provided, show usage
+if test (count $argv) -eq 0
+    usage
+    exit 1
+end
+
+$argv
