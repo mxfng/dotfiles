@@ -14,3 +14,4 @@ set -gx GOBIN $GOPATH/bin
 set -gx ASDF_DATA_DIR $HOME/.local/share/asdf
 set -gx ASDF_CONFIG_FILE $HOME/.config/asdf/asdfrc
 set -gx BUN_INSTALL_CACHE_DIR $HOME/.cache/bun
+set -gx DOCKER_CONFIG $HOME/.config/docker
