@@ -28,6 +28,7 @@ rsync -aP --delete \
     ./.config/starship.toml \
     ./.config/tmux \
     ./.config/wezterm \
+    ./.config/yabai \
     ~/.config/
 or exit 1
 
