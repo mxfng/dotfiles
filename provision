@@ -24,7 +24,7 @@ log "provisioning macOS environment for $USER"
 
 # Check we're on macOS
 test (uname) != Darwin
-and echo "Error: This script is for macOS only"
+and echo 'error: this script is for macOS only'
 and exit 1
 
 # Install all packages
@@ -105,4 +105,4 @@ or echo 'warning: failed to install cursor extensions'
 # TODO: this does not work
 defaults write com.cursor.helper ApplePressAndHoldEnabled -bool false 2>/dev/null
 
-echo "done provisioning."
+echo 'done provisioning macOS'

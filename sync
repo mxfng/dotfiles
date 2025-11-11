@@ -47,7 +47,7 @@ end
 log 'syncing git config'
 
 if test -z "$git_name" -o -z "$git_email"
-    echo 'Please set your git user:'
+    echo 'please set your git user:'
 
     if test -z "$git_name"
         read -P 'name: ' name
@@ -68,4 +68,4 @@ else
     git config --global user.email $git_email
 end
 
-echo 'done syncing.'
+echo 'done syncing'

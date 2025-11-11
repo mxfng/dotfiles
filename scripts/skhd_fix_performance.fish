@@ -3,12 +3,12 @@
 set plist_path (skhd --install-service 2>&1 | grep -o '/.*\.plist')
 
 if test -z "$plist_path"
-    echo "Error: skhd plist path not found"
+    echo 'error: skhd plist path not found'
     exit 1
 end
 
 if not test -f "$plist_path"
-    echo "Error: Plist file does not exist at $plist_path"
+    echo "error: plist file does not exist at $plist_path"
     exit 1
 end
 
@@ -38,4 +38,4 @@ end
     fi
 "
 
-echo "added SHELL=/bin/bash to $plist_path."
+echo "added SHELL=/bin/bash to $plist_path"
