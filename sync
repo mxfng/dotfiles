@@ -17,7 +17,7 @@ set -l git_name (git config --global user.name 2>/dev/null)
 set -l git_email (git config --global user.email 2>/dev/null)
 
 # Sync XDG configs
-rsync -aP \
+rsync -aP --delete \
     ./.config/fish \
     ./.config/git \
     ./.config/nvim \
@@ -28,7 +28,7 @@ rsync -aP \
     ~/.config/
 or exit 1
 
-rsync -aP ./scripts/ ~/Developer/scripts/
+rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
 
 # Sync root dotfiles
