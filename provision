@@ -22,6 +22,9 @@ function terminal -d 'Provision terminal environment'
     log 'setting m\'s default shell to fish'
     sudo chsh -s /opt/homebrew/bin/fish $USER
 
+    log 'generating fish completions'
+    ./scripts/fish_generate_completions.fish
+
     read -P "Would you like to sync desktop configurations? [Y/n] " confirm
     switch $confirm
         case n N
