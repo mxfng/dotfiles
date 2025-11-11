@@ -18,6 +18,9 @@ set -l git_email (git config --global user.email 2>/dev/null)
 
 # Sync XDG configs
 rsync -aP --delete \
+    --exclude 'fish/completions/' \
+    --exclude 'fish/fish_variables' \
+    --exclude 'tmux/plugins/' \
     ./.config/fish \
     ./.config/git \
     ./.config/nvim \
