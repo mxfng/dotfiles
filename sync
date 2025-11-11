@@ -18,9 +18,9 @@ set -l git_email (git config --global user.email 2>/dev/null)
 
 # Sync XDG configs
 rsync -aP --delete \
-    --exclude 'fish/completions/' \
-    --exclude 'fish/fish_variables' \
-    --exclude 'tmux/plugins/' \
+    --exclude fish/completions/ \
+    --exclude fish/fish_variables \
+    --exclude tmux/plugins/ \
     ./.config/fish \
     ./.config/git \
     ./.config/nvim \
@@ -33,12 +33,6 @@ rsync -aP --delete \
 or exit 1
 
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
-or exit 1
-
-# Sync root dotfiles
-rsync -a \
-    ./.hushlogin \
-    ~/
 or exit 1
 
 # Sync non-XDG configs
