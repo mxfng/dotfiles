@@ -1,64 +1,16 @@
 ## Focus window (vim-style navigation)
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+cmd + alt - h : yabai -m window --focus west
+cmd + alt - j : yabai -m window --focus south
+cmd + alt - k : yabai -m window --focus north
+cmd + alt - l : yabai -m window --focus east
 
-## Swap window position
-shift + alt - h : yabai -m window --swap west
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - l : yabai -m window --swap east
+## Move window (swap position with another window)
+shift + cmd + alt - h : yabai -m window --swap west
+shift + cmd + alt - j : yabai -m window --swap south
+shift + cmd + alt - k : yabai -m window --swap north
+shift + cmd + alt - l : yabai -m window --swap east
 
-## Warp window (move and resize)
-shift + cmd - h : yabai -m window --warp west
-shift + cmd - j : yabai -m window --warp south
-shift + cmd - k : yabai -m window --warp north
-shift + cmd - l : yabai -m window --warp east
-
-## Move floating window (relative positioning)
-shift + ctrl - a : yabai -m window --move rel:-20:0
-shift + ctrl - s : yabai -m window --move rel:0:20
-shift + ctrl - w : yabai -m window --move rel:0:-20
-shift + ctrl - d : yabai -m window --move rel:20:0
-
-## Increase window size
-shift + alt - a : yabai -m window --resize left:-20:0
-shift + alt - s : yabai -m window --resize bottom:0:20
-shift + alt - w : yabai -m window --resize top:0:-20
-shift + alt - d : yabai -m window --resize right:20:0
-
-## Decrease window size
-shift + cmd - a : yabai -m window --resize left:20:0
-shift + cmd - s : yabai -m window --resize bottom:0:-20
-shift + cmd - w : yabai -m window --resize top:0:20
-shift + cmd - d : yabai -m window --resize right:-20:0
-
-## Balance all windows
-shift + alt - 0 : yabai -m space --balance
-
-## Floating window grid presets
-shift + alt - up    : yabai -m window --grid 1:1:0:0:1:1  # Fill screen
-shift + alt - left  : yabai -m window --grid 1:2:0:0:1:1  # Left half
-shift + alt - right : yabai -m window --grid 1:2:1:0:1:1  # Right half
-
-## Create spaces
-shift + cmd - n : yabai -m space --create && \
-                  index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                  yabai -m window --space "${index}" && \
-                  yabai -m space --focus "${index}"
-
-cmd + alt - n : yabai -m space --create && \
-                index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
-                yabai -m space --focus "${index}"
-
-## Destroy space
-cmd + alt - w : yabai -m space --destroy
-
-## Focus space
-cmd + alt - x : yabai -m space --focus recent
-cmd + alt - z : yabai -m space --focus prev
-cmd + alt - c : yabai -m space --focus next
+## Focus space (switch between spaces 1-10)
 cmd + alt - 1 : yabai -m space --focus 1
 cmd + alt - 2 : yabai -m space --focus 2
 cmd + alt - 3 : yabai -m space --focus 3
@@ -66,75 +18,38 @@ cmd + alt - 4 : yabai -m space --focus 4
 cmd + alt - 5 : yabai -m space --focus 5
 cmd + alt - 6 : yabai -m space --focus 6
 cmd + alt - 7 : yabai -m space --focus 7
+# Note: cmd+alt+8 is macOS Zoom toggle (accessibility), but we override it
 cmd + alt - 8 : yabai -m space --focus 8
 cmd + alt - 9 : yabai -m space --focus 9
 cmd + alt - 0 : yabai -m space --focus 10
 
-## Send window to space and follow focus
-shift + cmd - x : yabai -m window --space recent; yabai -m space --focus recent
-shift + cmd - z : yabai -m window --space prev; yabai -m space --focus prev
-shift + cmd - c : yabai -m window --space next; yabai -m space --focus next
-shift + cmd - 1 : yabai -m window --space  1; yabai -m space --focus 1
-shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
-shift + cmd - 3 : yabai -m window --space  3; yabai -m space --focus 3
-shift + cmd - 4 : yabai -m window --space  4; yabai -m space --focus 4
-shift + cmd - 5 : yabai -m window --space  5; yabai -m space --focus 5
-shift + cmd - 6 : yabai -m window --space  6; yabai -m space --focus 6
-shift + cmd - 7 : yabai -m window --space  7; yabai -m space --focus 7
-shift + cmd - 8 : yabai -m window --space  8; yabai -m space --focus 8
-shift + cmd - 9 : yabai -m window --space  9; yabai -m space --focus 9
-shift + cmd - 0 : yabai -m window --space 10; yabai -m space --focus 10
+## Navigate to prev/next space
+cmd + alt - left  : yabai -m space --focus prev
+cmd + alt - right : yabai -m space --focus next
 
-## Focus monitor
-ctrl + alt - x : yabai -m display --focus recent
-ctrl + alt - z : yabai -m display --focus prev
-ctrl + alt - c : yabai -m display --focus next
-ctrl + alt - 1 : yabai -m display --focus 1
-ctrl + alt - 2 : yabai -m display --focus 2
-ctrl + alt - 3 : yabai -m display --focus 3
+## Move window to space and follow focus
+shift + cmd + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + cmd + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + cmd + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + cmd + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + cmd + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+shift + cmd + alt - 6 : yabai -m window --space 6; yabai -m space --focus 6
+shift + cmd + alt - 7 : yabai -m window --space 7; yabai -m space --focus 7
+shift + cmd + alt - 8 : yabai -m window --space 8; yabai -m space --focus 8
+shift + cmd + alt - 9 : yabai -m window --space 9; yabai -m space --focus 9
+shift + cmd + alt - 0 : yabai -m window --space 10; yabai -m space --focus 10
 
-## Send window to monitor and follow focus
-ctrl + cmd - x : yabai -m window --display recent; yabai -m display --focus recent
-ctrl + cmd - z : yabai -m window --display prev; yabai -m display --focus prev
-ctrl + cmd - c : yabai -m window --display next; yabai -m display --focus next
-ctrl + cmd - 1 : yabai -m window --display 1; yabai -m display --focus 1
-ctrl + cmd - 2 : yabai -m window --display 2; yabai -m display --focus 2
-ctrl + cmd - 3 : yabai -m window --display 3; yabai -m display --focus 3
+## Move window to prev/next space and follow
+shift + cmd + alt - left  : yabai -m window --space prev; yabai -m space --focus prev
+shift + cmd + alt - right : yabai -m window --space next; yabai -m space --focus next
 
-## Set insertion point for next window
-ctrl + alt - h : yabai -m window --insert west
-ctrl + alt - j : yabai -m window --insert south
-ctrl + alt - k : yabai -m window --insert north
-ctrl + alt - l : yabai -m window --insert east
+## Toggle window fullscreen
+cmd + alt - f : yabai -m window --toggle zoom-fullscreen
 
-## Rotate layout
-alt - r : yabai -m space --rotate 90
+## Toggle window float and center
+cmd + alt - t : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
 
-## Mirror layout
-alt - y : yabai -m space --mirror y-axis
-alt - x : yabai -m space --mirror x-axis
+## Toggle native macOS fullscreen
+cmd + alt - return : yabai -m window --toggle native-fullscreen
 
-## Toggle split type
-alt - e : yabai -m window --toggle split
-
-## Change layout mode
-ctrl + alt - a : yabai -m space --layout bsp
-ctrl + shift + alt - d : yabai -m space --layout float
-
-## Zoom toggles
-alt - d : yabai -m window --toggle zoom-parent
-alt - f : yabai -m window --toggle zoom-fullscreen
-shift + alt - f : yabai -m window --toggle native-fullscreen
-
-## Float window and center
-alt - t : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:1:2:2
-
-## Picture-in-picture mode
-alt - p : yabai -m window --toggle sticky;\
-          yabai -m window --grid 5:5:4:0:1:1
-
-## Other toggles
-alt - s : yabai -m window --toggle sticky
-alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
-shift + alt - b : yabai -m window --toggle border
+## Note: cmd+alt+esc (Force Quit) is preserved - not overridden
