@@ -10,3 +10,7 @@ set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
 
 set -gx GOPATH $HOME/Developer/go
 set -gx GOBIN $GOPATH/bin
+
+set -gx ASDF_DATA_DIR $HOME/.local/share/asdf
+set -gx ASDF_CONFIG_FILE $HOME/.config/asdf/asdfrc
+set -gx BUN_INSTALL_CACHE_DIR $HOME/.cache/bun

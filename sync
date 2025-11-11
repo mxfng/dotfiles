@@ -68,6 +68,7 @@ function sync_terminal_env
     and rsync -aP ./.config/tmux ~/.config/
     and rsync -aP ./scripts/ ~/Developer/scripts/
     and rsync -aP ./.config/starship.toml ~/.config/
+    and rsync -aP ./.tool-versions ~/
 end
 
 function sync_desktop_env -a uname
