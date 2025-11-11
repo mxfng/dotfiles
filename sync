@@ -55,21 +55,24 @@ function setup_tmp_space -a cwd tmp_dir
 end
 
 function sync_terminal_env
-    if ! test -e ~/.config
-        mkdir ~/.config
-    end
+    mkdir -p ~/.config ~/Developer/scripts
 
-    if ! test -e ~/Developer/scripts
-        mkdir -p ~/Developer/scripts
-    end
+    rsync -aP \
+        ./.config/fish \
+        ./.config/nvim \
+        ./.config/tmux \
+        ~/.config/
+    or return $status
 
-    rsync -aP ./.config/fish ~/.config/
-    and rsync -aP ./.config/nvim ~/.config/
-    and rsync -aP ./.config/tmux ~/.config/
-    and rsync -aP ./scripts/ ~/Developer/scripts/
-    and rsync -aP ./.config/starship.toml ~/.config/
-    and rsync -aP ./.tool-versions ~/
-    and rsync -aP ./.hushlogin ~/
+    rsync -aP ./scripts/ ~/Developer/scripts/
+    or return $status
+
+    rsync -a \
+        ./.config/starship.toml \
+        ./.tool-versions \
+        ./.hushlogin \
+        ~/
+    or return $status
 end
 
 function sync_desktop_env -a uname
@@ -94,14 +97,34 @@ function install_nvim_plugins
 end
 
 function sync_git_config
+    set -l current_name (git config --global user.name 2>/dev/null)
+    set -l current_email (git config --global user.email 2>/dev/null)
+
     rsync -aP ./.config/git ~/.config/
+    or return $status
 
-    echo 'Please set your git user:'
-    read -P 'name: ' name
-    read -P 'email: ' email
+    # Only prompt for user info if not already configured
+    if test -z "$current_name" -o -z "$current_email"
+        echo 'Please set your git user:'
 
-    git config --global user.name $name
-    git config --global user.email $email
+        if test -z "$current_name"
+            read -P 'name: ' name
+            git config --global user.name $name
+        else
+            echo "name: $current_name (already set)"
+        end
+
+        if test -z "$current_email"
+            read -P 'email: ' email
+            git config --global user.email $email
+        else
+            echo "email: $current_email (already set)"
+        end
+    else
+        echo "Git user already configured: $current_name <$current_email>"
+        git config --global user.name $current_name
+        git config --global user.email $current_email
+    end
 end
 
 function fish_set_universal_vars
@@ -123,4 +146,4 @@ function log -a message
     echo "$message"
 end
 
-main $argv[1]
+main $argv
