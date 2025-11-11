@@ -1,4 +1,4 @@
-# dotfiles
+# Max's dotfiles
 
 My preferred configurations and software for macOS systems.
 
