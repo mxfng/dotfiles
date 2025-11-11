@@ -1,5 +1,12 @@
 #!/usr/bin/env fish
 
+function log -a message
+    set_color blue
+    echo -n "==> "
+    set_color normal
+    echo "$message"
+end
+
 function confirm -a prompt default
     # Helper function for yes/no prompts
     # Usage: confirm "message" "Y" (default yes) or confirm "message" "N" (default no)
@@ -13,130 +20,83 @@ function confirm -a prompt default
     end
 end
 
-function install_brew_packages -a terminal
-    log "installing packages"
-    if test -n "$terminal"
-        env HOMEBREW_TERMINAL=1 brew bundle
-    else
-        brew bundle
-    end
-    or return $status
+log "provisioning macOS environment for $USER"
+
+# Check we're on macOS
+test (uname) != Darwin
+and echo "Error: This script is for macOS only"
+and return 1
+
+# Install all packages
+log "installing brew packages"
+brew bundle
+or return $status
+
+# Set up shell
+log 'adding brew path to fish'
+fish_add_path /opt/homebrew/bin
+
+log "setting $USER's default shell to fish"
+if test $SHELL = /opt/homebrew/bin/fish
+    echo 'fish is already the default shell'
+else
+    sudo chsh -s /opt/homebrew/bin/fish $USER
 end
 
-function terminal -d 'Provision terminal environment'
-    log "provisioning terminal utilities for $USER"
+log 'generating fish completions'
+./scripts/fish_generate_completions.fish
 
-    install_brew_packages --terminal
-    or return $status
-
-    log 'adding brew path to fish'
-    fish_add_path /opt/homebrew/bin
-
-    log "setting $USER's default shell to fish"
-    if test $SHELL = /opt/homebrew/bin/fish
-        echo 'fish is already the default shell'
-    else
-        sudo chsh -s /opt/homebrew/bin/fish $USER
-    end
-
-    log 'generating fish completions'
-    ./scripts/fish_generate_completions.fish
-
-    log 'installing tmux plugin manager'
-    if test -d ~/.config/tmux/plugins/tpm
-        echo 'tmux plugin manager already installed'
-    else
-        git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-        or echo 'warning: failed to install tmux plugin manager'
-    end
-
-    log 'syncing terminal configurations'
-    ./sync
-    or echo 'warning: sync failed'
-
-    if confirm "Would you like to set up git user config? [Y/n]" Y
-        ./sync --git
-    end
-
-    echo 'done provisioning.'
+# Set up terminal tools
+log 'installing tmux plugin manager'
+if test -d ~/.config/tmux/plugins/tpm
+    echo 'tmux plugin manager already installed'
+else
+    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+    or echo 'warning: failed to install tmux plugin manager'
 end
 
-function desktop -d 'Provision macOS desktop environment'
-    log "provisioning desktop environment for $USER"
+# Set up desktop/window management
 
-    install_brew_packages
-    or return $status
-
-    test (uname) != Darwin
-    and return 1
-
-    if confirm "Would you like to delete old login items? [y/N]" N
-        log "deleting old login items"
-        osascript -e 'tell application "System Events" to delete every login item'
-    end
-
-    log 'adding wezterm to login items'
-    if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q WezTerm
-        osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
-    else
-        echo 'wezterm already in login items'
-    end
-
-    log 'adding raycast to login items'
-    if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Raycast
-        osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
-    else
-        echo 'raycast already in login items'
-    end
-
-    log 'installing yabai service'
-    yabai --install-service
-    defaults write com.apple.dock mru-spaces -bool false
-    yabai --start-service
-
-    if confirm "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N]" N
-        log 'setting up yabai scripting addition'
-        ./scripts/yabai_setup_sa.fish
-        or echo 'warning: yabai scripting addition setup failed'
-    end
-
-    log 'installing skhd service'
-    skhd --install-service
-    log 'configuring skhd to use bash shell for better performance'
-    ./scripts/skhd_fix_performance.fish
-    or echo 'warning: skhd performance configuration failed'
-    skhd --stop-service
-    skhd --start-service
-
-    log 'syncing desktop configurations'
-    ./sync --desktop
-    or echo 'warning: desktop sync failed'
-
-    echo "done provisioning."
+if confirm "Would you like to delete old login items? [y/N]" N
+    log "deleting old login items"
+    osascript -e 'tell application "System Events" to delete every login item'
 end
 
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
+log 'adding wezterm to login items'
+if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q WezTerm
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
+else
+    echo 'wezterm already in login items'
 end
 
-function usage
-    echo "Usage: ./provision [command]"
-    echo ""
-    echo "Commands:"
-    echo "  terminal  - Provision terminal environment (brew packages, shell, completions)"
-    echo "  desktop   - Provision macOS desktop environment (yabai, skhd, login items)"
-    echo ""
-    echo "Example:"
-    echo "  ./provision terminal"
+log 'adding raycast to login items'
+if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Raycast
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
+else
+    echo 'raycast already in login items'
 end
 
-# If no arguments provided, show usage
-if test (count $argv) -eq 0
-    usage
-    exit 1
+log 'installing yabai service'
+yabai --install-service
+defaults write com.apple.dock mru-spaces -bool false
+yabai --start-service
+
+if confirm "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N]" N
+    log 'setting up yabai scripting addition'
+    ./scripts/yabai_setup_sa.fish
+    or echo 'warning: yabai scripting addition setup failed'
 end
 
-$argv
+log 'installing skhd service'
+skhd --install-service
+log 'configuring skhd to use bash shell for better performance'
+./scripts/skhd_fix_performance.fish
+or echo 'warning: skhd performance configuration failed'
+skhd --stop-service
+skhd --start-service
+
+# Sync all configurations
+./sync
+or echo 'warning: sync failed'
+
+echo "done provisioning."

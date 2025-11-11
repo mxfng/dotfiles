@@ -1,144 +1,5 @@
 #!/usr/bin/env fish
 
-function main
-    argparse d/desktop g/git i/install -- $argv
-    set -l start_dir (pwd)
-    and set -l tmp_dir (mktemp --directory 2>/dev/null; or mktemp -d -t 'dotfiles')
-    and set -l cwd (string match -r '\w+$' $start_dir)
-    and set -l uname (uname)
-    or return $status
-
-    log 'syncing shell environment configurations'
-    set_color grey
-
-    setup_tmp_space $cwd $tmp_dir
-
-    and sync_terminal_env
-
-    and fish_set_universal_vars
-
-    and if test -n "$_flag_i"
-        set_color normal
-        log 'installing neovim plugins'
-        set_color grey
-
-        install_nvim_plugins
-    end
-
-    and if test -n "$_flag_d"
-        set_color normal
-        log 'syncing desktop environment configurations'
-        set_color grey
-
-        sync_desktop_env $uname
-    end
-
-    and if test -n "$_flag_g"
-        set_color normal
-        log 'sync git config'
-        sync_git_config
-        set_color grey
-    end
-
-    clean_up_tmp_space $cwd $start_dir $tmp_dir
-    or return $status
-
-    set_color normal
-    echo -s 'done syncing.'
-end
-
-function setup_tmp_space -a cwd tmp_dir
-    if test ! "$cwd" = dotfiles
-        git clone --recurse-submodules https://github.com/mxfng/dotfiles.git $tmp_dir
-        and cd $tmp_dir
-    end
-end
-
-function sync_terminal_env
-    mkdir -p ~/.config ~/Developer/scripts
-
-    rsync -aP \
-        ./.config/fish \
-        ./.config/nvim \
-        ./.config/tmux \
-        ~/.config/
-    or return $status
-
-    rsync -aP ./scripts/ ~/Developer/scripts/
-    or return $status
-
-    rsync -a \
-        ./.config/starship.toml \
-        ./.tool-versions \
-        ./.hushlogin \
-        ~/
-    or return $status
-end
-
-function sync_desktop_env -a uname
-    rsync -aP ./.config/wezterm ~/.config/
-    or return 1
-
-    switch $uname
-        case Darwin
-            log 'syncing macOS desktop environment configurations'
-            rsync -aP ./.config/skhd ~/.config/
-            or return $status
-        case '*'
-            echo 'unsupported operating system'
-            return 1
-    end
-end
-
-function install_nvim_plugins
-    command -q nvim
-    and nvim +PlugUpgrade +PlugUpdate +UpdateRemotePlugins +qa
-    and nvim +bnext +bdelete +qa
-end
-
-function sync_git_config
-    set -l current_name (git config --global user.name 2>/dev/null)
-    set -l current_email (git config --global user.email 2>/dev/null)
-
-    rsync -aP ./.config/git ~/.config/
-    or return $status
-
-    # Only prompt for user info if not already configured
-    if test -z "$current_name" -o -z "$current_email"
-        echo 'Please set your git user:'
-
-        if test -z "$current_name"
-            read -P 'name: ' name
-            git config --global user.name $name
-        else
-            echo "name: $current_name (already set)"
-        end
-
-        if test -z "$current_email"
-            read -P 'email: ' email
-            git config --global user.email $email
-        else
-            echo "email: $current_email (already set)"
-        end
-    else
-        echo "Git user already configured: $current_name <$current_email>"
-        git config --global user.name $current_name
-        git config --global user.email $current_email
-    end
-end
-
-function fish_set_universal_vars
-    source ./scripts/fish_set_universal_vars.fish
-    or return $status
-end
-
-function clean_up_tmp_space -a cwd start_dir tmp_dir
-    if test ! "$cwd" = dotfiles
-        cd $start_dir
-        and rm -r $tmp_dir
-    end
-end
-
 function log -a message
     set_color blue
     echo -n "==> "
@@ -146,4 +7,72 @@ function log -a message
     echo "$message"
 end
 
-main $argv
+log 'syncing configurations'
+
+# Ensure directories exist
+mkdir -p ~/.config ~/Developer/scripts
+
+# Sync terminal configs
+log 'syncing terminal configs'
+rsync -aP \
+    ./.config/fish \
+    ./.config/nvim \
+    ./.config/tmux \
+    ~/.config/
+or exit 1
+
+rsync -aP ./scripts/ ~/Developer/scripts/
+or exit 1
+
+rsync -a \
+    ./.config/starship.toml \
+    ./.tool-versions \
+    ./.hushlogin \
+    ~/
+or exit 1
+
+# Sync desktop configs
+log 'syncing desktop configs'
+rsync -aP ./.config/wezterm ~/.config/
+or exit 1
+
+rsync -aP ./.config/skhd ~/.config/
+or exit 1
+
+# Sync git config (preserve user info)
+log 'syncing git config'
+set -l current_name (git config --global user.name 2>/dev/null)
+set -l current_email (git config --global user.email 2>/dev/null)
+
+rsync -aP ./.config/git ~/.config/
+or exit 1
+
+# Restore or prompt for git user info
+if test -z "$current_name" -o -z "$current_email"
+    echo 'Please set your git user:'
+
+    if test -z "$current_name"
+        read -P 'name: ' name
+        git config --global user.name $name
+    else
+        echo "name: $current_name (already set)"
+    end
+
+    if test -z "$current_email"
+        read -P 'email: ' email
+        git config --global user.email $email
+    else
+        echo "email: $current_email (already set)"
+    end
+else
+    echo "Git user already configured: $current_name <$current_email>"
+    git config --global user.name $current_name
+    git config --global user.email $current_email
+end
+
+# Set fish universal variables
+log 'setting fish universal variables'
+source ./scripts/fish_set_universal_vars.fish
+or exit 1
+
+echo 'done syncing.'

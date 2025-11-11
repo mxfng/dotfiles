@@ -13,35 +13,19 @@ brew install fish
 git clone https://github.com/mxfng/dotfiles.git ~/Developer/dotfiles
 cd ~/Developer/dotfiles
 
-# Provision terminal (installs packages, sets up shell)
-./provision terminal | fish
-
-# Optionally, provision desktop (window management, GUI apps)
-./provision desktop
+# Provision complete macOS environment
+./provision | fish
 ```
 
 ## Scripts
 
 ### `provision`
 
-Sets up a fresh macOS environment.
-
-**Commands:**
-
-- `./provision terminal` - Install CLI tools (fish, nvim, tmux) and sync configs
-- `./provision desktop` - Install GUI apps (yabai, skhd, WezTerm) and sync configs
+Provisions a complete macOS environment.
 
 ### `sync`
 
-Syncs dotfiles from repo to home directory. Run after pulling updates.
-
-**Usage:**
-
-```bash
-./sync              # Sync terminal configs (fish, nvim, tmux, etc.)
-./sync --desktop    # Sync desktop configs (wezterm, skhd)
-./sync --git        # Sync git config and set user
-```
+Syncs all dotfiles from repo to home directory. Run after pulling updates
 
 ## Thanks
 
