@@ -1,10 +1,4 @@
 return {
-  -- Highlight colors
-  {
-    "echasnovski/mini.hipatterns",
-    event = "BufReadPre",
-    opts = {},
-  },
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
