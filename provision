@@ -102,7 +102,10 @@ log "setting up cursor"
 ./scripts/cursor_install_extensions.fish
 or echo 'warning: failed to install cursor extensions'
 
-# TODO: this does not work
-defaults write com.cursor.helper ApplePressAndHoldEnabled -bool false 2>/dev/null
+# Set macOS defaults
+if confirm "Set macOS system defaults? [y/N]" N
+    ./scripts/macos_set_defaults.fish
+    or echo 'warning: failed to set macOS defaults'
+end
 
 echo 'done provisioning macOS'
