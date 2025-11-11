@@ -1,3 +1,7 @@
+#!/usr/bin/env fish
+
+# Set fish universal variables
+
 set -l foreground DCD7BA normal
 set -l selection 2D4F67 brcyan
 set -l comment 727169 brblack

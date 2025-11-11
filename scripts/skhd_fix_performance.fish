@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+# Fix skhd performance by setting SHELL to bash
+
 set plist_path (skhd --install-service 2>&1 | grep -o '/.*\.plist')
 
 if test -z "$plist_path"
