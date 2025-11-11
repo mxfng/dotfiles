@@ -25,82 +25,84 @@ log "provisioning macOS environment for $USER"
 # Check we're on macOS
 test (uname) != Darwin
 and echo "Error: This script is for macOS only"
-and return 1
+and exit 1
 
 # Install all packages
-log "installing brew packages"
+log "installing packages"
 brew bundle
-or return $status
+or exit 1
+
+# Sync all configurations first (get configs in place)
+./sync
+or exit 1
 
 # Set up shell
-log 'adding brew path to fish'
+log "setting up shell"
 fish_add_path /opt/homebrew/bin
 
-log "setting $USER's default shell to fish"
-if test $SHELL = /opt/homebrew/bin/fish
-    echo 'fish is already the default shell'
-else
+if test $SHELL != /opt/homebrew/bin/fish
     sudo chsh -s /opt/homebrew/bin/fish $USER
+    or exit 1
 end
 
-log 'generating fish completions'
 ./scripts/fish_generate_completions.fish
+or echo 'warning: failed to generate fish completions'
+
+# Set fish universal variables (after fish config is synced)
+source ./scripts/fish_set_universal_vars.fish
+or exit 1
 
 # Set up terminal tools
-log 'installing tmux plugin manager'
-if test -d ~/.config/tmux/plugins/tpm
-    echo 'tmux plugin manager already installed'
-else
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+log "setting up terminal tools"
+if not test -d ~/.config/tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm >/dev/null 2>&1
     or echo 'warning: failed to install tmux plugin manager'
 end
 
-# Set up desktop/window management
-
+# Set up desktop apps
+log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
-    log "deleting old login items"
     osascript -e 'tell application "System Events" to delete every login item'
 end
 
-log 'adding wezterm to login items'
 if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q WezTerm
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}'
-else
-    echo 'wezterm already in login items'
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}' 2>/dev/null
 end
 
-log 'adding raycast to login items'
 if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Raycast
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}'
-else
-    echo 'raycast already in login items'
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}' 2>/dev/null
 end
 
-log 'installing yabai service'
+# Set up window management
+log "setting up window management"
 yabai --install-service
+or echo 'warning: failed to install yabai service'
+
 defaults write com.apple.dock mru-spaces -bool false
+
 yabai --start-service
+or echo 'warning: failed to start yabai service'
 
 if confirm "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N]" N
-    log 'setting up yabai scripting addition'
     ./scripts/yabai_setup_sa.fish
     or echo 'warning: yabai scripting addition setup failed'
 end
 
-log 'installing skhd service'
 skhd --install-service
-log 'configuring skhd to use bash shell for better performance'
-./scripts/skhd_fix_performance.fish
-or echo 'warning: skhd performance configuration failed'
+or echo 'warning: failed to install skhd service'
+
+./scripts/skhd_fix_performance.fish >/dev/null 2>&1
+
 skhd --stop-service
 skhd --start-service
+or echo 'warning: failed to start skhd service'
 
-# Sync all configurations
-./sync
-or echo 'warning: sync failed'
-
-# Install Cursor extensions
+# Set up Cursor
+log "setting up cursor"
 ./scripts/cursor_install_extensions.fish
 or echo 'warning: failed to install cursor extensions'
 
-echo "done provisioning."
+# TODO: this does not work
+defaults write com.cursor.helper ApplePressAndHoldEnabled -bool false 2>/dev/null
+
+echo "done provisioning macOS!"

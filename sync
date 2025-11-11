@@ -7,82 +7,65 @@ function log -a message
     echo "$message"
 end
 
-log 'syncing configurations'
+log 'syncing dotfiles'
 
 # Ensure directories exist
 mkdir -p ~/.config ~/Developer/scripts
 
-# Sync terminal configs
-log 'syncing terminal configs'
+# Capture git user info before syncing (will restore after)
+set -l git_name (git config --global user.name 2>/dev/null)
+set -l git_email (git config --global user.email 2>/dev/null)
+
+# Sync XDG configs
 rsync -aP \
     ./.config/fish \
+    ./.config/git \
     ./.config/nvim \
+    ./.config/skhd \
+    ./.config/starship.toml \
     ./.config/tmux \
+    ./.config/wezterm \
     ~/.config/
 or exit 1
 
 rsync -aP ./scripts/ ~/Developer/scripts/
 or exit 1
 
+# Sync root dotfiles
 rsync -a \
-    ./.config/starship.toml \
     ./.tool-versions \
     ./.hushlogin \
     ~/
 or exit 1
 
-# Sync desktop configs
-log 'syncing desktop configs'
-rsync -aP ./.config/wezterm ~/.config/
-or exit 1
-
-rsync -aP ./.config/skhd ~/.config/
-or exit 1
-
-# Sync Cursor configs
-log 'syncing cursor configs'
+# Sync non-XDG configs
 if test -d ./.config/cursor
-    rsync -a ./.config/cursor/settings.json "/Users/$USER/Library/Application Support/Cursor/User/"
-    or echo 'warning: failed to sync cursor settings'
-
-    rsync -a ./.config/cursor/keybindings.json "/Users/$USER/Library/Application Support/Cursor/User/"
-    or echo 'warning: failed to sync cursor keybindings'
+    rsync -a ./.config/cursor/settings.json "/Users/$USER/Library/Application Support/Cursor/User/" 2>/dev/null
+    rsync -a ./.config/cursor/keybindings.json "/Users/$USER/Library/Application Support/Cursor/User/" 2>/dev/null
 end
 
-# Sync git config (preserve user info)
 log 'syncing git config'
-set -l current_name (git config --global user.name 2>/dev/null)
-set -l current_email (git config --global user.email 2>/dev/null)
 
-rsync -aP ./.config/git ~/.config/
-or exit 1
-
-# Restore or prompt for git user info
-if test -z "$current_name" -o -z "$current_email"
+if test -z "$git_name" -o -z "$git_email"
     echo 'Please set your git user:'
 
-    if test -z "$current_name"
+    if test -z "$git_name"
         read -P 'name: ' name
         git config --global user.name $name
     else
-        echo "name: $current_name (already set)"
+        echo "name: $git_name (already set)"
     end
 
-    if test -z "$current_email"
+    if test -z "$git_email"
         read -P 'email: ' email
         git config --global user.email $email
     else
-        echo "email: $current_email (already set)"
+        echo "email: $git_email (already set)"
     end
 else
-    echo "Git user already configured: $current_name <$current_email>"
-    git config --global user.name $current_name
-    git config --global user.email $current_email
+    echo "git user: $git_name <$git_email>"
+    git config --global user.name $git_name
+    git config --global user.email $git_email
 end
-
-# Set fish universal variables
-log 'setting fish universal variables'
-source ./scripts/fish_set_universal_vars.fish
-or exit 1
 
 echo 'done syncing.'
