@@ -32,17 +32,27 @@ if status is-interactive
 
     # Git
     abbr --add g git
-    abbr --add diff 'git diff'
-    abbr --add gbc git_branch_cleanup
-    abbr --add lg lazygit
-    abbr --add ghw 'gh repo view --web'
-    abbr --add ghpr 'gh pr create -a "@me" --fill'
-    abbr --add ghm --set-cursor 'gh pr merge % --merge'
-    abbr --add ghr --set-cursor 'gh release create v% --generate-notes --latest'
-    abbr --add ghce 'gh copilot explain %'
-    abbr --add ghcs 'gh copilot suggest'
-    abbr --add ghcc 'gh copilot config'
-    abbr --add ghca 'gh copilot alias'
+    abbr --add gd 'git diff'
+    abbr --add co 'git checkout'
+    abbr --add --set-cursor cob 'git checkout -b'
+    abbr --add aa 'git add --all'
+    abbr --add br 'git branch'
+    abbr --add --set-cursor cm 'git commit -m "%"'
+    abbr --add --set-cursor cma 'git commit -am "%"'
+    abbr --add gp 'git push'
+    abbr --add gpf 'git push --force'
+    abbr --add gpfwl 'git push --force-with-lease'
+    abbr --add puff 'git pull --ff-only'
+    abbr --add pa 'git push --all'
+    abbr --add fa 'git fetch --all'
+    abbr --add pull 'git pull'
+    abbr --add rb 'git rebase'
+    abbr --add sco 'git restore --staged'
+    abbr --add st 'git status'
+    abbr --add sts 'git stash'
+    abbr --add sta 'git stash apply'
+    abbr --add pop 'git stash pop'
+    abbr --add rh 'git reset --hard'
 
     # Docker
     abbr --add d docker
