@@ -58,6 +58,13 @@ if not test -d ~/.config/tmux/plugins/tpm
     or echo 'warning: failed to install tmux plugin manager'
 end
 
+# Initialize git-lfs (sets up git hooks)
+if command -v git >/dev/null 2>&1
+    and git lfs version >/dev/null 2>&1
+    git lfs install
+    or echo 'warning: failed to initialize git-lfs'
+end
+
 # Set up desktop apps
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
