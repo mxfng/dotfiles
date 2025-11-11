@@ -23,6 +23,7 @@ sco = restore --staged
 squash = commit --squash
 st = status
 unstage = reset HEAD
+fuckit = !git reset --hard && git clean -df
 
 [core]
 editor = nvim
