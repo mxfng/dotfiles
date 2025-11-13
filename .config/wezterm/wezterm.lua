@@ -60,6 +60,7 @@ config.keys = {
 	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 
 	-- Swap panes with vim keys
+	-- NOTE: PaneSelect prompts the user which pane to swap with; non-parity with other WMs
 	{ key = "H", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
 	{ key = "J", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
 	{ key = "K", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
