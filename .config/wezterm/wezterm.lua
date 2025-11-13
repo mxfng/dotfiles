@@ -59,11 +59,17 @@ config.keys = {
 	{ key = "k", mods = "LEADER", action = act.ActivatePaneDirection("Up") },
 	{ key = "l", mods = "LEADER", action = act.ActivatePaneDirection("Right") },
 
+	-- Swap panes with vim keys
+	{ key = "H", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+	{ key = "J", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+	{ key = "K", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+	{ key = "L", mods = "LEADER|SHIFT", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+
 	-- Resize panes with vim keys
-	{ key = "H", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
-	{ key = "J", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
-	{ key = "K", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
-	{ key = "L", mods = "LEADER|SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
+	{ key = "h", mods = "LEADER|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "j", mods = "LEADER|CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
+	{ key = "k", mods = "LEADER|CTRL", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "l", mods = "LEADER|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
 
 	-- New tab/window
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
