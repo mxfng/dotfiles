@@ -1,28 +1,62 @@
+-- Pull in the wezterm API
 local wezterm = require("wezterm")
-local config = wezterm.config_builder()
-local act = wezterm.action
-local theme = wezterm.plugin.require("https://github.com/neapsix/wezterm").moon
 
-local is_darwin = function()
-	return wezterm.target_triple:find("darwin") ~= nil
-end
+-- This will hold the configuration.
+local config = wezterm.config_builder()
+
+config.font_size = 13
+-- config.font = wezterm.font 'JetBrains Mono'
 
 config.term = "xterm-256color"
 
-config.force_reverse_video_cursor = true
-config.colors = theme.colors()
+-- Use built-in Rosé Pine Moon color scheme
+config.color_scheme = "rose-pine-moon"
+
+-- Define colors for tab bar customization (matching rose-pine/tmux)
+local colors = {
+	gold = "#f6c177",
+	iris = "#c4a7e7",
+	text = "#e0def4",
+}
+
+-- Override tab bar colors only
+config.colors = {
+	tab_bar = {
+		background = "rgba(0, 0, 0, 0)",
+		active_tab = {
+			bg_color = "rgba(0, 0, 0, 0)",
+			fg_color = colors.gold,
+		},
+		inactive_tab = {
+			bg_color = "rgba(0, 0, 0, 0)",
+			fg_color = colors.iris,
+		},
+		inactive_tab_hover = {
+			bg_color = "rgba(0, 0, 0, 0)",
+			fg_color = colors.text,
+		},
+		new_tab = {
+			bg_color = "rgba(0, 0, 0, 0)",
+			fg_color = colors.iris,
+		},
+		new_tab_hover = {
+			bg_color = "rgba(0, 0, 0, 0)",
+			fg_color = colors.text,
+		},
+	},
+}
 
 config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"
 config.macos_window_background_blur = 70
 
-config.font_size = is_darwin() and 13 or 11
-
+-- Tab bar - minimalist styling
+config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = false
+config.tab_max_width = 32
 
--- Tab bar styling to be more minimal
--- config.use_fancy_tab_bar = false
+local act = wezterm.action
 
 -- Mouse support
 config.mouse_bindings = {
