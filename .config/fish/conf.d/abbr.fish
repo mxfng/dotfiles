@@ -34,9 +34,10 @@ if status is-interactive
     abbr --add g git
     abbr --add gd 'git diff'
     abbr --add co 'git checkout'
-    abbr --add --set-cursor cob 'git checkout -b'
+    abbr --add --set-cursor cob 'git checkout -b %'
     abbr --add aa 'git add --all'
     abbr --add br 'git branch'
+    abbr --add brd --set-cursor 'git branch -D %'
     abbr --add --set-cursor cm 'git commit -m "%"'
     abbr --add --set-cursor cma 'git commit -am "%"'
     abbr --add push 'git push'
