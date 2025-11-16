@@ -101,4 +101,5 @@ if status is-interactive
     # AI Agents + Models
     abbr --add cc claude
 
+    abbr lsa "ls -a"
 end
