@@ -1,5 +1,4 @@
 return {
-  -- fzf-lua is the default picker in LazyVim
   {
     "ibhagwan/fzf-lua",
     keys = {
