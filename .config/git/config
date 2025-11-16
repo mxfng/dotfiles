@@ -42,7 +42,7 @@ default = simple
 rebase = true
 
 [init]
-  defaultBranch = main
+defaultBranch = main
 
 [interactive]
 diffFilter = delta --color-only
