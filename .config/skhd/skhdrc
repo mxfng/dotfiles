@@ -50,7 +50,7 @@ shift + cmd + alt - left  : yabai -m window --space prev; yabai -m space --focus
 shift + cmd + alt - right : yabai -m window --space next; yabai -m space --focus next
 
 ## Toggle window fullscreen
-cmd + alt - f : yabai -m window --toggle zoom-fullscreen
+cmd + alt - z : yabai -m window --toggle zoom-fullscreen
 
 ## Toggle window float and center
 cmd + alt - t : yabai -m window --toggle float; yabai -m window --grid 4:4:1:1:2:2
