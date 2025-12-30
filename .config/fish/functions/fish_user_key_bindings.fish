@@ -1,4 +1,4 @@
 function fish_user_key_bindings
-    bind ,r fzf-history-widget
-    bind ,c fzf-cd-widget
+    # FZF provides default bindings:
+    # Ctrl+r = history, Ctrl+t = files, Alt+c = cd
 end
