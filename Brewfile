@@ -39,6 +39,7 @@ tap "koekeishiya/formulae"
 brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 
+cask "bluestacks"
 cask "cursor"
 cask "docker-desktop"
 cask "font-ibm-plex"
