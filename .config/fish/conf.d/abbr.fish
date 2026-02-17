@@ -27,7 +27,7 @@ if status is-interactive
     abbr --add co code
     abbr --add con 'code -n .'
     abbr --add coo 'code -r .'
-    abbr --add c cursor
+    abbr --add c code
     abbr --add zen 'open -a Zen'
 
     # Git

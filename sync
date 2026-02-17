@@ -36,9 +36,9 @@ rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
 
 # Sync non-XDG configs
-if test -d ./.config/cursor
-    rsync -a ./.config/cursor/settings.json "/Users/$USER/Library/Application Support/Cursor/User/" 2>/dev/null
-    rsync -a ./.config/cursor/keybindings.json "/Users/$USER/Library/Application Support/Cursor/User/" 2>/dev/null
+if test -d ./.config/code
+    rsync -a ./.config/code/settings.json "/Users/$USER/Library/Application Support/Code/User/" 2>/dev/null
+    rsync -a ./.config/code/keybindings.json "/Users/$USER/Library/Application Support/Code/User/" 2>/dev/null
 end
 
 log 'syncing git config'

@@ -66,9 +66,5 @@
         "key": "tab",
         "command": "-editor.action.inlineSuggest.commit",
         "when": "inlineSuggestionHasIndentationLessThanTabSize && inlineSuggestionVisible && !editorHoverFocused && !editorTabMovesFocus && !suggestWidgetVisible"
-    },
-    {
-        "key": "cmd+i",
-        "command": "composerMode.agent"
     }
 ]

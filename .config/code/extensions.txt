@@ -1,5 +1,5 @@
 anthropic.claude-code
-anysphere.cursorpyright
+ms-python.vscode-pylance
 astro-build.astro-vscode
 asvetliakov.vscode-neovim
 blanu.vscode-styled-jsx

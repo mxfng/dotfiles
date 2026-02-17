@@ -112,10 +112,10 @@ skhd --stop-service
 skhd --start-service
 or echo 'warning: failed to start skhd service'
 
-# Set up Cursor
-log "setting up cursor"
-./scripts/cursor_install_extensions.fish
-or echo 'warning: failed to install cursor extensions'
+# Set up VSCode
+log "setting up vscode"
+./scripts/vscode_install_extensions.fish
+or echo 'warning: failed to install vscode extensions'
 
 # Set macOS defaults
 if confirm "Set macOS system defaults? [y/N]" N
