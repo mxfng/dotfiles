@@ -14,4 +14,4 @@ ms-python.debugpy
 ms-python.python
 mvllow.rose-pine
 unifiedjs.vscode-mdx
-zxh404.vscode-proto3
+drblury.protobuf-vsc
