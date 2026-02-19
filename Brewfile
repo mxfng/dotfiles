@@ -1,5 +1,6 @@
 brew "asdf"
 brew "bat"
+brew "btop"
 brew "coreutils"
 brew "curl"
 brew "delta"
