@@ -46,3 +46,5 @@ map("n", "<C-S-h>", "<C-w><", "Decrease width")
 map("n", "<C-S-l>", "<C-w>>", "Increase width")
 map("n", "<C-S-k>", "<C-w>+", "Increase height")
 map("n", "<C-S-j>", "<C-w>-", "Decrease height")
+
+require("config.vscodekeymaps")
