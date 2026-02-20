@@ -44,9 +44,6 @@ if test -d ./.config/code
     rsync -a ./.config/code/keybindings.json "/Users/$USER/Library/Application Support/Code/User/" 2>/dev/null
 end
 
-# Sync AI agent contexts
-./scripts/sync_ai_agents.fish
-
 log 'syncing git config'
 
 if test -z "$git_name" -o -z "$git_email"
