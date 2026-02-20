@@ -12,6 +12,9 @@ log 'syncing dotfiles'
 # Ensure directories exist
 mkdir -p ~/.config ~/Developer/scripts
 
+# Ensure XDG state dirs exist for tools that don't create them automatically
+mkdir -p ~/.local/state/{less,psql,node}
+
 # Capture git user info before syncing (will restore after)
 set -l git_name (git config --global user.name 2>/dev/null)
 set -l git_email (git config --global user.email 2>/dev/null)
