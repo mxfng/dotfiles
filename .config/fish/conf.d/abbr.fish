@@ -36,6 +36,7 @@ if status is-interactive
     abbr --add co 'git checkout'
     abbr --add --set-cursor cob 'git checkout -b %'
     abbr --add aa 'git add --all'
+    abbr --add au 'git add -u'
     abbr --add br 'git branch'
     abbr --add brd --set-cursor 'git branch -D %'
     abbr --add --set-cursor cm 'git commit -m "%"'
