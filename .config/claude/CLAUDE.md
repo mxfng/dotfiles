@@ -1,7 +1,7 @@
 # Dotfiles
 
 Personal macOS dotfiles at ~/Developer/dotfiles. Synced via `./sync` (rsync-based), provisioned from scratch via `./provision`.
-This file: .config/.claude/CLAUDE.md → synced to ~/.claude/ via scripts/sync_ai_agents.fish
+This file: .config/claude/CLAUDE.md → synced to ~/.claude/ via scripts/sync_ai_agents.fish
 
 ## Conventions
 - Rose Pine Moon theme everywhere (nvim, wezterm, tmux, starship, vscode)
@@ -14,7 +14,7 @@ This file: .config/.claude/CLAUDE.md → synced to ~/.claude/ via scripts/sync_a
 ## Sync & Provisioning
 - `./sync` — rsyncs .config/{fish,git,nvim,skhd,starship.toml,tmux,wezterm,yabai} + scripts/ + vscode settings
 - `./provision` — full macOS setup: Homebrew, sync, shell, git-lfs, apps, defaults, window management, vscode extensions
-- `scripts/sync_ai_agents.fish` — syncs .config/.claude/CLAUDE.md to ~/.claude/
+- `scripts/sync_ai_agents.fish` — syncs .config/claude/CLAUDE.md to ~/.claude/
 
 ## Shell — Fish (.config/fish/)
 - `conf.d/abbr.fish` — ~106 abbreviations (git, docker, kubectl, terraform, editors, etc.)
@@ -71,7 +71,7 @@ This file: .config/.claude/CLAUDE.md → synced to ~/.claude/ via scripts/sync_a
 - 18 extensions tracked in extensions.txt
 
 ## Scripts (scripts/)
-- `sync_ai_agents.fish` — sync .config/.claude/CLAUDE.md to ~/.claude/
+- `sync_ai_agents.fish` — sync .config/claude/CLAUDE.md to ~/.claude/
 - `vscode_install_extensions.fish` — install VSCode extensions from list
 - `docker_setup_xdg.fish` — align Docker with XDG paths
 - `fish_generate_completions.fish` — generate completions for asdf, docker, kubectl, etc.
