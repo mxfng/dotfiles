@@ -9,4 +9,18 @@ return {
       { ";e", "<cmd>FzfLua diagnostics_document<cr>", desc = "List diagnostics" },
     },
   },
+
+  -- Disable mini.surround (LazyVim default)
+  { "nvim-mini/mini.surround", enabled = false },
+
+  -- nvim.surround: chosen initially for cs/ds/ys commands (e.g. cs" or cst)
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- Disable Flash (ships in LazyVim core feature set)
+  { "folke/flash.nvim", enabled = false },
 }
