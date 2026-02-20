@@ -16,21 +16,24 @@ set -gx VISUAL nvim
 set -gx DIFFPROG nvim -d
 set -gx BROWSER zen
 
-set -gx FZF_CTRL_T_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
-set -gx FZF_DEFAULT_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
-set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
-
 set -gx ASDF_DATA_DIR $HOME/.local/share/asdf
 set -gx ASDF_CONFIG_FILE $HOME/.config/asdf/asdfrc
-
-set -gx GOPATH $HOME/Developer/go
-set -gx GOBIN $GOPATH/bin
 
 set -gx BUN_INSTALL_CACHE_DIR $HOME/.cache/bun
 
 set -gx DOCKER_CONFIG $HOME/.config/docker
 
+set -gx FZF_CTRL_T_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
+set -gx FZF_DEFAULT_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
+set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
+
+set -gx GOPATH $HOME/Developer/go
+set -gx GOBIN $GOPATH/bin
+
 set -gx LESSHISTFILE $XDG_STATE_HOME/less/history
-set -gx PSQL_HISTORY $XDG_STATE_HOME/psql/history
+
 set -gx NODE_REPL_HISTORY $XDG_STATE_HOME/node/history
+
 set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
+
+set -gx PSQL_HISTORY $XDG_STATE_HOME/psql/history

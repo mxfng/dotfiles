@@ -36,10 +36,6 @@ or exit 1
 ./sync
 or exit 1
 
-# Align Docker config/plugins/contexts with DOCKER_CONFIG
-./scripts/docker_setup_xdg.fish
-or echo 'warning: failed to align docker config'
-
 # Set up shell
 log "setting up shell"
 fish_add_path /opt/homebrew/bin
@@ -73,6 +69,10 @@ if command -v git >/dev/null 2>&1
     git lfs install
     or echo 'warning: failed to initialize git-lfs'
 end
+
+# Set up Docker CLI plugins (compose, buildx)
+./scripts/provision_docker.fish
+or echo 'warning: failed to set up docker'
 
 # Set up desktop apps
 log "setting up desktop apps"
