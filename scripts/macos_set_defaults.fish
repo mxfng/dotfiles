@@ -68,7 +68,7 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 defaults write com.apple.menuextra.clock Show24Hour -bool true
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
 
-# Spotlight: disable keyboard shortcuts (frees Cmd+Space for Raycast)
+# Spotlight: disable keyboard shortcuts (frees Cmd+Space for custom launcher)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 '<dict><key>enabled</key><false/></dict>'
 

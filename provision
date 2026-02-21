@@ -84,8 +84,8 @@ if not osascript -e 'tell application "System Events" to get the name of every l
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}' 2>/dev/null
 end
 
-if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Raycast
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Raycast.app", hidden:false}' 2>/dev/null
+if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Sol
+    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Sol.app", hidden:false}' 2>/dev/null
 end
 
 # Set up window management
