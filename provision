@@ -71,7 +71,7 @@ if command -v git >/dev/null 2>&1
 end
 
 # Set up Docker CLI plugins (compose, buildx)
-./scripts/provision_docker.fish
+./scripts/docker_install_cli_plugins.fish
 or echo 'warning: failed to set up docker'
 
 # Set up desktop apps
