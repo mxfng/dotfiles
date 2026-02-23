@@ -16,6 +16,7 @@ return {
         desc = "Add file",
         ft = { "NvimTree", "neo-tree", "oil" },
       },
+      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select model" },
       -- Diff management
       { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
       { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
