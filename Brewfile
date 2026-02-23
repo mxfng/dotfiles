@@ -42,8 +42,10 @@ brew "gnu-which"
 brew "gawk"
 brew "tree-sitter-cli"
 
+tap "anomalyco/tap"
 tap "koekeishiya/formulae"
 
+brew "anomalyco/tap/opencode"
 brew "koekeishiya/formulae/skhd"
 brew "koekeishiya/formulae/yabai"
 
