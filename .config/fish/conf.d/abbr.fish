@@ -1,21 +1,26 @@
 if status is-interactive
-    # System & Utilities
-    abbr --add cl clear
+    # system
     abbr --add cat 'bat -pp'
+    abbr --add cl clear
+    abbr --add fromcb pbpaste
     abbr --add siz 'du -khsc'
-    abbr --add usefish 'chsh -s $(which fish)'
+    abbr --add tocb pbcopy
     abbr --add usebash 'chsh -s $(which bash)'
+    abbr --add usefish 'chsh -s $(which fish)'
     abbr --add usezsh 'chsh -s $(which zsh)'
 
-    # Clipboard
-    abbr --add fromcb pbpaste
-    abbr --add tocb pbcopy
-
-    # Editors & Terminals
-    abbr --add vim nvim
+    # apps
     abbr --add zen 'open -a Zen'
 
-    # Git
+    # files
+    abbr --add grabit 'wget -mkEpnp'
+    abbr --add lzip 'ouch list'
+    abbr --add rcp 'rsync -aP'
+    abbr --add symlink 'ln -s'
+    abbr --add unzip 'ouch decompress'
+    abbr --add zip 'ouch compress -q'
+
+    # git
     abbr --add aa 'git add --all'
     abbr --add add 'git add'
     abbr --add amend 'git commit --amend'
@@ -24,11 +29,12 @@ if status is-interactive
     abbr --add checkout 'git checkout'
     abbr --add --set-cursor cm 'git commit -m "%"'
     abbr --add --set-cursor cma 'git commit -am "%"'
-    abbr --add --set-cursor commit 'git commit -m "%"'
     abbr --add co 'git checkout'
+    abbr --add --set-cursor commit 'git commit -m "%"'
     abbr --add fa 'git fetch --all'
     abbr --add fetch "git fetch"
     abbr --add fuckit 'git reset --hard && git clean -df'
+    abbr --add g git
     abbr --add gd 'git diff'
     abbr --add lol 'git log --graph --decorate --oneline'
     abbr --add pop 'git stash pop'
@@ -40,26 +46,21 @@ if status is-interactive
     abbr --add st 'git status'
     abbr --add stash 'git stash'
 
-    # Docker
+    # ssh
+    abbr --add ssh-add-key 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
+    abbr --add ssh-rm 'ssh-keygen -f ~/.ssh/known_hosts -R'
+
+    # tools
+    abbr --add cc claude
     abbr --add d docker
     abbr --add dc 'docker compose'
-
-    # Kubernetes & Cloud
+    abbr --add find fd
+    abbr --add grep rg
     abbr --add k kubectl
-
-    # File Operations
-    abbr --add grabit 'wget -mkEpnp'
-    abbr --add lzip 'ouch list'
-    abbr --add rcp 'rsync -aP'
-    abbr --add symlink 'ln -s'
-    abbr --add unzip 'ouch decompress'
-    abbr --add zip 'ouch compress -q'
-
-    # SSH
-    abbr --add ssh-rm 'ssh-keygen -f ~/.ssh/known_hosts -R'
-    abbr --add ssh-add-key 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
-
-    # AI Agents + Models
-    abbr --add cc claude
     abbr --add oc opencode
+    abbr --add psql pgcli
+    abbr --add tar ouch
+    abbr --add top btop
+    abbr --add vi nvim
+    abbr --add vim nvim
 end
