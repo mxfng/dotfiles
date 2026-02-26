@@ -7,7 +7,7 @@ function log -a message
     echo "$message"
 end
 
-log "installing docker cli-plugins"
+log "setting up docker cli-plugins"
 
 set -l plugins_dir (set -q DOCKER_CONFIG; and echo $DOCKER_CONFIG; or echo $HOME/.docker)/cli-plugins
 mkdir -p $plugins_dir
