@@ -18,6 +18,7 @@ set -l manual_allowlist \
     gh \
     k9s \
     kube \
+    lazydocker \
     opencode \
     sol
 
@@ -68,7 +69,9 @@ set_color normal
 switch $mode
     case audit
         for name in $unknowns
+            set_color yellow
             echo "  ? $name"
+            set_color normal
         end
     case clean
         for name in $unknowns
