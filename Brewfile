@@ -25,6 +25,7 @@ brew "ripgrep"
 brew "rsync"
 brew "starship"
 brew "tmux"
+brew "uv"
 brew "zoxide"
 
 # GNU overrides
