@@ -39,12 +39,6 @@ if test -d ./.config/colima
     rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
 end
 
-# Sync non-XDG configs
-if test -d ./.config/code
-    rsync -a ./.config/code/settings.json "/Users/$USER/Library/Application Support/Code/User/" 2>/dev/null
-    rsync -a ./.config/code/keybindings.json "/Users/$USER/Library/Application Support/Code/User/" 2>/dev/null
-end
-
 # Sync scripts
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1

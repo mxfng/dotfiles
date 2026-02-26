@@ -93,11 +93,6 @@ log "setting up window management"
 open -a AeroSpace
 or echo 'warning: failed to start AeroSpace'
 
-# Set up VSCode
-log "setting up vscode"
-./scripts/vscode_install_extensions.fish
-or echo 'warning: failed to install vscode extensions'
-
 # Set macOS defaults
 if confirm "Set macOS system defaults? [y/N]" N
     ./scripts/macos_set_defaults.fish
