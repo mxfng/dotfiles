@@ -30,7 +30,8 @@ set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
 set -gx GOPATH $HOME/Developer/go
 set -gx GOBIN $GOPATH/bin
 
-set -gx KUBECONFIG $HOME/.kube/config:$HOME/.kube/prod.yaml
+set -gx KUBECONFIG $XDG_CONFIG_HOME/kube/config:$XDG_CONFIG_HOME/kube/prod.yaml
+set -gx KUBECACHEDIR $XDG_CACHE_HOME/kube
 
 set -gx LESSHISTFILE $XDG_STATE_HOME/less/history
 
