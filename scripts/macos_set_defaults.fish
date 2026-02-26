@@ -57,6 +57,9 @@ defaults write com.apple.dock autohide -bool true
 # Dock: don't show recent applications
 defaults write com.apple.dock show-recents -bool false
 
+# Dock: don't rearrange spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
@@ -71,6 +74,8 @@ defaults write com.apple.menuextra.clock ShowSeconds -bool true
 # Spotlight: disable keyboard shortcuts (frees Cmd+Space for custom launcher)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 '<dict><key>enabled</key><false/></dict>'
+
+# 
 
 # Restart affected applications
 for app in Dock Finder SystemUIServer

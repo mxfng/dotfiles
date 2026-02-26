@@ -1,6 +1,6 @@
 # Max's dotfiles
 
-My preferred configurations and software for macOS systems. Uses fish shell, Neovim, yabai, skhd, tmux, WezTerm, Starship prompt, Homebrew, asdf runtime version manager, and other great tools.
+My preferred configurations and software for macOS systems. Uses fish shell, Neovim, AeroSpace, tmux, WezTerm, Starship prompt, Homebrew, asdf runtime version manager, and other great tools.
 
 ## Setup
 

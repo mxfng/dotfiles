@@ -90,27 +90,8 @@ end
 
 # Set up window management
 log "setting up window management"
-yabai --install-service
-or echo 'warning: failed to install yabai service'
-
-defaults write com.apple.dock mru-spaces -bool false
-
-yabai --start-service
-or echo 'warning: failed to start yabai service'
-
-if confirm "Set up yabai scripting addition? (requires SIP disabled + boot-args configured) [y/N]" N
-    ./scripts/yabai_setup_sa.fish
-    or echo 'warning: yabai scripting addition setup failed'
-end
-
-skhd --install-service
-or echo 'warning: failed to install skhd service'
-
-./scripts/skhd_fix_performance.fish >/dev/null 2>&1
-
-skhd --stop-service
-skhd --start-service
-or echo 'warning: failed to start skhd service'
+open -a AeroSpace
+or echo 'warning: failed to start AeroSpace'
 
 # Set up VSCode
 log "setting up vscode"

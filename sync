@@ -24,14 +24,13 @@ rsync -aP --delete \
     --exclude fish/completions/ \
     --exclude fish/fish_variables \
     --exclude tmux/plugins/ \
+    ./.config/aerospace \
     ./.config/fish \
     ./.config/git \
     ./.config/nvim \
-    ./.config/skhd \
     ./.config/starship.toml \
     ./.config/tmux \
     ./.config/wezterm \
-    ./.config/yabai \
     ~/.config/
 or exit 1
 
