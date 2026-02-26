@@ -9,5 +9,5 @@ These are manual steps that cannot be automated after running `./provision`.
 
 ## Menu Bar
 
-- [ ] Hide unwanted menu bar icons manually (or use Bartender if installed)
+- [ ] Hide unwanted menu bar icons manually
 - [ ] Reorder menu bar icons by holding `Command` and dragging
