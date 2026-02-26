@@ -39,6 +39,9 @@ if test -d ./.config/colima
     rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
 end
 
+# Audit ~/.config/ and flag any lingering configs not in allowlist
+./scripts/config_audit.fish --quiet
+
 # Sync scripts
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
