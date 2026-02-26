@@ -43,13 +43,16 @@ brew "gawk"
 brew "tree-sitter-cli"
 
 tap "anomalyco/tap"
+tap "FelixKratz/formulae"
+tap "nikitabobko/tap"
 
 brew "anomalyco/tap/opencode"
+brew "FelixKratz/formulae/sketchybar"
 
+cask "aerospace"
 cask "dropbox"
-cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
-cask "nikitabobko/tap/aerospace"
 cask "sol"
 cask "trunk-io"
 cask "wezterm"
