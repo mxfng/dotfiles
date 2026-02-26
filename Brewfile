@@ -26,7 +26,6 @@ brew "rsync"
 brew "starship"
 brew "tmux"
 brew "uv"
-brew "yq"
 brew "yt-dlp"
 brew "zoxide"
 
@@ -43,11 +42,9 @@ brew "gawk"
 brew "tree-sitter-cli"
 
 tap "anomalyco/tap"
-tap "FelixKratz/formulae"
 tap "nikitabobko/tap"
 
 brew "anomalyco/tap/opencode"
-brew "FelixKratz/formulae/sketchybar"
 
 cask "aerospace"
 cask "dropbox"
