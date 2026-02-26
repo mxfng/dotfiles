@@ -53,6 +53,9 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8"]
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
 
+# Minimal coupling to sketchybar FOCUSED_WORKSPACE
+exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE']
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -71,7 +74,7 @@ on-mode-changed = []
     inner.vertical =   12
     outer.left =       12
     outer.bottom =     12
-    outer.top =        12
+    outer.top =        49
     outer.right =      12
 
 # 'main' binding mode declaration
