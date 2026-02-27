@@ -19,6 +19,7 @@ set -l manual_allowlist \
     k9s \
     kube \
     lazydocker \
+    lazygit \
     opencode \
     sol
 
