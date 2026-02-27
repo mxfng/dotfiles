@@ -20,6 +20,7 @@ set -l manual_allowlist \
     kube \
     lazydocker \
     lazygit \
+    mole \
     opencode \
     sol
 
