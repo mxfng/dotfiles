@@ -180,3 +180,15 @@ on-mode-changed = []
     cmd-alt-shift-j = ['join-with down', 'mode main']
     cmd-alt-shift-k = ['join-with up', 'mode main']
     cmd-alt-shift-l = ['join-with right', 'mode main']
+
+# For second monitor
+# Workspaces 1-6 always on main, 7-8 on secondary (fallback to main when disconnected)
+[workspace-to-monitor-force-assignment]
+    1 = 'main'
+    2 = 'main'
+    3 = 'main'
+    4 = 'main'
+    5 = 'main'
+    6 = 'main'
+    7 = ['secondary', 'main']
+    8 = ['secondary', 'main']
