@@ -36,6 +36,7 @@ or exit 1
 
 # Sync colima surgically because it stores too much runtime state (smh)
 if test -d ./.config/colima
+    mkdir -p ~/.config/colima/default
     rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
 end
 
