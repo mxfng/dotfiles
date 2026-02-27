@@ -52,7 +52,6 @@ tap "nikitabobko/tap"
 brew "anomalyco/tap/opencode"
 
 cask "aerospace"
-cask "dropbox"
 cask "font-jetbrains-mono-nerd-font"
 cask "google-chrome"
 cask "sol"
