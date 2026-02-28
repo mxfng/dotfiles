@@ -9,6 +9,7 @@ config.window_background_opacity = 0.7
 config.window_decorations = "RESIZE"
 config.macos_window_background_blur = 70
 
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
 
 config.tab_bar_at_bottom = true
