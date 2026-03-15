@@ -27,6 +27,7 @@ rsync -aP --delete \
     ./.config/aerospace \
     ./.config/fish \
     ./.config/git \
+    ./.config/hypr \
     ./.config/nvim \
     ./.config/starship.toml \
     ./.config/tmux \
