@@ -2,15 +2,26 @@ if status is-interactive
     # system
     abbr --add cat 'bat -pp'
     abbr --add cl clear
-    abbr --add fromcb pbpaste
     abbr --add siz 'du -khsc'
-    abbr --add tocb pbcopy
     abbr --add usebash 'chsh -s $(which bash)'
     abbr --add usefish 'chsh -s $(which fish)'
     abbr --add usezsh 'chsh -s $(which zsh)'
 
+    # clipboard
+    if command -q pbcopy
+        abbr --add tocb pbcopy
+        abbr --add fromcb pbpaste
+    else if command -q wl-copy
+        abbr --add tocb wl-copy
+        abbr --add fromcb wl-paste
+    end
+
     # apps
-    abbr --add zen 'open -a Zen'
+    if command -q zen-browser
+        abbr --add zen zen-browser
+    else
+        abbr --add zen 'open -a Zen'
+    end
 
     # files
     abbr --add grabit 'wget -mkEpnp'
@@ -48,7 +59,11 @@ if status is-interactive
     abbr --add stash 'git stash'
 
     # ssh
-    abbr --add ssh-add-key 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
+    if test -d /opt/homebrew
+        abbr --add ssh-add-key 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
+    else
+        abbr --add ssh-add-key 'ssh-add ~/.ssh/id_ed25519'
+    end
     abbr --add ssh-rm 'ssh-keygen -f ~/.ssh/known_hosts -R'
 
     # tools
