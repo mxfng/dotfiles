@@ -1,0 +1,111 @@
+/* Waybar — after maxfu.ng */
+/* Monochrome. Typographic. Symbols as wayfinding. */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: rgba(26, 26, 26, 0.80);
+    border-radius: 8px;
+    color: rgba(229, 229, 229, 0.5);
+}
+
+/* ── Left: Name + Workspaces ── */
+
+#custom-name {
+    color: rgba(229, 229, 229, 0.7);
+    font-size: 11px;
+    padding: 0 8px 0 12px;
+    letter-spacing: 0.05em;
+}
+
+#workspaces {
+    padding: 0 2px;
+}
+
+#workspaces button {
+    padding: 2px 8px;
+    color: rgba(229, 229, 229, 0.2);
+    background: transparent;
+    border-radius: 6px;
+    margin: 4px 1px;
+}
+
+#workspaces button.active {
+    color: #e5e5e5;
+}
+
+#workspaces button:hover {
+    color: rgba(229, 229, 229, 0.5);
+}
+
+/* ── Center ── */
+
+#window {
+    color: rgba(229, 229, 229, 0.35);
+    font-size: 11px;
+}
+
+/* ── Right ── */
+
+#custom-gpu,
+#cpu,
+#pulseaudio,
+#backlight,
+#network,
+#battery,
+#clock {
+    padding: 0 8px;
+}
+
+#custom-gpu {
+    color: rgba(229, 229, 229, 0.4);
+}
+
+#cpu {
+    color: rgba(229, 229, 229, 0.4);
+}
+
+#pulseaudio {
+    color: rgba(229, 229, 229, 0.4);
+}
+
+#pulseaudio.muted {
+    color: rgba(229, 229, 229, 0.2);
+}
+
+#backlight {
+    color: rgba(229, 229, 229, 0.4);
+}
+
+#network {
+    color: rgba(229, 229, 229, 0.4);
+}
+
+#network.disconnected {
+    color: #eb6f92;
+}
+
+#battery {
+    color: rgba(229, 229, 229, 0.5);
+}
+
+#battery.warning {
+    color: #f6c177;
+}
+
+#battery.critical {
+    color: #eb6f92;
+}
+
+#clock {
+    color: rgba(229, 229, 229, 0.7);
+    padding-right: 12px;
+}

@@ -29,11 +29,19 @@ rsync -aP --delete \
     ./.config/git \
     ./.config/hypr \
     ./.config/nvim \
+    ./.config/rofi \
+    ./.config/waybar \
     ./.config/starship.toml \
     ./.config/tmux \
     ./.config/wezterm \
     ~/.config/
 or exit 1
+
+# Sync custom desktop entries (lock screen, etc.)
+if test -d ./.local/share/applications
+    mkdir -p ~/.local/share/applications
+    rsync -aP ./.local/share/applications/ ~/.local/share/applications/
+end
 
 # Sync colima surgically because it stores too much runtime state (smh)
 if test -d ./.config/colima

@@ -1,0 +1,98 @@
+/* Rofi — monochrome, matching waybar */
+
+configuration {
+    show-icons: true;
+    display-drun: "";
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    bg:       rgba(26, 26, 26, 0.85);
+    bg-alt:   rgba(229, 229, 229, 0.08);
+    fg:       rgba(229, 229, 229, 0.7);
+    fg-dim:   rgba(229, 229, 229, 0.3);
+    fg-bright: #e5e5e5;
+
+    background-color: transparent;
+    text-color:       @fg;
+    border-color:     @bg-alt;
+}
+
+window {
+    width:            500px;
+    background-color: @bg;
+    border:           0px;
+    border-radius:    8px;
+    padding:          16px;
+}
+
+mainbox {
+    background-color: transparent;
+}
+
+inputbar {
+    children:         [ entry ];
+    padding:          8px 12px;
+    background-color: @bg-alt;
+    border-radius:    6px;
+    text-color:       @fg;
+}
+
+entry {
+    placeholder:       "search";
+    placeholder-color: @fg-dim;
+    text-color:        @fg;
+    cursor-color:      @fg;
+}
+
+listbox {
+    spacing: 2px;
+    padding: 8px 0 0 0;
+}
+
+scrollbar {
+    handle-color: @bg-alt;
+    handle-width: 4px;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+message {
+    background-color: transparent;
+}
+
+textbox {
+    text-color: @fg;
+}
+
+element {
+    padding:       6px 12px;
+    spacing:       8px;
+    border-radius: 6px;
+    background-color: transparent;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @fg;
+}
+
+element selected.normal {
+    background-color: @bg-alt;
+    text-color:       @fg-bright;
+}
+
+element-icon {
+    size: 20px;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+}
