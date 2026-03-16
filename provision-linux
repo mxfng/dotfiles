@@ -32,8 +32,9 @@ paru -S --needed --noconfirm \
     fd ffmpeg fish fzf git git-lfs git-delta github-cli \
     jq k9s kubectl lazydocker lazygit mkcert neovim ouch \
     pgcli ripgrep rsync starship tailscale tmux uv zoxide \
-    ttf-jetbrains-mono-nerd obs-studio wezterm wl-clipboard \
-    asdf-vm glow rancher-k3d-bin zen-browser-bin
+    ttf-jetbrains-mono-nerd obs-studio wezterm-nightly-bin wl-clipboard \
+    asdf-vm glow rancher-k3d-bin zen-browser-bin helium-browser-bin \
+    waybar dunst hyprpaper hyprlock hypridle rofi keyd brightnessctl polkit-kde-agent
 or exit 1
 
 # Sync all configurations first (get configs in place)
@@ -86,5 +87,9 @@ if command -q tailscale
     sudo systemctl enable --now tailscaled.service
     or echo 'warning: failed to enable tailscale'
 end
+
+# Remap Right Alt to Super (macOS-like right-hand modifier)
+./scripts/setup_keyd.fish
+or echo 'warning: failed to set up keyd'
 
 echo 'done provisioning Linux'

@@ -1,0 +1,85 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "margin-top": 6,
+  "margin-left": 12,
+  "margin-right": 12,
+  "spacing": 0,
+
+  "modules-left": ["custom/name", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["custom/gpu", "cpu", "network", "battery", "clock"],
+
+  "custom/name": {
+    "format": "馮",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "persistent-workspaces": {
+      "*": [1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 60
+  },
+
+  "custom/gpu": {
+    "exec": "nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits | awk -F', ' '{printf \"{\\\"text\\\": \\\"󰢮 %s%%\\\", \\\"tooltip\\\": \\\"GPU · %s MiB VRAM\\\"}\\n\", $1, $2}'",
+    "return-type": "json",
+    "interval": 5
+  },
+
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "interval": 5,
+    "tooltip-format": "{avg_frequency} GHz"
+  },
+
+  "pulseaudio": {
+    "format": "󰕾 {volume}%",
+    "format-muted": "󰝟 muted",
+    "tooltip-format": "{desc}",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  },
+
+  "backlight": {
+    "format": "󰃟 {percent}%",
+    "tooltip-format": "brightness",
+    "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
+    "on-scroll-down": "brightnessctl -e4 -n2 set 5%-"
+  },
+
+  "network": {
+    "format-wifi": "󰤨 {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤭",
+    "tooltip-format-wifi": "{essid}",
+    "tooltip-format-ethernet": "{ifname} {ipaddr}",
+    "interval": 5
+  },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "{timeTo}",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  }
+}
