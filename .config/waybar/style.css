@@ -1,113 +1,94 @@
-/* Waybar — after maxfu.ng */
-/* Monochrome. Typographic. Symbols as wayfinding. */
+@define-color bg rgba(26, 26, 26, 0.8);
+@define-color fg rgba(229, 229, 229, 0.5);
+@define-color fg-bright #e5e5e5;
+@define-color fg-dim rgba(229, 229, 229, 0.2);
+@define-color accent #c25d3a;
+@define-color rose #eb6f92;
+@define-color gold #f6c177;
 
 * {
-    font-family: "JetBrainsMono Nerd Font";
-    font-size: 12px;
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
 }
 
 window#waybar {
-    background: rgba(26, 26, 26, 0.80);
-    border-radius: 8px;
-    color: rgba(229, 229, 229, 0.5);
+  background: @bg;
+  border-radius: 8px;
+  color: @fg;
 }
 
 /* ── Left: Name + Workspaces ── */
 
 #custom-name {
-    color: #c25d3a;
-    font-size: 11px;
-    padding: 0 3px;
-    margin: 7px 6px 7px 8px;
-    border: 1px solid #c25d3a;
-    border-radius: 3px;
+  color: @accent;
+  font-size: 11px;
+  padding: 0 3px;
+  margin: 7px 6px 7px 8px;
+  border: 1px solid @accent;
+  border-radius: 3px;
 }
 
 #workspaces {
-    padding: 0 2px;
+  padding: 0 2px;
 }
 
 #workspaces button {
-    padding: 2px 8px;
-    color: rgba(229, 229, 229, 0.2);
-    background: transparent;
-    border-radius: 6px;
-    margin: 4px 1px;
+  padding: 2px 8px;
+  color: @fg-dim;
+  background: transparent;
+  border-radius: 6px;
+  margin: 4px 1px;
 }
 
 #workspaces button.active {
-    color: #e5e5e5;
+  color: @fg-bright;
 }
 
 #workspaces button:hover {
-    color: rgba(229, 229, 229, 0.5);
+  color: @fg;
 }
 
 /* ── Center ── */
 
 #window {
-    color: rgba(229, 229, 229, 0.35);
-    font-size: 11px;
+  color: rgba(229, 229, 229, 0.35);
+  font-size: 11px;
 }
 
 /* ── Right ── */
 
-#custom-gpu,
-#cpu,
-#pulseaudio,
-#backlight,
 #network,
 #battery,
 #clock {
-    padding: 0 8px;
-}
-
-#custom-gpu {
-    color: rgba(229, 229, 229, 0.4);
-}
-
-#cpu {
-    color: rgba(229, 229, 229, 0.4);
-}
-
-#pulseaudio {
-    color: rgba(229, 229, 229, 0.4);
-}
-
-#pulseaudio.muted {
-    color: rgba(229, 229, 229, 0.2);
-}
-
-#backlight {
-    color: rgba(229, 229, 229, 0.4);
+  padding: 0 8px;
 }
 
 #network {
-    color: rgba(229, 229, 229, 0.4);
+  color: rgba(229, 229, 229, 0.4);
 }
 
 #network.disconnected {
-    color: #eb6f92;
+  color: @rose;
 }
 
 #battery {
-    color: rgba(229, 229, 229, 0.5);
+  color: @fg;
 }
 
 #battery.warning {
-    color: #f6c177;
+  color: @gold;
 }
 
 #battery.critical {
-    color: #eb6f92;
+  color: @rose;
 }
 
 #clock {
-    color: rgba(229, 229, 229, 0.7);
-    padding-right: 12px;
+  color: rgba(229, 229, 229, 0.7);
+  padding-right: 12px;
 }

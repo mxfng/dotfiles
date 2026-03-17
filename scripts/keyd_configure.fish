@@ -1,14 +1,7 @@
 #!/usr/bin/env fish
 
 # Remap Right Alt (AltGr) to Super for macOS-like right-hand modifier access.
-# System-level config — requires sudo. Safe to re-run.
-
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
-end
+# System-level config, requires sudo. Safe to re-run.
 
 log "setting up keyd"
 

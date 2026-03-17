@@ -1,12 +1,5 @@
 #!/usr/bin/env fish
 
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
-end
-
 log "setting up docker cli-plugins"
 
 set -l plugins_dir (set -q DOCKER_CONFIG; and echo $DOCKER_CONFIG; or echo $HOME/.docker)/cli-plugins

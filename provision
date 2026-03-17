@@ -1,42 +1,22 @@
 #!/usr/bin/env fish
 
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
-end
-
-function confirm -a prompt default
-    # Helper function for yes/no prompts
-    # Usage: confirm "message" "Y" (default yes) or confirm "message" "N" (default no)
-    read -P "$prompt " answer
-    set -l answer (string lower $answer)
-
-    if test -z "$answer"
-        test "$default" = Y
-    else
-        string match -q -r '^y' $answer
-    end
-end
+source ./.config/fish/functions/log.fish
+source ./.config/fish/functions/confirm.fish
 
 log "provisioning macOS environment for $USER"
 
-# Check we're on macOS
 test (uname) != Darwin
 and echo 'error: this script is for macOS only'
 and exit 1
 
-# Install all packages
 log "installing packages"
 brew bundle
 or exit 1
 
-# Sync all configurations first (get configs in place)
+# Sync configs to home
 ./sync
 or exit 1
 
-# Set up shell
 log "setting up shell"
 fish_add_path /opt/homebrew/bin
 
@@ -48,10 +28,8 @@ end
 ./scripts/fish_generate_completions.fish
 or echo 'warning: failed to generate fish completions'
 
-# Suppress login messages
 touch ~/.hushlogin
 
-# Set up terminal tools
 log "setting up terminal tools"
 if not test -d ~/.config/tmux/plugins/tpm
     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm >/dev/null 2>&1
@@ -63,18 +41,15 @@ if test -d ~/.config/tmux/plugins/tpm
     or echo 'warning: failed to install tmux plugins'
 end
 
-# Initialize git-lfs (sets up git hooks)
 if command -v git >/dev/null 2>&1
     and git lfs version >/dev/null 2>&1
     git lfs install
     or echo 'warning: failed to initialize git-lfs'
 end
 
-# Set up Docker CLI plugins (compose, buildx)
 ./scripts/docker_install_cli_plugins.fish
 or echo 'warning: failed to set up docker'
 
-# Set up desktop apps
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'
@@ -88,12 +63,10 @@ if not osascript -e 'tell application "System Events" to get the name of every l
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Sol.app", hidden:false}' 2>/dev/null
 end
 
-# Set up window management
 log "setting up window management"
 open -a AeroSpace
 or echo 'warning: failed to start AeroSpace'
 
-# Set macOS defaults
 if confirm "Set macOS system defaults? [y/N]" N
     ./scripts/macos_set_defaults.fish
     or echo 'warning: failed to set macOS defaults'
