@@ -11,8 +11,10 @@ set dotfiles_config ~/Developer/dotfiles/.config
 
 # Tool-generated dirs expected in ~/.config/ but not tracked in dotfiles
 set -l manual_allowlist \
+    alacritty \
     autostart \
     btop \
+    cachyos \
     colima \
     dconf \
     docker \
@@ -22,15 +24,21 @@ set -l manual_allowlist \
     gtk-3.0 \
     gtk-4.0 \
     k9s \
+    kdeconnect \
+    kdedefaults \
+    kitty \
     kube \
     lazydocker \
     lazygit \
+    libaccounts-glib \
+    micro \
     mole \
     mozilla \
     net.imput.helium \
     opencode \
     pulse \
     session \
+    Slack \
     sol \
     xsettingsd \
     zen
