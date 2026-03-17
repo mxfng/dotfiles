@@ -19,7 +19,7 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 # Keyboard: enable full keyboard access (tab through dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # Finder: show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
@@ -68,17 +68,16 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
 # Menu bar: show clock with 24-hour time and seconds
-defaults write com.apple.menuextra.clock Show24Hour -bool true
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
 
 # Spotlight: disable keyboard shortcuts (frees Cmd+Space for custom launcher)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 '<dict><key>enabled</key><false/></dict>'
-
-# 
+/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
 # Restart affected applications
-for app in Dock Finder SystemUIServer
+for app in Dock Finder SystemUIServer ControlCenter
     killall $app 2>/dev/null
 end
 

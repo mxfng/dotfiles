@@ -1,4 +1,4 @@
-# GNU tools have path priority over macOS builtins
+# NOTE: GNU tools have path priority over macOS builtins
 if test -d /opt/homebrew
     fish_add_path \
         /opt/homebrew/opt/coreutils/libexec/gnubin \

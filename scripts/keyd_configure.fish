@@ -1,8 +1,5 @@
 #!/usr/bin/env fish
 
-# Remap Right Alt (AltGr) to Super for macOS-like right-hand modifier access.
-# System-level config, requires sudo. Safe to re-run.
-
 log "setting up keyd"
 
 if not command -q keyd
@@ -11,6 +8,9 @@ if not command -q keyd
 end
 
 sudo mkdir -p /etc/keyd
+
+# Remap Right Alt (AltGr) to Super for macOS-like right-hand modifier access.
+# System-level config, requires sudo. Safe to re-run.
 
 echo '[ids]
 *

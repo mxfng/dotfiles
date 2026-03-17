@@ -11,9 +11,7 @@ function git_branch_cleanup
         echo "You're about to delete these branches:"
         printf "%s\n" $selected_branches
 
-        read -l -P "Are you sure? (y/N) " confirm
-
-        if test "$confirm" = y -o "$confirm" = Y
+        if confirm "Are you sure? (y/N)" N
             for branch in $selected_branches
                 echo "Deleting $branch..."
                 git branch -D $branch

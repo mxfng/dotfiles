@@ -16,13 +16,6 @@ if status is-interactive
         abbr --add fromcb wl-paste
     end
 
-    # apps
-    if command -q zen-browser
-        abbr --add zen zen-browser
-    else
-        abbr --add zen 'open -a Zen'
-    end
-
     # files
     abbr --add grabit 'wget -mkEpnp'
     abbr --add lzip 'ouch list'

@@ -67,9 +67,8 @@ for entry in ~/.config/*/
     end
 end
 
-# TODO: How can I get this if statement to only print a "all configs clean for --purge and --clean modes?"
 if test (count $unknowns) -eq 0
-    if test $quiet = false
+    if test $quiet = false; and test $mode != audit
         echo "~/.config/ is clean"
     end
     exit 0
@@ -88,8 +87,7 @@ switch $mode
         end
     case clean
         for name in $unknowns
-            read -P "  delete ~/.config/$name/? [y/N] " confirm
-            if test "$confirm" = y -o "$confirm" = Y
+            if confirm "  delete ~/.config/$name/? [y/N]" N
                 rm -rf ~/.config/$name
                 echo "    deleted"
             else
