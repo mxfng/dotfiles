@@ -22,5 +22,3 @@ or exit 1
 
 sudo systemctl enable --now keyd
 or exit 1
-
-log "keyd configured — right alt=super, right ctrl=alt"
