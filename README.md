@@ -1,36 +1,38 @@
 # Max's dotfiles
 
-My preferred configurations and software for macOS systems. Uses fish shell, Neovim, AeroSpace, tmux, WezTerm, Starship prompt, Homebrew, asdf runtime version manager, and other great tools.
+My personal dotfiles for macOS and Linux.
 
-## Setup
+- fish shell
+- Neovim
+- WezTerm
+- tmux
+- Starship prompt
+- asdf vm
+- AeroSpace tiling WM on macOS
+- Hypr, rofi, waybar on Arch
 
-It's highly recommended that you read through my dotfiles with scrutiny before incorporating them as your own. In the words of the late, great Bruce Lee: "absorb what is useful, discard what is useless, and add what is specifically your own."
+## Provision
+
+> "Absorb what is useful, discard what is useless, and add what is specifically your own." — Bruce Lee
+
+To provision a new machine:
 
 ```bash
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Clone this repo
 git clone https://github.com/mxfng/dotfiles.git ~/Developer/dotfiles
 cd ~/Developer/dotfiles
-
-# Install fish shell (ensure brew is added to PATH)
-brew install fish
-
-# Provision complete macOS environment
-./provision | fish
 ```
 
-## Scripts
+| Platform        | Prerequisites                                                  | Command             |
+| --------------- | -------------------------------------------------------------- | ------------------- |
+| macOS           | [Homebrew](https://brew.sh), fish                              | `./provision`       |
+| Arch Linux      | AUR helper ([paru](https://github.com/Morganamilo/paru)), fish | `./provision-linux` |
+| CachyOS         | fish (paru included)                                           | `./provision-linux` |
+| Debian / Ubuntu | fish                                                           | `./provision-linux` |
 
-### `provision`
+## Sync
 
-Provisions a complete macOS environment. Run this when starting from scratch.
-
-### `sync`
-
-Syncs all dotfiles from repo to home directory. Run this after pulling updates.
+Run `./sync` after pulling updates.
 
 ## Thanks
 
-I forked Mitchell Simon's excellent [dotfiles](https://github.com/mitchell/dotfiles) for some time and eventually used them as a guiding inspiration for my own. A decent amount of the code here stems from or was inspired by Mitchell's original project. Thanks Mitchell!
+Thanks to [@mitchell](https://github.com/mitchell), whose [dotfiles](https://github.com/mitchell/dotfiles) I forked long ago and eventually grew into my own.
