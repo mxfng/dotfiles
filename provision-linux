@@ -13,7 +13,7 @@ log "provisioning Linux environment for $USER ($distro)"
 
 log "installing packages"
 switch $distro
-    case arch
+    case arch cachyos
         paru -S --needed --noconfirm \
             asdf-vm \
             bat \
