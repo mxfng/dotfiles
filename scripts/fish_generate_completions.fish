@@ -14,6 +14,9 @@ and colima completion fish >$completions_dir/colima.fish
 command -q docker
 and docker completion fish >$completions_dir/docker.fish
 
+command -q gh
+and gh completion -s fish >$completions_dir/gh.fish
+
 command -q git
 and git lfs completion fish >$completions_dir/git-lfs.fish
 
@@ -25,3 +28,9 @@ and k9s completion fish >$completions_dir/k9s.fish
 
 command -q kubectl
 and kubectl completion fish >$completions_dir/kubectl.fish
+
+command -q tailscale
+and tailscale completion fish >$completions_dir/tailscale.fish
+
+command -q uv
+and uv generate-shell-completion fish >$completions_dir/uv.fish
