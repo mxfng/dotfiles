@@ -26,6 +26,7 @@ cd ~/Developer/dotfiles
 
 # Run the relevant provision command
 ```
+
 | Platform        | Prerequisites                                                  | Command             |
 | --------------- | -------------------------------------------------------------- | ------------------- |
 | macOS           | [Homebrew](https://brew.sh), fish                              | `./provision`       |
