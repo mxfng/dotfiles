@@ -9,7 +9,7 @@
 
   "modules-left": ["custom/name", "hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["custom/gpu", "cpu", "network", "battery", "clock"],
+  "modules-right": ["network", "battery", "clock"],
 
   "custom/name": {
     "format": "馮",
@@ -28,34 +28,6 @@
   "hyprland/window": {
     "format": "{title}",
     "max-length": 60
-  },
-
-  "custom/gpu": {
-    "exec": "nvidia-smi --query-gpu=utilization.gpu,memory.used --format=csv,noheader,nounits | awk -F', ' '{printf \"{\\\"text\\\": \\\"󰢮 %s%%\\\", \\\"tooltip\\\": \\\"GPU · %s MiB VRAM\\\"}\\n\", $1, $2}'",
-    "return-type": "json",
-    "interval": 5
-  },
-
-  "cpu": {
-    "format": "󰍛 {usage}%",
-    "interval": 5,
-    "tooltip-format": "{avg_frequency} GHz"
-  },
-
-  "pulseaudio": {
-    "format": "󰕾 {volume}%",
-    "format-muted": "󰝟 muted",
-    "tooltip-format": "{desc}",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-  },
-
-  "backlight": {
-    "format": "󰃟 {percent}%",
-    "tooltip-format": "brightness",
-    "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
-    "on-scroll-down": "brightnessctl -e4 -n2 set 5%-"
   },
 
   "network": {

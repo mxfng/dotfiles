@@ -1,47 +1,97 @@
 #!/usr/bin/env fish
 
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
-end
+source ./.config/fish/functions/log.fish
+source ./.config/fish/functions/confirm.fish
 
-function confirm -a prompt default
-    read -P "$prompt " answer
-    set -l answer (string lower $answer)
+set -l distro (awk -F= '/^ID=/ {print $2}' /etc/os-release)
 
-    if test -z "$answer"
-        test "$default" = Y
-    else
-        string match -q -r '^y' $answer
-    end
-end
-
-log "provisioning Linux environment for $USER"
-
-# Check we're on Linux
 test (uname) != Linux
 and echo 'error: this script is for Linux only'
 and exit 1
 
-# Install all packages
+log "provisioning Linux environment for $USER ($distro)"
+
 log "installing packages"
-paru -S --needed --noconfirm \
-    bat btop curl docker docker-buildx docker-compose \
-    fd ffmpeg fish fzf git git-lfs git-delta github-cli \
-    jq k9s kubectl lazydocker lazygit mkcert neovim ouch \
-    pgcli ripgrep rsync starship tailscale tmux uv zoxide \
-    ttf-jetbrains-mono-nerd obs-studio wezterm-nightly-bin wl-clipboard \
-    asdf-vm glow rancher-k3d-bin zen-browser-bin helium-browser-bin \
-    waybar dunst hyprpaper hyprlock hypridle rofi keyd brightnessctl polkit-kde-agent
+switch $distro
+    case arch
+        paru -S --needed --noconfirm \
+            asdf-vm \
+            bat \
+            brightnessctl \
+            btop \
+            curl \
+            docker \
+            docker-buildx \
+            docker-compose \
+            dunst \
+            fd \
+            ffmpeg \
+            fish \
+            fzf \
+            git \
+            git-delta \
+            git-lfs \
+            github-cli \
+            glow \
+            helium-browser-bin \
+            hypridle \
+            hyprlock \
+            hyprpaper \
+            jq \
+            k9s \
+            keyd \
+            kubectl \
+            lazydocker \
+            lazygit \
+            mkcert \
+            neovim \
+            obs-studio \
+            ouch \
+            pgcli \
+            polkit-kde-agent \
+            rancher-k3d-bin \
+            ripgrep \
+            rofi \
+            rsync \
+            starship \
+            tailscale \
+            tmux \
+            ttf-jetbrains-mono-nerd \
+            uv \
+            waybar \
+            wezterm-nightly-bin \
+            wl-clipboard \
+            zen-browser-bin \
+            zoxide
+    case ubuntu debian
+        sudo apt-get update
+        and sudo apt-get install -y \
+            bat \
+            btop \
+            curl \
+            fd-find \
+            ffmpeg \
+            fish \
+            fzf \
+            git \
+            git-lfs \
+            jq \
+            mkcert \
+            neovim \
+            pgcli \
+            ripgrep \
+            rsync \
+            tmux \
+            zoxide
+    case '*'
+        echo "error: unsupported distro '$distro'"
+        exit 1
+end
 or exit 1
 
-# Sync all configurations first (get configs in place)
 ./sync
 or exit 1
 
-# Set up shell
 log "setting up shell"
 fish_add_path $HOME/.local/bin
 
@@ -53,7 +103,6 @@ end
 ./scripts/fish_generate_completions.fish
 or echo 'warning: failed to generate fish completions'
 
-# Set up terminal tools
 log "setting up terminal tools"
 if not test -d ~/.config/tmux/plugins/tpm
     git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm >/dev/null 2>&1
@@ -65,14 +114,12 @@ if test -d ~/.config/tmux/plugins/tpm
     or echo 'warning: failed to install tmux plugins'
 end
 
-# Initialize git-lfs
 if command -v git >/dev/null 2>&1
     and git lfs version >/dev/null 2>&1
     git lfs install
     or echo 'warning: failed to initialize git-lfs'
 end
 
-# Set up Docker
 log "setting up docker"
 sudo systemctl enable --now docker.service
 or echo 'warning: failed to enable docker'
@@ -82,14 +129,12 @@ if not groups $USER | grep -q docker
     echo 'added user to docker group (logout required to take effect)'
 end
 
-# Enable tailscale
 if command -q tailscale
     sudo systemctl enable --now tailscaled.service
     or echo 'warning: failed to enable tailscale'
 end
 
-# Remap Right Alt to Super (macOS-like right-hand modifier)
-./scripts/setup_keyd.fish
+./scripts/keyd_configure.fish
 or echo 'warning: failed to set up keyd'
 
 echo 'done provisioning Linux'

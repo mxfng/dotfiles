@@ -1,11 +1,6 @@
 #!/usr/bin/env fish
 
-function log -a message
-    set_color blue
-    echo -n "==> "
-    set_color normal
-    echo "$message"
-end
+source ./.config/fish/functions/log.fish
 
 log 'syncing dotfiles'
 
@@ -19,34 +14,38 @@ mkdir -p ~/.local/state/{less,psql,node}
 set -l git_name (git config --global user.name 2>/dev/null)
 set -l git_email (git config --global user.email 2>/dev/null)
 
-# Sync XDG configs
 rsync -aP --delete \
     --exclude fish/completions/ \
     --exclude fish/fish_variables \
     --exclude tmux/plugins/ \
-    ./.config/aerospace \
     ./.config/fish \
     ./.config/git \
-    ./.config/hypr \
     ./.config/nvim \
-    ./.config/rofi \
-    ./.config/waybar \
     ./.config/starship.toml \
     ./.config/tmux \
     ./.config/wezterm \
     ~/.config/
 or exit 1
 
-# Sync custom desktop entries (lock screen, etc.)
-if test -d ./.local/share/applications
+# Platform-specific
+if test (uname) = Darwin
+    rsync -aP --delete ./.config/aerospace ~/.config/
+
+    # Sync colima surgically because it stores too much runtime state
+    if test -d ./.config/colima
+        mkdir -p ~/.config/colima/default
+        rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
+    end
+else
+    rsync -aP --delete \
+        ./.config/hypr \
+        ./.config/rofi \
+        ./.config/waybar \
+        ~/.config/
+
+    # Desktop entries (lock screen, power off, restart)
     mkdir -p ~/.local/share/applications
     rsync -aP ./.local/share/applications/ ~/.local/share/applications/
-end
-
-# Sync colima surgically because it stores too much runtime state (smh)
-if test -d ./.config/colima
-    mkdir -p ~/.config/colima/default
-    rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
 end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist
