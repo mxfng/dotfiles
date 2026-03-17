@@ -9,7 +9,7 @@ My personal dotfiles for macOS and Linux.
 - Starship prompt
 - asdf vm
 - AeroSpace tiling WM on macOS
-- Hypr, rofi, waybar on Arch
+- Hypr, rofi, waybar on Linux
 
 ## Provision
 
@@ -19,9 +19,13 @@ To provision a new machine:
 
 ```bash
 git clone https://github.com/mxfng/dotfiles.git ~/Developer/dotfiles
-cd ~/Developer/dotfiles
-```
 
+cd ~/Developer/dotfiles
+
+# Install platform-specific prerequisites
+
+# Run the relevant provision command
+```
 | Platform        | Prerequisites                                                  | Command             |
 | --------------- | -------------------------------------------------------------- | ------------------- |
 | macOS           | [Homebrew](https://brew.sh), fish                              | `./provision`       |
