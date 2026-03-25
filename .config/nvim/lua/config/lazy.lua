@@ -21,6 +21,7 @@ require("lazy").setup({
       import = "lazyvim.plugins",
       -- opts = { news = { lazyvim = false, neovim = false } },
     },
+    { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "plugins" },
   },
   defaults = {
