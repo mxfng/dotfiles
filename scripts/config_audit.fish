@@ -35,7 +35,6 @@ set -l manual_allowlist \
     mole \
     mozilla \
     net.imput.helium \
-    opencode \
     pulse \
     session \
     Slack \

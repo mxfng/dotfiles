@@ -47,10 +47,7 @@ brew "docker-compose"
 brew "git-lfs"
 brew "tree-sitter-cli"
 
-tap "anomalyco/tap"
 tap "nikitabobko/tap"
-
-brew "anomalyco/tap/opencode"
 
 cask "aerospace"
 cask "font-jetbrains-mono-nerd-font"
