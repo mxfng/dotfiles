@@ -1,0 +1,21 @@
+# Hermes — track only config.yaml and SOUL.md under .hermes/.
+# Everything else under .hermes/ is secrets, local state, or personal data.
+.hermes/*
+!.hermes/config.yaml
+!.hermes/SOUL.md
+
+# Belt-and-suspenders: never commit Hermes secrets/state even if force-added.
+**/.env
+**/auth.json
+**/auth.lock
+**/state.db
+**/state.db-*
+**/*.db
+**/*.db-shm
+**/*.db-wal
+.hermes/memories/
+.hermes/sessions/
+.hermes/logs/
+.hermes/cache/
+.hermes/mnemosyne/
+.hermes/plugins/

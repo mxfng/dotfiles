@@ -55,6 +55,12 @@ end
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
 
+# Deploy Hermes config (only if Hermes is installed; never touches secrets)
+if test -d ~/.hermes
+    ./scripts/hermes_sync.fish
+    or echo 'warning: failed to sync Hermes config'
+end
+
 log 'syncing git config'
 
 if test -z "$git_name" -o -z "$git_email"
