@@ -30,6 +30,10 @@ set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
 set -gx GOPATH $HOME/Developer/go
 set -gx GOBIN $GOPATH/bin
 
+# Central root for git worktrees (see `gwt` function). Keeps per-branch
+# checkouts out of the project tree -- handy as isolated sandboxes for agents.
+set -gx GWT_HOME $HOME/worktrees
+
 set -gx KUBECONFIG $XDG_CONFIG_HOME/kube/config:$XDG_CONFIG_HOME/kube/prod.yaml
 set -gx KUBECACHEDIR $XDG_CACHE_HOME/kube
 
