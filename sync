@@ -17,6 +17,7 @@ set -l git_email (git config --global user.email 2>/dev/null)
 rsync -aP --delete \
     --exclude fish/completions/ \
     --exclude fish/fish_variables \
+    --exclude fish/conf.d/secrets.fish \
     --exclude tmux/plugins/ \
     ./.config/fish \
     ./.config/git \
@@ -27,14 +28,17 @@ rsync -aP --delete \
     ~/.config/
 or exit 1
 
+# Sync hermes surgically because it stores runtime state
+rsync -aP ./.config/hermes/config.yaml ./.config/hermes/SOUL.md $HERMES_HOME/
+
 # Platform-specific
 if test (uname) = Darwin
     rsync -aP --delete ./.config/aerospace ~/.config/
 
-    # Sync colima surgically because it stores too much runtime state
+    # Sync colima surgically because it stores runtime state
     if test -d ./.config/colima
         mkdir -p ~/.config/colima/default
-        rsync -a ./.config/colima/default/colima.yaml ~/.config/colima/default/
+        rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
     end
 else
     rsync -aP --delete \
@@ -54,12 +58,6 @@ end
 # Sync scripts
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
-
-# Deploy Hermes config (only if Hermes is installed; never touches secrets)
-if test -d ~/.hermes
-    ./scripts/hermes_sync.fish
-    or echo 'warning: failed to sync Hermes config'
-end
 
 log 'syncing git config'
 

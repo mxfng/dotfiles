@@ -9,7 +9,7 @@
 
 log "setting up Hermes Agent"
 
-set -l hermes_home $HOME/.hermes
+set -l hermes_home $HERMES_HOME
 
 # 1. Install Hermes if the launcher is missing.
 if not command -q hermes
@@ -28,8 +28,8 @@ if not command -q hermes
 end
 
 # 2. Deploy tracked config (never clobbers secrets / state).
-./scripts/hermes_sync.fish
-or echo 'warning: failed to sync Hermes config'
+rsync -a ./.config/hermes/config.yaml ./.config/hermes/SOUL.md $hermes_home/
+or echo 'warning: failed to deploy Hermes config'
 
 # 3. Resolve Hermes's own venv python (the mnemosyne provider imports
 #    agent.memory_provider, which only resolves inside Hermes's venv).
@@ -73,7 +73,7 @@ if not $hermes_py -c 'import mnemosyne_hermes' 2>/dev/null
     end
 end
 
-# 5. Run the mnemosyne installer (creates the ~/.hermes/plugins/mnemosyne
+# 5. Run the mnemosyne installer (creates the $HERMES_HOME/plugins/mnemosyne
 #    discovery symlink + bootstraps deps). Idempotent with --force.
 if $hermes_py -c 'import mnemosyne_hermes' 2>/dev/null
     log "wiring mnemosyne provider"

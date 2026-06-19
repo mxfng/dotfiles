@@ -19,6 +19,8 @@ set -gx VISUAL nvim
 set -gx ASDF_DATA_DIR $HOME/.local/share/asdf
 set -gx ASDF_CONFIG_FILE $HOME/.config/asdf/asdfrc
 
+set -gx BOTO_CONFIG $XDG_CONFIG_HOME/gcloud/.boto
+
 set -gx BUN_INSTALL_CACHE_DIR $HOME/.cache/bun
 
 set -gx DOCKER_CONFIG $HOME/.config/docker
@@ -27,12 +29,12 @@ set -gx FZF_CTRL_T_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
 set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
 
+set -gx GEM_SPEC_CACHE $XDG_CACHE_HOME/gem
+
 set -gx GOPATH $HOME/Developer/go
 set -gx GOBIN $GOPATH/bin
 
-# Central root for git worktrees (see `gwt` function). Keeps per-branch
-# checkouts out of the project tree -- handy as isolated sandboxes for agents.
-set -gx GWT_HOME $HOME/worktrees
+set -gx HERMES_HOME $XDG_CONFIG_HOME/hermes
 
 set -gx KUBECONFIG $XDG_CONFIG_HOME/kube/config:$XDG_CONFIG_HOME/kube/prod.yaml
 set -gx KUBECACHEDIR $XDG_CACHE_HOME/kube
