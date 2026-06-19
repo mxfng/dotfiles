@@ -23,6 +23,7 @@ set -l manual_allowlist \
     go \
     gtk-3.0 \
     gtk-4.0 \
+    homebrew \
     k9s \
     kdeconnect \
     kdedefaults \
