@@ -50,10 +50,6 @@ end
 ./scripts/docker_install_cli_plugins.fish
 or echo 'warning: failed to set up docker'
 
-log "setting up Hermes Agent"
-./scripts/hermes_install.fish
-or echo 'warning: failed to set up Hermes'
-
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'

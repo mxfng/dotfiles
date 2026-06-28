@@ -28,9 +28,6 @@ rsync -aP --delete \
     ~/.config/
 or exit 1
 
-# Sync hermes surgically because it stores runtime state
-rsync -aP ./.config/hermes/config.yaml ./.config/hermes/SOUL.md $HERMES_HOME/
-
 # Platform-specific
 if test (uname) = Darwin
     rsync -aP --delete ./.config/aerospace ~/.config/

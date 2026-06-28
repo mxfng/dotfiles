@@ -137,8 +137,4 @@ end
 ./scripts/keyd_configure.fish
 or echo 'warning: failed to set up keyd'
 
-log "setting up Hermes Agent"
-./scripts/hermes_install.fish
-or echo 'warning: failed to set up Hermes'
-
 echo 'done provisioning Linux'

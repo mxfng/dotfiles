@@ -34,8 +34,6 @@ set -gx GEM_SPEC_CACHE $XDG_CACHE_HOME/gem
 set -gx GOPATH $HOME/Developer/go
 set -gx GOBIN $GOPATH/bin
 
-set -gx HERMES_HOME $XDG_CONFIG_HOME/hermes
-
 set -gx KUBECONFIG $XDG_CONFIG_HOME/kube/config:$XDG_CONFIG_HOME/kube/prod.yaml
 set -gx KUBECACHEDIR $XDG_CACHE_HOME/kube
 
