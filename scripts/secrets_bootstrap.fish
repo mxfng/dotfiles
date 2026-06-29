@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-source ./.config/fish/functions/log.fish
-source ./.config/fish/functions/confirm.fish
+source (dirname (status filename))/../.config/fish/functions/log.fish
+source (dirname (status filename))/../.config/fish/functions/confirm.fish
 
 function __bws_set_keychain -a service value
     if not security find-generic-password -s $service >/dev/null 2>&1

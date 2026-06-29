@@ -1,22 +1,21 @@
 #!/usr/bin/env fish
 
-log "setting up docker cli-plugins"
+source (dirname (status filename))/../.config/fish/functions/log.fish
+
+log "cleaning up docker cli-plugins"
+
+# Docker CLI from Homebrew bundles compose and buildx as built-in subcommands.
+# The standalone docker-compose and docker-buildx Homebrew formulae provide
+# the hyphenated binaries for scripts that need them — no CLI plugin symlinks
+# needed anymore.
 
 set -l plugins_dir (set -q DOCKER_CONFIG; and echo $DOCKER_CONFIG; or echo $HOME/.docker)/cli-plugins
-mkdir -p $plugins_dir
 
-# Link Homebrew-installed CLI plugins (compose, buildx, etc.)
-set -l brew_prefix (brew --prefix)
-for plugin in docker-compose docker-buildx
-    set -l brew_bin $brew_prefix/opt/$plugin/bin/$plugin
-    if test -x $brew_bin
-        ln -sf $brew_bin $plugins_dir/$plugin
-    end
-end
-
-# Clean up broken symlinks from any legacy Docker Desktop / Rancher Desktop
-for f in $plugins_dir/*
-    if test -L $f; and not test -e $f
-        rm $f
+# Clean up broken symlinks from any legacy Docker Desktop / Rancher Desktop installs
+if test -d $plugins_dir
+    for f in $plugins_dir/*
+        if test -L $f; and not test -e $f
+            rm $f
+        end
     end
 end

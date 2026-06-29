@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-source ./.config/fish/functions/log.fish
+source (dirname (status filename))/../.config/fish/functions/log.fish
 
 log 'generating fish completions'
 

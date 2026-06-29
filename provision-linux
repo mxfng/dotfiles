@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+cd (dirname (status filename))
+
 source ./.config/fish/functions/log.fish
 source ./.config/fish/functions/confirm.fish
 
@@ -104,21 +106,11 @@ end
 or echo 'warning: failed to generate fish completions'
 
 log "setting up terminal tools"
-if not test -d ~/.config/tmux/plugins/tpm
-    git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm >/dev/null 2>&1
-    or echo 'warning: failed to install tmux plugin manager'
-end
+./scripts/tmux_setup_plugins.fish
+or echo 'warning: failed to set up tmux plugins'
 
-if test -d ~/.config/tmux/plugins/tpm
-    ~/.config/tmux/plugins/tpm/bin/install_plugins
-    or echo 'warning: failed to install tmux plugins'
-end
-
-if command -v git >/dev/null 2>&1
-    and git lfs version >/dev/null 2>&1
-    git lfs install
-    or echo 'warning: failed to initialize git-lfs'
-end
+./scripts/git_setup_lfs.fish
+or echo 'warning: failed to set up git-lfs'
 
 log "setting up docker"
 sudo systemctl enable --now docker.service

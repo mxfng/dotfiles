@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+cd (dirname (status filename))
+
 source ./.config/fish/functions/log.fish
 
 log 'syncing dotfiles'

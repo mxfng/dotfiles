@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 
+source (dirname (status filename))/../.config/fish/functions/confirm.fish
+
 # Audit ~/.config for unrecognized directories not tracked by dotfiles.
 #
 # Usage:
