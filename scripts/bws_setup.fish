@@ -38,11 +38,8 @@ if not security find-generic-password -s bws-access-token >/dev/null 2>&1
 end
 
 # --- provider secret UUIDs ---
-# Not secrets — just row IDs. Create the actual secret in the web vault first,
-# then paste its UUID here. Re-run provision when adding new providers.
-
+security add-generic-password -a $USER -s claude-code-oauth-token -w 1a3187c3-fa93-4c07-b0b3-b4780146cf06
 security add-generic-password -a $USER -s claude-code-backend-secret-id -w 7de096b6-1e06-40df-8e43-b4780122d49f
-# security add-generic-password -a $USER -s openai-secret-id        -w <uuid>
 # security add-generic-password -a $USER -s anthropic-secret-id     -w <uuid>
 
 log "done setting up Bitwarden Secrets CLI"
