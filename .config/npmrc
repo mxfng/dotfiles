@@ -1,0 +1,4 @@
+# Trunk ships its own vendored npm@10.9.2 which ignores XDG_CACHE_HOME
+# so this forces older versions to respect cache location in ~
+# TODO: Remove whenever Trunk ships newer npm!
+cache=/Users/max/.cache/npm

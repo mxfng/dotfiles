@@ -48,6 +48,9 @@ else
     rsync -aP ./.local/share/applications/ ~/.local/share/applications/
 end
 
+# Deploy stray dotfiles that live outside ~/.config/
+rsync -aP ./.config/npmrc ~/.npmrc
+
 # Audit ~/.config/ and flag any lingering configs not in allowlist
 ./scripts/config_audit.fish --quiet
 
