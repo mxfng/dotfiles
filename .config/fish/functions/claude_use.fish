@@ -1,4 +1,4 @@
-function claude-use --argument-names backend
+function claude_use --argument-names backend
     set -l backends deepseek anthropic
     if not contains "$backend" $backends
         echo "Usage: claude-use [deepseek|anthropic]"
