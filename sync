@@ -27,8 +27,13 @@ rsync -aP --delete \
     ~/.config/
 or exit 1
 
+# TODO: Remove this when Trunk.io ships newer npm version
+# Stray .npmrc blocks Trunk npm from shitting cache entries to ~
+rsync -aP ./.config/npmrc ~/.npmrc
+
 # Platform-specific
 if test (uname) = Darwin
+    # macOS
     rsync -aP --delete ./.config/aerospace ~/.config/
 
     # Surgical sync because these store their runtime state
@@ -42,6 +47,7 @@ if test (uname) = Darwin
         rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
     end
 else
+    # Linux
     rsync -aP --delete \
         ./.config/hypr \
         ./.config/rofi \
@@ -52,9 +58,6 @@ else
     mkdir -p ~/.local/share/applications
     rsync -aP ./.local/share/applications/ ~/.local/share/applications/
 end
-
-# Deploy stray dotfiles that live outside ~/.config/
-rsync -aP ./.config/npmrc ~/.npmrc
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist
 ./scripts/config_audit.fish --quiet
