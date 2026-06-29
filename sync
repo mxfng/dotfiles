@@ -31,7 +31,12 @@ or exit 1
 if test (uname) = Darwin
     rsync -aP --delete ./.config/aerospace ~/.config/
 
-    # Sync colima surgically because it stores runtime state
+    # Surgical sync because these store their runtime state
+    if test -d ./.config/sol
+        mkdir -p ~/.config/sol
+        rsync -aP ./.config/sol/config.json ~/.config/sol/
+        rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
+    end
     if test -d ./.config/colima
         mkdir -p ~/.config/colima/default
         rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/

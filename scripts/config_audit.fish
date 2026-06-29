@@ -14,6 +14,7 @@ set -l manual_allowlist \
     alacritty \
     autostart \
     btop \
+    bws \
     cachyos \
     colima \
     dconf \
@@ -23,6 +24,7 @@ set -l manual_allowlist \
     go \
     gtk-3.0 \
     gtk-4.0 \
+    hermes \
     homebrew \
     k9s \
     kdeconnect \
@@ -39,7 +41,6 @@ set -l manual_allowlist \
     pulse \
     session \
     Slack \
-    sol \
     xsettingsd \
     zen
 
