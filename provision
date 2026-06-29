@@ -50,6 +50,9 @@ end
 ./scripts/docker_install_cli_plugins.fish
 or echo 'warning: failed to set up docker'
 
+./scripts/bws_setup.fish
+or echo 'warning: failed to set up Bitwarden Secrets CLI'
+
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'
