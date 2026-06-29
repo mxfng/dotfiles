@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 
-echo 'generating fish completions'
+source ./.config/fish/functions/log.fish
+
+log 'generating fish completions'
 
 set -l completions_dir ~/.config/fish/completions
 mkdir -p $completions_dir

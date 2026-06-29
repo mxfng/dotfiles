@@ -3,11 +3,14 @@
 source ./.config/fish/functions/log.fish
 source ./.config/fish/functions/confirm.fish
 
-if not confirm "Set up Bitwarden Secrets CLI? [y/N]" N
-    exit 0
+function __bws_set_keychain -a service value
+    if not security find-generic-password -s $service >/dev/null 2>&1
+        security add-generic-password -a $USER -s $service -w $value
+    end
 end
 
-# --- install ---
+log "setting up bws cli and secrets"
+
 if not command -q bws
     switch (uname)
         case Darwin
@@ -24,7 +27,6 @@ if not command -q bws
     log "bws installed"
 end
 
-# --- auth ---
 if not security find-generic-password -s bws-access-token >/dev/null 2>&1
     echo
     echo "  Create an access token at https://vault.bitwarden.com/#/sm"
@@ -33,13 +35,10 @@ if not security find-generic-password -s bws-access-token >/dev/null 2>&1
     read -P "  Paste BWS_ACCESS_TOKEN: " -s token
     echo
     test -n "$token"
-    and security add-generic-password -a $USER -s bws-access-token -w $token
+    and __bws_set_keychain bws-access-token $token
     or echo "warning: skipped bws token"
 end
 
 # --- provider secret UUIDs ---
-security add-generic-password -a $USER -s claude-code-oauth-token -w 1a3187c3-fa93-4c07-b0b3-b4780146cf06
-security add-generic-password -a $USER -s claude-code-backend-secret-id -w 7de096b6-1e06-40df-8e43-b4780122d49f
-# security add-generic-password -a $USER -s anthropic-secret-id     -w <uuid>
-
-log "done setting up Bitwarden Secrets CLI"
+__bws_set_keychain claude-code-oauth-token 1a3187c3-fa93-4c07-b0b3-b4780146cf06
+__bws_set_keychain claude-code-backend-secret-id 7de096b6-1e06-40df-8e43-b4780122d49f
