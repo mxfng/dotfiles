@@ -39,9 +39,6 @@ or echo 'warning: failed to set up tmux plugins'
 ./scripts/git_setup_lfs.fish
 or echo 'warning: failed to set up git-lfs'
 
-./scripts/docker_setup_plugins.fish
-or echo 'warning: failed to set up docker'
-
 ./scripts/secrets_bootstrap.fish
 or echo 'warning: failed to bootstrap secrets'
 
