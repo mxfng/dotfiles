@@ -47,11 +47,11 @@ if command -v git >/dev/null 2>&1
     or echo 'warning: failed to initialize git-lfs'
 end
 
-./scripts/docker_install_cli_plugins.fish
+./scripts/docker_setup_plugins.fish
 or echo 'warning: failed to set up docker'
 
-./scripts/bws_setup.fish
-or echo 'warning: failed to set up Bitwarden Secrets CLI'
+./scripts/secrets_bootstrap.fish
+or echo 'warning: failed to bootstrap secrets'
 
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N

@@ -137,7 +137,7 @@ end
 ./scripts/keyd_configure.fish
 or echo 'warning: failed to set up keyd'
 
-./scripts/bws_setup.fish
-or echo 'warning: failed to set up Bitwarden Secrets CLI'
+./scripts/secrets_bootstrap.fish
+or echo 'warning: failed to bootstrap secrets'
 
 echo 'done provisioning Linux'
