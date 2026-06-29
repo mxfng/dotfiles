@@ -66,13 +66,13 @@ if not osascript -e 'tell application "System Events" to get the name of every l
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Sol.app", hidden:false}' 2>/dev/null
 end
 
-log "setting up window management"
-open -a AeroSpace
-or echo 'warning: failed to start AeroSpace'
-
 if confirm "Set macOS system defaults? [y/N]" N
     ./scripts/macos_set_defaults.fish
     or echo 'warning: failed to set macOS defaults'
 end
+
+log "setting up window management"
+open -a AeroSpace
+or echo 'warning: failed to start AeroSpace'
 
 echo 'done provisioning macOS'
