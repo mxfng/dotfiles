@@ -25,10 +25,17 @@ shortcuts run "$DND_ON_SHORTCUT" >/dev/null 2>&1 || true
 /usr/bin/osascript -e "set volume output volume $VOLUME" >/dev/null 2>&1 || true
 
 # Clear the target workspace: shove anything already there onto the evac one,
-# but leave Logic put if it's already on workspace 1.
+# but leave Logic put if it's already on workspace 1. Record what we move so
+# Exit Studio Mode can put it back. State: line 1 = origin workspace, rest =
+# evacuated window ids.
+STATE_DIR="${TMPDIR:-/tmp}/sol-modes"
+STATEFILE="$STATE_DIR/studio-evac.state"
+mkdir -p "$STATE_DIR"
+echo "$WORKSPACE" > "$STATEFILE"
 while IFS='|' read -r wid app; do
   [[ -z "$wid" || "$app" == "Logic Pro" ]] && continue
   aerospace move-node-to-workspace --window-id "$wid" "$EVAC_WORKSPACE" >/dev/null 2>&1 || true
+  echo "$wid" >> "$STATEFILE"
 done < <(aerospace list-windows --workspace "$WORKSPACE" --format '%{window-id}|%{app-name}' 2>/dev/null)
 
 open -a "Logic Pro"
