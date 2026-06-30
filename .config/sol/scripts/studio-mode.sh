@@ -8,7 +8,8 @@
 export PATH="/opt/homebrew/bin:$PATH"
 
 # --- config ---------------------------------------------------------------
-WORKSPACE=4                # aerospace workspace to dedicate to Logic
+WORKSPACE=1                # workspace to dedicate to Logic
+EVAC_WORKSPACE=2           # existing workspace-1 windows get shoved here
 VOLUME=70                  # output volume (0-100)
 DND_ON_SHORTCUT="Do Not Disturb On"   # optional; see note at bottom
 # --------------------------------------------------------------------------
@@ -23,9 +24,14 @@ shortcuts run "$DND_ON_SHORTCUT" >/dev/null 2>&1 || true
 
 /usr/bin/osascript -e "set volume output volume $VOLUME" >/dev/null 2>&1 || true
 
+# Clear the target workspace: shove anything already there onto the evac one.
+for wid in $(aerospace list-windows --workspace "$WORKSPACE" --format '%{window-id}' 2>/dev/null); do
+  aerospace move-node-to-workspace --window-id "$wid" "$EVAC_WORKSPACE" >/dev/null 2>&1 || true
+done
+
 open -a "Logic Pro"
 
-# Give Logic a moment to front, then move it to its own workspace.
+# Give Logic a moment to front, then move it onto the now-empty workspace.
 sleep 2
 aerospace move-node-to-workspace "$WORKSPACE" >/dev/null 2>&1 || true
 aerospace workspace "$WORKSPACE" >/dev/null 2>&1 || true
