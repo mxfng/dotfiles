@@ -3,7 +3,7 @@
 # icon: 🎬
 #
 # Settle in to watch: open your streaming sites, Do Not Disturb on, a
-# comfortable volume, and the browser fullscreened on its own workspace.
+# comfortable volume, and the browser moved to its own workspace.
 # Pairs with Bedtime — trigger this, then Bedtime, and drift off.
 
 export PATH="/opt/homebrew/bin:$PATH"
@@ -16,7 +16,6 @@ SITES=(
 )
 WORKSPACE=6                # aerospace workspace for the browser
 VOLUME=50
-FULLSCREEN=true
 DND_ON_SHORTCUT="Do Not Disturb On"
 # --------------------------------------------------------------------------
 
@@ -29,11 +28,10 @@ for url in "${SITES[@]}"; do
 done
 
 # Let the browser come to front, then move IT (now the focused window) to the
-# workspace and fullscreen it.
+# workspace.
 sleep 1.5
 aerospace move-node-to-workspace "$WORKSPACE" >/dev/null 2>&1 || true
 aerospace workspace "$WORKSPACE" >/dev/null 2>&1 || true
-[[ "$FULLSCREEN" == "true" ]] && aerospace fullscreen on >/dev/null 2>&1 || true
 
 /usr/bin/osascript -e "display notification \"Lights down. Enjoy the show 🍿\" with title \"Cinema Mode 🎬\"" >/dev/null 2>&1 || true
 echo "Cinema mode on (workspace $WORKSPACE)."
