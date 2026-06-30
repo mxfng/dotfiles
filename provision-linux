@@ -36,6 +36,7 @@ switch $distro
             github-cli \
             glow \
             grpcurl \
+            gum \
             helium-browser-bin \
             hypridle \
             hyprlock \
@@ -79,6 +80,7 @@ switch $distro
             fzf \
             git \
             git-lfs \
+            gum \
             jq \
             mkcert \
             neovim \

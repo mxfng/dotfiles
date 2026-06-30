@@ -4,6 +4,7 @@ cd (dirname (status filename))
 
 source ./.config/fish/functions/log.fish
 source ./.config/fish/functions/confirm.fish
+source ./.config/fish/functions/claude_use.fish
 
 log "provisioning macOS environment for $USER"
 
@@ -39,6 +40,9 @@ or echo 'warning: failed to set up tmux plugins'
 ./scripts/git_setup_lfs.fish
 or echo 'warning: failed to set up git-lfs'
 
+claude_use
+or echo 'warning: failed to set up Claude Code'
+
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'
@@ -61,4 +65,4 @@ log "setting up window management"
 open -a AeroSpace
 or echo 'warning: failed to start AeroSpace'
 
-echo 'done provisioning macOS'
+echo 'done provisioning'

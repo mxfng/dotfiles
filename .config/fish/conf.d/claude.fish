@@ -1,5 +1,3 @@
-# Set preferred model provider backend here
-if not set -q CLAUDE_CODE_BACKEND
-    set -U CLAUDE_CODE_BACKEND deepseek
-end
-claude_use $CLAUDE_CODE_BACKEND
+# Apply the machine's saved Claude Code provider (defaults to anthropic).
+# Never prompts at startup -- use `claude_use` to choose a provider / set keys.
+claude_use --quiet
