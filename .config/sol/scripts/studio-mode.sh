@@ -24,10 +24,12 @@ shortcuts run "$DND_ON_SHORTCUT" >/dev/null 2>&1 || true
 
 /usr/bin/osascript -e "set volume output volume $VOLUME" >/dev/null 2>&1 || true
 
-# Clear the target workspace: shove anything already there onto the evac one.
-for wid in $(aerospace list-windows --workspace "$WORKSPACE" --format '%{window-id}' 2>/dev/null); do
+# Clear the target workspace: shove anything already there onto the evac one,
+# but leave Logic put if it's already on workspace 1.
+while IFS='|' read -r wid app; do
+  [[ -z "$wid" || "$app" == "Logic Pro" ]] && continue
   aerospace move-node-to-workspace --window-id "$wid" "$EVAC_WORKSPACE" >/dev/null 2>&1 || true
-done
+done < <(aerospace list-windows --workspace "$WORKSPACE" --format '%{window-id}|%{app-name}' 2>/dev/null)
 
 open -a "Logic Pro"
 
