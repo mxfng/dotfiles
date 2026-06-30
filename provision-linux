@@ -35,6 +35,7 @@ switch $distro
             git-lfs \
             github-cli \
             glow \
+            grpcurl \
             helium-browser-bin \
             hypridle \
             hyprlock \
@@ -58,6 +59,7 @@ switch $distro
             starship \
             tailscale \
             tmux \
+            tree-sitter-cli \
             ttf-jetbrains-mono-nerd \
             uv \
             waybar \
