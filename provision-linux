@@ -129,7 +129,4 @@ end
 ./scripts/keyd_configure.fish
 or echo 'warning: failed to set up keyd'
 
-./scripts/secrets_bootstrap.fish
-or echo 'warning: failed to bootstrap secrets'
-
 echo 'done provisioning Linux'

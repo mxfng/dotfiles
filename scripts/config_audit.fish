@@ -16,7 +16,6 @@ set -l manual_allowlist \
     alacritty \
     autostart \
     btop \
-    bws \
     cachyos \
     colima \
     dconf \

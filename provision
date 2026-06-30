@@ -39,9 +39,6 @@ or echo 'warning: failed to set up tmux plugins'
 ./scripts/git_setup_lfs.fish
 or echo 'warning: failed to set up git-lfs'
 
-./scripts/secrets_bootstrap.fish
-or echo 'warning: failed to bootstrap secrets'
-
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'
