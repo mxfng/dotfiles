@@ -8,12 +8,13 @@
 export PATH="/opt/homebrew/bin:$PATH"
 
 # --- config ---------------------------------------------------------------
+# Opened in order; the LAST one becomes the active tab, so Calendar is last.
 TABS=(
   "https://mail.google.com"            # Gmail
-  "https://calendar.google.com"        # Google Calendar (lives in the browser)
   "https://github.com"                 # GitHub
   "https://news.ycombinator.com"       # news — swap for your preferred site
   "https://pitchfork.com"              # music news — swap to taste
+  "https://calendar.google.com"        # Google Calendar — foregrounded last
 )
 OPEN_REMINDERS=true        # Apple Reminders app (you actually use this one)
 DND_OFF_SHORTCUT="Do Not Disturb Off"
