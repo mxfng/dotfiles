@@ -9,11 +9,13 @@ export PATH="/opt/homebrew/bin:$PATH"
 
 # --- config ---------------------------------------------------------------
 TABS=(
-  "https://mail.google.com"
-  "https://calendar.google.com"
-  "https://github.com/notifications"
+  "https://mail.google.com"            # Gmail
+  "https://calendar.google.com"        # Google Calendar (lives in the browser)
+  "https://github.com"                 # GitHub
+  "https://news.ycombinator.com"       # news — swap for your preferred site
+  "https://pitchfork.com"              # music news — swap to taste
 )
-OPEN_CALENDAR_APP=true
+OPEN_REMINDERS=true        # Apple Reminders app (you actually use this one)
 DND_OFF_SHORTCUT="Do Not Disturb Off"
 # --------------------------------------------------------------------------
 
@@ -24,7 +26,7 @@ for url in "${TABS[@]}"; do
 done
 
 open -a WezTerm >/dev/null 2>&1 || true
-[[ "$OPEN_CALENDAR_APP" == "true" ]] && open -a Calendar >/dev/null 2>&1 || true
+[[ "$OPEN_REMINDERS" == "true" ]] && open -a Reminders >/dev/null 2>&1 || true
 
 /usr/bin/osascript -e "display notification \"Good morning. Everything's up.\" with title \"Morning Boot 🌅\"" >/dev/null 2>&1 || true
 echo "Morning boot complete."
