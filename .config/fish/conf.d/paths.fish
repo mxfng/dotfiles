@@ -13,4 +13,5 @@ end
 
 fish_add_path \
     $HOME/.local/bin \
+    $HOME/Developer/go/bin \
     $HOME/Developer/scripts
