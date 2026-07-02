@@ -40,8 +40,11 @@ or echo 'warning: failed to set up tmux plugins'
 ./scripts/git_setup_lfs.fish
 or echo 'warning: failed to set up git-lfs'
 
-claude_use
+./scripts/claude_setup.fish
 or echo 'warning: failed to set up Claude Code'
+
+claude_use
+or echo 'warning: failed to select Claude Code provider'
 
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
