@@ -29,16 +29,13 @@ rsync -aP --delete \
     ~/.config/
 or exit 1
 
-# TODO: Remove this when Trunk.io ships newer npm version
-# Stray .npmrc blocks Trunk npm from shitting cache entries to ~
+# TODO: Remove this when Trunk.io ships newer npm version, blocks stray cache entires on old version
 rsync -aP ./.config/npmrc ~/.npmrc
 
-# Agentic
+# Agentic: AGENTS.md at ~ for tool discovery, guides under ~/.config/agents
 rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
-rsync -aP ./.config/agents/VOICE.md ~/VOICE.md
-rsync -aP ./.config/agents/OPINIONS.md ~/OPINIONS.md
-mkdir -p ~/.claude
-ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
+rsync -aP ./.config/agents/{VOICE,OPINIONS}.md ~/.config/agents/
+mkdir -p ~/.claude; and ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
 
 # Platform-specific
 if test (uname) = Darwin
