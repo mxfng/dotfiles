@@ -33,6 +33,13 @@ or exit 1
 # Stray .npmrc blocks Trunk npm from shitting cache entries to ~
 rsync -aP ./.config/npmrc ~/.npmrc
 
+# Agentic
+rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
+rsync -aP ./.config/agents/VOICE.md ~/VOICE.md
+rsync -aP ./.config/agents/OPINIONS.md ~/OPINIONS.md
+mkdir -p ~/.claude
+ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
+
 # Platform-specific
 if test (uname) = Darwin
     # macOS
