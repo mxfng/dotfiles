@@ -26,6 +26,8 @@ set -gx BUN_INSTALL_CACHE_DIR $XDG_CACHE_HOME/bun
 set -gx BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundle
 set -gx BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle
 
+set -gx CARGO_HOME $XDG_DATA_HOME/cargo
+
 set -gx DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 
 set -gx FZF_CTRL_T_COMMAND 'fd --type f --type d --hidden --exclude ".git/"'
@@ -49,3 +51,5 @@ set -gx NODE_REPL_HISTORY $XDG_STATE_HOME/node/history
 set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 
 set -gx PSQL_HISTORY $XDG_STATE_HOME/psql/history
+
+set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
