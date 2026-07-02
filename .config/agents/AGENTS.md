@@ -9,6 +9,7 @@ These are common instructions for Max's agents across all scenarios.
 - Never manually modify `CHANGELOG.md` files or any files that are marked as auto-generated.
 - When writing or substantially editing long Markdown files, preserve normal Markdown structure. Put each full sentence on its own line, but avoid wrapping multiple sentences onto one physical line.
 - When making technical decisions, do not give much weight to development cost. Instead, prefer quality, simplicity, robustness, scalability, and long-term maintainability.
+- Prefer a first-class command-line tool over an MCP server when both can do the job (e.g. the `gh` CLI over the GitHub MCP server). CLIs are typically far more token- and latency-efficient for agents to drive.
 - When doing bug fixes, always start by reproducing the bug in an E2E setting, as closely aligned as possible with how an end user would experience it while end-to-end testing the product. This makes sure you find the real problem so your fix will actually solve it. If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 

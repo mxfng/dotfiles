@@ -37,6 +37,13 @@ rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
 rsync -aP ./.config/agents/{VOICE,OPINIONS}.md ~/.config/agents/
 mkdir -p ~/.claude; and ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
 
+# Personal Claude Code skills. No --delete: externally installed skills (e.g.
+# skill-creator, added by claude_setup) live alongside these and must survive.
+if test -d ./.config/agents/skills
+    mkdir -p ~/.claude/skills
+    rsync -aP ./.config/agents/skills/ ~/.claude/skills/
+end
+
 # Platform-specific
 if test (uname) = Darwin
     # macOS
