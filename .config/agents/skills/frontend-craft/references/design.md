@@ -14,6 +14,11 @@ layered on top of this; do not bake one product's aesthetic into a general build
 - **Restraint.** Let content, type, and negative space carry the design; every element earns
   its place or is cut. Minimalism is the result of deciding what the thing should be, not a
   coat of paint.
+- **Terse copy when scaffolding.** Do not pad HTML/JSX with filler - no lorem ipsum, no
+  invented paragraphs, no throwaway feature blurbs stuffed in to fill space. Write the few real
+  words a label/heading/empty-state actually needs, and leave genuinely-unknown copy as a short
+  `TODO` placeholder rather than fabricating prose. Negative space is the design; walls of
+  filler text bury it and read as a template. When in doubt, write less.
 - **Dense and legible.** His UIs lean toward a compact, information-rich scale (roughly one
   step below Tailwind's defaults) with tight control heights - they should read as a tool, not
   a marketing page. Set base typography once, globally, in `@layer base`.
