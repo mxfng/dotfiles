@@ -34,14 +34,32 @@ This resolves the usual false choice between a component library (fast, generic)
 hand-rolling everything (slow, bespoke): borrow the library's ergonomics and accessibility,
 author the look yourself.
 
+## Start from the canonical template
+
+Do not hand-assemble a new frontend from scratch - **scaffold from the starter, then modernize on
+use.** It is the stack below already wired and CI-green: configs, the two-pass token system, the
+primitive pattern, providers (theme/query/toast/error-boundary), a Ladle gallery, and git hooks.
+
+- **Repo:** `github.com/mxfng/frontend-starter` (source of truth). Pinned known-good: **`1069a5d`**.
+- **Scaffold:** `pnpm dlx degit mxfng/frontend-starter <app>` → `pnpm install` → `pnpm refresh`
+  (bumps the whole stack to latest, dedupes, re-runs typecheck/lint/build/test) → fix whatever the
+  bump surfaces → build. The refresh step is not optional - it is how a new app is born current.
+- **Why refresh-on-use:** the template only has to stay *directionally* current; bump-on-scaffold
+  (plus Renovate on the repo) makes every new project current even if the seed lags.
+- **Conflict rule:** if this skill and the template's actual working config disagree, **the
+  template wins** - update this skill to match rather than trusting stale prose.
+
+Everything below is the rationale the template encodes - read it to work *within* a scaffolded app,
+not to recreate the setup by hand.
+
 ## Stack defaults
 
 Reach for these unless the project has a specific reason not to.
 
 | Concern | Default | Notes |
 |---|---|---|
-| Framework | **React 19** + Vite (SWC) | React Compiler on → drop most manual `useMemo`/`useCallback` |
-| Language | **TypeScript, strict-max** | exact tsconfig flags in `references/architecture.md` |
+| Framework | **React 19** + Vite 8 (Rolldown/Oxc) | React Compiler **on** → drop most manual `useMemo`/`useCallback`. On Vite 8 the compiler wires via `@rolldown/plugin-babel` + `reactCompilerPreset()` (plugin-react is Oxc-based; the old `babel` option is gone). Swap to `plugin-react-swc` only when you need raw build speed over auto-memoization. |
+| Language | **TypeScript, strict-max** | exact tsconfig flags in `references/architecture.md`. Paths are baseUrl-free (deprecated in TS7); Vite 8 resolves them natively (`resolve.tsconfigPaths`). |
 | Global state | **zustand** | one store per feature; `devtools(persist(immer()))` |
 | Server cache | **TanStack Query** | `enabled` gating; prefer mutation response over stale cache |
 | Styling | **Tailwind v4, CSS-first** (`@tailwindcss/vite`, no JS config) | token system in `references/styling.md` |
@@ -49,7 +67,10 @@ Reach for these unless the project has a specific reason not to.
 | Forms | react-hook-form + `@hookform/resolvers` + **zod** | validate at the boundary → `z.infer` the type |
 | Routing | react-router v7 data-router | when the app needs routing |
 | Icons | one library (lucide) | using two is a smell to unify |
-| Motion | framer-motion for continuous; CSS transitions otherwise | always via named constants, never magic numbers |
+| Motion | **motion** (the package formerly named framer-motion) for continuous; CSS transitions otherwise | always via named constants, never magic numbers |
+| Toasts | **sonner** behind a typed `showError/Success/Warning/Info` wrapper | uniform call sites; swap the lib in one file |
+| Theming | **next-themes**, class-based `.dark` | light `:root`, dark `.dark`; pre-paint script kills the flash |
+| Gallery | **Ladle** | lighter than Storybook; a theme decorator drives `.dark` |
 | Package manager | pnpm | |
 
 ## The core primitive pattern
@@ -128,3 +149,31 @@ repo's quality gates. Highlights: strict type-checked lint (oxlint, or ESLint fl
 `tseslint recommendedTypeChecked`), Prettier **with `prettier-plugin-tailwindcss`** plus an
 import-sort plugin, Husky pre-commit lint-staged and pre-push typecheck+test, CI of
 format-check → lint → typecheck + build.
+
+## Verifying and handing off a change
+
+When a change to a running app is done, do not stop at "typecheck passes." Take it through this
+sequence, in order, so Max gets something he can see and click - not a diff he has to trust:
+
+1. **Verify headless first.** Drive the app in a headless browser (Playwright - already in the
+   stack) against the affected flow, and screenshot the changed UI in both light and dark. This is
+   the real-behavior check: the component mounts, the interaction works, nothing renders unstyled
+   or throws. Fix what the screenshots expose before going further - a green typecheck over a blank
+   mount is a false pass.
+2. **Run the local CI gate.** The exact sequence CI runs: format-check → lint → typecheck → build →
+   test, via the repo's `pnpm` scripts. It must be clean end to end, not "clean except." If lint or
+   a test the change did not touch is red, fix it on the way through - same engineering-excellence
+   bar as everything else.
+3. **Hoist a dev server for Max to demo.** Start Vite (`pnpm dev`) wired to the right data, and
+   leave it running:
+   - **Real backend** when one is reachable (dev/staging API) - point the app's runtime env at it.
+   - **Mock backend** otherwise - MSW handlers for the touched endpoints, so the flow is fully
+     demoable with no live service.
+
+   State which of the two you used and why. Then hand back **the localhost link** plus a short
+   **verification plan**: the exact steps to reproduce the change (route → what to click → expected
+   result), which backend it is pointed at, and any edges worth poking. Max should be able to open
+   the link and confirm the change in under a minute.
+
+This is the frontend-specific flavor of the general verify-then-ship gate; run it before calling a
+UI change done.
