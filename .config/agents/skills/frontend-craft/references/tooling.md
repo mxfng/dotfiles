@@ -5,14 +5,22 @@ tiebreaker.
 
 ## Lint
 
-- **oxlint** `--max-warnings 0` is the current preference - fast, with `eslint` / `typescript`
-  / `unicorn` / `oxc` / `react` plugins. Inline exceptions via `// oxlint-disable-next-line`.
-- If ESLint instead: **flat config** with `typescript-eslint` **type-checked** presets
-  (`recommendedTypeChecked` + `stylisticTypeChecked`), `react-hooks`, `react-refresh`, and
-  **`simple-import-sort`** (as an error - automate import order). Keep rule relaxations
-  **narrowly scoped and commented** (e.g. disable `no-unsafe-*` only for one file whose
-  third-party types leak `any`). Watch-outs from his past repos: do not globally disable
-  `react-hooks/exhaustive-deps` or strip `react/prop-types` without cause.
+- The **template ships ESLint flat, type-checked** (`recommendedTypeChecked`), with
+  `projectService: true`, `react-hooks`, `react-refresh`, and **`eslint-config-prettier` last**
+  (turns off stylistic rules that fight Prettier). **oxlint** `--max-warnings 0` remains a fine
+  fast alternative (`eslint`/`typescript`/`unicorn`/`oxc`/`react` plugins) when you don't need
+  type-checked rules.
+- **Import sort has a single owner: Prettier** (`@ianvs/prettier-plugin-sort-imports`). Do *not*
+  also run eslint `simple-import-sort` - two sorters fight. (Older repos used the eslint one; the
+  template moved it into Prettier alongside the Tailwind class sorter.)
+- **Gotcha (eslint 10 + react-hooks 7):** the plugin's `configs['recommended-latest']` still ships
+  legacy **array-style `plugins`**, which the flat parser rejects. Don't spread that config into
+  `extends`; instead register `plugins: { 'react-hooks': reactHooks }` and spread only its
+  `.rules`. Same for any plugin whose config predates flat.
+- Keep rule relaxations **narrowly scoped and commented** (e.g. `unbound-method` off for test
+  files; `react-refresh/only-export-components` off for `shared/ui/**` where primitives co-export
+  their `*Variants`). Watch-outs: do not globally disable `react-hooks/exhaustive-deps` or strip
+  `react/prop-types` without cause.
 
 ## Format
 
@@ -40,6 +48,24 @@ separate `tsc` type-check script; do not let the bundler be the only type check.
 - Do not let "typecheck + lint + build" become the only gate. Anywhere logic is load-bearing
   (data transforms, derivations, store migrations), test it - that is worth the time even on a
   small project.
+
+## Component gallery
+
+**Ladle** is the gallery (lighter than Storybook). **Gotcha on the Vite 8 / Rolldown stack:**
+Ladle 5 bundles its own Vite 6, and if it loads the app's `vite.config.ts` (Vite 8 `plugin-react`
+oxc + `@rolldown/plugin-babel`) it drags Rolldown's react-refresh wrapper into Vite 6 and dies -
+`Missing field moduleType`, an unresolved `@react-refresh`, and a **blank mount** in both `serve`
+and `build`. Two-part fix (already in the template):
+
+1. **Isolate Ladle's Vite config.** Add `.ladle/vite.config.ts` with only `@tailwindcss/vite`
+   (Ladle supplies its own React handling), and point `.ladle/config.mjs` at it via
+   `viteConfig: '.ladle/vite.config.ts'`.
+2. **Explicit `@source`.** Ladle builds from a different root, so Tailwind v4's auto-scan misses
+   `src/` and every component renders unstyled. Add `@source '../../';` in `globals.css` so both
+   the app and Ladle scan the source tree.
+
+If Ladle ever fights the toolchain harder than this, an **in-app `/kitchen-sink` route** (rendered
+by the app's own working Vite pipeline) is the zero-second-toolchain fallback.
 
 ## CI
 
