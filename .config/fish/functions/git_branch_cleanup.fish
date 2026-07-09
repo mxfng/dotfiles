@@ -9,7 +9,9 @@ function git_branch_cleanup
     if test -n "$selected_branches"
         # Confirm deletion
         echo "You're about to delete these branches:"
-        printf "%s\n" $selected_branches
+        set_color red
+        printf "  %s\n" $selected_branches
+        set_color normal
 
         if confirm "Are you sure? (y/N)" N
             for branch in $selected_branches
