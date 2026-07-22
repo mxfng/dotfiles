@@ -62,6 +62,7 @@ if status is-interactive
     # tools
     abbr --add cc claude
     abbr --add cu claude_use
+    abbr --add ca claude_account
     abbr --add d docker
     abbr --add dc 'docker compose'
     abbr --add find fd
