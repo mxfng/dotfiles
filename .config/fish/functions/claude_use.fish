@@ -29,6 +29,8 @@ function claude_use
     set -U CLAUDE_CODE_BACKEND $backend
 
     # Clear the deepseek overlay; anthropic then uses the account's native login.
+    # ANTHROPIC_API_KEY too, so a stray key never overrides the /login.
+    set -e ANTHROPIC_API_KEY
     set -e ANTHROPIC_AUTH_TOKEN
     set -e ANTHROPIC_BASE_URL
     set -e ANTHROPIC_MODEL
