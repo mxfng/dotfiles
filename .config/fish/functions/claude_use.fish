@@ -1,9 +1,3 @@
-# Pick which model provider Claude Code talks to. anthropic uses the active
-# account's native subscription login (see claude_account); deepseek overlays
-# its own endpoint, key, and models via env. Choice persists in
-# CLAUDE_CODE_BACKEND and is reapplied at shell start by conf.d/claude.fish.
-# Usage:
-#   claude_use [--quiet] [anthropic|deepseek]
 function claude_use
     argparse quiet -- $argv
     or return 1
@@ -34,8 +28,7 @@ function claude_use
 
     set -U CLAUDE_CODE_BACKEND $backend
 
-    # Clear the deepseek overlay; anthropic then falls back to the active
-    # account's native subscription login (managed by claude_account).
+    # Clear the deepseek overlay; anthropic then uses the account's native login.
     set -e ANTHROPIC_AUTH_TOKEN
     set -e ANTHROPIC_BASE_URL
     set -e ANTHROPIC_MODEL
@@ -47,8 +40,7 @@ function claude_use
 
     switch "$backend"
         case anthropic
-            # Nothing to set: the cleared overlay above leaves Claude Code on the
-            # native subscription login of the active CLAUDE_CONFIG_DIR.
+            # native subscription login; nothing to set
         case deepseek
             set -gx ANTHROPIC_AUTH_TOKEN (__claude_secret deepseek-api-key "DeepSeek API key" $_flag_quiet)
             set -gx ANTHROPIC_BASE_URL https://api.deepseek.com/anthropic
