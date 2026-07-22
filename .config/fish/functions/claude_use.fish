@@ -1,32 +1,44 @@
+# Pick which account/provider Claude Code bills and authenticates against.
+# The Anthropic subscriptions (personal/personal2/work) each carry their own
+# OAuth token from `claude setup-token`, cached in the macOS Keychain; deepseek
+# routes through its own API key. Choice persists in CLAUDE_CODE_BACKEND /
+# CLAUDE_ACCOUNT and is reapplied at shell start by conf.d/claude.fish.
+# Usage:
+#   claude_use [--quiet] [personal|personal2|work|deepseek]
 function claude_use
     argparse quiet -- $argv
     or return 1
 
-    set -l backends anthropic deepseek
-    set -l backend $argv[1]
+    set -l accounts personal personal2 work
+    set -l choices $accounts deepseek
+    set -l selection $argv[1]
 
-    # No backend given: at startup (--quiet) just apply the saved choice;
+    # The label to preselect / reapply: the deepseek provider, or the remembered
+    # Anthropic account (falling back to personal on a fresh machine).
+    set -l saved personal
+    if test "$CLAUDE_CODE_BACKEND" = deepseek
+        set saved deepseek
+    else if set -q CLAUDE_ACCOUNT
+        set saved $CLAUDE_ACCOUNT
+    end
+
+    # No selection given: at startup (--quiet) just apply the saved choice;
     # otherwise prompt to pick one, with the saved choice preselected.
-    if test -z "$backend"
+    if test -z "$selection"
         if set -q _flag_quiet
-            set backend $CLAUDE_CODE_BACKEND
-            test -z "$backend"; and set backend anthropic
+            set selection $saved
         else
-            set -l default anthropic
-            set -q CLAUDE_CODE_BACKEND; and set default $CLAUDE_CODE_BACKEND
-            log "select a Claude Code provider"
-            set backend (gum choose --header "" --no-show-help --cursor.foreground 4 --selected.foreground 4 --selected "$default" $backends)
+            log "select a Claude Code account / provider"
+            set selection (gum choose --header "" --no-show-help --cursor.foreground 4 --selected.foreground 4 --selected "$saved" $choices)
             # Cancelled (esc / ctrl-c) -- leave the current config untouched.
-            test -z "$backend"; and return 0
+            test -z "$selection"; and return 0
         end
     end
 
-    if not contains -- "$backend" $backends
-        echo "Usage: claude_use [--quiet] [anthropic|deepseek]"
+    if not contains -- "$selection" $choices
+        echo "Usage: claude_use [--quiet] [personal|personal2|work|deepseek]"
         return 1
     end
-
-    set -U CLAUDE_CODE_BACKEND $backend
 
     # Clear all
     set -e ANTHROPIC_AUTH_TOKEN
@@ -39,13 +51,15 @@ function claude_use
     set -e CLAUDE_CODE_EFFORT_LEVEL
     set -e CLAUDE_CODE_OAUTH_TOKEN
 
-    switch "$backend"
-        case anthropic
-            set -gx ANTHROPIC_AUTH_TOKEN (__claude_secret anthropic-api-key "Anthropic API token" $_flag_quiet)
+    switch "$selection"
         case deepseek
-            # Anthropic OAuth token is optional in this mode: use it if already
-            # cached, but don't prompt for it just to run deepseek.
-            set -gx CLAUDE_CODE_OAUTH_TOKEN (security find-generic-password -w -s anthropic-api-key 2>/dev/null)
+            set -U CLAUDE_CODE_BACKEND deepseek
+            # Anthropic subscription is optional in this mode: keep the remembered
+            # account's OAuth token available if already cached, but never prompt.
+            if set -q CLAUDE_ACCOUNT
+                set -l fallback (security find-generic-password -w -s claude-oauth-$CLAUDE_ACCOUNT 2>/dev/null)
+                test -n "$fallback"; and set -gx CLAUDE_CODE_OAUTH_TOKEN $fallback
+            end
             set -gx ANTHROPIC_AUTH_TOKEN (__claude_secret deepseek-api-key "DeepSeek API key" $_flag_quiet)
             set -gx ANTHROPIC_BASE_URL https://api.deepseek.com/anthropic
             set -gx ANTHROPIC_DEFAULT_OPUS_MODEL deepseek-v4-pro[1m]
@@ -54,10 +68,18 @@ function claude_use
             set -gx ANTHROPIC_DEFAULT_HAIKU_MODEL deepseek-v4-flash
             set -gx CLAUDE_CODE_SUBAGENT_MODEL deepseek-v4-flash
             set -gx CLAUDE_CODE_EFFORT_LEVEL max
+        case '*'
+            # An Anthropic subscription account: authenticate with its OAuth token.
+            set -U CLAUDE_CODE_BACKEND anthropic
+            set -U CLAUDE_ACCOUNT $selection
+            set -l tok (__claude_secret claude-oauth-$selection "OAuth token for $selection (run: claude setup-token)" $_flag_quiet)
+            # Leave it unset rather than empty so Claude Code can fall back to its
+            # stored login until the token is cached on first interactive use.
+            test -n "$tok"; and set -gx CLAUDE_CODE_OAUTH_TOKEN $tok
     end
 
-    # Confirm the active provider (skip the silent startup path).
-    set -q _flag_quiet; or echo "using $backend"
+    # Confirm the active selection (skip the silent startup path).
+    set -q _flag_quiet; or echo "using $selection"
 end
 
 # Read a keychain secret, prompting with gum and caching on first use -- unless
