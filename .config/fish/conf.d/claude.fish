@@ -1,3 +1,3 @@
-# Apply the machine's saved Claude Code provider (defaults to anthropic).
-# Never prompts at startup -- use `claude_use` to choose a provider / set keys.
+# Reapply the saved account (config dir) then provider (env overlay) at shell start.
+claude_account --quiet
 claude_use --quiet

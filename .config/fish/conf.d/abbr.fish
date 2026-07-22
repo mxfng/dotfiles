@@ -60,6 +60,7 @@ if status is-interactive
     abbr --add ssh-rm 'ssh-keygen -f ~/.ssh/known_hosts -R'
 
     # tools
+    abbr --add ca claude_account
     abbr --add cc claude
     abbr --add cu claude_use
     abbr --add d docker

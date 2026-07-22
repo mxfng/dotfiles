@@ -28,7 +28,9 @@ function claude_use
 
     set -U CLAUDE_CODE_BACKEND $backend
 
-    # Clear all
+    # Clear the deepseek overlay; anthropic then uses the account's native login.
+    # ANTHROPIC_API_KEY too, so a stray key never overrides the /login.
+    set -e ANTHROPIC_API_KEY
     set -e ANTHROPIC_AUTH_TOKEN
     set -e ANTHROPIC_BASE_URL
     set -e ANTHROPIC_MODEL
@@ -37,15 +39,11 @@ function claude_use
     set -e ANTHROPIC_DEFAULT_HAIKU_MODEL
     set -e CLAUDE_CODE_SUBAGENT_MODEL
     set -e CLAUDE_CODE_EFFORT_LEVEL
-    set -e CLAUDE_CODE_OAUTH_TOKEN
 
     switch "$backend"
         case anthropic
-            set -gx ANTHROPIC_AUTH_TOKEN (__claude_secret anthropic-api-key "Anthropic API token" $_flag_quiet)
+            # native subscription login; nothing to set
         case deepseek
-            # Anthropic OAuth token is optional in this mode: use it if already
-            # cached, but don't prompt for it just to run deepseek.
-            set -gx CLAUDE_CODE_OAUTH_TOKEN (security find-generic-password -w -s anthropic-api-key 2>/dev/null)
             set -gx ANTHROPIC_AUTH_TOKEN (__claude_secret deepseek-api-key "DeepSeek API key" $_flag_quiet)
             set -gx ANTHROPIC_BASE_URL https://api.deepseek.com/anthropic
             set -gx ANTHROPIC_DEFAULT_OPUS_MODEL deepseek-v4-pro[1m]
