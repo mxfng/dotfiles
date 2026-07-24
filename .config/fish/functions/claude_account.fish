@@ -49,7 +49,7 @@ function __claude_account_scaffold --argument-names account
 
     mkdir -p "$dir"
 
-    set -l shared settings.json CLAUDE.md plugins commands agents \
+    set -l shared settings.json CLAUDE.md plugins commands agents skills \
         projects history.jsonl sessions todos file-history
 
     for item in $shared
