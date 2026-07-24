@@ -162,6 +162,17 @@ The rule scales with the verdict:
 Never write a top-level comment that restates every inline comment.
 Never open with praise as a cushion before the criticism.
 
+**Negative findings: one line, and only when they carry weight.**
+"I checked X and it is fine" is worth posting in exactly two cases:
+
+- the author could not have checked it themselves - it depends on an unmerged
+  branch, another service, an environment they do not have
+- your blocking findings raise an obvious follow-up question and this answers it
+  before they ask
+
+Anything else is padding. Do not list what you looked at.
+Say what you checked and what you concluded, in one sentence, and stop.
+
 ## Step 5 - re-read before posting
 
 Draft, then read the draft as the author would receive it.
