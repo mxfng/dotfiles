@@ -67,6 +67,11 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 # Prevent Photos from opening automatically
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
+# Screenshots: save to ~/Pictures/Screenshots, not the Desktop
+mkdir -p ~/Pictures/Screenshots
+defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
+killall SystemUIServer 2>/dev/null
+
 # Menu bar: show clock with 24-hour time and seconds
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
