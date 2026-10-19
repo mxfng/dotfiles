@@ -40,6 +40,7 @@ set -l manual_allowlist \
     mozilla \
     net.imput.helium \
     pulse \
+    rclone \
     session \
     Slack \
     xsettingsd \
