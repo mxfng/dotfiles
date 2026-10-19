@@ -9,7 +9,7 @@ set -gx XDG_PICTURES_DIR $HOME/Pictures
 set -gx XDG_STATE_HOME $HOME/.local/state
 set -gx XDG_VIDEOS_DIR $HOME/Videos
 
-set -gx BROWSER zen
+set -gx BROWSER 'open -a Helium'
 set -gx DIFFPROG nvim -d
 set -gx EDITOR nvim
 set -gx TERM xterm-256color
