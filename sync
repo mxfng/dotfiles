@@ -23,11 +23,27 @@ rsync -aP --delete \
     ./.config/fish \
     ./.config/git \
     ./.config/nvim \
+    ./.config/ssh \
     ./.config/starship.toml \
     ./.config/tmux \
     ./.config/wezterm \
     ~/.config/
 or exit 1
+
+# ssh only reads ~/.ssh/config, so include the shared hosts from there.
+# Prepended because Include only applies globally before the first Host block.
+set -l ssh_include 'Include ~/.config/ssh/config'
+mkdir -p ~/.ssh; and chmod 700 ~/.ssh
+if not contains -- $ssh_include (cat ~/.ssh/config 2>/dev/null)
+    begin
+        echo $ssh_include
+        echo
+        cat ~/.ssh/config 2>/dev/null
+    end >~/.ssh/config.tmp
+    and chmod 600 ~/.ssh/config.tmp
+    and mv ~/.ssh/config.tmp ~/.ssh/config
+    or echo 'warning: failed to add shared include to ~/.ssh/config'
+end
 
 # TODO: Remove this when Trunk.io ships newer npm version, blocks stray cache entires on old version
 rsync -aP ./.config/npmrc ~/.npmrc
