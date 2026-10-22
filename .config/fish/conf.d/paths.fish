@@ -13,6 +13,7 @@ end
 
 fish_add_path \
     $HOME/.local/bin \
+    $HOME/.local/share/pnpm \
     $HOME/.local/share/cargo/bin \
     $HOME/Developer/go/bin \
     $HOME/Developer/scripts

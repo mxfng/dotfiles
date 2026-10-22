@@ -50,6 +50,13 @@ set -gx NODE_REPL_HISTORY $XDG_STATE_HOME/node/history
 
 set -gx NPM_CONFIG_CACHE $XDG_CACHE_HOME/npm
 
+# pnpm
+set -gx PNPM_HOME $XDG_DATA_HOME/pnpm
+if not string match -q -- $PNPM_HOME $PATH
+    set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end
+
 set -gx PSQL_HISTORY $XDG_STATE_HOME/psql/history
 
 set -gx RUSTUP_HOME $XDG_DATA_HOME/rustup
