@@ -5,7 +5,7 @@
 //   node serve.cjs <root> <port> <host> <log file> [/prefix=<dir> ...]
 //
 // Log lines: ms since the load began, ms until the last byte left, bytes sent, path.
-const http = require("http"), https = require("https"), fs = require("fs"), path = require("path"), zlib = require("zlib");
+const http = require("http"), https = require("https"), fs = require("fs"), path = require("path"), zlib = require("zlib"), crypto = require("crypto");
 const [root, port, host, logFile, ...mountArgs] = process.argv.slice(2);
 if (!logFile) {
   console.error("usage: node serve.cjs <root> <port> <host> <log file> [/prefix=<dir> ...]");
@@ -64,7 +64,8 @@ const handler = (req, res) => {
     const gz = /gzip/.test(req.headers["accept-encoding"] || "") && !compressed.test(type);
     let body = buf;
     if (gz) {
-      const key = file + buf.length;
+      // By content, so a rebuilt file of the same size isn't served stale.
+      const key = crypto.createHash("sha1").update(buf).digest("hex");
       body = gzCache.get(key) || zlib.gzipSync(buf, { level: 6 });
       gzCache.set(key, body);
     }

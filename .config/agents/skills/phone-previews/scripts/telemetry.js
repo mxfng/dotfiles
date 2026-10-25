@@ -8,9 +8,31 @@
   window.__mark = mark; // the page may mark its own milestones
   window.__tm = window.__tm || []; // and push [label, start ms, duration ms] timers
 
+  // Time each requestAnimationFrame callback the page runs, so a frame's interval splits into the page's own
+  // JavaScript and everything else (style, layout, paint, compositing, the GPU).
+  var raf = window.requestAnimationFrame.bind(window), frameJs = 0;
+  window.requestAnimationFrame = function (cb) {
+    return raf(function (t) { var a = performance.now(); try { cb(t); } finally { frameJs += performance.now() - a; } });
+  };
+
+  // While a finger (or mouse button) is down: every frame as [interval ms, page JS ms], and the gestures' count.
+  T.touch = { gestures: 0, frames: [] };
+  var down = 0;
+  addEventListener("pointerdown", function () { if (down++ === 0) T.touch.gestures++; }, true);
+  var up = function () { down = Math.max(0, down - 1); };
+  addEventListener("pointerup", up, true);
+  addEventListener("pointercancel", up, true);
+
   // Main-thread stalls: requestAnimationFrame gaps over 50 ms, as [at, length].
   var last = performance.now();
-  (function tick(t) { if (t - last > 50) T.gaps.push([Math.round(last), Math.round(t - last)]); last = t; requestAnimationFrame(tick); })(performance.now());
+  (function tick(t) {
+    var d = t - last;
+    if (d > 50) T.gaps.push([Math.round(last), Math.round(d)]);
+    if (down > 0 && T.touch.frames.length < 3000) T.touch.frames.push([Math.round(d * 10) / 10, Math.round(frameJs * 10) / 10]);
+    frameJs = 0;
+    last = t;
+    raf(tick);
+  })(performance.now());
 
   var W = window.Worker;
   if (W) {
@@ -41,14 +63,21 @@
     ["drawArrays", "drawElements", "drawArraysInstanced", "drawElementsInstanced"].forEach(function (n) { var f = G[n]; G[n] = function () { mark("first GL draw"); return f.apply(this, arguments); }; });
   }
 
-  var sent = false;
+  // A beacon at 15 s, then one whenever the page is hidden or every 20 s while new touch frames come in;
+  // each is the whole record so far, numbered by `seq`.
+  T.seq = 0;
+  var sentFrames = -1;
   var send = function () {
-    if (sent) return;
-    sent = true;
+    T.seq++;
+    // Read now, not at injection: before the viewport meta is parsed, iOS reports a 980 px layout width.
+    T.screen = { dpr: devicePixelRatio, w: innerWidth, h: innerHeight };
     T.marks.sent = now();
     T.tm = window.__tm;
+    sentFrames = T.touch.frames.length;
     navigator.sendBeacon("/__beacon", JSON.stringify(T));
   };
+  setInterval(function () { if (T.seq > 0 && T.touch.frames.length !== sentFrames) send(); }, 20000);
+  addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") send(); });
   setTimeout(function () {
     // A fixed tight loop: ~30 ms on a recent iPhone (secure context, Low Power Mode off), ~2x in Low Power Mode,
     // ~10x on an insecure origin, about a second in Lockdown Mode.
