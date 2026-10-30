@@ -1,8 +1,9 @@
 // A preview server for phones: serves a build gzipped (over HTTPS when TLS_CERT and TLS_KEY are set),
-// mounts extra directories by URL prefix, logs every request, injects telemetry.js into HTML pages, and
-// writes each telemetry beacon beside the log.
+// mounts extra directories by URL prefix, forwards a prefix to another origin (an https:// target, the
+// prefix dropped, as a dev server's proxy does), logs every request, injects telemetry.js into HTML pages,
+// and writes each telemetry beacon beside the log.
 //
-//   node serve.cjs <root> <port> <host> <log file> [/prefix=<dir> ...]
+//   node serve.cjs <root> <port> <host> <log file> [/prefix=<dir> | /prefix=https://origin[/path] ...]
 //
 // Log lines: ms since the load began, ms until the last byte left, bytes sent, path.
 const http = require("http"), https = require("https"), fs = require("fs"), path = require("path"), zlib = require("zlib"), crypto = require("crypto");
@@ -11,7 +12,9 @@ if (!logFile) {
   console.error("usage: node serve.cjs <root> <port> <host> <log file> [/prefix=<dir> ...]");
   process.exit(2);
 }
-const mounts = mountArgs.map((m) => m.split("=")).map(([prefix, dir]) => [prefix.replace(/\/?$/, "/"), dir]);
+const pairs = mountArgs.map((m) => m.split("=")).map(([prefix, to]) => [prefix.replace(/\/?$/, "/"), to]);
+const mounts = pairs.filter(([, to]) => !/^https?:\/\//.test(to));
+const proxies = pairs.filter(([, to]) => /^https?:\/\//.test(to)).map(([prefix, to]) => [prefix, to.replace(/\/$/, "")]);
 const types = {
   ".html": "text/html", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json",
   ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".woff2": "font/woff2",
@@ -51,6 +54,21 @@ const handler = (req, res) => {
     log(`--- load from ${req.socket.remoteAddress} ${new Date().toISOString()} ${(req.headers["user-agent"] || "").slice(0, 80)}`);
   }
   lastAt = now;
+  const proxy = proxies.find(([prefix]) => req.url.startsWith(prefix));
+  if (proxy) {
+    const target = new URL(proxy[1] + "/" + req.url.slice(proxy[0].length));
+    const out = (target.protocol === "https:" ? https : http).get(target, { headers: { "user-agent": req.headers["user-agent"] || "serve.cjs" } }, (up) => {
+      res.writeHead(up.statusCode || 502, { "content-type": up.headers["content-type"] || "application/octet-stream", "cache-control": "no-store" });
+      up.pipe(res);
+      res.on("finish", () => log(`${now - t0}\t${up.statusCode}\tproxy\t${req.url}`));
+    });
+    out.on("error", () => {
+      res.writeHead(502);
+      res.end();
+      log(`${now - t0}\t502\tproxy\t${req.url}`);
+    });
+    return;
+  }
   const u = decodeURIComponent(req.url.split("?")[0]);
   const file = resolve(u);
   fs.readFile(file ?? "", (err, buf) => {
