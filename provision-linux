@@ -136,4 +136,17 @@ end
 ./scripts/keyd_configure.fish
 or echo 'warning: failed to set up keyd'
 
+# Acer laptops: stop charging at about 80% (Acer's battery health mode), so one left on its charger
+# around the clock, as a server, doesn't wear its battery out. Acer keeps the setting out of the
+# firmware setup, so it comes from the acer-wmi-battery driver.
+if contains $distro arch cachyos; and string match -qi '*acer*' (cat /sys/class/dmi/id/sys_vendor 2>/dev/null)
+    log "turning on Acer battery health mode"
+    paru -S --needed --noconfirm acer-wmi-battery-dkms
+    and echo "options acer-wmi-battery enable_health_mode=1" | sudo tee /etc/modprobe.d/acer-wmi-battery.conf >/dev/null
+    and echo acer-wmi-battery | sudo tee /etc/modules-load.d/acer-wmi-battery.conf >/dev/null
+    and sudo modprobe acer-wmi-battery
+    and echo 1 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode >/dev/null
+    or echo 'warning: failed to turn on Acer battery health mode'
+end
+
 echo 'done provisioning Linux'
