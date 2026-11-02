@@ -10,16 +10,16 @@ Host github.com
     IdentityFile ~/.ssh/id_ed25519
     IdentitiesOnly yes
 
-Host mbp
-    HostName maxs-macbook-pro
+Host roadie
+    HostName roadie
     User max
 
-Host mini
-    HostName macmini
+Host studio
+    HostName studio
     User mxfng
 
-Host gpu
-    HostName gpu
+Host foundry
+    HostName foundry
     User max
 
 Host mom
