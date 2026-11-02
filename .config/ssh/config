@@ -1,7 +1,7 @@
 # Shared ssh hosts, pulled in by an Include line that sync adds to ~/.ssh/config.
 # Machine-specific entries (colima, gcloud) stay untracked in ~/.ssh/config.
 #
-# Tailnet hosts use MagicDNS names, and each User must exist on that machine:
+# Tailnet hosts use their Tailscale IPs (stable per device; MagicDNS names don't resolve on every machine), and each User must exist on that machine:
 # Tailscale SSH only logs in as a local account with the same name.
 
 Host github.com
@@ -11,15 +11,15 @@ Host github.com
     IdentitiesOnly yes
 
 Host roadie
-    HostName roadie
+    HostName 100.68.113.20
     User max
 
 Host studio
-    HostName studio
+    HostName 100.72.222.102
     User mxfng
 
 Host foundry
-    HostName foundry
+    HostName 100.108.50.73
     User max
 
 Host mom
