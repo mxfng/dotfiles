@@ -38,6 +38,7 @@ switch $distro
             grpcurl \
             gum \
             helium-browser-bin \
+            hyprland \
             hypridle \
             hyprlock \
             hyprpaper \
@@ -52,6 +53,7 @@ switch $distro
             obs-studio \
             ouch \
             pgcli \
+            playerctl \
             polkit-kde-agent \
             rancher-k3d-bin \
             ripgrep \
@@ -64,6 +66,7 @@ switch $distro
             ttf-jetbrains-mono-nerd \
             uv \
             waybar \
+            wireplumber \
             wezterm-nightly-bin \
             wl-clipboard \
             zen-browser-bin \
