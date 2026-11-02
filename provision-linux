@@ -149,4 +149,13 @@ if contains $distro arch cachyos; and string match -qi '*acer*' (cat /sys/class/
     or echo 'warning: failed to turn on Acer battery health mode'
 end
 
+# A laptop kept as an always-on server: closing the lid must not suspend it, on battery or charger.
+if confirm "Keep running with the lid closed (always-on server)? [y/N]" N
+    log "ignoring the lid switch"
+    sudo mkdir -p /etc/systemd/logind.conf.d
+    and printf '[Login]\nHandleLidSwitch=ignore\nHandleLidSwitchExternalPower=ignore\nHandleLidSwitchDocked=ignore\n' | sudo tee /etc/systemd/logind.conf.d/server.conf >/dev/null
+    and sudo systemctl kill -s HUP systemd-logind
+    or echo 'warning: failed to ignore the lid switch'
+end
+
 echo 'done provisioning Linux'
