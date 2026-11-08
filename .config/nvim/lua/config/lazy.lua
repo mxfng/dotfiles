@@ -19,7 +19,9 @@ require("lazy").setup({
     {
       "LazyVim/LazyVim",
       import = "lazyvim.plugins",
-      -- opts = { news = { lazyvim = false, neovim = false } },
+      -- sync overwrites lazyvim.json, where LazyVim records news already seen,
+      -- so news would otherwise reopen on every start after a sync.
+      opts = { news = { lazyvim = false, neovim = false } },
     },
     { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "plugins" },
