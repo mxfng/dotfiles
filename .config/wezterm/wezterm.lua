@@ -6,7 +6,7 @@ config.term = "xterm-256color"
 
 config.color_scheme = "rose-pine-moon"
 
-config.window_background_opacity = 0.7
+config.window_background_opacity = 0.88
 
 if is_mac then
 	config.window_decorations = "RESIZE"
