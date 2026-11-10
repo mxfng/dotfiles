@@ -3,12 +3,6 @@
 -- its own repo; delete this file to take it out of nvim.
 local dir = vim.fn.expand("~/Developer/matisse")
 
-local function m(fn)
-  return function()
-    require("matisse")[fn]()
-  end
-end
-
 return {
   {
     dir = dir,
@@ -16,13 +10,20 @@ return {
     cond = vim.uv.fs_stat(dir) ~= nil,
     lazy = false,
     opts = {},
-    keys = {
-      { "<leader>m", "", desc = "+matisse", mode = { "n", "x" } },
-      { "<leader>mc", m("comment"), desc = "Comment", mode = { "n", "x" } },
-      { "<leader>md", m("delete"), desc = "Delete comment" },
-      { "<leader>ml", m("list"), desc = "List comments" },
-      { "<leader>ms", m("review"), desc = "Submit review" },
-      { "<leader>mt", m("toggle_thread"), desc = "Toggle whole thread" },
-    },
+  },
+  {
+    -- The follow view's state: "hold · 3" while agent edits wait.
+    "nvim-lualine/lualine.nvim",
+    optional = true,
+    opts = function(_, opts)
+      table.insert(opts.sections.lualine_x, 1, {
+        function()
+          return require("matisse").follow_status()
+        end,
+        cond = function()
+          return package.loaded["matisse"] ~= nil and require("matisse").follow_status() ~= ""
+        end,
+      })
+    end,
   },
 }
