@@ -22,6 +22,7 @@ return {
       { "<leader>md", m("delete"), desc = "Delete comment" },
       { "<leader>ml", m("list"), desc = "List comments" },
       { "<leader>ms", m("review"), desc = "Submit review" },
+      { "<leader>mt", m("toggle_thread"), desc = "Toggle whole thread" },
     },
   },
 }
