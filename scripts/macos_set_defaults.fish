@@ -71,6 +71,10 @@ defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 mkdir -p ~/Pictures/Screenshots
 defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
 
+# Screenshots: copy to clipboard instead of saving a file (location above is the fallback
+# if target is switched back to file)
+defaults write com.apple.screencapture target -string clipboard
+
 # Menu bar: show clock with 24-hour time and seconds
 defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
 defaults write com.apple.menuextra.clock ShowSeconds -bool true
