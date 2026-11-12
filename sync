@@ -44,9 +44,8 @@ if not contains -- $ssh_include (cat ~/.ssh/config 2>/dev/null)
     or echo 'warning: failed to add shared include to ~/.ssh/config'
 end
 
-# Agentic: AGENTS.md at ~ for tool discovery, guides under ~/.config/agents
+# Agentic: AGENTS.md at ~ for tool discovery, linked as Claude's global CLAUDE.md
 rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
-rsync -aP ./.config/agents/{VOICE,OPINIONS}.md ~/.config/agents/
 mkdir -p ~/.claude; and ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
 rsync -aP ./.config/agents/claude/settings.json ~/.claude/settings.json
 

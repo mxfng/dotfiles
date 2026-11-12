@@ -4,7 +4,7 @@ These are common instructions for Max's agents across all scenarios.
 
 ## General Guidelines
 
-- Never use the em dash "-". Use the plain dash "-" instead.
+- Never use the em dash (U+2014). Use a plain hyphen-minus "-" instead.
 - When writing commit messages, never auto-add your agent name as a co-author.
 - Never manually modify `CHANGELOG.md` files or any files that are marked as auto-generated.
 - When writing or substantially editing long Markdown files, preserve normal Markdown structure. Put each full sentence on its own line, but avoid wrapping multiple sentences onto one physical line.
@@ -15,16 +15,8 @@ These are common instructions for Max's agents across all scenarios.
 
 ## Editing my dotfiles and configs
 
-My shell, editor, terminal, window-manager, and agent configs under `~/.config/` (including `~/.config/agents/`), along with `~/AGENTS.md` at the home root, are deployed copies, not the source of truth. They come from my dotfiles repo at `~/Developer/dotfiles` and are copied into place by its `./sync` script.
+My shell, editor, terminal, window-manager, and agent configs under `~/.config/`, along with `~/AGENTS.md`, `~/.claude/settings.json` and `~/.claude/skills/`, are deployed copies, not the source of truth. They come from my dotfiles repo at `~/Developer/dotfiles` and are copied into place by its `./sync` script.
 
 - Edit the source in `~/Developer/dotfiles/`, then run `./sync` to deploy. Do not edit the deployed copy in `~/.config/` (or `~/AGENTS.md`, etc.) directly; the next sync overwrites it and the change is lost from version control.
 - New config must be added to the repo's `sync` script to deploy, and a new `~/.config/` dir may need a `config_audit` allowlist entry. The repo's own `AGENTS.md` has the details.
 - If you're unsure whether a path is managed by the repo, check whether it exists under `~/Developer/dotfiles/.config/` before editing in place.
-
-## Max's Opinions
-
-When you are working on something that would benefit from being informed by Max's viewpoints, read `~/.config/agents/OPINIONS.md` to understand them.
-
-## Voice Profile
-
-When you are talking or posting on behalf of Max using his identity, read `~/.config/agents/VOICE.md` to see how Max writes.
