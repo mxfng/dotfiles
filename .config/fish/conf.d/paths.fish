@@ -1,8 +1,8 @@
-# Homebrew first: each fish_add_path prepends, so the GNU paths below land ahead of it
-fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
-
-# NOTE: GNU tools have path priority over macOS builtins
 if test -d /opt/homebrew
+    # Homebrew first: each fish_add_path prepends, so the GNU paths below land ahead of it
+    fish_add_path /opt/homebrew/bin /opt/homebrew/sbin
+
+    # NOTE: GNU tools have path priority over macOS builtins
     fish_add_path \
         /opt/homebrew/opt/coreutils/libexec/gnubin \
         /opt/homebrew/opt/findutils/libexec/gnubin \
