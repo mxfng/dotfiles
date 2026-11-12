@@ -1,0 +1,9 @@
+# Only for my own machines. Installed by ./provision when you answer yes to
+# "personal machine?"; Brewfile has the baseline that goes on every machine.
+
+brew "gallery-dl"
+brew "yt-dlp"
+
+cask "backblaze"
+cask "dropbox"
+cask "zoom"

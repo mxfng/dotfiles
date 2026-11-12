@@ -23,7 +23,8 @@ scripts/          helper scripts, deployed to ~/Developer/scripts
   config_audit.fish   flags untracked dirs in ~/.config against an allowlist
 provision         macOS bootstrap: brew bundle, sync, shell, apps
 sync              rsync .config/* into ~/.config and refresh scripts
-Brewfile          macOS packages
+Brewfile          macOS packages for every machine
+Brewfile.personal packages for my own machines only (provision asks)
 ```
 
 ## Terminology

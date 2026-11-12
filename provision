@@ -16,6 +16,11 @@ log "installing packages"
 brew bundle
 or exit 1
 
+if confirm "Is this a personal machine (install Brewfile.personal)? [y/N]" N
+    brew bundle --file Brewfile.personal
+    or exit 1
+end
+
 # Sync configs to home
 ./sync
 or exit 1
