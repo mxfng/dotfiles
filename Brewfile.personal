@@ -1,8 +1,0 @@
-# Installed by ./provision via prompt
-
-brew "gallery-dl"
-brew "yt-dlp"
-
-cask "backblaze"
-cask "dropbox"
-cask "zoom"

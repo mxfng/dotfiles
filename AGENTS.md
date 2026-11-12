@@ -15,7 +15,7 @@ Keep `~` and `~/.config/` clean.
 scripts/      deployed to ~/Developer/scripts
 provision     new-Mac bootstrap: brew bundle, sync, shell, apps
 sync          deploys .config/ and scripts/
-Brewfile      every machine; Brewfile.personal is for Max's machines only
+Brewfile      Homebrew packages
 ```
 
 ## sync

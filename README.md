@@ -27,9 +27,6 @@ cd ~/Developer/dotfiles
 ./provision
 ```
 
-`Brewfile` is the baseline for every machine.
-`./provision` asks whether this is a personal machine before installing `Brewfile.personal`.
-
 ## Sync
 
 Run `./sync` after pulling updates.
