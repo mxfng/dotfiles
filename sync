@@ -4,6 +4,9 @@ cd (dirname (status filename))
 
 source ./.config/fish/functions/ohai.fish
 
+ohai 'pulling updates'
+git pull --ff-only --no-rebase --quiet; or echo 'warning: git pull failed, syncing local files only'
+
 ohai 'syncing dotfiles'
 
 # Ensure directories exist
