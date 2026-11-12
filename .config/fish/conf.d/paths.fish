@@ -8,9 +8,7 @@ if test -d /opt/homebrew
         /opt/homebrew/opt/gnu-tar/libexec/gnubin \
         /opt/homebrew/opt/gnu-which/libexec/gnubin \
         /opt/homebrew/opt/grep/libexec/gnubin \
-        /opt/homebrew/opt/rustup/bin \
-        /opt/homebrew/bin \
-        /opt/homebrew/sbin
+        /opt/homebrew/opt/rustup/bin
 end
 
 fish_add_path \
