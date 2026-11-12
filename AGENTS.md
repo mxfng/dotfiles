@@ -17,7 +17,7 @@ The guiding principle is root cleanliness via XDG: configuration lives under
   fish/           shell config; functions/ is autoloaded, one function per file
   nvim/ tmux/ wezterm/ starship.toml   editor and terminal
   aerospace/      macOS tiling WM
-  sol/ colima/    tools that also store runtime state (synced surgically)
+  sol/            tool that also stores runtime state (synced surgically)
   ssh/            shared ssh hosts, included from ~/.config/ssh by ~/.ssh/config
 scripts/          helper scripts, deployed to ~/Developer/scripts
   config_audit.fish   flags untracked dirs in ~/.config against an allowlist
@@ -43,7 +43,7 @@ Brewfile          macOS packages
 `sync` is the heart of the repo. It rsyncs a hand-picked set of `.config`
 subtrees into `~/.config/` (with `--delete` for fully-managed trees, and
 surgical single-file copies for tools that keep runtime state alongside config,
-e.g. `sol`, `colima`). It also deploys `.config/agents` to the home root and
+e.g. `sol`). It also deploys `.config/agents` to the home root and
 runs `config_audit` at the end. It also prepends an `Include ~/.config/ssh/config`
 line to `~/.ssh/config`, since ssh has no XDG lookup; machine-specific hosts stay
 untracked below it. Copy-based on purpose: no symlinks back into the

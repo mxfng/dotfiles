@@ -1,5 +1,5 @@
 # Shared ssh hosts, pulled in by an Include line that sync adds to ~/.ssh/config.
-# Machine-specific entries (colima, gcloud) stay untracked in ~/.ssh/config.
+# Machine-specific entries stay untracked in ~/.ssh/config.
 #
 # Tailnet hosts use their Tailscale IPs (stable per device; MagicDNS names don't resolve on every machine), and each User must exist on that machine:
 # Tailscale SSH only logs in as a local account with the same name.

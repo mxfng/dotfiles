@@ -68,10 +68,6 @@ if test -d ./.config/sol
     rsync -aP ./.config/sol/config.json ~/.config/sol/
     rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
 end
-if test -d ./.config/colima
-    mkdir -p ~/.config/colima/default
-    rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
-end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist
 ./scripts/config_audit.fish --quiet
