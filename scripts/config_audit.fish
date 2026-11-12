@@ -14,22 +14,12 @@ set dotfiles_config ~/Developer/dotfiles/.config
 # Tool-generated dirs expected in ~/.config/ but not tracked in dotfiles
 set -l manual_allowlist \
     btop \
-    colima \
     configstore \
-    docker \
-    gcloud \
     gh \
     go \
     homebrew \
-    k9s \
-    kube \
-    lazydocker \
-    lazygit \
-    mole \
     net.imput.helium \
-    rclone \
-    Slack \
-    zen
+    Slack
 
 # Parse flags
 set -l mode audit

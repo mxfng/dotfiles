@@ -66,7 +66,6 @@ if status is-interactive
     abbr --add grep rg
     abbr --add k kubectl
     abbr --add oc opencode
-    abbr --add psql pgcli
     abbr --add tar ouch
     abbr --add top btop
     abbr --add vi nvim
