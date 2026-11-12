@@ -11,9 +11,6 @@ if status is-interactive
     if command -q pbcopy
         abbr --add tocb pbcopy
         abbr --add fromcb pbpaste
-    else if command -q wl-copy
-        abbr --add tocb wl-copy
-        abbr --add fromcb wl-paste
     end
 
     # files

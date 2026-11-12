@@ -75,17 +75,6 @@ if test (uname) = Darwin
         mkdir -p ~/.config/colima/default
         rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
     end
-else
-    # Linux
-    rsync -aP --delete \
-        ./.config/hypr \
-        ./.config/rofi \
-        ./.config/waybar \
-        ~/.config/
-
-    # Desktop entries (lock screen, power off, restart)
-    mkdir -p ~/.local/share/applications
-    rsync -aP ./.local/share/applications/ ~/.local/share/applications/
 end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist

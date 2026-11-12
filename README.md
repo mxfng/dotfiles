@@ -1,6 +1,6 @@
 # Max's dotfiles
 
-My personal dotfiles for macOS and Linux.
+My personal dotfiles for macOS, with a terminal-only setup for Linux.
 
 - fish shell
 - Neovim
@@ -9,7 +9,6 @@ My personal dotfiles for macOS and Linux.
 - Starship prompt
 - asdf vm
 - AeroSpace tiling WM on macOS
-- Hypr, rofi, waybar on Linux
 
 ## Provision
 
@@ -27,12 +26,14 @@ cd ~/Developer/dotfiles
 # Run the relevant provision command
 ```
 
-| Platform        | Prerequisites                                                  | Command             |
-| --------------- | -------------------------------------------------------------- | ------------------- |
-| macOS           | [Homebrew](https://brew.sh), fish                              | `./provision`       |
-| Arch Linux      | AUR helper ([paru](https://github.com/Morganamilo/paru)), fish | `./provision-linux` |
-| CachyOS         | fish (paru included)                                           | `./provision-linux` |
-| Debian / Ubuntu | fish                                                           | `./provision-linux` |
+| Platform                   | Prerequisites                                                  | Command             |
+| -------------------------- | -------------------------------------------------------------- | ------------------- |
+| macOS                      | [Homebrew](https://brew.sh), fish                              | `./provision`       |
+| Arch Linux / CachyOS       | AUR helper ([paru](https://github.com/Morganamilo/paru)), fish | `./provision-linux` |
+| Debian / Ubuntu            | fish                                                           | `./provision-linux` |
+
+Linux installs terminal tools only.
+The old Hyprland desktop setup is preserved in the `archive/linux` git tag.
 
 ## Sync
 

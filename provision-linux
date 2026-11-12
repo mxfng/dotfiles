@@ -19,13 +19,11 @@ switch $distro
         paru -S --needed --noconfirm \
             asdf-vm \
             bat \
-            brightnessctl \
             btop \
             curl \
             docker \
             docker-buildx \
             docker-compose \
-            dunst \
             fd \
             ffmpeg \
             fish \
@@ -37,39 +35,23 @@ switch $distro
             glow \
             grpcurl \
             gum \
-            helium-browser-bin \
-            hyprland \
-            hypridle \
-            hyprlock \
-            hyprpaper \
             jq \
             k9s \
-            keyd \
             kubectl \
             lazydocker \
             lazygit \
             mkcert \
             neovim \
-            obs-studio \
             ouch \
             pgcli \
-            playerctl \
-            polkit-kde-agent \
             rancher-k3d-bin \
             ripgrep \
-            rofi \
             rsync \
             starship \
             tailscale \
             tmux \
             tree-sitter-cli \
-            ttf-jetbrains-mono-nerd \
             uv \
-            waybar \
-            wireplumber \
-            wezterm-nightly-bin \
-            wl-clipboard \
-            zen-browser-bin \
             zoxide
     case ubuntu debian
         sudo apt-get update
@@ -131,31 +113,6 @@ end
 if command -q tailscale
     sudo systemctl enable --now tailscaled.service
     or echo 'warning: failed to enable tailscale'
-end
-
-./scripts/keyd_configure.fish
-or echo 'warning: failed to set up keyd'
-
-# Acer laptops: stop charging at about 80% (Acer's battery health mode), so one left on its charger
-# around the clock, as a server, doesn't wear its battery out. Acer keeps the setting out of the
-# firmware setup, so it comes from the acer-wmi-battery driver.
-if contains $distro arch cachyos; and string match -qi '*acer*' (cat /sys/class/dmi/id/sys_vendor 2>/dev/null)
-    log "turning on Acer battery health mode"
-    paru -S --needed --noconfirm acer-wmi-battery-dkms
-    and echo "options acer-wmi-battery enable_health_mode=1" | sudo tee /etc/modprobe.d/acer-wmi-battery.conf >/dev/null
-    and echo acer-wmi-battery | sudo tee /etc/modules-load.d/acer-wmi-battery.conf >/dev/null
-    and sudo modprobe acer-wmi-battery
-    and echo 1 | sudo tee /sys/bus/wmi/drivers/acer-wmi-battery/health_mode >/dev/null
-    or echo 'warning: failed to turn on Acer battery health mode'
-end
-
-# A laptop kept as an always-on server: closing the lid must not suspend it, on battery or charger.
-if confirm "Keep running with the lid closed (always-on server)? [y/N]" N
-    log "ignoring the lid switch"
-    sudo mkdir -p /etc/systemd/logind.conf.d
-    and printf '[Login]\nHandleLidSwitch=ignore\nHandleLidSwitchExternalPower=ignore\nHandleLidSwitchDocked=ignore\n' | sudo tee /etc/systemd/logind.conf.d/server.conf >/dev/null
-    and sudo systemctl kill -s HUP systemd-logind
-    or echo 'warning: failed to ignore the lid switch'
 end
 
 echo 'done provisioning Linux'
