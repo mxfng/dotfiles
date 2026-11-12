@@ -12,8 +12,8 @@ and echo 'error: this script is for macOS only'
 and exit 1
 
 ohai "installing packages"
-brew bundle
-or exit 1
+brew bundle; or exit 1
+brew bundle cleanup; or true
 
 # Sync configs to home
 ./sync
