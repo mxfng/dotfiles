@@ -10,7 +10,6 @@ if test -d /opt/homebrew
         /opt/homebrew/opt/rustup/bin \
         /opt/homebrew/bin \
         /opt/homebrew/sbin
-
 end
 
 fish_add_path \
