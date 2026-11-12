@@ -1,5 +1,5 @@
-# NOTE: GNU tools have path priority over macOS builtins
 if test -d /opt/homebrew
+    # NOTE: GNU tools have path priority over macOS builtins
     fish_add_path \
         /opt/homebrew/opt/coreutils/libexec/gnubin \
         /opt/homebrew/opt/findutils/libexec/gnubin \
@@ -8,7 +8,9 @@ if test -d /opt/homebrew
         /opt/homebrew/opt/gnu-tar/libexec/gnubin \
         /opt/homebrew/opt/gnu-which/libexec/gnubin \
         /opt/homebrew/opt/grep/libexec/gnubin \
-        /opt/homebrew/opt/rustup/bin
+        /opt/homebrew/opt/rustup/bin \
+        /opt/homebrew/bin \
+        /opt/homebrew/sbin
 end
 
 fish_add_path \
