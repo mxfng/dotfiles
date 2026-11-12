@@ -1,4 +1,5 @@
 brew "asdf"
+brew "bash"
 brew "bat"
 brew "btop"
 brew "curl"
