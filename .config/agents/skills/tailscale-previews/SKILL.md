@@ -1,9 +1,9 @@
 ---
-name: phone-previews
+name: tailscale-previews
 description: How to put a web app in front of Max's phone and measure it there - previews over the tailnet with HTTPS, a production build served gzipped, a telemetry beacon that reports real-device timings back, and the traps that make phone numbers lie (insecure origins, Low Power Mode, dev servers). Also how to reach his other Macs over Tailscale SSH (check links, launchd env, Keychain). Use whenever Max will test something on his phone or iPad, asks for a preview URL, reports mobile slowness or jank, or work needs a command run on another machine on the tailnet.
 ---
 
-# phone-previews
+# tailscale-previews
 
 Max often reviews from his phone, and many users of what he builds are on phones.
 A phone test is only worth asking for if the numbers it produces are real, so set it up the way users get the site.
