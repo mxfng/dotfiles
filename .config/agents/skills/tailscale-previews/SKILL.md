@@ -1,12 +1,14 @@
 ---
 name: tailscale-previews
-description: Serve a web app preview to Max's phone over Tailscale with HTTPS, and measure real-device performance with a telemetry beacon. Also covers SSH to Max's other Macs over Tailscale (auth links, launchd env, Keychain). Use when Max tests on his phone or iPad, asks for a preview URL, reports mobile slowness, or a command must run on another Mac on the tailnet.
+description: Serve a web app preview over Tailscale with HTTPS to any of Max's devices - his phone, iPad, or another computer he works from over SSH - and measure real-device performance with a telemetry beacon. Also covers SSH to Max's other Macs over Tailscale (auth links, launchd env, Keychain). Use when Max tests on his phone or iPad, asks for a preview URL, wants to check a change end to end from another machine, reports mobile slowness, or a command must run on another Mac on the tailnet.
 ---
 
 # tailscale-previews
 
-A phone test is useful only if its numbers are real.
-Serve the preview the way users get the site.
+Max can open a preview on any device on his tailnet.
+Use this when he tests on his phone or iPad, and when he works on this machine over SSH from another computer and wants to check a change end to end in that computer's browser.
+
+Serve the preview the way users get the site, so that the test is real.
 
 ## Messages to Max on his phone
 
