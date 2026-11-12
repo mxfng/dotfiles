@@ -46,7 +46,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "c"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -159,11 +159,20 @@ on-mode-changed = []
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     cmd-alt-shift-semicolon = 'mode service'
 
+    # Enter launch mode: one key opens or focuses an app, then back to main
+    cmd-alt-o = 'mode launch'
+
+    # Toggle Google Calendar as a fixed-width right-edge sidebar
+    cmd-alt-c = 'exec-and-forget ~/Developer/scripts/calendar_toggle.fish'
+
     # Toggle fullscreen
     cmd-alt-z = 'fullscreen'
 
     # Toggle float and center
     cmd-alt-t = 'layout floating tiling'
+
+    # Open or focus WezTerm
+    cmd-alt-w = 'exec-and-forget open -a WezTerm'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -180,6 +189,14 @@ on-mode-changed = []
     cmd-alt-shift-j = ['join-with down', 'mode main']
     cmd-alt-shift-k = ['join-with up', 'mode main']
     cmd-alt-shift-l = ['join-with right', 'mode main']
+
+# 'launch' binding mode: cmd-alt-o, then a letter. URLs open in the default browser (Helium).
+[mode.launch.binding]
+    esc = 'mode main'
+    t = ['exec-and-forget open -a WezTerm', 'mode main']
+    g = ['exec-and-forget open https://mail.google.com', 'mode main']
+    c = ['exec-and-forget open https://calendar.google.com', 'mode main']
+    s = ['exec-and-forget open -a Slack', 'mode main']
 
 # For second monitor
 # Workspaces 1-6 always on main, 7-8 on secondary (fallback to main when disconnected)

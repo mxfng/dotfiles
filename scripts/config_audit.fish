@@ -18,6 +18,7 @@ set -l manual_allowlist \
     btop \
     cachyos \
     colima \
+    configstore \
     dconf \
     docker \
     gcloud \
