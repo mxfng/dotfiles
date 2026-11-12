@@ -1,7 +1,6 @@
 #!/usr/bin/env fish
 
 # Install the Claude Code CLI (if missing) and Max's global skills.
-# Provider selection and API keys are handled separately by `claude_use`.
 # Usage:
 #   ./scripts/claude_setup.fish   install the CLI and the pinned skill set
 
