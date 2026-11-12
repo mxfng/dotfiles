@@ -36,7 +36,7 @@ A phone test is only worth asking for if the numbers it produces are real, so se
 
 ```sh
 TLS_CERT=<dir>/ts.crt TLS_KEY=<dir>/ts.key \
-  node ~/.claude/skills/phone-previews/scripts/serve.cjs <build dir> <port> <tailnet ip> <log file> [/data=<dir> ...] [/skin=https://crafthead.net ...]
+  node ~/.claude/skills/tailscale-previews/scripts/serve.cjs <build dir> <port> <tailnet ip> <log file> [/data=<dir> ...] [/skin=https://crafthead.net ...]
 ```
 
 It serves the build gzipped with `no-store`, mounts extra directories by URL prefix, logs every request (ms since the load started, ms until the last byte left, bytes sent), and injects `scripts/telemetry.js` into HTML.
