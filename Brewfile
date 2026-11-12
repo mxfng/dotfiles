@@ -11,7 +11,7 @@ brew "gh"
 brew "git"
 brew "gum"
 brew "jq"
-brew "libpq"
+brew "libpq", link: true
 brew "neovim"
 brew "ouch"
 brew "ripgrep"
