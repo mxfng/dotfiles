@@ -32,17 +32,13 @@ if test $SHELL != /opt/homebrew/bin/fish
     or exit 1
 end
 
-./scripts/fish_generate_completions.fish
-or echo 'warning: failed to generate fish completions'
-
 touch ~/.hushlogin
 
-log "setting up terminal tools"
-./scripts/tmux_setup_plugins.fish
-or echo 'warning: failed to set up tmux plugins'
-
-./scripts/claude_setup.fish
-or echo 'warning: failed to set up Claude Code'
+log "setting up tmux plugins"
+test -d ~/.config/tmux/plugins/tpm
+or git clone -q https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+and ~/.config/tmux/plugins/tpm/bin/install_plugins
+or echo 'warning: failed to install tmux plugins'
 
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
@@ -51,10 +47,6 @@ end
 
 if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q WezTerm
     osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/WezTerm.app", hidden:false}' 2>/dev/null
-end
-
-if not osascript -e 'tell application "System Events" to get the name of every login item' | grep -q Sol
-    osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Sol.app", hidden:false}' 2>/dev/null
 end
 
 if confirm "Set macOS system defaults? [y/N]" N

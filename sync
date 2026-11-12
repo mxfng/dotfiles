@@ -17,7 +17,6 @@ set -l git_name (git config --global user.name 2>/dev/null)
 set -l git_email (git config --global user.email 2>/dev/null)
 
 rsync -aP --delete \
-    --exclude fish/completions/ \
     --exclude fish/fish_variables \
     --exclude tmux/plugins/ \
     ./.config/fish \

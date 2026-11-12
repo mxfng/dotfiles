@@ -53,9 +53,8 @@ repo.
 ### fish functions
 
 `.config/fish/functions/` is autoloaded: each file defines one function matching
-its filename (e.g. `agents_init.fish`). Shared helpers like `log` and `confirm`
-are sourced by scripts as needed. `agents_init` scaffolds an AGENTS.md +
-CLAUDE.md symlink pair in any project repo.
+its filename (e.g. `git_branch_cleanup.fish`). Shared helpers like `log` and
+`confirm` are sourced by scripts as needed.
 
 ## End-to-end testing
 
