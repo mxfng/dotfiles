@@ -60,11 +60,8 @@ if status is-interactive
     abbr --add ca claude_account
     abbr --add cc claude
     abbr --add cu claude_use
-    abbr --add d docker
-    abbr --add dc 'docker compose'
     abbr --add find fd
     abbr --add grep rg
-    abbr --add k kubectl
     abbr --add oc opencode
     abbr --add tar ouch
     abbr --add top btop
