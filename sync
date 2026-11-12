@@ -45,9 +45,6 @@ if not contains -- $ssh_include (cat ~/.ssh/config 2>/dev/null)
     or echo 'warning: failed to add shared include to ~/.ssh/config'
 end
 
-# TODO: Remove this when Trunk.io ships newer npm version, blocks stray cache entires on old version
-rsync -aP ./.config/npmrc ~/.npmrc
-
 # Agentic: AGENTS.md at ~ for tool discovery, guides under ~/.config/agents
 rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
 rsync -aP ./.config/agents/{VOICE,OPINIONS}.md ~/.config/agents/
