@@ -32,6 +32,7 @@ if status is-interactive
     abbr --add --set-cursor commit 'git commit -m "%"'
     abbr --add fa 'git fetch --all'
     abbr --add fetch "git fetch"
+    abbr --add clean git_cleanup
     abbr --add fuckit 'git reset --hard && git clean -df'
     abbr --add g git
     abbr --add gd 'git diff'
