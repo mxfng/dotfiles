@@ -2,9 +2,6 @@
 
 My personal dotfiles for macOS.
 
-A Linux setup used to live here.
-It is preserved in the `archive/linux` git tag.
-
 - fish shell
 - Neovim
 - WezTerm
@@ -12,6 +9,8 @@ It is preserved in the `archive/linux` git tag.
 - Starship prompt
 - asdf vm
 - AeroSpace tiling WM
+
+I try to keep my tools and their configs minimalist and tidy for maintainability.
 
 ## Provision
 
@@ -27,9 +26,13 @@ cd ~/Developer/dotfiles
 ./provision
 ```
 
+Provision is designed to be idempotent and can be run on a machine more than once as updates occur.
+
 ## Sync
 
 Run `./sync` after pulling updates.
+
+Configuration files tracked in this repository are the source of truth for their machine. All updates to configuration should be made here, not in the home folder.
 
 ## Thanks
 

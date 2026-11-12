@@ -44,16 +44,10 @@ if not contains -- $ssh_include (cat ~/.ssh/config 2>/dev/null)
     or echo 'warning: failed to add shared include to ~/.ssh/config'
 end
 
-# Agentic: AGENTS.md at ~ for tool discovery, linked as Claude's global CLAUDE.md
+# Claude related stuff
 rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
 mkdir -p ~/.claude; and ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
 rsync -aP ./.config/agents/claude/settings.json ~/.claude/settings.json
-
-# Personal Claude Code skills. No --delete: protect externally installed skills
-if test -d ./.config/agents/skills
-    mkdir -p ~/.claude/skills
-    rsync -aP ./.config/agents/skills/ ~/.claude/skills/
-end
 
 rsync -aP --delete ./.config/aerospace ~/.config/
 
