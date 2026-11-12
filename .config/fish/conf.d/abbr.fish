@@ -60,7 +60,6 @@ if status is-interactive
     abbr --add cc claude
     abbr --add find fd
     abbr --add grep rg
-    abbr --add oc opencode
     abbr --add tar ouch
     abbr --add top btop
     abbr --add vi nvim
