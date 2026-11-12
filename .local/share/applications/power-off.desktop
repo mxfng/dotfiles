@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Power Off
-Exec=systemctl poweroff
-Type=Application
-Icon=system-shutdown
-Categories=System;

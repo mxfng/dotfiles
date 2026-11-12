@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Lock Screen
-Exec=hyprlock
-Type=Application
-Icon=system-lock-screen
-Categories=System;
