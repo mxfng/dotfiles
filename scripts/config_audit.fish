@@ -1,13 +1,18 @@
 #!/usr/bin/env fish
 
-# Audit ~/.config for directories not tracked by dotfiles. Report only; delete strays by hand.
+source (dirname (status filename))/../.config/fish/functions/confirm.fish
+
+# Audit ~/.config for unrecognized directories not tracked by dotfiles.
 #
 # Usage:
-#   config_audit.fish          # list unknowns, or report clean
-#   config_audit.fish --quiet  # print nothing when clean
+#   config_audit.fish         # audit only; list unknowns
+#   config_audit.fish --clean # prompt to delete each unknown
+#   config_audit.fish --purge # auto-delete all unknowns
+
+set dotfiles_config ~/Developer/dotfiles/.config
 
 # Tool-generated dirs expected in ~/.config/ but not tracked in dotfiles
-set -l allowlist \
+set -l manual_allowlist \
     btop \
     configstore \
     gh \
@@ -15,22 +20,69 @@ set -l allowlist \
     homebrew \
     net.imput.helium \
     Slack
-for entry in ~/Developer/dotfiles/.config/*
+
+# Parse flags
+set -l mode audit
+set -l quiet false
+for arg in $argv
+    switch $arg
+        case --clean
+            set mode clean
+        case --purge
+            set mode purge
+        case --quiet -q
+            set quiet true
+        case '*'
+            echo "unknown flag: $arg" >&2
+            exit 1
+    end
+end
+
+# Build allowlist from tracked dotfiles + manual entries
+set -l allowlist $manual_allowlist
+for entry in $dotfiles_config/*
     set -a allowlist (basename $entry)
 end
 
+# Find unknowns
 set -l unknowns
 for entry in ~/.config/*/
-    contains -- (basename $entry) $allowlist
-    or set -a unknowns (basename $entry)
+    set -l name (basename $entry)
+    if not contains $name $allowlist
+        set -a unknowns $name
+    end
 end
 
 if test (count $unknowns) -eq 0
-    contains -- --quiet $argv; or echo '~/.config/ is clean'
+    if test $quiet = false; and test $mode != audit
+        echo "~/.config/ is clean"
+    end
     exit 0
 end
 
 set_color yellow
-echo 'unrecognized entries in ~/.config/:'
-printf '  ? %s\n' $unknowns
+echo "found "(count $unknowns)" unrecognized entries in ~/.config/:"
 set_color normal
+
+switch $mode
+    case audit
+        for name in $unknowns
+            set_color yellow
+            echo "  ? $name"
+            set_color normal
+        end
+    case clean
+        for name in $unknowns
+            if confirm "  delete ~/.config/$name/? [y/N]" N
+                rm -rf ~/.config/$name
+                echo "    deleted"
+            else
+                echo "    skipped"
+            end
+        end
+    case purge
+        for name in $unknowns
+            rm -rf ~/.config/$name
+            echo "  deleted $name"
+        end
+end
