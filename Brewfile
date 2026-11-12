@@ -12,6 +12,7 @@ brew "gh"
 brew "git"
 brew "gum"
 brew "jq"
+brew "lazygit"
 brew "libpq", link: true
 brew "neovim"
 brew "ouch"

@@ -18,6 +18,7 @@ set -l manual_allowlist \
     gh \
     go \
     homebrew \
+    lazygit \
     net.imput.helium \
     Slack
 
