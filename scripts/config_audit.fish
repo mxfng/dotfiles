@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-source (dirname (status filename))/../.config/fish/functions/confirm.fish
+source $DOTFILES/.config/fish/functions/confirm.fish
 
 # Audit ~/.config for unrecognized directories not tracked by dotfiles.
 #
@@ -9,7 +9,7 @@ source (dirname (status filename))/../.config/fish/functions/confirm.fish
 #   config_audit.fish --clean # prompt to delete each unknown
 #   config_audit.fish --purge # auto-delete all unknowns
 
-set dotfiles_config ~/Developer/dotfiles/.config
+set dotfiles_config $DOTFILES/.config
 
 # Tool-generated dirs expected in ~/.config/ but not tracked in dotfiles
 set -l manual_allowlist \

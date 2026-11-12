@@ -1,13 +1,9 @@
 set -gx XDG_CACHE_HOME $HOME/.cache
 set -gx XDG_CONFIG_HOME $HOME/.config
 set -gx XDG_DATA_HOME $HOME/.local/share
-set -gx XDG_DESKTOP_DIR $HOME/Desktop
-set -gx XDG_DOCUMENTS_DIR $HOME/Documents
-set -gx XDG_DOWNLOAD_DIR $HOME/Downloads
-set -gx XDG_MUSIC_DIR $HOME/Music
-set -gx XDG_PICTURES_DIR $HOME/Pictures
 set -gx XDG_STATE_HOME $HOME/.local/state
-set -gx XDG_VIDEOS_DIR $HOME/Videos
+
+set -gx DOTFILES $HOME/Developer/dotfiles
 
 set -gx BROWSER 'open -a Helium'
 set -gx DIFFPROG nvim -d
@@ -32,8 +28,9 @@ set -gx FZF_ALT_C_COMMAND 'fd --type d --hidden --exclude ".git/"'
 
 set -gx GEM_SPEC_CACHE $XDG_CACHE_HOME/gem
 
-set -gx GOPATH $HOME/Developer/go
+set -gx GOPATH $XDG_DATA_HOME/go
 set -gx GOBIN $GOPATH/bin
+set -gx GOMODCACHE $XDG_CACHE_HOME/go/mod
 
 set -gx LESSHISTFILE $XDG_STATE_HOME/less/history
 
