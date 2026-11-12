@@ -3,9 +3,7 @@ if status is-interactive
     abbr --add cat 'bat -pp'
     abbr --add cl clear
     abbr --add siz 'du -khsc'
-    abbr --add usebash 'chsh -s $(which bash)'
     abbr --add usefish 'chsh -s $(which fish)'
-    abbr --add usezsh 'chsh -s $(which zsh)'
 
     # clipboard
     if command -q pbcopy
@@ -14,7 +12,6 @@ if status is-interactive
     end
 
     # files
-    abbr --add grabit 'wget -mkEpnp'
     abbr --add lzip 'ouch list'
     abbr --add rcp 'rsync -aP'
     abbr --add symlink 'ln -s'
