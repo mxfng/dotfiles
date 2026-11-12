@@ -1,22 +1,20 @@
 # Max's agent instructions
 
-These are common instructions for Max's agents across all scenarios.
+## Writing
 
-## General Guidelines
-
+- Write in Simplified Technical English (ASD-STE100): short sentences, active voice, one idea per sentence, plain words.
 - Never use the em dash (U+2014). Use a plain hyphen-minus "-" instead.
-- When writing commit messages, never auto-add your agent name as a co-author.
-- Never manually modify `CHANGELOG.md` files or any files that are marked as auto-generated.
-- When writing or substantially editing long Markdown files, preserve normal Markdown structure. Put each full sentence on its own line, but avoid wrapping multiple sentences onto one physical line.
-- When making technical decisions, do not give much weight to development cost. Instead, prefer quality, simplicity, robustness, scalability, and long-term maintainability.
-- Prefer a first-class command-line tool over an MCP server when both can do the job (e.g. the `gh` CLI over the GitHub MCP server). CLIs are typically far more token- and latency-efficient for agents to drive.
-- When doing bug fixes, always start by reproducing the bug in an E2E setting, as closely aligned as possible with how an end user would experience it while end-to-end testing the product. This makes sure you find the real problem so your fix will actually solve it. If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
-- Apply that same high standard to engineering excellence: lint, test failures, and test flakiness. If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 
-## Editing my dotfiles and configs
+## Bugs
 
-My shell, editor, terminal, window-manager, and agent configs under `~/.config/`, along with `~/AGENTS.md`, `~/.claude/settings.json` and `~/.claude/skills/`, are deployed copies, not the source of truth. They come from my dotfiles repo at `~/Developer/dotfiles` and are copied into place by its `./sync` script.
+- Before fixing a bug, reproduce it end to end, the way a user would hit it.
 
-- Edit the source in `~/Developer/dotfiles/`, then run `./sync` to deploy. Do not edit the deployed copy in `~/.config/` (or `~/AGENTS.md`, etc.) directly; the next sync overwrites it and the change is lost from version control.
-- New config must be added to the repo's `sync` script to deploy, and a new `~/.config/` dir may need a `config_audit` allowlist entry. The repo's own `AGENTS.md` has the details.
-- If you're unsure whether a path is managed by the repo, check whether it exists under `~/Developer/dotfiles/.config/` before editing in place.
+## Machine
+
+- macOS with Homebrew. GNU coreutils, findutils, sed, awk, tar and grep come before the BSD versions on PATH, so use GNU flags (`sed -i 's/a/b/'`, `stat -c`, `date -d`).
+- Installed CLI tools: `rg`, `fd`, `bat`, `jq`, `gh`, `fzf`, `delta`, `ouch` (any archive format), `uv`, `ffmpeg`, `yt-dlp`, `psql`, `tailscale`.
+- Language runtimes (node, pnpm, bun, go) come from asdf. Pin versions in the project's `.tool-versions`, not with Homebrew.
+
+## Dotfiles
+
+- `~/.config/`, `~/AGENTS.md` and `~/.claude/{settings.json,skills}` are deployed from `~/Developer/dotfiles`. Edit the source there and run `./sync`, never the deployed copy.
