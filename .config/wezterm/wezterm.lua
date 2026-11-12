@@ -1,6 +1,5 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-local is_mac = wezterm.target_triple:find("darwin") ~= nil
 
 config.term = "xterm-256color"
 
@@ -8,13 +7,8 @@ config.color_scheme = "rose-pine-moon"
 
 config.window_background_opacity = 0.88
 
-if is_mac then
-	config.window_decorations = "RESIZE"
-	config.macos_window_background_blur = 70
-else
-	config.enable_wayland = true
-	config.window_decorations = "NONE"
-end
+config.window_decorations = "RESIZE"
+config.macos_window_background_blur = 70
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13

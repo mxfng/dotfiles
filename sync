@@ -60,32 +60,17 @@ if test -d ./.config/agents/skills
     rsync -aP ./.config/agents/skills/ ~/.claude/skills/
 end
 
-# Platform-specific
-if test (uname) = Darwin
-    # macOS
-    rsync -aP --delete ./.config/aerospace ~/.config/
+rsync -aP --delete ./.config/aerospace ~/.config/
 
-    # Surgical sync because these store their runtime state
-    if test -d ./.config/sol
-        mkdir -p ~/.config/sol
-        rsync -aP ./.config/sol/config.json ~/.config/sol/
-        rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
-    end
-    if test -d ./.config/colima
-        mkdir -p ~/.config/colima/default
-        rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
-    end
-else
-    # Linux
-    rsync -aP --delete \
-        ./.config/hypr \
-        ./.config/rofi \
-        ./.config/waybar \
-        ~/.config/
-
-    # Desktop entries (lock screen, power off, restart)
-    mkdir -p ~/.local/share/applications
-    rsync -aP ./.local/share/applications/ ~/.local/share/applications/
+# Surgical sync because these store their runtime state
+if test -d ./.config/sol
+    mkdir -p ~/.config/sol
+    rsync -aP ./.config/sol/config.json ~/.config/sol/
+    rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
+end
+if test -d ./.config/colima
+    mkdir -p ~/.config/colima/default
+    rsync -aP ./.config/colima/default/colima.yaml ~/.config/colima/default/
 end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist

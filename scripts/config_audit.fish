@@ -25,11 +25,8 @@ set -l manual_allowlist \
     go \
     gtk-3.0 \
     gtk-4.0 \
-    hermes \
     homebrew \
     k9s \
-    kdeconnect \
-    kdedefaults \
     kitty \
     kube \
     lazydocker \

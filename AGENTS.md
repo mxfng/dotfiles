@@ -4,8 +4,8 @@ Instructions for coding agents working in this repository.
 
 ## What this is
 
-Max's personal dotfiles for macOS and Linux: fish shell, Neovim, WezTerm, tmux,
-Starship, AeroSpace (macOS tiling WM), and Hyprland/rofi/waybar (Linux).
+Max's personal dotfiles for macOS: fish shell,
+Neovim, WezTerm, tmux, Starship, and AeroSpace (macOS tiling WM).
 The guiding principle is root cleanliness via XDG: configuration lives under
 `.config/`, forced into `.config/` whenever it mostly suits, even when awkward.
 
@@ -17,13 +17,11 @@ The guiding principle is root cleanliness via XDG: configuration lives under
   fish/           shell config; functions/ is autoloaded, one function per file
   nvim/ tmux/ wezterm/ starship.toml   editor and terminal
   aerospace/      macOS tiling WM
-  hypr/ rofi/ waybar/                  Linux desktop
   sol/ colima/    tools that also store runtime state (synced surgically)
   ssh/            shared ssh hosts, included from ~/.config/ssh by ~/.ssh/config
 scripts/          helper scripts, deployed to ~/Developer/scripts
   config_audit.fish   flags untracked dirs in ~/.config against an allowlist
 provision         macOS bootstrap: brew bundle, sync, shell, apps
-provision-linux   Arch/Debian bootstrap
 sync              rsync .config/* into ~/.config and refresh scripts
 Brewfile          macOS packages
 ```
