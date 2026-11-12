@@ -1,4 +1,5 @@
 if test -d /opt/homebrew
+    # NOTE: GNU tools have path priority over macOS builtins
     fish_add_path \
         /opt/homebrew/opt/coreutils/libexec/gnubin \
         /opt/homebrew/opt/findutils/libexec/gnubin \
