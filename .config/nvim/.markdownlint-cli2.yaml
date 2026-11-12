@@ -1,5 +1,0 @@
-# Global markdownlint settings for nvim, passed with --config by
-# lua/plugins/markdown.lua. Markdown here is written one sentence per line,
-# so long lines are expected; every other rule stays on.
-config:
-  MD013: false
