@@ -4,7 +4,7 @@ Instructions for coding agents working in this repository.
 
 ## What this is
 
-Max's personal dotfiles for macOS (plus a terminal-only Linux setup): fish shell,
+Max's personal dotfiles for macOS: fish shell,
 Neovim, WezTerm, tmux, Starship, and AeroSpace (macOS tiling WM).
 The guiding principle is root cleanliness via XDG: configuration lives under
 `.config/`, forced into `.config/` whenever it mostly suits, even when awkward.
@@ -22,7 +22,6 @@ The guiding principle is root cleanliness via XDG: configuration lives under
 scripts/          helper scripts, deployed to ~/Developer/scripts
   config_audit.fish   flags untracked dirs in ~/.config against an allowlist
 provision         macOS bootstrap: brew bundle, sync, shell, apps
-provision-linux   Arch/Debian terminal-tools bootstrap (Hyprland desktop is in tag archive/linux)
 sync              rsync .config/* into ~/.config and refresh scripts
 Brewfile          macOS packages
 ```
