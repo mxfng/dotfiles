@@ -95,7 +95,7 @@ so the author can see what was and was not covered.
 Escalate here only when the change is already Tier 3 AND it alters user-visible
 web behavior that no automated test covers, or the PR claims a visual or
 interaction fix you cannot confirm from code.
-Use the `cloakbrowser` skill.
+Use the project's Playwright setup if it has one, otherwise the `claude-in-chrome` skill.
 Do not open a browser to check a backend change.
 
 ### Escalation rules
