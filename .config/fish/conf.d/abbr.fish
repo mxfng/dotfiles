@@ -1,13 +1,22 @@
 if status is-interactive
     # system
     abbr --add cat 'bat -pp'
+    abbr --add cl clear
+    abbr --add siz 'du -khsc'
+    abbr --add usefish 'chsh -s $(which fish)'
 
     # clipboard
-    abbr --add tocb pbcopy
+    if command -q pbcopy
+        abbr --add tocb pbcopy
+        abbr --add fromcb pbpaste
+    end
 
     # files
+    abbr --add lzip 'ouch list'
+    abbr --add rcp 'rsync -aP'
     abbr --add symlink 'ln -s'
     abbr --add unzip 'ouch decompress'
+    abbr --add zip 'ouch compress -q'
 
     # git
     abbr --add aa 'git add --all'
@@ -18,13 +27,18 @@ if status is-interactive
     abbr --add branch 'git branch'
     abbr --add checkout 'git checkout'
     abbr --add --set-cursor cm 'git commit -m "%"'
+    abbr --add --set-cursor cma 'git commit -am "%"'
     abbr --add co 'git checkout'
     abbr --add --set-cursor commit 'git commit -m "%"'
+    abbr --add fa 'git fetch --all'
     abbr --add fetch "git fetch"
+    abbr --add gbc git_branch_cleanup
     abbr --add fuckit 'git reset --hard && git clean -df'
     abbr --add g git
-    abbr --add gbc git_branch_cleanup
     abbr --add gd 'git diff'
+    abbr --add lol 'git log --graph --decorate --oneline'
+    abbr --add pop 'git stash pop'
+    abbr --add puff 'git pull --ff-only'
     abbr --add pull 'git pull'
     abbr --add push 'git push'
     abbr --add rb 'git rebase'
@@ -32,11 +46,20 @@ if status is-interactive
     abbr --add st 'git status'
     abbr --add stash 'git stash'
 
+    # ssh
+    if test -d /opt/homebrew
+        abbr --add ssh-add-key 'ssh-add --apple-use-keychain ~/.ssh/id_ed25519'
+    else
+        abbr --add ssh-add-key 'ssh-add ~/.ssh/id_ed25519'
+    end
+    abbr --add ssh-rm 'ssh-keygen -f ~/.ssh/known_hosts -R'
+
     # tools
     abbr --add cc claude
     abbr --add find fd
     abbr --add grep rg
     abbr --add tar ouch
+    abbr --add top btop
     abbr --add vi nvim
     abbr --add vim nvim
 end
