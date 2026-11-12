@@ -1,8 +1,8 @@
 #!/usr/bin/env fish
 
-source (dirname (status filename))/../.config/fish/functions/log.fish
+source (dirname (status filename))/../.config/fish/functions/ohai.fish
 
-log "setting up tmux plugins"
+ohai "setting up tmux plugins"
 
 if not test -d ~/.config/tmux/plugins/tpm
     set -l err (git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm 2>&1)

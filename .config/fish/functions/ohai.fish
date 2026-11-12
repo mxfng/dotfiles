@@ -1,4 +1,4 @@
-function log -a message
+function ohai -a message
     set_color blue
     echo -n "==> "
     set_color normal

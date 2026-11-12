@@ -2,16 +2,16 @@
 
 cd (dirname (status filename))
 
-source ./.config/fish/functions/log.fish
+source ./.config/fish/functions/ohai.fish
 source ./.config/fish/functions/confirm.fish
 
-log "provisioning macOS environment for $USER"
+ohai "provisioning macOS environment for $USER"
 
 test (uname) != Darwin
 and echo 'error: this script is for macOS only'
 and exit 1
 
-log "installing packages"
+ohai "installing packages"
 brew bundle
 or exit 1
 
@@ -19,7 +19,7 @@ or exit 1
 ./sync
 or exit 1
 
-log "setting up shell"
+ohai "setting up shell"
 fish_add_path /opt/homebrew/bin
 
 if test $SHELL != /opt/homebrew/bin/fish
@@ -29,11 +29,11 @@ end
 
 touch ~/.hushlogin
 
-log "setting up terminal tools"
+ohai "setting up terminal tools"
 ./scripts/tmux_setup_plugins.fish
 or echo 'warning: failed to set up tmux plugins'
 
-log "setting up desktop apps"
+ohai "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'
 end
@@ -51,7 +51,7 @@ if confirm "Set macOS system defaults? [y/N]" N
     or echo 'warning: failed to set macOS defaults'
 end
 
-log "setting up window management"
+ohai "setting up window management"
 open -a AeroSpace
 or echo 'warning: failed to start AeroSpace'
 

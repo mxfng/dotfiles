@@ -2,9 +2,9 @@
 
 cd (dirname (status filename))
 
-source ./.config/fish/functions/log.fish
+source ./.config/fish/functions/ohai.fish
 
-log 'syncing dotfiles'
+ohai 'syncing dotfiles'
 
 # Ensure directories exist
 mkdir -p ~/.config ~/Developer/scripts
@@ -64,7 +64,7 @@ end
 rsync -aP --delete ./scripts/ ~/Developer/scripts/
 or exit 1
 
-log 'syncing git config'
+ohai 'syncing git config'
 
 if test -z "$git_name" -o -z "$git_email"
     echo 'please set your git user:'
