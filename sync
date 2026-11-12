@@ -66,7 +66,6 @@ rsync -aP --delete ./.config/aerospace ~/.config/
 if test -d ./.config/sol
     mkdir -p ~/.config/sol
     rsync -aP ./.config/sol/config.json ~/.config/sol/
-    rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
 end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist
