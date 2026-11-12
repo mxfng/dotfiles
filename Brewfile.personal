@@ -1,5 +1,4 @@
-# Only for my own machines. Installed by ./provision when you answer yes to
-# "personal machine?"; Brewfile has the baseline that goes on every machine.
+# Installed by ./provision via prompt
 
 brew "gallery-dl"
 brew "yt-dlp"
