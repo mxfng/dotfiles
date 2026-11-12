@@ -1,6 +1,6 @@
 ---
 name: ship
-description: Pre-PR quality gate for the current change. Runs code review, security review, and end-to-end verification in sequence, self-corrects clear problems, escalates ambiguous product decisions, and reports whether the change is ready to open a PR. Use before opening a PR, or when asked to "ship", "ship it", or confirm a change is merge-ready. Do NOT use for reviewing an existing remote PR (use /review) or as a substitute for a single targeted review.
+description: Pre-PR quality gate for the current change. Runs code review, security review, and end-to-end verification in sequence, self-corrects clear problems, escalates ambiguous product decisions, and reports whether the change is ready to open a PR. Use before opening a PR, or when asked to "ship", "ship it", or confirm a change is merge-ready. Do NOT use for reviewing someone else's PR (use the pr-review skill) or as a substitute for a single targeted review.
 ---
 
 # ship
