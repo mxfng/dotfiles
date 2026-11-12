@@ -13,7 +13,7 @@
 
 - macOS with Homebrew. GNU coreutils, findutils, sed, awk, tar and grep come before the BSD versions on PATH, so use GNU flags (`sed -i 's/a/b/'`, `stat -c`, `date -d`).
 - Installed CLI tools: `rg`, `fd`, `bat`, `jq`, `gh`, `fzf`, `delta`, `ouch` (any archive format), `uv`, `ffmpeg`, `yt-dlp`, `psql`, `tailscale`.
-- Language runtimes (node, pnpm, bun, go) come from asdf. Pin versions in the project's `.tool-versions`, not with Homebrew.
+- Language runtimes (node, pnpm, bun, go, python, ruby) come from asdf. Pin versions in the project's `.tool-versions`, not with Homebrew.
 
 ## Dotfiles
 
