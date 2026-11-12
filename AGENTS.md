@@ -1,120 +1,45 @@
 # dotfiles
 
-Instructions for coding agents working in this repository.
+Max's macOS dotfiles: fish, Neovim (LazyVim), WezTerm, tmux, Starship, AeroSpace.
+All config lives under `.config/`, even when a tool needs a workaround.
+Keep `~` and `~/.config/` clean.
 
-## What this is
-
-Max's personal dotfiles for macOS: fish shell,
-Neovim, WezTerm, tmux, Starship, and AeroSpace (macOS tiling WM).
-The guiding principle is root cleanliness via XDG: configuration lives under
-`.config/`, forced into `.config/` whenever it mostly suits, even when awkward.
-
-## Repository layout
+## Layout
 
 ```
-.config/          XDG configs, the source of truth for everything synced
-  agents/         Max's global cross-project agent instructions (deployed to ~ by sync)
-  fish/           shell config; functions/ is autoloaded, one function per file
-  nvim/ tmux/ wezterm/ starship.toml   editor and terminal
-  aerospace/      macOS tiling WM
-  sol/            tool that also stores runtime state (synced surgically)
-  ssh/            shared ssh hosts, included from ~/.config/ssh by ~/.ssh/config
-scripts/          helper scripts, deployed to ~/Developer/scripts
-  config_audit.fish   flags untracked dirs in ~/.config against an allowlist
-provision         macOS bootstrap: brew bundle, sync, shell, apps
-sync              rsync .config/* into ~/.config and refresh scripts
-Brewfile          macOS packages
+.config/      source of truth, deployed by ./sync
+  agents/     AGENTS.md (-> ~/AGENTS.md, ~/.claude/CLAUDE.md), claude/settings.json, skills/
+  fish/       conf.d/ runs at shell start; functions/ autoloads, one function per file
+  nvim/ tmux/ wezterm/ aerospace/ git/ ssh/ starship.toml
+  sol/        only config.json is synced; sol keeps runtime state beside it
+scripts/      deployed to ~/Developer/scripts
+provision     new-Mac bootstrap: brew bundle, sync, shell, apps
+sync          deploys .config/ and scripts/
+Brewfile      Homebrew packages
 ```
 
-## Terminology
+## sync
 
-- **Sync** - `./sync` rsyncs selected `.config/*` trees into `~/.config/` (and
-  scripts into `~/Developer/scripts/`). Deployment is copy-based, not symlinked,
-  so the machine keeps working if this repo is moved or removed.
-- **Provision** - one-time machine bootstrap (`./provision` on macOS) that
-  installs packages, runs `sync`, and sets up the shell and apps.
-- **Config audit** - `scripts/config_audit.fish` compares `~/.config/` against
-  the tracked `.config/*` dirs plus a manual allowlist and flags strays.
+- It copies files. It never symlinks, so machines keep working without the repo.
+- fish, nvim, tmux, wezterm, aerospace, git, ssh and scripts sync with `--delete`. A file removed from the repo is removed on the next sync.
+- `~/.claude/skills/`, `~/.claude/settings.json`, `~/AGENTS.md` and sol sync without `--delete`. When you remove one of these from the repo, delete the deployed copy by hand.
+- Add new config to `sync`. If a tool creates a `~/.config/` dir that the repo does not track, add it to the allowlist in `scripts/config_audit.fish`.
 
-## How it works
+## Test a change
 
-### sync (deployment)
+1. Run `./sync`. It must exit 0.
+2. Check the deployed file, not the repo file.
+3. For fish changes, test in a new shell: `fish -ic '<check>'`.
+4. Run `./scripts/config_audit.fish`. It must report `~/.config/` clean.
 
-`sync` is the heart of the repo. It rsyncs a hand-picked set of `.config`
-subtrees into `~/.config/` (with `--delete` for fully-managed trees, and
-surgical single-file copies for tools that keep runtime state alongside config,
-e.g. `sol`). It also deploys `.config/agents` to the home root and
-runs `config_audit` at the end. It also prepends an `Include ~/.config/ssh/config`
-line to `~/.ssh/config`, since ssh has no XDG lookup; machine-specific hosts stay
-untracked below it. Copy-based on purpose: no symlinks back into the
-repo.
+Never run `./provision` on Max's main machine.
 
-### fish functions
+## Fish style
 
-`.config/fish/functions/` is autoloaded: each file defines one function matching
-its filename (e.g. `agents_init.fish`). Shared helpers like `log` and `confirm`
-are sourced by scripts as needed. `agents_init` scaffolds an AGENTS.md +
-CLAUDE.md symlink pair in any project repo.
+All scripts are fish. Match the existing files. These rules are not obvious from the code:
 
-## End-to-end testing
-
-Changes to `.config` are not live until deployed. To verify a change the way the
-machine actually consumes it:
-
-1. Run `./sync` and confirm it exits 0 with no rsync errors.
-2. Inspect the deployed target (e.g. `~/.config/fish/...`) rather than the repo
-   source.
-3. For shell changes, open a fresh fish session so autoloaded functions and
-   config reload.
-4. Confirm `config_audit` reports `~/.config/` clean (sync runs it with
-   `--quiet`; run `./scripts/config_audit.fish` directly to see the report).
-
-For a full machine bootstrap, test `./provision` on a throwaway environment, not
-your primary machine.
-
-## Conventions
-
-- Keep the home root and `~/.config/` clean: new config belongs under `.config/`
-  in the repo and must be added to `sync` to deploy. If a new `~/.config/` dir is
-  expected but not tracked here, add it to the `config_audit` allowlist.
-- Deployment is copy-based; do not introduce symlinks from `~` back into the repo
-  unless a specific case requires it.
-
-### Fish scripting style
-
-All scripting in this repo is fish, not bash. Match the existing house style:
-
-Structure:
-- Standalone scripts start with `#!/usr/bin/env fish`. Functions live one-per-file
-  in `.config/fish/functions/`, named to match the file; they are autoloaded.
-- A script that needs its own directory does `cd (dirname (status filename))`; one
-  that needs a helper sources it by the same relative anchor, e.g.
-  `source (dirname (status filename))/../.config/fish/functions/log.fish`.
-- Lead a script with a comment block: one line on what it does, then a `# Usage:`
-  block showing each invocation and flag. Comment the why, not the what (see the
-  GNU-tools note in `conf.d/paths.fish`).
-- `conf.d/` files run at every shell start; guard interactive-only logic with
-  `if status is-interactive`.
-
-Output and errors:
-- Use the `log` helper (blue `==> ` prefix) for top-level progress or section
-  headers, and plain `echo` for detail lines. Prompt with the `confirm` helper.
-- Use `set_color yellow` / `set_color normal` to highlight audit findings.
-- Messages are lowercase. Aborting errors go `echo 'error: ...' >&2` then `exit 1`;
-  non-fatal problems in optional steps `echo 'warning: ...'` and continue.
-
-Idioms:
-- Guard external commands with `command -q foo` before calling them.
-- Prefer `and`/`or` connectors over nested `if` for short conditional chains, and
-  `command; or exit 1` to fail fast after critical steps. Group with `begin/end`.
-- Parse flags with `argparse` (or a `switch` loop for richer scripts, as in
-  `config_audit.fish`); take positionals via `--argument-names`.
-- Scope with `set -l` (local), `set -gx` (exported), `set -U` (universal); unset
-  with `set -e`. Always quote variables in tests: `test -z "$x"`.
-- Reach for fish builtins (`string`, `contains --`, `fish_add_path`) over shelling
-  out to coreutils.
-
-Safety:
-- Scripts are idempotent and safe to re-run (`mkdir -p`, existence checks first).
-- Default to non-destructive: audits report by default and only mutate behind an
-  explicit `--clean`/`--purge`/`--force` flag.
+- A script starts with `#!/usr/bin/env fish`, then a comment: one line on what it does, then a `# Usage:` block.
+- Find the repo with `(dirname (status filename))`. Source helpers from `.config/fish/functions/`: `log` for section headers, `confirm` for prompts.
+- Messages are lowercase. Fatal error: `echo 'error: ...' >&2; exit 1`. Failed optional step: `echo 'warning: ...'`, then continue.
+- Guard optional tools with `command -q`. Quote variables in `test`.
+- Scripts are safe to run again. A destructive action needs an explicit flag.

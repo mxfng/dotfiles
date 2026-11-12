@@ -23,7 +23,6 @@ require("lazy").setup({
       -- so news would otherwise reopen on every start after a sync.
       opts = { news = { lazyvim = false, neovim = false } },
     },
-    { import = "lazyvim.plugins.extras.lang.markdown" },
     { import = "plugins" },
   },
   defaults = {

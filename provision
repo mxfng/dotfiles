@@ -27,17 +27,11 @@ if test $SHELL != /opt/homebrew/bin/fish
     or exit 1
 end
 
-./scripts/fish_generate_completions.fish
-or echo 'warning: failed to generate fish completions'
-
 touch ~/.hushlogin
 
 log "setting up terminal tools"
 ./scripts/tmux_setup_plugins.fish
 or echo 'warning: failed to set up tmux plugins'
-
-./scripts/claude_setup.fish
-or echo 'warning: failed to set up Claude Code'
 
 log "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N

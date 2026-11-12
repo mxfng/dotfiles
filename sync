@@ -17,7 +17,6 @@ set -l git_name (git config --global user.name 2>/dev/null)
 set -l git_email (git config --global user.email 2>/dev/null)
 
 rsync -aP --delete \
-    --exclude fish/completions/ \
     --exclude fish/fish_variables \
     --exclude tmux/plugins/ \
     ./.config/fish \
@@ -45,12 +44,8 @@ if not contains -- $ssh_include (cat ~/.ssh/config 2>/dev/null)
     or echo 'warning: failed to add shared include to ~/.ssh/config'
 end
 
-# TODO: Remove this when Trunk.io ships newer npm version, blocks stray cache entires on old version
-rsync -aP ./.config/npmrc ~/.npmrc
-
-# Agentic: AGENTS.md at ~ for tool discovery, guides under ~/.config/agents
+# Agentic: AGENTS.md at ~ for tool discovery, linked as Claude's global CLAUDE.md
 rsync -aP ./.config/agents/AGENTS.md ~/AGENTS.md
-rsync -aP ./.config/agents/{VOICE,OPINIONS}.md ~/.config/agents/
 mkdir -p ~/.claude; and ln -sf ../AGENTS.md ~/.claude/CLAUDE.md
 rsync -aP ./.config/agents/claude/settings.json ~/.claude/settings.json
 
@@ -66,7 +61,6 @@ rsync -aP --delete ./.config/aerospace ~/.config/
 if test -d ./.config/sol
     mkdir -p ~/.config/sol
     rsync -aP ./.config/sol/config.json ~/.config/sol/
-    rsync -aP --delete ./.config/sol/scripts/ ~/.config/sol/scripts/
 end
 
 # Audit ~/.config/ and flag any lingering configs not in allowlist
