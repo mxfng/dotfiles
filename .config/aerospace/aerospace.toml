@@ -69,13 +69,16 @@ on-mode-changed = []
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+# The MacBook's built-in screen keeps tight gaps. External screens get room
+# to show the wallpaper; the ultrawide gets wide sides so a lone window
+# stays centered and readable. The first matching monitor pattern wins.
 [gaps]
-    inner.horizontal = 12
-    inner.vertical =   12
-    outer.left =       12
-    outer.bottom =     12
-    outer.top =        12
-    outer.right =      12
+    inner.horizontal = [{ monitor.'built-in' = 12 }, 20]
+    inner.vertical =   [{ monitor.'built-in' = 12 }, 20]
+    outer.left =       [{ monitor.'built-in' = 12 }, { monitor.'S34J55x' = 320 }, 48]
+    outer.right =      [{ monitor.'built-in' = 12 }, { monitor.'S34J55x' = 320 }, 48]
+    outer.top =        [{ monitor.'built-in' = 12 }, 24]
+    outer.bottom =     [{ monitor.'built-in' = 12 }, 24]
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
