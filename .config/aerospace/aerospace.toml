@@ -301,3 +301,24 @@ on-mode-changed = []
 [[on-window-detected]]
     if.app-id = 'com.apple.Passwords'
     run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.calculator'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.clock'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.PhotoBooth'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.Stickies'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.DigitalColorMeter'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.SystemProfiler'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.archiveutility'
+    run = 'layout floating'
