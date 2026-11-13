@@ -43,4 +43,25 @@ function M.apply()
   end
 end
 
+-- Watch the state file and apply changes as soon as `theme` writes it, even
+-- while Neovim is in an unfocused pane. The watch restarts after each event
+-- so it keeps working if the file is replaced instead of rewritten.
+local watcher
+function M.watch()
+  local path = vim.fn.expand("~/.local/state/theme")
+  if watcher then
+    watcher:stop()
+  end
+  watcher = vim.uv.new_fs_event()
+  if not watcher then
+    return
+  end
+  watcher:start(path, {}, function()
+    vim.schedule(function()
+      M.apply()
+      M.watch()
+    end)
+  end)
+end
+
 return M
