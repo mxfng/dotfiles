@@ -167,6 +167,9 @@ on-mode-changed = []
     # Toggle float and center
     cmd-alt-t = 'layout floating tiling'
 
+    # Toggle/cycle floating windows
+    cmd-alt-f = 'exec-and-forget ~/Developer/scripts/aerospace_focus_floating.sh'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
