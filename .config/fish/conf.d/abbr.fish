@@ -45,6 +45,7 @@ if status is-interactive
     abbr --add sco 'git restore --staged'
     abbr --add st 'git status'
     abbr --add stash 'git stash'
+    abbr --add sw 'git switch'
 
     # ssh
     if test -d /opt/homebrew
