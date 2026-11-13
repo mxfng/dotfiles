@@ -3,9 +3,8 @@ local config = wezterm.config_builder()
 
 config.term = "xterm-256color"
 
--- The `theme` fish command writes the theme name to a state file; the
--- registry maps it to a WezTerm scheme. Watching the state file makes
--- WezTerm reload as soon as the theme changes.
+-- The `theme` fish command writes the theme name to the state file.
+-- The registry maps the name to a WezTerm scheme.
 local theme_state = wezterm.home_dir .. "/.local/state/theme"
 local theme_registry = wezterm.home_dir .. "/.config/theme/themes.tsv"
 
@@ -30,9 +29,8 @@ local function read_theme()
   return "rose-pine-moon"
 end
 
--- WezTerm can only watch a file that exists. If the state file is missing
--- when the config loads, the watch silently never starts and `theme` has no
--- effect until a manual reload, so create it with the default first.
+-- WezTerm can watch only a file that exists.
+-- Create the state file if it is missing.
 local exists = io.open(theme_state, "r")
 if exists then
   exists:close()
@@ -45,12 +43,25 @@ else
 end
 
 config.color_scheme = read_theme()
+-- Reload when the state file changes.
 wezterm.add_to_config_reload_watch_list(theme_state)
 
-config.window_background_opacity = 0.88
+-- Light schemes get a solid window. Transparency lowers their contrast.
+-- A scheme is light when its background lightness is above 0.5.
+local function scheme_is_light(name)
+  local scheme = wezterm.color.get_builtin_schemes()[name]
+  if not scheme or not scheme.background then
+    return false
+  end
+  local _, _, lightness = wezterm.color.parse(scheme.background):hsla()
+  return lightness > 0.5
+end
+
+local light = scheme_is_light(config.color_scheme)
+config.window_background_opacity = light and 1.0 or 0.88
 
 config.window_decorations = "RESIZE"
-config.macos_window_background_blur = 70
+config.macos_window_background_blur = light and 0 or 70
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13

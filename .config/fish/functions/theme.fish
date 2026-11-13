@@ -1,7 +1,7 @@
 function theme --description 'Switch the terminal theme: theme [name]'
     # Writes the theme name to a state file. WezTerm reloads at once,
-    # Neovim switches when it regains focus, and tmux and Starship use the
-    # terminal's ANSI colors, so they follow WezTerm.
+    # Neovim switches when it regains focus, other tools follow WezTerm's
+    # ANSI colors
     set -l registry ~/.config/theme/themes.tsv
     set -l state ~/.local/state/theme
     set -l names (string match -rv '^#' <$registry | string split -f1 \t)

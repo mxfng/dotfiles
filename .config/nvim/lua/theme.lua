@@ -1,6 +1,6 @@
--- Reads the current theme for Neovim. The `theme` fish command writes the
--- name to ~/.local/state/theme; ~/.config/theme/themes.tsv maps it to a
--- colorscheme. WezTerm reads the same files.
+-- Theme for Neovim.
+-- The `theme` fish command writes the theme name to ~/.local/state/theme.
+-- ~/.config/theme/themes.tsv maps the name to a colorscheme.
 local M = {}
 
 local fallback = "rose-pine-moon"
@@ -21,31 +21,28 @@ function M.colorscheme()
   return fallback
 end
 
--- Apply the theme if it changed since Neovim last applied it. Track the name
--- here: some schemes set g:colors_name to the family ("rose-pine"), not the
--- variant ("rose-pine-dawn"), so g:colors_name can't tell variants apart.
+-- Apply the theme if it changed.
+-- Track the applied name here. Some schemes set g:colors_name to the
+-- family ("rose-pine"), not the variant ("rose-pine-dawn").
 local applied
 function M.apply()
   local cs = M.colorscheme()
   if applied ~= cs then
-    -- Load the lazy plugin that provides this colorscheme first. lazy.nvim
-    -- does this on its own only at startup, so a live switch to a theme
-    -- whose plugin isn't loaded yet would fail with E185.
+    -- Load the plugin for this colorscheme first.
+    -- Without this, a switch to an unloaded plugin fails with E185.
     pcall(function()
       require("lazy.core.loader").colorscheme(cs)
     end)
-    -- Reset to dark first. Light schemes (dawn, latte) set "light" on their
-    -- own, but Kanagawa leaves the option alone, so a switch from a light
-    -- theme would keep "light" under a dark scheme.
+    -- Set the background to dark first.
+    -- Light schemes set "light". Kanagawa does not set the background.
     vim.o.background = "dark"
     vim.cmd.colorscheme(cs)
     applied = cs
   end
 end
 
--- Watch the state file and apply changes as soon as `theme` writes it, even
--- while Neovim is in an unfocused pane. The watch restarts after each event
--- so it keeps working if the file is replaced instead of rewritten.
+-- Watch the state file. Apply each change at once, also in an unfocused pane.
+-- Restart the watch after each event. A replaced file stops the old watch.
 local watcher
 function M.watch()
   local path = vim.fn.expand("~/.local/state/theme")
