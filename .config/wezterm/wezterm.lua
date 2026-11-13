@@ -30,6 +30,20 @@ local function read_theme()
   return "rose-pine-moon"
 end
 
+-- WezTerm can only watch a file that exists. If the state file is missing
+-- when the config loads, the watch silently never starts and `theme` has no
+-- effect until a manual reload, so create it with the default first.
+local exists = io.open(theme_state, "r")
+if exists then
+  exists:close()
+else
+  local f = io.open(theme_state, "w")
+  if f then
+    f:write("rose-pine-moon\n")
+    f:close()
+  end
+end
+
 config.color_scheme = read_theme()
 wezterm.add_to_config_reload_watch_list(theme_state)
 
