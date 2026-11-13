@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Toggle a Claude Code pane on the right of a tmux window, like
+# claudecode.nvim does inside Neovim. Each window gets its own Claude.
+# A hidden Claude keeps running in the background "_claude" session.
+#
+# Usage: claude-toggle <pane id>   (tmux.conf passes #{pane_id})
+set -eu
+
+target=$1
+win=$(tmux display -p -t "$target" '#{window_id}')
+
+# Find this window's Claude pane and the window it is in now.
+read -r claude where < <(
+  tmux list-panes -a -F '#{@claude_for} #{pane_id} #{window_id}' |
+    awk -v w="$win" '$1 == w { print $2, $3; exit }'
+) || true
+
+if [ -z "${claude:-}" ]; then
+  # None yet: open one in the folder of the current pane.
+  dir=$(tmux display -p -t "$target" '#{pane_current_path}')
+  claude=$(tmux split-window -fh -l 35% -t "$target" -c "$dir" -P -F '#{pane_id}' claude)
+  tmux set -p -t "$claude" @claude_for "$win"
+elif [ "$where" = "$win" ]; then
+  # Visible: hide it.
+  tmux has -t =_claude 2>/dev/null || tmux new -d -s _claude
+  tmux break-pane -d -s "$claude" -t _claude:
+else
+  # Hidden: bring it back.
+  tmux join-pane -fh -l 35% -s "$claude" -t "$target"
+fi
