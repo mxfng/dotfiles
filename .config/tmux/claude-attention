@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Claude Code hook: mark the tmux window of a Claude that needs you, so
+# the status bar shows it. Claude settings.json calls this:
+#   wait    Claude asks for permission
+#   done    Claude finished its turn
+#   resume  a tool ran, so a permission prompt is over
+#   clear   you sent a prompt, or the session ended
+# A Claude from prefix + a marks its home window, also while hidden.
+[ -n "${TMUX_PANE:-}" ] || exit 0
+
+win=$(tmux show -pqv -t "$TMUX_PANE" @claude_for)
+[ -n "$win" ] || win=$(tmux display -p -t "$TMUX_PANE" '#{window_id}')
+
+case ${1:-} in
+  wait | done) tmux set -w -t "$win" @agent "$1" ;;
+  clear) tmux set -wu -t "$win" @agent ;;
+  resume)
+    if [ "$(tmux show -wqv -t "$win" @agent)" = wait ]; then
+      tmux set -wu -t "$win" @agent
+    fi
+    ;;
+esac
+exit 0
