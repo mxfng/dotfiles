@@ -1,30 +1,88 @@
 #!/usr/bin/env bash
-# Toggle a Claude Code pane on the right of a tmux window, like
-# claudecode.nvim does inside Neovim. Each window gets its own Claude.
-# A hidden Claude keeps running in the background "_claude" session.
+# A Claude Code pane on the right of a tmux window, like claudecode.nvim
+# does inside Neovim. Each window gets its own Claude. A hidden Claude
+# keeps running in the background "_claude" session.
 #
-# Usage: claude-toggle <pane id>   (tmux.conf passes #{pane_id})
-set -eu
+# tmux.conf calls these:
+#   claude-toggle toggle <pane id>    create, hide or show the pane
+#   claude-toggle fit <window id>     keep the width when the window resizes
+#   claude-toggle save <window id>    remember a width you dragged to
+#   claude-toggle gc                  kill hidden Claudes whose window is gone
+set -u
 
-target=$1
-win=$(tmux display -p -t "$target" '#{window_id}')
+default_pct=35  # share of the window (claudecode.nvim uses 30%)
+min_cols=80     # Claude Code's prompts wrap badly below about 80 columns
 
-# Find this window's Claude pane and the window it is in now.
-read -r claude where < <(
+# Print "<claude pane> <window it is in now>" for a home window.
+find_claude() {
   tmux list-panes -a -F '#{@claude_for} #{pane_id} #{window_id}' |
-    awk -v w="$win" '$1 == w { print $2, $3; exit }'
-) || true
+    awk -v w="$1" '$1 == w { print $2, $3; exit }'
+}
 
-if [ -z "${claude:-}" ]; then
-  # None yet: open one in the folder of the current pane.
-  dir=$(tmux display -p -t "$target" '#{pane_current_path}')
-  claude=$(tmux split-window -fh -l 35% -t "$target" -c "$dir" -P -F '#{pane_id}' claude)
-  tmux set -p -t "$claude" @claude_for "$win"
-elif [ "$where" = "$win" ]; then
-  # Visible: hide it.
-  tmux has -t =_claude 2>/dev/null || tmux new -d -s _claude
-  tmux break-pane -d -s "$claude" -t _claude:
-else
-  # Hidden: bring it back.
-  tmux join-pane -fh -l 35% -s "$claude" -t "$target"
-fi
+# Width in columns for Claude pane $1 in window $2: its share of the
+# window, but at least min_cols, and that floor at most half the window.
+target_cols() {
+  local pct ww cols
+  pct=$(tmux show -pqv -t "$1" @claude_pct)
+  ww=$(tmux display -p -t "$2" '#{window_width}')
+  cols=$((ww * ${pct:-$default_pct} / 100))
+  if ((cols < min_cols)); then cols=$((min_cols < ww / 2 ? min_cols : ww / 2)); fi
+  echo "$cols"
+}
+
+toggle() {
+  local target=$1 win claude where dir
+  win=$(tmux display -p -t "$target" '#{window_id}')
+  read -r claude where < <(find_claude "$win")
+  if [ -z "${claude:-}" ]; then
+    # None yet: open one in the folder of the current pane.
+    dir=$(tmux display -p -t "$target" '#{pane_current_path}')
+    claude=$(tmux split-window -fh -l 50% -t "$target" -c "$dir" -P -F '#{pane_id}' claude)
+    tmux set -p -t "$claude" @claude_for "$win"
+    fit "$win"
+  elif [ "$where" = "$win" ]; then
+    # Visible: hide it.
+    tmux has -t =_claude 2>/dev/null || tmux new -d -s _claude
+    tmux break-pane -d -s "$claude" -t =_claude:
+  else
+    # Hidden: bring it back.
+    tmux join-pane -fh -s "$claude" -t "$target"
+    fit "$win"
+  fi
+}
+
+fit() {
+  local win=$1 claude where
+  read -r claude where < <(find_claude "$win")
+  [ "${where:-}" = "$win" ] || return 0
+  tmux resize-pane -t "$claude" -x "$(target_cols "$claude" "$win")"
+}
+
+save() {
+  local win=$1 claude where width ww
+  read -r claude where < <(find_claude "$win")
+  [ "${where:-}" = "$win" ] || return 0
+  width=$(tmux display -p -t "$claude" '#{pane_width}')
+  # fit set this width itself, so it is not a drag.
+  [ "$width" = "$(target_cols "$claude" "$win")" ] && return 0
+  ww=$(tmux display -p -t "$win" '#{window_width}')
+  tmux set -p -t "$claude" @claude_pct $(((width * 100 + ww / 2) / ww))
+}
+
+gc() {
+  local live pane home
+  live=$(tmux list-windows -a -F '#{window_id}')
+  tmux list-panes -s -t =_claude -F '#{pane_id} #{@claude_for}' 2>/dev/null |
+    while read -r pane home; do
+      if [ -n "$home" ] && ! grep -qx "$home" <<<"$live"; then
+        tmux kill-pane -t "$pane"
+      fi
+    done
+  # Drop the session when only its startup shell is left.
+  if ! tmux list-panes -s -t =_claude -F '#{@claude_for}' 2>/dev/null | grep -q .; then
+    tmux kill-session -t =_claude 2>/dev/null
+  fi
+  return 0
+}
+
+"$@"
