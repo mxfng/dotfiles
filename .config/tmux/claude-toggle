@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
-# A Claude Code pane on the right of a tmux window, like claudecode.nvim
-# does inside Neovim. Each window gets its own Claude. A hidden Claude
-# keeps running in the background "_claude" session.
+# Claude Code pane on the right of a tmux window, with claudecode.nvim
+# integration. Persists in the background "_claude" session when hidden.
 #
 # tmux.conf calls these:
 #   claude-toggle toggle <pane id>    create, hide or show the pane
 #   claude-toggle fit <window id>     keep the width when the window resizes
-#   claude-toggle save <window id>    remember a width you dragged to
+#   claude-toggle save <window id>    remember the width (drag end, hide)
 #   claude-toggle gc                  kill hidden Claudes whose window is gone
 set -u
 
-default_pct=35  # share of the window (claudecode.nvim uses 30%)
-min_cols=80     # Claude Code's prompts wrap badly below about 80 columns
+default_pct=35 # share of the window (claudecode.nvim uses 30%)
+min_cols=80    # Claude Code's prompts wrap badly below about 80 columns
 
 # Print "<claude pane> <window it is in now>" for a home window.
 find_claude() {
@@ -41,7 +40,8 @@ toggle() {
     tmux set -p -t "$claude" @claude_for "$win"
     fit "$win"
   elif [ "$where" = "$win" ]; then
-    # Visible: hide it.
+    # Visible: remember its width, then hide it.
+    save "$win"
     tmux has -t =_claude 2>/dev/null || tmux new -d -s _claude
     tmux break-pane -d -s "$claude" -t =_claude:
   else

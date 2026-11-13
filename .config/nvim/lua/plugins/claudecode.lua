@@ -1,7 +1,6 @@
--- Claude runs in a tmux pane (prefix + a), not in a Neovim terminal.
--- claudecode.nvim stays for the link: it starts a server that the tmux
--- Claude joins with `claude --ide`, so <leader>as sends a selection,
--- <leader>ab adds the buffer, and diffs open in Neovim.
+-- Claude terminal toggle omitted here, prefer config's claude in tmux pane
+-- claudecode.nvim starts a server that tmux claude joins with `claude --ide`
+-- so nvim integration holds.
 return {
   "coder/claudecode.nvim",
   event = "VeryLazy", -- start the server with Neovim, not on first key
