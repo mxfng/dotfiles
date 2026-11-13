@@ -203,6 +203,10 @@
     "branch": "master",
     "commit": "460432301a5cb280ea265ddfa15c9f3dcd1d26b7"
   },
+  "vim-tmux-navigator": {
+    "branch": "master",
+    "commit": "e41c431a0c7b7388ae7ba341f01a0d217eb3a432"
+  },
   "which-key.nvim": {
     "branch": "main",
     "commit": "370ec46f710e058c9c1646273e6b225acf47cbed"
