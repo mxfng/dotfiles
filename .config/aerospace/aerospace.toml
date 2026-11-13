@@ -46,7 +46,10 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8"]
+# Each persistent workspace has one job:
+#   1 Terminal  2 Browser  3 Chat  4 Plan  5 Create
+# 6-8 still work on demand (6 is for games), but prev/next skips them when empty.
+persistent-workspaces = ["1", "2", "3", "4", "5"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -107,7 +110,7 @@ on-mode-changed = []
     # end tell'
     # '''
     cmd-alt-enter = 'exec-and-forget open -a WezTerm'
-    cmd-alt-c = 'exec-and-forget open -a "Calendar"'
+    cmd-alt-c = ['workspace 4', 'exec-and-forget open -a "Calendar"']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     # alt-slash = 'layout tiles horizontal vertical'
@@ -194,3 +197,69 @@ on-mode-changed = []
     6 = 'main'
     7 = ['secondary', 'main']
     8 = ['secondary', 'main']
+
+# Dedicated workspaces per app type
+# Terminal (1) and browser (2) are less restricted
+# See: https://nikitabobko.github.io/AeroSpace/guide#on-window-detected-callback
+
+# 3 Chat
+[[on-window-detected]]
+    if.app-id = 'com.apple.MobileSMS'
+    run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+    if.app-id = 'ru.keepcoder.Telegram'
+    run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+    if.app-id = 'net.whatsapp.WhatsApp'
+    run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+    if.app-id = 'com.apple.mail'
+    run = 'move-node-to-workspace 3'
+
+# 4 Plan
+[[on-window-detected]]
+    if.app-id = 'com.apple.iCal'
+    run = 'move-node-to-workspace 4'
+[[on-window-detected]]
+    if.app-id = 'com.apple.Notes'
+    run = 'move-node-to-workspace 4'
+[[on-window-detected]]
+    if.app-id = 'com.apple.reminders'
+    run = 'move-node-to-workspace 4'
+
+# 5 Create
+[[on-window-detected]]
+    if.app-id = 'com.apple.logic10'
+    run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+    if.app-id = 'com.ableton.live'
+    run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+    if.app-id = 'com.splice.Splice'
+    run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+    if.app-id = 'com.uaudio.ua-connect'
+    run = 'move-node-to-workspace 5'
+[[on-window-detected]]
+    if.app-id = 'com.canva.affinity'
+    run = 'move-node-to-workspace 5'
+
+# Float overrides
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.FaceTime'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences'
+    run = 'layout floating'
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = 'layout floating'
