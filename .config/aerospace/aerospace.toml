@@ -144,6 +144,15 @@ on-mode-changed = []
     cmd-alt-6 = 'workspace 6'
     cmd-alt-7 = 'workspace 7'
     cmd-alt-8 = 'workspace 8'
+
+    # Same workspaces 1-5 for the right hand, for keyboards without
+    # right-side cmd and alt: left hand holds cmd-alt, right hand picks.
+    cmd-alt-n = 'workspace 1'
+    cmd-alt-m = 'workspace 2'
+    cmd-alt-comma = 'workspace 3'
+    cmd-alt-period = 'workspace 4'
+    cmd-alt-slash = 'workspace 5'
+
     cmd-alt-left = 'workspace prev'
     cmd-alt-right = 'workspace next'
 
@@ -156,6 +165,14 @@ on-mode-changed = []
     cmd-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
     cmd-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
     cmd-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+
+    # Right-hand versions of cmd-alt-shift-1 to 5
+    cmd-alt-shift-n = ['move-node-to-workspace 1', 'workspace 1']
+    cmd-alt-shift-m = ['move-node-to-workspace 2', 'workspace 2']
+    cmd-alt-shift-comma = ['move-node-to-workspace 3', 'workspace 3']
+    cmd-alt-shift-period = ['move-node-to-workspace 4', 'workspace 4']
+    cmd-alt-shift-slash = ['move-node-to-workspace 5', 'workspace 5']
+
     cmd-alt-shift-left = ['move-node-to-workspace prev', 'workspace prev']
     cmd-alt-shift-right = ['move-node-to-workspace next', 'workspace next']
 
