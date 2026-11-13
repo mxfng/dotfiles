@@ -6,3 +6,12 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- Switch colorscheme live when the `theme` fish command changes it.
+-- Runs when Neovim regains focus (tmux has focus-events on).
+vim.api.nvim_create_autocmd("FocusGained", {
+  group = vim.api.nvim_create_augroup("theme_follow", { clear = true }),
+  callback = function()
+    require("theme").apply()
+  end,
+})

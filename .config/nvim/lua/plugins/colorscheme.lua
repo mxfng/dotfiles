@@ -1,15 +1,15 @@
+-- The colorscheme follows the `theme` fish command (see lua/theme.lua).
+-- Catppuccin ships with LazyVim; Rosé Pine and Kanagawa are added here.
+-- All load lazily: lazy.nvim loads the plugin when its colorscheme is set.
 return {
+  { "rose-pine/neovim", name = "rose-pine", lazy = true },
+  { "rebelot/kanagawa.nvim", lazy = true },
   {
-    "rose-pine/neovim",
-    name = "rose-pine",
-    priority = 1000,
-    config = function()
-      require("rose-pine").setup({
-        variant = "auto",
-        dark_variant = "moon",
-      })
-
-      vim.cmd("colorscheme rose-pine")
-    end,
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = function()
+        require("theme").apply()
+      end,
+    },
   },
 }

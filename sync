@@ -27,6 +27,7 @@ rsync -aP --delete \
     ./.config/nvim \
     ./.config/ssh \
     ./.config/starship.toml \
+    ./.config/theme \
     ./.config/tmux \
     ./.config/wezterm \
     ~/.config/

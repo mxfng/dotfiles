@@ -3,20 +3,6 @@
 add_newline = true
 command_timeout = 1000
 
-palette = 'rose-pine'
-
-[palettes.rose-pine ]
-bg = '#393552'
-fg = '#3e8fb0'
-black = '#393552'
-red = '#eb6f92'
-green = '#f6c177'
-yellow = '#ea9a97'
-blue = '#3e8fb0'
-magenta = '#c4a7e7'
-cyan = '#9ccfd8'
-white = '#f6c177'
-
 [aws]
 symbol = "  "
 

@@ -1,0 +1,7 @@
+# Themes for the `theme` fish command. Tab-separated:
+# name	WezTerm color_scheme	Neovim colorscheme
+rose-pine-moon	rose-pine-moon	rose-pine-moon
+rose-pine-dawn	rose-pine-dawn	rose-pine-dawn
+catppuccin-mocha	Catppuccin Mocha	catppuccin-mocha
+catppuccin-latte	Catppuccin Latte	catppuccin-latte
+kanagawa	Kanagawa (Gogh)	kanagawa-wave
