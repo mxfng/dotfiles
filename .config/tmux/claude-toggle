@@ -37,7 +37,7 @@ toggle() {
   if [ -z "${claude:-}" ]; then
     # None yet: open one in the folder of the current pane.
     dir=$(tmux display -p -t "$target" '#{pane_current_path}')
-    claude=$(tmux split-window -fh -l 50% -t "$target" -c "$dir" -P -F '#{pane_id}' claude)
+    claude=$(tmux split-window -fh -l 50% -t "$target" -c "$dir" -P -F '#{pane_id}' claude --ide)
     tmux set -p -t "$claude" @claude_for "$win"
     fit "$win"
   elif [ "$where" = "$win" ]; then
