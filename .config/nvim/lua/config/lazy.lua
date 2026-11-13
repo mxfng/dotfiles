@@ -14,7 +14,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- sync overwrites the deployed config, so write the lock straight into the
+-- dotfiles repo where git can track it. Fall back when the repo is absent.
+local repo_lock = vim.fn.expand("~/Developer/dotfiles/.config/nvim/lazy-lock.json")
+
 require("lazy").setup({
+  lockfile = vim.uv.fs_stat(repo_lock) and repo_lock or vim.fn.stdpath("config") .. "/lazy-lock.json",
   spec = {
     {
       "LazyVim/LazyVim",
