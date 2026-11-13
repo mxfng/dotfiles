@@ -273,6 +273,18 @@ on-mode-changed = []
     if.app-id = 'com.canva.affinity'
     run = 'move-node-to-workspace 5'
 
+# 6 Play
+# Prism floats: its launcher and settings windows don't work well as tiles.
+[[on-window-detected]]
+    if.app-id = 'org.prismlauncher.PrismLauncher'
+    run = ['layout floating', 'move-node-to-workspace 6']
+# Minecraft runs as a bare 'java' process with no bundle ID, so match the
+# app name and the window title together.
+[[on-window-detected]]
+    if.app-name-regex-substring = '^java$'
+    if.window-title-regex-substring = 'Minecraft'
+    run = 'move-node-to-workspace 6'
+
 # Float overrides
 [[on-window-detected]]
     if.app-id = 'us.zoom.xos'
