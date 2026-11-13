@@ -82,6 +82,12 @@ defaults write com.apple.menuextra.clock ShowSeconds -bool true
 # Spotlight: disable keyboard shortcuts (frees Cmd+Space for custom launcher)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 64 '<dict><key>enabled</key><false/></dict>'
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 65 '<dict><key>enabled</key><false/></dict>'
+
+# Mission Control: disable Ctrl+Left/Right (and with Shift) to switch Spaces.
+# AeroSpace manages workspaces, and these keys are easy to hit by mistake.
+for id in 79 80 81 82
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add $id '<dict><key>enabled</key><false/></dict>'
+end
 /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
 
 # Restart affected applications
