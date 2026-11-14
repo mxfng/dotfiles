@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+# Agent pane (Claude Code) on the right of a tmux window, with claudecode.nvim
+# integration. Persists in the background "_agent" session when hidden.
+#
+# tmux.conf calls these:
+#   agent-toggle toggle <pane id>    create, hide or show the pane
+#   agent-toggle fit <window id>     keep the width when the window resizes
+#   agent-toggle save <window id>    remember the width (drag end, hide)
+#   agent-toggle gc                  kill hidden agents whose window is gone
+set -u
+
+default_pct=35 # share of the window (claudecode.nvim uses 30%)
+min_cols=80    # Claude Code's prompts wrap badly below about 80 columns
+
+# Print "<agent pane> <window it is in now>" for a home window.
+find_agent() {
+  tmux list-panes -a -F '#{@agent_for} #{pane_id} #{window_id}' |
+    awk -v w="$1" '$1 == w { print $2, $3; exit }'
+}
+
+# Width in columns for agent pane $1 in window $2: its share of the
+# window, but at least min_cols, and that floor at most half the window.
+target_cols() {
+  local pct ww cols
+  pct=$(tmux show -pqv -t "$1" @agent_pct)
+  ww=$(tmux display -p -t "$2" '#{window_width}')
+  cols=$((ww * ${pct:-$default_pct} / 100))
+  if ((cols < min_cols)); then cols=$((min_cols < ww / 2 ? min_cols : ww / 2)); fi
+  echo "$cols"
+}
+
+toggle() {
+  local target=$1 win agent where dir
+  win=$(tmux display -p -t "$target" '#{window_id}')
+  read -r agent where < <(find_agent "$win")
+  # Remember the layout without the agent, to put it back on hide.
+  [ "${where:-}" = "$win" ] || tmux set -w -t "$win" @agent_layout "$(tmux display -p -t "$win" '#{window_layout}')"
+  if [ -z "${agent:-}" ]; then
+    # None yet: open one in the folder of the current pane.
+    dir=$(tmux display -p -t "$target" '#{pane_current_path}')
+    agent=$(tmux split-window -fh -l 50% -t "$target" -c "$dir" -P -F '#{pane_id}' claude --ide)
+    tmux set -p -t "$agent" @agent_for "$win"
+    fit "$win"
+  elif [ "$where" = "$win" ]; then
+    # Visible: remember its width, then hide it.
+    save "$win"
+    tmux has -t =_agent 2>/dev/null || tmux new -d -s _agent
+    tmux break-pane -d -s "$agent" -t =_agent:
+    # Fails, and changes nothing, if panes were added or closed meanwhile.
+    tmux select-layout -t "$win" "$(tmux show -wqv -t "$win" @agent_layout)" 2>/dev/null
+  else
+    # Hidden: bring it back.
+    tmux join-pane -fh -s "$agent" -t "$target"
+    fit "$win"
+  fi
+}
+
+fit() {
+  local win=$1 agent where
+  read -r agent where < <(find_agent "$win")
+  [ "${where:-}" = "$win" ] || return 0
+  tmux resize-pane -t "$agent" -x "$(target_cols "$agent" "$win")"
+}
+
+save() {
+  local win=$1 agent where width ww
+  read -r agent where < <(find_agent "$win")
+  [ "${where:-}" = "$win" ] || return 0
+  width=$(tmux display -p -t "$agent" '#{pane_width}')
+  # fit set this width itself, so it is not a drag.
+  [ "$width" = "$(target_cols "$agent" "$win")" ] && return 0
+  ww=$(tmux display -p -t "$win" '#{window_width}')
+  tmux set -p -t "$agent" @agent_pct $(((width * 100 + ww / 2) / ww))
+}
+
+gc() {
+  local live pane home
+  live=$(tmux list-windows -a -F '#{window_id}')
+  tmux list-panes -s -t =_agent -F '#{pane_id} #{@agent_for}' 2>/dev/null |
+    while read -r pane home; do
+      if [ -n "$home" ] && ! grep -qx "$home" <<<"$live"; then
+        tmux kill-pane -t "$pane"
+      fi
+    done
+  # Drop the session when only its startup shell is left.
+  if ! tmux list-panes -s -t =_agent -F '#{@agent_for}' 2>/dev/null | grep -q .; then
+    tmux kill-session -t =_agent 2>/dev/null
+  fi
+  return 0
+}
+
+"$@"

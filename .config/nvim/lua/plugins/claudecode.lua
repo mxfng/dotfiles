@@ -1,5 +1,5 @@
--- Claude terminal toggle omitted here, prefer config's claude in tmux pane
--- claudecode.nvim starts a server that tmux claude joins with `claude --ide`
+-- Claude terminal toggle omitted here, prefer the agent pane in tmux
+-- claudecode.nvim starts a server that the tmux agent pane joins with `claude --ide`
 -- so nvim integration holds.
 return {
   "coder/claudecode.nvim",
