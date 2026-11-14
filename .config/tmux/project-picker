@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Pick a project folder in ~/Developer with fzf and switch to its tmux
+# session. Make the session first if it does not exist.
+#
+# tmux.conf calls this in a popup:
+#   project-picker
+set -u
+root=$HOME/Developer
+
+# tmux does not allow "." or ":" in session names.
+session_name() { tr '.:' '__' <<<"$1"; }
+
+# Projects that have a session come first, marked with "*".
+list() {
+  local open=() rest=() p
+  while IFS= read -r p; do
+    if tmux has -t "=$(session_name "$p")" 2>/dev/null; then
+      open+=("* $p")
+    else
+      rest+=("  $p")
+    fi
+  done < <(fd --type d --max-depth 1 . "$root" -x basename | sort)
+  printf '%s\n' "${open[@]}" "${rest[@]}"
+}
+
+project=$(list | fzf --reverse --prompt 'project> ' | cut -c3-)
+[ -n "$project" ] || exit 0
+dir=$root/$project
+name=$(session_name "$project")
+tmux has -t "=$name" 2>/dev/null || tmux new -d -s "$name" -c "$dir"
+tmux switch-client -t "=$name"
