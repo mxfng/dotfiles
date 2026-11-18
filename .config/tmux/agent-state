@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Show what an agent (Claude Code) is doing in its window's tab.
+# Claude Code hooks call this (.config/agents/claude/settings.json):
+#   agent-state working    the agent works
+#   agent-state input      the agent waits for an answer or a permission
+#   agent-state done       the agent stopped; cleared when you view the window
+#   agent-state clear      the session ended
+# It writes @agent_state on the agent's home window, so the state shows
+# also while agent-toggle hides the agent in the _agent session.
+#
+# No hook fires when you interrupt the agent (Esc, or a denied permission).
+# The icon then stays until your next prompt to that agent.
+set -u
+
+[ -n "${TMUX_PANE:-}" ] || exit 0
+
+win=$(tmux show -pqv -t "$TMUX_PANE" @agent_for)
+[ -n "$win" ] || win=$(tmux display -p -t "$TMUX_PANE" '#{window_id}') || exit 0
+
+case ${1:-} in
+done)
+  # You see the window now, so there is nothing new to show.
+  if [ "$(tmux display -p -t "$win" '#{&&:#{window_active},#{session_attached}}')" = 1 ]; then
+    tmux set -wu -t "$win" @agent_state
+  else
+    tmux set -w -t "$win" @agent_state done
+  fi
+  ;;
+working | input) tmux set -w -t "$win" @agent_state "$1" ;;
+clear) tmux set -wu -t "$win" @agent_state ;;
+esac
+exit 0
