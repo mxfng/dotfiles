@@ -29,10 +29,17 @@ target_cols() {
   echo "$cols"
 }
 
+# The window name shows the agent's task (tmux.conf). This format finds
+# the agent in any session, so the name stays while the agent is hidden.
+set_title() {
+  tmux set -w -t "$1" @agent_title "#{S:#{W:#{P:#{?#{==:#{@agent_for},$1},#{s/^[^A-Za-z0-9]+//:pane_title},}}}}"
+}
+
 toggle() {
   local target=$1 win agent where dir
   win=$(tmux display -p -t "$target" '#{window_id}')
   read -r agent where < <(find_agent "$win")
+  set_title "$win"
   # Remember the layout without the agent, to put it back on hide.
   [ "${where:-}" = "$win" ] || tmux set -w -t "$win" @agent_layout "$(tmux display -p -t "$win" '#{window_layout}')"
   if [ -z "${agent:-}" ]; then
