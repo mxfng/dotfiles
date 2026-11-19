@@ -110,7 +110,7 @@ list() {
       case $state in
       working) icon="$blue✻$reset" ;;
       input) icon="$red$bell$reset" ;;
-      done) icon='✓' ;;
+      done) icon="$blue●$reset" ;;
       *) icon=' ' ;;
       esac
       printf '%s\t  %s %s\n' "$wid" "$icon" "$name"
