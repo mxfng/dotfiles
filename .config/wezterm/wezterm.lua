@@ -46,12 +46,12 @@ config.color_scheme = read_theme()
 -- Reload when the state file changes.
 wezterm.add_to_config_reload_watch_list(theme_state)
 
-config.window_background_opacity = 0.88
+config.window_background_opacity = 0.95
 
 config.window_decorations = "RESIZE"
 config.macos_window_background_blur = 70
 
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 13
 
 config.tab_bar_at_bottom = true
