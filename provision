@@ -33,6 +33,9 @@ ohai "setting up terminal tools"
 ./scripts/tmux_setup_plugins.fish
 or echo 'warning: failed to set up tmux plugins'
 
+./scripts/asdf_install_runtimes.fish
+or echo 'warning: failed to install language runtimes'
+
 ohai "setting up desktop apps"
 if confirm "Would you like to delete old login items? [y/N]" N
     osascript -e 'tell application "System Events" to delete every login item'

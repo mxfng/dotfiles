@@ -55,6 +55,9 @@ rsync -aP ./.config/agents/claude/settings.json ~/.claude/settings.json
 
 rsync -aP --delete ./.config/aerospace ~/.config/
 
+# Default runtimes for tools that run outside a project, such as mason
+rsync -aP ./.config/asdf/tool-versions ~/.tool-versions
+
 # Surgical sync because these store their runtime state
 if test -d ./.config/sol
     mkdir -p ~/.config/sol
