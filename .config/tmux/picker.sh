@@ -18,7 +18,7 @@ picker_opts=(
   # The prompt is the Nerd Font nf-fa-search icon.
   --prompt "$(printf '')  " --pointer '▌' --gutter ' ' --ellipsis '…'
   --info inline-right --no-scrollbar --highlight-line
-  --color 'bg+:0,gutter:-1,pointer:4,prompt:4,hl:4,hl+:4'
+  --color 'bg+:0,gutter:-1,pointer:4,prompt:4,hl:4,hl+:4,border:4'
   --preview-window 'right,60%,border-left,noinfo'
   --bind 'j:down,k:up,l:accept,g:first,G:last,q:abort'
   --bind "/:show-input+unbind($picker_nav)"
