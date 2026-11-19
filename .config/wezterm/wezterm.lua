@@ -51,7 +51,11 @@ config.window_background_opacity = 0.95
 config.window_decorations = "RESIZE"
 config.macos_window_background_blur = 70
 
-config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
+-- Symbols Nerd Font covers icons newer than the copy built into WezTerm.
+config.font = wezterm.font_with_fallback({
+  { family = "JetBrains Mono", weight = "Medium" },
+  "Symbols Nerd Font Mono",
+})
 config.font_size = 13
 
 config.tab_bar_at_bottom = true
