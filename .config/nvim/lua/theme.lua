@@ -23,7 +23,7 @@ end
 
 -- Apply the theme if it changed.
 -- Track the applied name here. Some schemes set g:colors_name to the
--- family ("rose-pine"), not the variant ("rose-pine-dawn").
+-- family ("rose-pine"), not the variant ("rose-pine-moon").
 local applied
 function M.apply()
   local cs = M.colorscheme()
@@ -34,7 +34,7 @@ function M.apply()
       require("lazy.core.loader").colorscheme(cs)
     end)
     -- Set the background to dark first.
-    -- Light schemes set "light". Kanagawa does not set the background.
+    -- Kanagawa does not set the background.
     vim.o.background = "dark"
     vim.cmd.colorscheme(cs)
     applied = cs

@@ -46,22 +46,10 @@ config.color_scheme = read_theme()
 -- Reload when the state file changes.
 wezterm.add_to_config_reload_watch_list(theme_state)
 
--- Light schemes get a solid window. Transparency lowers their contrast.
--- A scheme is light when its background lightness is above 0.5.
-local function scheme_is_light(name)
-  local scheme = wezterm.color.get_builtin_schemes()[name]
-  if not scheme or not scheme.background then
-    return false
-  end
-  local _, _, lightness = wezterm.color.parse(scheme.background):hsla()
-  return lightness > 0.5
-end
-
-local light = scheme_is_light(config.color_scheme)
-config.window_background_opacity = light and 1.0 or 0.88
+config.window_background_opacity = 0.88
 
 config.window_decorations = "RESIZE"
-config.macos_window_background_blur = light and 0 or 70
+config.macos_window_background_blur = 70
 
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.font_size = 13
