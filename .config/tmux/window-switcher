@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+# Pick a session or window with fzf and switch to it.
+# Windows show under their sessions. Each window shows the state of its
+# agent (from agent-state) and its full task title.
+# The preview shows the panes that the window shows now, one under the
+# other.
+#
+# Keys:
+#   j, k       move down, move up
+#   l, Enter   switch to the selected row
+#   g, G       go to the first row, go to the last row
+#   q, Esc     close
+#   /          open the search
+#   Esc        in the search: clear the search and go back to j and k
+#
+# tmux.conf calls this in a popup over the window area:
+#   window-switcher <current window id>
+# fzf calls these:
+#   window-switcher list [query]                     print the rows
+#   window-switcher preview <session or window id>   print the preview
+set -u
+
+sep=$'\x1f'
+
+# Print the visible panes of window (or session) $1, one under the other.
+# Like the tmux tree preview, it ignores the real layout. Each pane gets
+# the full width and an equal number of rows, centered on its cursor line.
+# Wide characters (emoji, CJK) can move a line by one column.
+preview() {
+  local win zoomed id height cy active floating
+  read -r win zoomed < <(tmux display -p -t "$1" '#{window_id} #{window_zoomed_flag}')
+  tmux list-panes -t "$win" -F '#{pane_id} #{pane_height} #{cursor_y} #{pane_active} #{pane_floating_flag}' |
+    while read -r id height cy active floating; do
+      # Skip floating panes. A zoomed window shows only its active pane.
+      [ "$floating" = 1 ] || { [ "$zoomed" = 1 ] && [ "$active" != 1 ]; } && continue
+      printf '%s %s %s\n' "$sep" "$height" "$cy"
+      tmux capture-pane -epN -t "$id"
+    done |
+    LC_ALL=en_US.UTF-8 awk -v W="${FZF_PREVIEW_COLUMNS:-80}" -v H="${FZF_PREVIEW_LINES:-24}" \
+      -v sep="$sep" "$stack"
+}
+
+# The awk program for preview. For each pane, its input is a header line
+# "<sep> height cursor_y", then the lines of the pane with color codes.
+stack='
+# Return the first w columns of s. Color codes take no columns.
+function crop(s, w,   out, c) {
+  out = ""; c = 0
+  while (s != "" && c < w) {
+    if (match(s, /^\033\[[0-9;:]*[A-Za-z]/)) { out = out substr(s, 1, RLENGTH); s = substr(s, RLENGTH + 1); continue }
+    out = out substr(s, 1, 1); s = substr(s, 2); c++
+  }
+  out = out "\033[0m"
+  while (c++ < w) out = out " "
+  return out
+}
+$1 == sep { n++; PH[n] = $2; CY[n] = $3; lines[n] = 0; color = ""; next }
+{
+  # A color stays on until a reset, also on the next lines. Record the
+  # color at the start of each line.
+  pre[n, lines[n]] = color; text[n, lines[n]++] = $0
+  s = $0
+  while (match(s, /\033\[[0-9;:]*m/)) {
+    q = substr(s, RSTART, RLENGTH); color = (q == "\033[0m" || q == "\033[m") ? "" : color q
+    s = substr(s, RSTART + RLENGTH)
+  }
+}
+END {
+  if (n == 0) exit
+  each = int((H - (n - 1)) / n)
+  line = ""
+  for (x = 0; x < W; x++) line = line "─"
+  for (i = 1; i <= n; i++) {
+    if (i > 1) print "\033[34m" line "\033[0m"
+    h = i < n ? each : H - (n - 1) * (each + 1)
+    top = CY[i] - int(h / 2)
+    if (top > PH[i] - h) top = PH[i] - h
+    if (top < 0) top = 0
+    for (y = top; y < top + h; y++) print pre[i, y] crop(text[i, y], W)
+  }
+}'
+
+# Print one line per window: session id, session name, window id, agent
+# state, title.
+windows() {
+  local title='#{?#{&&:#{E:@agent_title},#{!=:#{E:@agent_title},Claude Code}},#{E:@agent_title},#{window_name}}'
+  tmux list-windows -a -f '#{!=:#{session_name},_agent}' \
+    -F "#{session_id}$sep#{session_name}$sep#{window_id}$sep#{@agent_state}$sep$title"
+}
+
+# Keep the windows that match query $1. The filter in fzf would remove
+# the session rows, so this function does the filtering. It matches each
+# window on its session name and title. The matches stay under their
+# sessions. The session with the best match comes first. In each session,
+# the best window comes first.
+matches() {
+  fzf --filter "$1" --delimiter "$sep" --nth 2,5 |
+    awk -F "$sep" '!($1 in rows) { order[++n] = $1 } { rows[$1] = rows[$1] $0 "\n" }
+      END { for (i = 1; i <= n; i++) printf "%s", rows[order[i]] }'
+}
+
+# Print the rows for query $1, or all rows if $1 is empty. Each row is
+# "<target><tab><text>". fzf shows only the text.
+list() {
+  local sid session wid state name last='' icon
+  local red=$'\e[31m' blue=$'\e[34m' bold=$'\e[1m' reset=$'\e[0m'
+  local bell
+  bell=$(printf '') # Nerd Font nf-fa-bell, the same icon as in tmux.conf
+  if [ -n "${1:-}" ]; then windows | matches "$1"; else windows; fi |
+    while IFS=$sep read -r sid session wid state name; do
+      if [ "$sid" != "$last" ]; then
+        printf '%s\t%s%s%s\n' "$sid" "$bold" "$session" "$reset"
+        last=$sid
+      fi
+      case $state in
+      working) icon="$blue✻$reset" ;;
+      input) icon="$red$bell$reset" ;;
+      done) icon='✓' ;;
+      *) icon=' ' ;;
+      esac
+      printf '%s\t  %s %s\n' "$wid" "$icon" "$name"
+    done
+}
+
+case ${1:-} in
+preview)
+  preview "$2"
+  exit 0
+  ;;
+list)
+  list "${2:-}"
+  exit 0
+  ;;
+esac
+current=${1:-}
+
+lines=$(list)
+# Start with the cursor on the current window.
+pos=$(awk -F '\t' -v w="$current" '$1 == w { print NR; exit }' <<<"$lines")
+
+nav='j,k,l,g,G,q,/'
+target=$(
+  fzf --ansi --reverse --disabled --no-input --delimiter '\t' --with-nth 2 \
+    --with-shell 'bash -c' \
+    --prompt "$(printf '')  " --pointer '▌' --gutter ' ' --ellipsis '…' \
+    --info inline-right --no-scrollbar --highlight-line \
+    --color 'bg+:0,gutter:-1,pointer:4,prompt:4,hl:4,hl+:4' \
+    --bind "load:pos(${pos:-1})+unbind(load)" \
+    --bind 'j:down,k:up,l:accept,g:first,G:last,q:abort' \
+    --bind "/:show-input+unbind($nav)" \
+    --bind "change:reload-sync($0 list {q})+first+down" \
+    --bind "esc:transform:[ \"\$FZF_INPUT_STATE\" = hidden ] && echo abort || echo 'clear-query+hide-input+reload-sync($0 list)+pos(${pos:-1})+rebind($nav)'" \
+    --preview "$0 preview {1}" --preview-window 'right,60%,border-left,noinfo' \
+    <<<"$lines" | cut -f1
+)
+[ -n "$target" ] || exit 0
+tmux switch-client -t "$target"
