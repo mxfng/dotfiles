@@ -37,6 +37,7 @@ brew "grep"
 
 # indirect
 brew "git-delta"
+brew "llama.cpp"
 brew "tree-sitter-cli"
 
 tap "nikitabobko/tap"
