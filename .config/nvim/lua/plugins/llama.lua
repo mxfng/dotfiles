@@ -1,6 +1,9 @@
 -- Local tab completion with llama.cpp (brew "llama.cpp").
 -- nvim starts llama-server on the first InsertEnter. The model unloads after
--- 10 idle minutes. Server log: ~/.local/state/nvim/llama-server.log
+-- 10 idle minutes. Server log (warnings and errors, reset on each start):
+-- ~/.local/state/nvim/llama-server.log
+-- After changing the server flags or upgrading llama.cpp, run `pkill llama-server`.
+-- The next InsertEnter starts the new server.
 local port = 8012
 
 -- Start llama-server unless something already listens on the port.
@@ -21,7 +24,7 @@ local function ensure_server()
       vim.fn.jobstart({
         "sh",
         "-c",
-        'exec llama-server --fim-qwen-3b-default --port "$1" --sleep-idle-seconds 600 >>"$2" 2>&1',
+        'exec llama-server --fim-qwen-3b-default --port "$1" --sleep-idle-seconds 600 -lv 2 >"$2" 2>&1',
         "sh",
         tostring(port),
         log,
