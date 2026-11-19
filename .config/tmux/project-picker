@@ -1,29 +1,65 @@
 #!/usr/bin/env bash
 # Pick a project folder in ~/Developer with fzf and switch to its tmux
 # session. Make the session first if it does not exist.
+# Projects with a session come first, with a terminal icon. The preview
+# shows what the session shows now. For a project without a session, it
+# shows the README, or else the files.
 #
-# tmux.conf calls this in a popup:
+# Keys: see picker.sh. Enter switches to the selected project.
+#
+# tmux.conf calls this in a popup over the window area:
 #   project-picker
+# fzf calls this:
+#   project-picker preview <project>   print the preview
 set -u
 root=$HOME/Developer
+source "$(dirname "$0")/picker.sh"
 
 # tmux does not allow "." or ":" in session names.
 session_name() { tr '.:' '__' <<<"$1"; }
 
-# Projects that have a session come first, marked with "*".
+# Print one row per project: "<project><tab><text>". fzf shows only the
+# text.
 list() {
-  local open=() rest=() p
+  local open=() rest=() p icon
+  # Nerd Font nf-fa-terminal, in blue
+  icon=$'\e[34m'"$(printf '')"$'\e[0m'
   while IFS= read -r p; do
     if tmux has -t "=$(session_name "$p")" 2>/dev/null; then
-      open+=("* $p")
+      open+=("$p"$'\t'"$icon $p")
     else
-      rest+=("  $p")
+      rest+=("$p"$'\t'"  $p")
     fi
   done < <(fd --type d --max-depth 1 . "$root" -x basename | sort)
   printf '%s\n' "${open[@]}" "${rest[@]}"
 }
 
-project=$(list | fzf --reverse --prompt 'project> ' | cut -c3-)
+# Print the preview of project $1.
+preview() {
+  local name
+  name=$(session_name "$1")
+  if tmux has -t "=$name" 2>/dev/null; then
+    "$(dirname "$0")/window-switcher" preview "=$name:"
+  elif [ -f "$root/$1/README.md" ]; then
+    bat --color always --style plain --paging never --terminal-width "${FZF_PREVIEW_COLUMNS:-80}" "$root/$1/README.md"
+  else
+    ls -A --color=always "$root/$1"
+  fi
+}
+
+if [ "${1:-}" = preview ]; then
+  preview "$2"
+  exit 0
+fi
+
+# Esc clears the query and starts an empty search. Without search(), fzf
+# keeps the old matches after it hides the search box.
+project=$(
+  list | fzf "${picker_opts[@]}" --delimiter '\t' --with-nth 2 \
+    --bind "$(picker_esc 'clear-query+search()')" \
+    --preview "$0 preview {1}" |
+    cut -f1
+)
 [ -n "$project" ] || exit 0
 dir=$root/$project
 name=$(session_name "$project")

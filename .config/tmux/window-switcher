@@ -5,13 +5,7 @@
 # The preview shows the panes that the window shows now, one under the
 # other.
 #
-# Keys:
-#   j, k       move down, move up
-#   l, Enter   switch to the selected row
-#   g, G       go to the first row, go to the last row
-#   q, Esc     close
-#   /          open the search
-#   Esc        in the search: clear the search and go back to j and k
+# Keys: see picker.sh. Enter switches to the selected session or window.
 #
 # tmux.conf calls this in a popup over the window area:
 #   window-switcher <current window id>
@@ -19,6 +13,7 @@
 #   window-switcher list [query]                     print the rows
 #   window-switcher preview <session or window id>   print the preview
 set -u
+source "$(dirname "$0")/picker.sh"
 
 sep=$'\x1f'
 
@@ -138,19 +133,14 @@ lines=$(list)
 # Start with the cursor on the current window.
 pos=$(awk -F '\t' -v w="$current" '$1 == w { print NR; exit }' <<<"$lines")
 
-nav='j,k,l,g,G,q,/'
+# fzf does not filter (--disabled). Each change of the query reloads the
+# rows from list, which keeps the session rows.
 target=$(
-  fzf --ansi --reverse --disabled --no-input --delimiter '\t' --with-nth 2 \
-    --with-shell 'bash -c' \
-    --prompt "$(printf '')  " --pointer '▌' --gutter ' ' --ellipsis '…' \
-    --info inline-right --no-scrollbar --highlight-line \
-    --color 'bg+:0,gutter:-1,pointer:4,prompt:4,hl:4,hl+:4' \
+  fzf "${picker_opts[@]}" --disabled --delimiter '\t' --with-nth 2 \
     --bind "load:pos(${pos:-1})+unbind(load)" \
-    --bind 'j:down,k:up,l:accept,g:first,G:last,q:abort' \
-    --bind "/:show-input+unbind($nav)" \
     --bind "change:reload-sync($0 list {q})+first+down" \
-    --bind "esc:transform:[ \"\$FZF_INPUT_STATE\" = hidden ] && echo abort || echo 'clear-query+hide-input+reload-sync($0 list)+pos(${pos:-1})+rebind($nav)'" \
-    --preview "$0 preview {1}" --preview-window 'right,60%,border-left,noinfo' \
+    --bind "$(picker_esc clear-query)" \
+    --preview "$0 preview {1}" \
     <<<"$lines" | cut -f1
 )
 [ -n "$target" ] || exit 0
